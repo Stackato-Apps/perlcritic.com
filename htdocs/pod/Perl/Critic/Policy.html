@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#DOCUMENTATION">DOCUMENTATION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy - Base class for all Policy modules
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Perl::Critic::Policy is the abstract base class for all Policy
+objects.  If you're developing your own Policies, your job is to
+implement and override its methods in a subclass.  To work with the
+<A HREF="../../Perl/Critic.html">Perl::Critic</A> engine, your implementation must behave as described
+below.  For a detailed explanation on how to make new Policy modules,
+please see the <A HREF="../../Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> document included in this
+distribution.
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="new(key1%20%3d%20value1%2c%20key2%20%3d%3e%20value2%20...%20)%3e"><CODE>new(key1 =</CODE> value1, key2 =&gt; value2 ... )&gt;
+
+</A></DT>
+<DD>
+Returns a reference to a new subclass of Perl::Critic::Policy. If
+your Policy requires any special arguments, they should be passed
+in here as key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify
+these in their config file.  Unless you override the <CODE>new</CODE> method,
+the default method simply returns a reference to an empty hash that
+has been blessed into your subclass.
+
+</DD>
+<DT><A NAME="violates(%20%24element%2c%20%24document%20)"><CODE>violates( $element, $document )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A> and a <A HREF="../../PPI/Document.html">PPI::Document</A>, returns one or more
+<A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects if the <CODE>$element</CODE> violates this
+Policy.  If there are no violations, then it returns an empty list.
+If the Policy encounters an exception, then it should <CODE>croak</CODE> with an
+error message and let the caller decide how to handle it.
+
+</P>
+<P><CODE>violates()</CODE> is an abstract method and it will abort if you attempt
+to invoke it directly.  It is the heart of all Policy modules, and
+your subclass <B>must</B> override this method.
+
+</P></DD>
+<DT><A NAME="applies_to()"><CODE>applies_to()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of the names of PPI classes that this Policy cares
+about.  By default, the result is <CODE>PPI::Element</CODE>.  Overriding this
+method in Policy subclasses should lead to significant performance
+increases.
+
+</DD>
+<DT><A NAME="default_severity()"><CODE>default_severity()</CODE>
+
+</A></DT>
+<DD>
+Returns the default severity for violating this Policy.  See the
+<CODE>$SEVERITY</CODE> constants in <A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of
+possible severity values.  By default, this method returns
+<CODE>$SEVERITY_LOWEST</CODE>.  Authors of Perl::Critic::Policy subclasses
+should override this method to return a value that they feel is
+appropriate for their Policy.  In general, Polices that are widely
+accepted or tend to prevent bugs should have a higher severity than
+those that are more subjective or cosmetic in nature.
+
+</DD>
+<DT><A NAME="get_severity()"><CODE>get_severity()</CODE>
+
+</A></DT>
+<DD>
+Returns the severity of violating this Policy.  If the severity has
+not been explicitly defined by calling <CODE>set_severity</CODE>, then the
+<CODE>default_severity</CODE> is returned.  See the <CODE>$SEVERITY</CODE> constants in
+<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of possible severity values.
+
+</DD>
+<DT><A NAME="set_severity(%20%24N%20)"><CODE>set_severity( $N )</CODE>
+
+</A></DT>
+<DD>
+Sets the severity for violating this Policy.  Clients of
+Perl::Critic::Policy objects can call this method to assign a
+different severity to the Policy if they don't agree with the
+<CODE>default_severity</CODE>.  See the <CODE>$SEVERITY</CODE> constants in
+<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of possible values.
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="DOCUMENTATION">DOCUMENTATION
+
+</A></H1>
+
+<P>When your Policy module first <CODE>use</CODE>s <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>, it
+will try and extract the DESCRIPTION section of your Policy module's
+POD.  This information is displayed by Perl::Critic if the verbosity
+level is set accordingly.  Therefore, please include a DESCRIPTION
+section in the POD for any Policy modules that you author.  Thanks.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

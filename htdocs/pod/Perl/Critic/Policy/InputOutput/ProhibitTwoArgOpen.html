@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>The three-argument form of <CODE>open</CODE> (introduced in Perl 5.6) prevents
+subtle bugs that occur when the filename starts with funny characters
+like '&gt;' or '&lt;'.  The <A HREF="../../../../IO/File.html">IO::File</A> module provides a nice
+object-oriented interface to filehandles, which I think is more
+elegant anyway.
+
+</P>
+<PRE>  open( $fh, '&gt;output.txt' );          # not ok
+  open( $fh, q{&gt;}, 'output.txt );      # ok
+
+  use IO::File;
+  my $fh = IO::File-&gt;new( 'output.txt', q{&gt;} ); # even better!</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>The only time you should use the two-argument form is when you re-open
+STDIN, STDOUT, or STDERR.  But for now, this Policy doesn't provide
+that loophole.
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../IO/Handle.html">IO::Handle</A>
+
+</P>
+<P><A HREF="../../../../IO/File.html">IO::File</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

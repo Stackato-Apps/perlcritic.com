@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::RegularExpressions::RequireExtendedFormatting</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::RegularExpressions::RequireExtendedFormatting
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Extended regular expression formatting allows you mix whitespace and
+comments into the pattern, thus making them much more readable.
+
+</P>
+<PRE>    # Match a single-quoted string efficiently...
+
+    m{'[^\\']*(?:\\.[^\\']*)*'};  #Huh?
+
+    #Same thing with extended format...
+
+    m{ '           #an opening single quote
+       [^\\']      #any non-special chars (i.e. not backslash or single quote)
+       (?:         #then all of...
+          \\ .     #   any explicitly backslashed char
+          [^\\']*  #   followed by an non-special chars
+       )*          #...repeated zero or more times
+       '           # a closing single quote
+     }x;</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>For common regular expressions like e-mail addresses, phone numbers,
+dates, etc., have a look at the <A HREF="../../../../Regex/Common.html">Regex::Common</A> module.  Also, be
+cautions about slapping modifier flags onto existing regular
+expressions, as they can drastically alter their meaning.  See
+<A HREF="http://www.perlmonks.org/?node_id=484238">http://www.perlmonks.org/?node_id=484238</A> for an interesting
+discussion on the effects of blindly modifying regular expression
+flags.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer  &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer. All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Every code file, no matter how small, should be kept in a
+source-control repository.  Adding the magical RCS keywords to your
+file helps the reader know where the file comes from, in case he or
+she needs to modify it.  This Policy scans your file for comments that
+look like this:
+
+</P>
+<PRE>  # $Revision: 431 $
+  # $Source: /myproject/lib/foo.pm $</PRE>
+
+<P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
+define the <CODE>$VERSION</CODE> variable like this:
+
+</P>
+<PRE>  our ($VERSION) = '$Revision: 431 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>By default, this policy only requires the <CODE>Revision</CODE>, <CODE>Source</CODE>, and
+<CODE>Date</CODE> keywords.  To specify alternate keywords, pass them into the
+constructor as a key-value pair, where the key is 'keywords' and the
+value is a whitespace delimited series of keywords (without the
+dollar-signs).  Or specify them in your <I>.perlcriticrc</I> file like
+this:
+
+</P>
+<PRE>  [Miscellanea::RequireRcsKeywords]
+  keywords = Revision Source Date Author Id</PRE>
+
+<P>See the documentation on RCS for a list of supported keywords.  Many
+source control systems are descended from RCS, so the keywords
+supported by CVS and Subversion are probably the same.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

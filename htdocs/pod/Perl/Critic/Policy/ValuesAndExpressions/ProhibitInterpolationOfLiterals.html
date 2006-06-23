@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Don't use double-quotes or <CODE>qq//</CODE> if your string doesn't require
+interpolation.  This saves the interpreter a bit of work and it lets
+the reader know that you really did intend the string to be literal.
+
+</P>
+<PRE>  print &quot;foobar&quot;;     #not ok
+  print 'foobar';     #ok
+  print qq/foobar/;   #not ok
+  print q/foobar/;    #ok
+
+  print &quot;$foobar&quot;;    #ok
+  print &quot;foobar\n&quot;;   #ok
+  print qq/$foobar/;  #ok
+  print qq/foobar\n/; #ok
+
+  print qq{$foobar};  #preferred
+  print qq{foobar\n}; #preferred</PRE>
+<HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This Policy accepts an additional key-value pair in the constructor,
+The key is 'allow' and the value is a string of quote styles
+that are exempt from this policy.  Valid styles are <CODE>qq{}</CODE>, <CODE>qq()</CODE>,
+<CODE>qq[]</CODE>, and <CODE>qq//</CODE>. Multiple styles should be separated by
+whitespace.  This is useful because some folks have configured their
+editor to apply special syntax highlighting within certain styles of
+quotes.  For example, you can tweak <CODE>vim</CODE> to use SQL highlighting for
+everything that appears within <CODE>qq{}</CODE> or <CODE>qq[]</CODE> quotes.  But if
+those strings are literal, Perl::Critic will complain.  To prevent
+this, put the following in your <I>.perlcriticrc</I> file:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+  allow = qq{} qq[]</PRE>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/RequireInterpolationOfMetachars.html">Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

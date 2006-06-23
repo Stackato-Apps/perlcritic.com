@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html>
+<head>
+<title>Perl::Critic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta name="keywords" content="Perl programming code validate rate validator certification evaluate evaluation check" />
+<meta name="description" content="Rate your Perl code!" />
+<link rel="stylesheet" href="/styles/style.css" type="text/css" media="all" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta http-equiv="imagetoolbar" content="no" />
+<!-- Prevents Google Toolbar from coloring inputs yellow -->
+<script src="/javascript/input-style.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+function setFocus()
+{
+document.getElementById("upload").focus()
+}
+</script>
+
+</head>
+
+<body id="home" onload="setFocus()">
+<h1 class="logo">Perl::Critic</h1>
+
+<h2 class="tag-line">Some Ways Are Better Than Others</h2>
+
+<center>	
+<form method="post" enctype="multipart/form-data" action="/perl/critic.pl">
+	<p>
+	<label title="Select a local Perl file to upload." for="upload">Select File To Upload:</label><br />
+	<input type="file" id="upload" name="code_file" size="42" class="file" />
+        </p>
+	<p class="last-child">
+	<label title="Submit Perl file for evaluation.">
+	<input type="submit" id="critique" value="Analyze My Code!" class="button" /></label>
+        </p>
+</form>
+</center>
+
+<p class="copyright">&copy;2006 Perl::Critic, all rights reserved</p>
+</body>
+</html>

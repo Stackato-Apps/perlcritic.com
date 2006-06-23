@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway discourages using postfix control structures (<CODE>if</CODE>, <CODE>for</CODE>,
+<CODE>unless</CODE>, <CODE>until</CODE>, <CODE>while</CODE>).  The <CODE>unless</CODE> and <CODE>until</CODE> controls
+are particularly evil because they lead to double-negatives that are
+hard to comprehend.  The only tolerable usage of a postfix <CODE>if</CODE> is
+when it follows a loop break such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or
+<CODE>continue</CODE>.
+
+</P>
+<PRE>  do_something() if $condition;         #not ok
+  if($condition){ do_something() }      #ok
+
+  do_something() while $condition;      #not ok
+  while($condition){ do_something() }   #ok
+
+  do_something() unless $condition;     #not ok
+  do_something() unless ! $condition;   #really bad
+  if(! $condition){ do_something() }    #ok
+
+  do_something() until $condition;      #not ok
+  do_something() until ! $condition;    #really bad
+  while(! $condition){ do_something() } #ok 
+
+  do_something($_) for @list;           #not ok
+
+ LOOP:
+  for my $n (0..100){
+      next if $condition;               #ok
+      last LOOP if $other_condition;    #also ok
+  }</PRE>
+<HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
+The key should be 'allow' and the value is a string of space-delimited
+keywords.  Choose from <CODE>if</CODE>, <CODE>for</CODE>, <CODE>unless</CODE>, <CODE>until</CODE>,and
+<CODE>while</CODE>.  When using the <A HREF="../../../../Perl/Critic.html">Perl::Critic</A> engine, these can be
+configured in the <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE> [ControlStructures::ProhibitPostfixControls]
+ allow = for if until</PRE>
+
+<P>By default, all postfix control keywords are prohibited.
+
+</P><HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>The <CODE>die</CODE>, <CODE>croak</CODE>, and <CODE>confess</CODE> functions are frequently used as
+flow-controls just like <CODE>next</CODE> or <CODE>last</CODE>.  So this Policy does
+permit you to use a postfix <CODE>if</CODE> when the statement begins with one
+of those functions.  It is also pretty common to use <CODE>warn</CODE>, <CODE>carp</CODE>,
+and <CODE>cluck</CODE> with a postfix <CODE>if</CODE>, so those are allowed too.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

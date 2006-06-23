@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Using bareword symbols to refer to file handles is particularly evil
+because they are global, and you have no idea if that symbol already
+points to some other file handle.  You can mitigate some of that risk
+by <CODE>local</CODE>izing the symbol first, but that's pretty ugly.  Since Perl
+5.6, you can use an undefined scalar variable as a lexical reference
+to an anonymous filehandle.  Alternatively, see the <A HREF="../../../../IO/Handle.html">IO::Handle</A> or
+<A HREF="../../../../IO/File.html">IO::File</A> or <A HREF="../../../../FileHandle.html">FileHandle</A> modules for an object-oriented approach.
+
+</P>
+<PRE>  open FH, '&lt;', $some_file;           #not ok
+  open my $fh, '&lt;', $some_file;       #ok
+  my $fh = IO::File-&gt;new($some_file); #ok</PRE>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../IO/Handle.html">IO::Handle</A>
+
+</P>
+<P><A HREF="../../../../IO/File.html">IO::File</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

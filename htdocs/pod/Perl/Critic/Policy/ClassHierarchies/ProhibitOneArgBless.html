@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ClassHierarchies::ProhibitOneArgBless</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ClassHierarchies::ProhibitOneArgBless
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Always use the two-argument form of <CODE>bless</CODE> because it allows
+subclasses to inherit your constructor.
+
+</P>
+<PRE>  sub new {
+      my $class = shift;
+      my $self = bless {};          # not ok
+      my $self = bless {}, $class;  # ok
+      return $self;
+  }</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

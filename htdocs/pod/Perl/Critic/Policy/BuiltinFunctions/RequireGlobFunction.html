@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::BuiltinFunctions::RequireGlobFunction</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::BuiltinFunctions::RequireGlobFunction
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway discourages the use of the <CODE>&lt;..&gt;</CODE> construct for globbing, as
+its heavily associated with I/O in most people's minds.  Instead, he recommends
+the use of the <CODE>glob()</CODE> function as it makes it much more obvious what you're
+attempting to do.
+
+</P>
+<PRE>  @files = &lt;*.pl&gt;;              # not ok
+  @files = glob( &quot;*.pl&quot; );      # ok</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Graham TerMarsch &lt;graham@howlingfrog.com&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2005-2006 Graham TerMarsch.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

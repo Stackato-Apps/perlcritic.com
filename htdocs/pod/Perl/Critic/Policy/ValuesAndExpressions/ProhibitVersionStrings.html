@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Whenever you <CODE>use</CODE> or <CODE>require</CODE> a module, you can specify a minimum
+version requirement.  To ensure compatibility with older Perls, this
+version number should be expressed as a floating-point number.  Do not
+use v-strings or three-part numbers.  The Perl convention for expressing
+version numbers as floats is: version + (patch level / 1000).
+
+</P>
+<PRE>  use Foo v1.2    qw(foo bar);  # not ok
+  use Foo 1.2.03  qw(foo bar);  # not ok
+  use Foo 1.00203 qw(foo bar);  # ok</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

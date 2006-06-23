@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Don't use quotes for an empty string or any string that is pure whitespace.
+Instead, use <CODE>q{}</CODE> to improve legibility.  Better still, created named values
+like this.  Use the <CODE>x</CODE> operator to repeat characters.
+
+</P>
+<PRE>  $message = '';      #not ok
+  $message = &quot;&quot;;      #not ok
+  $message = &quot;     &quot;; #not ok
+
+  $message = q{};     #better
+  $message = q{     } #better
+
+  $EMPTY = q{};
+  $message = $EMPTY;      #best
+
+  $SPACE = q{ };
+  $message = $SPACE x 5;  #best</PRE>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitNoisyStrings.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitNoisyStrings</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

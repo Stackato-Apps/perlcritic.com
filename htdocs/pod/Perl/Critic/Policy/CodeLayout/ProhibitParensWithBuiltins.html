@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::CodeLayout::ProhibitParensWithBuiltins</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::CodeLayout::ProhibitParensWithBuiltins
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway suggests that all built-in functions should be called without
+parenthesis around the argument list.  This reduces visual clutter and
+disambiguates built-in functions from user functions.  Exceptions are
+made for <CODE>my</CODE>, <CODE>local</CODE>, and <CODE>our</CODE> which require parenthesis when
+called with multiple arguments.
+
+</P>
+<PRE>  open($handle, '&gt;', $filename); #not ok
+  open $handle, '&gt;', $filename;  #ok
+
+  split(/$pattern/, @list); #not ok
+  split /$pattern/, @list;  #ok</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>Coding with parens can sometimes lead to verbose and awkward
+constructs, so I think the intent of Conway's guideline is to remove
+only the <I>unnecessary</I> parens.  This policy makes exceptions for some
+common situations where parens are usually required.  However, you may
+find other situations where the parens are necessary to enforce
+precedence, but they cause still violations.  In those cases, consider
+using the '## no critic' comments to silence Perl::Critic.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

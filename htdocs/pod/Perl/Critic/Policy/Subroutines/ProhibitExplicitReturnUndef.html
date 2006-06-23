@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Returning <CODE>undef</CODE> upon failure from a subroutine is pretty common.
+But if the subroutine is called in list context, an explicit <CODE>return
+undef;</CODE> statement will return a one-element list containing
+<CODE>(undef)</CODE>.  Now if that list is subsequently put in a boolean context
+to test for failure, then it evaluates to true.  But you probably
+wanted it to be false.
+
+</P>
+<PRE>  sub read_file {
+      my $file = shift;
+      -f $file || return undef;  #file doesn't exist!
+
+      #Continue reading file...
+  }
+
+  #and later...
+
+  if ( my @data = read_file($filename) ){
+
+      # if $filename doesn't exist,
+      # @data will be (undef),
+      # but I'll still be in here!
+
+      process(@data);
+  }
+  else{
+
+      # This is my error handling code.
+      # I probably want to be in here
+      # if $filname doesn't exist.
+
+      die &quot;$filename not found&quot;;
+  }</PRE>
+
+<P>The solution is to just use a bare <CODE>return</CODE> statement whenever you
+want to return failure.  In list context, Perl will then give you an
+empty list (which is false), and <CODE>undef</CODE> in scalar context (which is
+also false).
+
+</P>
+<PRE>  sub read_file {
+      my $file = shift;
+      -f $file || return;  #DWIM!
+
+      #Continue reading file...
+  }</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>You can fool this policy pretty easily by hiding <CODE>undef</CODE> in a boolean
+expression.  But don't bother trying.  In fact, using return values to
+indicate failure is pretty poor technique anyway.  Consider using
+<CODE>die</CODE> or <CODE>croak</CODE> with <CODE>eval</CODE>, or the <A HREF="../../../../Error.html">Error</A> module for a much
+more robust exception-handling model.  Conway has a real nice
+discussion on error handling in chapter 13 of PBP.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

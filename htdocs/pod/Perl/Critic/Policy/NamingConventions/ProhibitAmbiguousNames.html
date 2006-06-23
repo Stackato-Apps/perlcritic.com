@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#BUGS">BUGS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway lists a collection of English words which are highly ambiguous
+as variable or subroutine names.  For example, <CODE>$last</CODE> can mean
+previous or final.
+
+</P>
+<P>This policy tests against a list of ambiguous words for variable
+names.
+
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This Policy accepts an additional key-value pair in the constructor,
+The key is 'forbid' and the value is a string of forbidden words
+separated by spaces.  Any specified list replaces the default list.
+
+</P>
+<P>The default list is:
+
+</P>
+<PRE>    last set left right no abstract contract record second close bases</PRE>
+
+<P>For example, to override the default list:
+
+</P>
+<PRE>    my $pkg = 'Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames';
+    my $policy = $pkg-&gt;new(forbid =&gt; 'last set');</PRE>
+<HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="default_forbidden_words()">default_forbidden_words()
+
+</A></DT>
+<DD>
+
+<P>This can be called as a class or instance method.  It returns the list
+of words that are forbidden by default.  This list can be overridden
+via a perlcriticrc file.
+
+</P>
+<P>For example, if you decide that <CODE>bases</CODE> is an OK name for variables
+(e.g. in bioinformatics), then put something like the following in
+<CODE>$HOME/.perlcriticrc</CODE>:
+
+</P>
+<PRE>    [NamingConventions::ProhibitAmbiguousNames]
+    forbid = last set left right no abstract contract record second close</PRE>
+</DD>
+</DL>
+<HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Currently this policy checks the entire variable and subroutine name,
+not parts of the name.  For example, it catches <CODE>$last</CODE> but not
+<CODE>$last_record</CODE>.  Hopefully future versions will catch both cases.
+
+</P>
+<P>Some variable statements will be false positives if they have
+assignments where the right hand side uses forbidden names.  For
+example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
+
+</P>
+<PRE>    my $previous_record = $Foo::last;</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Chris Dolan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

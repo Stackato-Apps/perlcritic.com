@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Subroutines::RequireFinalReturn</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#LIMITATIONS">LIMITATIONS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Subroutines::RequireFinalReturn
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Subroutines without explicit return statements at their ends can be
+confusing.  It can be challenging to deduce what the return value will
+be.
+
+</P>
+<P>Furthermore, if the programmer did not mean for there to be a
+significant return value, and omits a return statement, some of the
+subroutine's inner data can leak to the outside.  Consider this case:
+
+</P>
+<PRE>   package Password;
+   # every time the user guesses the password wrong, it's value
+   # is rotated by one character
+   my $password;
+   sub set_password {
+      $password = shift;
+   }
+   sub check_password {
+      my $guess = shift;
+      if ($guess eq $password) {
+         unlock_secrets();
+      } else {
+         $password = (substr $password, 1).(substr $password, 0, 1);
+      }
+   }
+   1;</PRE>
+
+<P>In this case, the last statement in check_password() is the
+assignment.  The result of that assignment is the implicit return
+value, so a wrong guess returns the right password!  Adding a
+<CODE>return;</CODE> at the end of that subroutine solves the problem.
+
+</P>
+<P>The only exception allowed is an empty subroutine.
+
+</P><HR>
+<H1><A NAME="LIMITATIONS">LIMITATIONS
+
+</A></H1>
+
+<P>We do not look for returns inside ternary operators.  That
+construction is too complicated to analyze right now.  Besides, a
+better form is the return outside of the ternary like this: <CODE>return
+foo ? 1 : bar ? 2 : 3</CODE>
+
+</P>
+<P>Also, this policy doesn't allow you to terminate a subroutine with
+<CODE>die</CODE>, <CODE>exit</CODE>, <CODE>croak</CODE>, or <CODE>confess</CODE>.  We'll try and fix that in
+the future.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Chris Dolan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

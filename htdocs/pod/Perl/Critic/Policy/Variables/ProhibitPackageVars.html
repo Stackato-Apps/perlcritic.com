@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Variables::ProhibitPackageVars</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Variables::ProhibitPackageVars
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway suggests avoiding package variables completely, because they
+expose your internals to other packages.  Never use a package variable
+when a lexical variable will suffice.  If your package needs to keep
+some dynamic state, consider using an object or closures to keep the
+state private.
+
+</P>
+<P>This policy assumes that you're using <CODE>strict vars</CODE> so that naked
+variable declarations are not package variables by default.  Thus, it
+complains you declare a variable with <CODE>our</CODE> or <CODE>use vars</CODE>, or if you
+make reference to variable with a fully-qualified package name.
+
+</P>
+<PRE>  $Some::Package::foo = 1;    #not ok
+  our $foo            = 1;    #not ok
+  use vars '$foo';            #not ok
+  $foo = 1;                   #not allowed by 'strict'
+  local $foo = 1;             #bad taste, but technically ok.
+  use vars '$FOO';            #ok, because it's ALL CAPS
+  my $foo = 1;                #ok</PRE>
+
+<P>In practice though, its not really practical to prohibit all package
+variables.  Common variables like <CODE>$VERSION</CODE> and <CODE>@EXPORT</CODE> need to
+be global, as do any variables that you want to Export.  To work
+around this, the Policy overlooks any variables that are in ALL_CAPS.
+This forces you to put all your exported variables in ALL_CAPS too, which
+seems to be the usual practice anyway.
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/Variables/ProhibitPunctuationVars.html">Perl::Critic::Policy::Variables::ProhibitPunctuationVars</A>
+
+</P>
+<P><A HREF="../../../../Perl/Critic/Policy/Variables/ProhibitLocalVars.html">Perl::Critic::Policy::Variables::ProhibitLocalVars</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

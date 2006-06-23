@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#IMPORTANT%20CHANGES">IMPORTANT CHANGES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway doesn't mention this, but I think <CODE>qw()</CODE> is an underutilized
+feature of Perl.  Whenever you need to declare a list of one-word
+literals, the <CODE>qw()</CODE> operator is wonderfully concise and saves you
+lots of keystrokes.  And using <CODE>qw()</CODE> makes it easy to add to the
+list in the future.
+
+</P>
+<PRE>  @list = ('foo', 'bar', 'baz');  #not ok
+  @list = qw(foo bar baz);        #ok</PRE>
+<HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This Policy accepts an additional key-value pair in the constructor.
+The key must be 'min_elements' and the value is the minimum number of
+elements in the list.  Lists with fewer elements will be overlooked by
+this Policy.  The default is 2.  Users of Perl::Critic can configure
+this in their <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE>  [CodeLayout::ProhibitQuotedWordLists]
+  min_elements = 4</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>In the PPI parlance, a &quot;list&quot; is almost anything with parens.  I've
+tried to make this Policy smart by targeting only &quot;lists&quot; that could
+be sensibly expressed with <CODE>qw()</CODE>.  However, there may be some edge
+cases that I haven't covered.  If you find one, send me a note.
+
+</P><HR>
+<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+
+</A></H1>
+
+<P>This policy was formerly called <CODE>RequireQuotedWords</CODE> which seemed a
+little counterintuitive.  If you get lots of &quot;Cannot load policy
+module&quot; errors, then you probably need to change <CODE>RequireQuotedWords</CODE>
+to <CODE>ProhibitQuotedWordLists</CODE> in your <I>.perlcriticrc</I> file.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P>
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

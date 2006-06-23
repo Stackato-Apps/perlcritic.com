@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Modules::RequireExplicitPackage</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#IMPORTANT%20CHANGES">IMPORTANT CHANGES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Modules::RequireExplicitPackage
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway doesn't specifically mention this, but I've come across it in
+my own work.  In general, the first statement of any Perl module or
+library should be a <CODE>package</CODE> statement.  Otherwise, all the code
+that comes before the <CODE>package</CODE> statement is getting executed in the
+caller's package, and you have no idea who that is.  Good
+encapsulation and common decency require your module to keep its
+innards to itself.
+
+</P>
+<P>As for scripts, most people understand that the default package is
+<CODE>main</CODE>, so this Policy doesn't apply to files that begin with a perl
+shebang.  But it you want to require an explicit <CODE>package</CODE>
+declaration in all files, including scripts, then add the following to
+your <I>.perlcriticrc</I> file
+
+</P>
+<PRE>  [Modules::RequireExplicitPackage]
+  exempt_scripts = 0</PRE>
+
+<P>There are some valid reasons for not having a <CODE>package</CODE> statement at
+all.  But make sure you understand them before assuming that you
+should do it too.
+
+</P><HR>
+<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+
+</A></H1>
+
+<P>This policy was formerly called <CODE>ProhibitUnpackagedCode</CODE> which sounded
+a bit odd.  If you get lots of &quot;Cannot load policy module&quot; errors,
+then you probably need to change <CODE>ProhibitUnpackagedCode</CODE> to
+<CODE>RequireExplicitPackage</CODE> in your <I>.perlcriticrc</I> file.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

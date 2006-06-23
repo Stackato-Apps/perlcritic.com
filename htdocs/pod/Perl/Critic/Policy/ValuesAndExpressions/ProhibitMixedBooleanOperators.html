@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Conway advises against combining the low-precedence booleans ( <CODE>and
+or not</CODE> ) with the high-precedence boolean operators ( <CODE>&amp;&amp; || !</CODE> )
+in the same expression.  Unless you fully understand the differences
+between the high and low-precedence operators, it is easy to
+misinterpret expressions that use both.  And even if you do understand
+them, it is not always clear if the author actually intended it.
+
+</P>
+<PRE>  next if not $foo || $bar;  #not ok
+  next if !$foo || $bar;     #ok
+  next if !( $foo || $bar ); #ok</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

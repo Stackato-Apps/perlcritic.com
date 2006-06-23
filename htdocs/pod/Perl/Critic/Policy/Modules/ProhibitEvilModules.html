@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Modules::ProhibitEvilModules</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Modules::ProhibitEvilModules
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Use this policy if you wish to prohibit the use of specific modules.
+These may be modules that you feel are deprecated, buggy, unsupported,
+insecure, or just don't like.
+
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
+The key should be 'modules' and the value is a string of
+space-delimited fully qualified module names.  These can be configured
+in the <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE> [Modules::ProhibitEvilModules]
+ modules = Getopt::Std  Autoload</PRE>
+
+<P>If any module name in your configuration is braced with slashes, it
+is interpreted as a regular expression.  So any module that matches
+<CODE>m/$module_name/</CODE> will be forbidden.  For example:
+
+</P>
+<PRE>  [Modules::ProhibitEvilModules]
+  modules = /Acme::/</PRE>
+
+<P>would cause all modules that match <CODE>m/Acme::/</CODE> to be forbidden.  You
+can add any of the <CODE>imxs</CODE> switches to the end of the pattern, but
+beware that your pattern should not contain spaces, lest the parser
+will get confused.
+
+</P>
+<P>By default, there aren't any prohibited modules (although I can think
+of a few that should be).
+
+</P><HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>Note that this policy doesn't apply to pragmas.  Future versions may
+allow you to specify an alternative for each prohibited module, which
+can be suggested by <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

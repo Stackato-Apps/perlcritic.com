@@ -1,0 +1,34 @@
+<VirtualHost 208.109.27.120:80>
+
+    ServerName perlcritic.com
+    ServerAlias www.perlcritic.com www.perlcritic.org perlcritic.org
+    DocumentRoot /var/www/vhosts/perlcritic/htdocs
+    UseCanonicalName Off
+
+    ScriptAlias /cgi-bin/ "/var/www/vhosts/perlcritic/cgi-bin/"
+    <Directory "/var/www/vhosts/perlcritic/cgi-bin/">
+        AllowOverride None
+        Options None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /tmp/ "/var/tmp/"
+    <Directory "/var/tmp/">
+        AllowOverride None
+        Options None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /perl/ /var/www/vhosts/perlcritic/perl/
+    <Location /perl/>
+        SetHandler perl-script
+        PerlResponseHandler ModPerl::Registry
+        PerlOptions +ParseHeaders
+        Options +ExecCGI
+        Order allow,deny
+        Allow from all 
+    </Location>
+
+</VirtualHost>

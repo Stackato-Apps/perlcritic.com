@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>There are good reasons for disabling certain kinds of strictures, But
+if you were wise enough to <CODE>use strict</CODE> in the first place, then it
+doesn't make sense to disable it completely.  By default, any <CODE>no
+strict</CODE> statement will violate this policy.  However, you can
+configure this Policy to allow certain types of strictures to be
+disabled (See <A HREF="../../../../Configuration.html">Configuration</A>).  A bare <CODE>no strict</CODE> statement will
+always raise a violation.
+
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This policy accepts one key-value pair in the constructor.  The key is
+'allow' and the value is a string of whitespace delimited stricture
+types that you want to permit.  These can be 'vars', 'subs' and/or
+'refs'.  Users of the Perl::Critic engine can configure this in their
+<I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE>  [TestingAndDebugging::ProhibitStrictureDisabling]
+  allow = vars subs refs</PRE>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequirePackageStricture.html">Perl::Critic::Policy::TestingAndDebugging::RequirePackageStricture</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

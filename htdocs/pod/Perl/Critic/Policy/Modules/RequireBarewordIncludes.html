@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Modules::RequireBarewordIncludes</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Modules::RequireBarewordIncludes
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>When including another module (or library) via the <CODE>require</CODE> or
+<CODE>use</CODE> statements, it is best to identify the module (or library)
+using a bareword rather than an explicit path.  This is because paths
+are usually not portable from one machine to another.  Also, Perl
+automatically assumes that the filename ends in '.pm' when the library
+is expressed as a bareword.  So as a side-effect, this Policy
+encourages people to write '*.pm' modules instead of the old-school
+'*.pl' libraries.
+
+</P>
+<PRE>  use 'My/Perl/Module.pm';  #not ok
+  use My::Perl::Module;     #ok</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>This Policy is a replacement for <CODE>ProhibitRequireStatements</CODE>, which
+completely banned the use of <CODE>require</CODE> for the sake of eliminating
+the old '*.pl' libraries from Perl4.  Upon further consideration, I
+realized that <CODE>require</CODE> is quite useful and necessary to enable
+run-time loading.  Thus, <CODE>RequireBarewordIncludes</CODE> does allow you to
+use <CODE>require</CODE>, but still encourages you to write '*.pm' modules.
+
+</P>
+<P>Sometimes, you may want to load modules at run-time, but you don't
+know at design-time exactly which module you will need to load
+(<A HREF="../../../../Perl/Critic.html">Perl::Critic</A> is an example of this).  In that case, just attach
+the <CODE>'## no critic'</CODE> pseudo-pragma like so:
+
+</P>
+<PRE>  require $module_name;  ## no critic
+</PRE>
+<HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt; was instrumental in identifying the
+correct motivation for and behavior of this Policy.  Thanks Chris.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P>
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>
