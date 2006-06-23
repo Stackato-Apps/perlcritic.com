@@ -20,13 +20,20 @@ our $HL = create_highlighter();
 
 #-----------------------------------------------------------------------------
 
-my $source_fh           = upload('code_file');
-my $source_path         = param('code_file');
-my ($raw, $cooked)      = load_source_code( $HL, $source_fh );
-my $code_frame_url      = generate_code_frame( $TT, $cooked );
-my @violations          = critique_source_code( $PC, $raw );
-my $critique_frame_url  = generate_critique_frame( $TT, $code_frame_url, @violations );
-my $status              = render_page( $TT, $source_path, $code_frame_url, $critique_frame_url );
+if ( http('HTTP_USER_AGENT') =~ m{ (?: mozilla|msie ) }imx ) {
+    my $source_fh           = upload('code_file');
+    my $source_path         = param('code_file');
+    my ($raw, $cooked)      = load_source_code( $HL, $source_fh );
+    my $code_frame_url      = generate_code_frame( $TT, $cooked );
+    my @violations          = critique_source_code( $PC, $raw );
+    my $critique_frame_url  = generate_critique_frame( $TT, $code_frame_url, @violations );
+    my $status              = render_page( $TT, $source_path, $code_frame_url, $critique_frame_url );
+}
+else {
+  my $raw                 = \do{  local $/ = undef; <STDIN> };
+  my @violations          = critique_source_code( $PC, $raw );
+  print header, @violations;
+}
 
 #=============================================================================
 
