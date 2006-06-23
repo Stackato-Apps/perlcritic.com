@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Perl::Critic</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Perl programming code validate rate validator certification evaluate evaluation check" />
 <meta name="description" content="Rate your Perl code!" />
 <link rel="stylesheet" href="/styles/style.css" type="text/css" media="all" />
@@ -21,23 +21,28 @@ document.getElementById("upload").focus()
 </head>
 
 <body id="home" onload="setFocus()">
-<h1 class="logo">Perl::Critic</h1>
+ <h1 class="logo">Perl::Critic</h1>
+ <h2 class="tag-line">Some Ways Are Better Than Others</h2>
 
-<h2 class="tag-line">Some Ways Are Better Than Others</h2>
+ <div>
+  <form method="post" enctype="multipart/form-data" action="/perl/critic.pl" class="center">
+  <fieldset>
+   <p>
+    <label for="upload">
+     Select file to upload:
+    </label>
+    <input type="file" id="upload" name="code_file" size="30" />
+   </p>
 
-<center>	
-<form method="post" enctype="multipart/form-data" action="/perl/critic.pl">
-	<p>
-	<label title="Select a local Perl file to upload." for="upload">Select File To Upload:</label><br />
-	<input type="file" id="upload" name="code_file" size="42" class="file" />
-        </p>
-	<p class="last-child">
-	<label title="Submit Perl file for evaluation.">
-	<input type="submit" id="critique" value="Analyze My Code!" class="button" /></label>
-        </p>
-</form>
-</center>
+   <p>
+    <input type="submit" id="critique" value="Analyze My Code!" class="button" />
+   </p>
+  </fieldset>
+  </form>
+ </div>
 
-<p class="copyright">&copy;2006 Perl::Critic, all rights reserved</p>
+ <div class="footer">
+  <p class="copyright">&copy;2006 Perl::Critic, all rights reserved</p>
+ </div>
 </body>
 </html>
