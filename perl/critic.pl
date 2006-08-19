@@ -23,6 +23,10 @@ our $HL = create_highlighter();
 if ( http('HTTP_USER_AGENT') =~ m{ (?: mozilla|msie ) }imx ) {
     my $source_fh           = upload('code_file');
     my $source_path         = param('code_file');
+
+    #TODO: Validate parameters before POSTing!
+    if ( !$source_fh ) { show_error_screen($TT) }
+
     my ($raw, $cooked)      = load_source_code( $HL, $source_fh );
     my $code_frame_url      = generate_code_frame( $TT, $cooked );
     my @violations          = critique_source_code( $PC, $raw );
@@ -30,12 +34,13 @@ if ( http('HTTP_USER_AGENT') =~ m{ (?: mozilla|msie ) }imx ) {
     my $status              = render_page( $TT, $source_path, $code_frame_url, $critique_frame_url );
 }
 else {
-  my $raw                 = \do{  local $/ = undef; <STDIN> };
-  my @violations          = critique_source_code( $PC, $raw );
+  my $raw                   = \do{  local $/ = undef; <STDIN> };
+  my @violations            = critique_source_code( $PC, $raw );
   print header, @violations;
 }
 
 #=============================================================================
+
 
 sub render_page {
     my ($TT, @args) = @_;
@@ -103,6 +108,15 @@ sub create_highlighter {
     }
 
     return $hl;
+}
+
+#-----------------------------------------------------------------------------
+
+sub show_error_screen {
+    my ($TT) = @_;
+    my $template = 'error.html.tt';
+    $TT->process($template) or confess $TT->error();
+    return 1;
 }
 
 #-----------------------------------------------------------------------------
