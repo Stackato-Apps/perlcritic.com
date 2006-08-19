@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+<title>Perl::Critic - results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta name="keywords" content="Perl perl-critic perl::critic programming code standards" />
+<link rel="stylesheet" href="/styles/style.css" type="text/css" media="all" />
+
+</head>
+<body id="results">
+
+<div id="header">
+    <a href="/" title="Return to Perl::Critic home"><h1 class="logo">Perl::Critic</h1></a>
+</div>
+
+<div id="contents">
+
+<h2>Oops...</h2>
+Looks like you forgot to select a file, or the upload failed somehow.<br/>
+Please go <a href="/">back</a> and try again.<br/>
+
+</div>
+
+<div id="footer">
+    <hr/>                        
+    <p class="copyright">&copy;2006 Perl::Critic, all rights reserved</p>
+</div>
