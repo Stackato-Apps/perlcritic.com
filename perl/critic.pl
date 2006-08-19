@@ -115,6 +115,7 @@ sub create_highlighter {
 sub show_error_screen {
     my ($TT) = @_;
     my $template = 'error.html.tt';
+    print header();
     $TT->process($template) or confess $TT->error();
     return 1;
 }
