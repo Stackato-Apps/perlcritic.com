@@ -16,9 +16,9 @@
 
 <div id="contents">
 
-<h2>Oops...</h2>
-Looks like you forgot to select a file, or the upload failed somehow.<br/>
-Please go <a href="/">back</a> and try again.<br/>
+<h2>Oops!</h2>
+Looks like you forgot to select a file, or the file path was incorrect.
+Please go <a href="/">back</a> and try again.
 
 </div>
 
