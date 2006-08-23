@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::PolicySummary</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -16,6 +16,8 @@
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitSleepViaSelect"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitSleepViaSelect.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitStringyEval"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitStringyEval.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitStringySplit"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitStringySplit.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitUniversalCan"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitUniversalCan.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitUniversalCan</A>
 
@@ -47,6 +49,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitCascadingIfElse"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitCascadingIfElse.html">Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitDeepNests"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitDeepNests.html">Perl::Critic::Policy::ControlStructures::ProhibitDeepNests</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitPostfixControls"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitPostfixControls.html">Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitUnlessBlocks"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitUnlessBlocks.html">Perl::Critic::Policy::ControlStructures::ProhibitUnlessBlocks</A>
@@ -59,9 +63,13 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aRequirePodSections"><A HREF="../../Perl/Critic/Policy/Documentation/RequirePodSections.html">Perl::Critic::Policy::Documentation::RequirePodSections</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aErrorHandling%3a%3aRequireCarping"><A HREF="../../Perl/Critic/Policy/ErrorHandling/RequireCarping.html">Perl::Critic::Policy::ErrorHandling::RequireCarping</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitBacktickOperators"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitBacktickOperators.html">Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitBarewordFileHandles"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitBarewordFileHandles.html">Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitInteractiveTest"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitInteractiveTest.html">Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitOneArgSelect"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitOneArgSelect.html">Perl::Critic::Policy::InputOutput::ProhibitOneArgSelect</A>
 
@@ -98,6 +106,8 @@
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aNamingConventions%3a%3aProhibitMixedCaseVars"><A HREF="../../Perl/Critic/Policy/NamingConventions/ProhibitMixedCaseVars.html">Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseVars</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aReferences%3a%3aProhibitDoubleSigils"><A HREF="../../Perl/Critic/Policy/References/ProhibitDoubleSigils.html">Perl::Critic::Policy::References::ProhibitDoubleSigils</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aRegularExpressions%3a%3aProhibitCaptureWithoutTest"><A HREF="../../Perl/Critic/Policy/RegularExpressions/ProhibitCaptureWithoutTest.html">Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aRegularExpressions%3a%3aRequireExtendedFormatting"><A HREF="../../Perl/Critic/Policy/RegularExpressions/RequireExtendedFormatting.html">Perl::Critic::Policy::RegularExpressions::RequireExtendedFormatting</A>
 
@@ -163,6 +173,10 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireInitializationForLocalVars"><A HREF="../../Perl/Critic/Policy/Variables/RequireInitializationForLocalVars.html">Perl::Critic::Policy::Variables::RequireInitializationForLocalVars</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireLexicalLoopIterators"><A HREF="../../Perl/Critic/Policy/Variables/RequireLexicalLoopIterators.html">Perl::Critic::Policy::Variables::RequireLexicalLoopIterators</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireNegativeIndices"><A HREF="../../Perl/Critic/Policy/Variables/RequireNegativeIndices.html">Perl::Critic::Policy::Variables::RequireNegativeIndices</A>
+
 </A></UL>
 <LI><A HREF="#AUTHOR">AUTHOR
 
@@ -212,6 +226,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Write <CODE>eval { my $foo; bar($foo) }</CODE> instead of <CODE>eval &quot;my $foo; bar($foo);&quot;</CODE> [Severity 5]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitStringySplit"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitStringySplit.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit</A>
+
+</A></H2>
+
+<P>Write <CODE>split /-/, $string</CODE> instead of <CODE>split '-', $string</CODE> [Severity 3]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitUniversalCan"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitUniversalCan.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitUniversalCan</A>
 
@@ -303,6 +323,15 @@ each module for it's specific details.
 
 <P>Don't write long &quot;if-elsif-elsif-elsif-elsif...else&quot; chains. [Severity 3]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitDeepNests"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitDeepNests.html">Perl::Critic::Policy::ControlStructures::ProhibitDeepNests</A>
+
+</A></H2>
+
+<P>[Severity 2]
+
+</P>
+<P>Don't write deeply nested loops and conditionals.
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitPostfixControls"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitPostfixControls.html">Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls</A>
 
 </A></H2>
@@ -339,6 +368,12 @@ each module for it's specific details.
 
 <P>Organize your POD into the customary sections. [Severity 2]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aErrorHandling%3a%3aRequireCarping"><A HREF="../../Perl/Critic/Policy/ErrorHandling/RequireCarping.html">Perl::Critic::Policy::ErrorHandling::RequireCarping</A>
+
+</A></H2>
+
+<P>Use functions from <A HREF="../../Carp.html">Carp</A> instead of <CODE>warn</CODE> or <CODE>die</CODE>. [Severity 3]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitBacktickOperators"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitBacktickOperators.html">Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators</A>
 
 </A></H2>
@@ -350,6 +385,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Write <CODE>open my $fh, q{&lt;}, $filename;</CODE> instead of <CODE>open FH, q{&lt;}, $filename;</CODE> [Severity 5]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitInteractiveTest"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitInteractiveTest.html">Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest</A>
+
+</A></H2>
+
+<P>Use prompt() instead of -t [Severity 5]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitOneArgSelect"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitOneArgSelect.html">Perl::Critic::Policy::InputOutput::ProhibitOneArgSelect</A>
 
@@ -458,6 +499,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Write <CODE>@{ $array_ref }</CODE> instead of <CODE>@$array_ref</CODE> [Severity 2]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aRegularExpressions%3a%3aProhibitCaptureWithoutTest"><A HREF="../../Perl/Critic/Policy/RegularExpressions/ProhibitCaptureWithoutTest.html">Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest</A>
+
+</A></H2>
+
+<P>Capture variable used outside conditional [Severity 3]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aRegularExpressions%3a%3aRequireExtendedFormatting"><A HREF="../../Perl/Critic/Policy/RegularExpressions/RequireExtendedFormatting.html">Perl::Critic::Policy::RegularExpressions::RequireExtendedFormatting</A>
 
@@ -650,6 +697,18 @@ each module for it's specific details.
 </A></H2>
 
 <P>Write <CODE>local $foo = $bar;</CODE> instead of just <CODE>local $foo;</CODE> [Severity 3]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireLexicalLoopIterators"><A HREF="../../Perl/Critic/Policy/Variables/RequireLexicalLoopIterators.html">Perl::Critic::Policy::Variables::RequireLexicalLoopIterators</A>
+
+</A></H2>
+
+<P>Write <CODE>for my $element (@list) {...}</CODE> instead of <CODE>for $element (@list) {...}</CODE>
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireNegativeIndices"><A HREF="../../Perl/Critic/Policy/Variables/RequireNegativeIndices.html">Perl::Critic::Policy::Variables::RequireNegativeIndices</A>
+
+</A></H2>
+
+<P>Negative array index should be used [Severity 4]
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

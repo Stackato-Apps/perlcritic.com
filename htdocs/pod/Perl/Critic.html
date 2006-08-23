@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -92,11 +92,18 @@ pragma.
 <P>Win32 and ActivePerl users can find PPM distributions of Perl::Critic
 at <A HREF="http://theoryx5.uwinnipeg.ca/ppms/">http://theoryx5.uwinnipeg.ca/ppms/</A>.
 
+</P>
+<P>If you'd like to try <A HREF="Perl/Critic.html">Perl::Critic</A> before you install it, there is a
+web-service available at <A HREF="http://perlcritic.com">http://perlcritic.com</A>.  The web-service
+does not yet support all the configuration features that are available
+in the native Perl::Critic API, but it should give you a good idea
+of what it does.
+
 </P><HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%20N%2c%20-force%20%3d%3e%201%20)%3e"><CODE>new( -profile =&gt; $FILE, -severity =&gt; $N, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =</CODE> N, -force =&gt; 1 )&gt;
+<DL><DT><A NAME="new(%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20N%2c%20-force%20%3d%3e%201%20)"><CODE>new( -profile =&gt; $FILE, -severity =&gt; $N, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; N, -force =&gt; 1 )</CODE>
 
 </A></DT>
 <DD>
@@ -253,7 +260,10 @@ method.  Here are some examples:
   @violations = critique( $some_file );
 
   # Use custom parameters...
-  @violations = critique( {-severity =&gt; 2}, $some_file );</PRE>
+  @violations = critique( {-severity =&gt; 2}, $some_file );
+
+  # As a one-liner
+  %&gt; perl -MPerl::Critic=critique -e 'print critique(shift)' some_file.pm</PRE>
 
 <P>None of the other object-methods are currently supported as static
 functions.  Sorry.
@@ -266,7 +276,7 @@ functions.  Sorry.
 <P>The default configuration file is called <I>.perlcriticrc</I>.
 Perl::Critic will look for this file in the current directory first,
 and then in your home directory.  Alternatively, you can set the
-PERLCRITIC environment variable to explicitly point to a different
+<CODE>PERLCRITIC</CODE> environment variable to explicitly point to a different
 file in another location.  If none of these files exist, and the
 <CODE>-profile</CODE> option is not given to the constructor, then all the
 modules that are found in the Perl::Critic::Policy namespace will be
@@ -372,7 +382,7 @@ modules themselves.
 
 <P>Perl::Critic takes a hard-line approach to your code: either you
 comply or you don't.  In the real world, it is not always practical
-(or even possible) to fully comply with coding standards.  In such
+(nor even possible) to fully comply with coding standards.  In such
 cases, it is wise to show that you are knowingly violating the
 standards and that you have a Damn Good Reason (DGR) for doing so.
 
@@ -408,7 +418,7 @@ ignore the <CODE>&quot;## no critic&quot;</CODE> comments, use the <CODE>-force<
 </P>
 <P>A bare <CODE>&quot;## no critic&quot;</CODE> comment disables all the active Policies.  If
 you wish to disable only specific Policies, add a list of Policy names
-as arguments just as you would for the <CODE>&quot;no strict&quot;</CODE> or <CODE>&quot;no
+as arguments, just as you would for the <CODE>&quot;no strict&quot;</CODE> or <CODE>&quot;no
 warnings&quot;</CODE> pragmas.  For example, this would disable the
 <CODE>ProhibitEmptyQuotes</CODE> and <CODE>ProhibitPostfixControls</CODE> policies until
 the end of the block or until the next <CODE>&quot;## use critic&quot;</CODE> comment
@@ -432,8 +442,8 @@ family of Policies in one shot like this:
   sub camelHumpSub {}        #Now exempt from NamingConventions::ProhibitMixedCaseSubs</PRE>
 
 <P>The argument list must be enclosed in parens and must contain one or
-more comma-separated barewords (e.g. don't use quotes).  The &lt;&quot;## no
-critic&quot;&gt; pragmas can be nested, and Policies named by an inner pragma
+more comma-separated barewords (e.g. don't use quotes).  The <CODE>&quot;## no
+critic&quot;</CODE> pragmas can be nested, and Policies named by an inner pragma
 will be disabled along with those already disabled an outer pragma.
 
 </P>
@@ -449,7 +459,7 @@ resorting to this feature.
 
 </A></H1>
 
-<P>Perl-Critic is evolving rapidly.  As such, some of the interfaces have
+<P>Perl-Critic is evolving rapidly, so some of the interfaces have
 changed in ways that are not backward-compatible.  If you have been
 using an older version of Perl-Critic and/or you have been developing
 custom Policy modules, please read this section carefully.
@@ -481,17 +491,18 @@ and then start another comment.  For example:
 
 <P>Starting in version 0.14, the interface to <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>
 changed.  This will also break any custom Policy modules that you
-might have written for earlier modules.  See <A HREF="DEVELOPER.pod.html">DEVELOPER.pod</A> for an
-up-to-date guide on creating Policy modules.
+might have written for earlier modules.  See
+<A HREF="Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> for an up-to-date guide on creating Policy
+modules.
 
 </P>
 <P>The notion of &quot;priority&quot; was also replaced with &quot;severity&quot; in version
 0.14.  Consequently, the default behavior of Perl::Critic is to only
 load the most &quot;severe&quot; Policy modules, rather than loading all of
 them.  This decision was based on user-feedback suggesting that
-Perl-Critic should be less &quot;critical&quot; for new users, and should steer
-them toward gradually increasing the strictness as they adopt better
-coding practices.
+Perl-Critic should be less critical for new users, and should steer
+them toward gradually increasing the strictness as they progressively
+adopt better coding practices.
 
 
 </P><H2><A NAME="VERSION%200.11">VERSION 0.11
@@ -503,8 +514,8 @@ rewritten so that only one traversal of the PPI document tree is
 required.  Unfortunately, this will break any custom Policy modules
 that you might have written for earlier versions.  Converting your
 policies to work with the new version is pretty easy and actually
-results in cleaner code.  See <A HREF="DEVELOPER.pod.html">DEVELOPER.pod</A> for an up-to-date guide
-on creating Policy modules.
+results in cleaner code.  See <A HREF="Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> for an
+up-to-date guide on creating Policy modules.
 
 </P><HR>
 <H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
@@ -534,7 +545,7 @@ step-by-step demonstration of how to create new Policy modules.
 
 </P>
 <P>If you develop any new Policy modules, feel free to send them to
-&lt;thaljef@cpan.org&gt; and I'll be happy to put them into the Perl::Critic
+<CODE>thaljef@cpan.org</CODE> and I'll be happy to put them into the Perl::Critic
 distribution.  Or if you'd like to work on the Perl::Critic project
 directly, check out our repository at <A HREF="http://perlcritic.tigris.org">http://perlcritic.tigris.org</A>.
 To subscribe to our mailing list, send a message to
@@ -589,9 +600,6 @@ testing:
 
 </P>
 <P><A HREF="Test/Pod/Coverage.html">Test::Pod::Coverage</A>
-
-</P>
-<P><A HREF="Test/Perl/Critic.html">Test::Perl::Critic</A>
 
 </P><HR>
 <H1><A NAME="BUGS">BUGS

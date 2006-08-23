@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::InputOutput::ProhibitReadlineInForLoop</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -26,7 +26,7 @@
 </A></H1>
 
 <P>Using the readline operator in a <CODE>for</CODE> or <CODE>foreach</CODE> loop is very
-inefficient.  The iteration list of the loop creates a list context,
+slow.  The iteration list of the loop creates a list context,
 which causes the readline operator to read the entire input stream
 before iteration even starts.  Instead, just use a <CODE>while</CODE> loop,
 which only reads one line at a time.

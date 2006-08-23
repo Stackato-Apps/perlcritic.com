@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Subroutines::RequireFinalReturn</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -27,6 +27,9 @@
 
 </A></H1>
 
+<P>Require all subroutines to terminate with a <CODE>return</CODE> (or a <CODE>goto</CODE>).
+
+</P>
 <P>Subroutines without explicit return statements at their ends can be
 confusing.  It can be challenging to deduce what the return value will
 be.

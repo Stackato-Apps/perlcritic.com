@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -34,14 +34,14 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>  # $Revision: 431 $
+<PRE>  # $Revision: 633 $
   # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 431 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<PRE>  our ($VERSION) = '$Revision: 633 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
 <HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 

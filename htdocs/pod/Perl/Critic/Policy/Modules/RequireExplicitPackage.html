@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Modules::RequireExplicitPackage</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -27,8 +27,7 @@
 
 </A></H1>
 
-<P>Conway doesn't specifically mention this, but I've come across it in
-my own work.  In general, the first statement of any Perl module or
+<P>In general, the first statement of any Perl module or
 library should be a <CODE>package</CODE> statement.  Otherwise, all the code
 that comes before the <CODE>package</CODE> statement is getting executed in the
 caller's package, and you have no idea who that is.  Good
@@ -38,8 +37,8 @@ innards to itself.
 </P>
 <P>As for scripts, most people understand that the default package is
 <CODE>main</CODE>, so this Policy doesn't apply to files that begin with a perl
-shebang.  But it you want to require an explicit <CODE>package</CODE>
-declaration in all files, including scripts, then add the following to
+shebang.  If you want to require an explicit <CODE>package</CODE>
+declaration in all files, including programs, then add the following to
 your <I>.perlcriticrc</I> file
 
 </P>

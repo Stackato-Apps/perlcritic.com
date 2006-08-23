@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Utils</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -122,6 +122,16 @@ of a subroutine declaration.  This is useful for distinguishing
 barewords and from function calls from subroutine declarations.
 
 </DD>
+<DT><A NAME="is_function_call(%20%24element%20)"><CODE>is_function_call( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> returns true if the element appears to be
+call to a static function.  Specifically, this function returns true
+if <CODE>is_hash_key</CODE>, <CODE>is_method_call</CODE>, and <CODE>is_subroutine_name</CODE> all
+return false for the given element.
+
+</DD>
 <DT><A NAME="parse_arg_list(%20%24element%20)"><CODE>parse_arg_list( $element )</CODE>
 
 </A></DT>
@@ -171,6 +181,24 @@ backup files.
 </DD>
 </DL>
 </DD>
+<DT><A NAME="verbosity_to_format(%20%24verbosity_level%20)"><CODE>verbosity_to_format( $verbosity_level )</CODE>
+
+</A></DT>
+<DD>
+Given a verbosity level between 1 and 10, returns the corresponding
+predefined format string.  These formats are suitable for passing to
+the <CODE>set_format</CODE> method in <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>.  See the
+<A HREF="../../perlcritic.html">perlcritic</A> documentation for a listing of the predefined formats.
+
+</DD>
+<DT><A NAME="hashify(%20%40list%20)"><CODE>hashify( @list )</CODE>
+
+</A></DT>
+<DD>
+Given <CODE>@list</CODE>, return a hash where <CODE>@list</CODE> is in the keys and
+each value is 1.
+
+</DD>
 </DL>
 <HR>
 <H1><A NAME="EXPORTED%20VARIABLES">EXPORTED VARIABLES
@@ -204,6 +232,11 @@ without the sigil.
 
 </P></DD>
 <DT><A NAME="%24COMMA"><CODE>$COMMA</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24FATCOMMA"><CODE>$FATCOMMA</CODE>
 
 </A></DT>
 <DD>

@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Modules::RequireVersionVar</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -27,7 +27,7 @@
 
 </A></H1>
 
-<P>Every Perl file (modules, libraries, and scripts) should have a
+<P>Every Perl file (modules, libraries, and programs) should have a
 <CODE>$VERSION</CODE> variable.  The <CODE>$VERSION</CODE> allows clients to insist on a
 particular revision of your file like this:
 
@@ -43,11 +43,11 @@ have to declare it like one of these:
   $MyPackage::VERSION = 1.01;
   use vars qw($VERSION);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 431 $</CODE> keyword to automatically
+<P>A common practice is to use the <CODE>$Revision: 633 $</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 431 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<PRE>  our ($VERSION) = '$Revision: 633 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 

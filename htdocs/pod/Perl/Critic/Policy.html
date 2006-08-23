@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -68,6 +68,22 @@ error message and let the caller decide how to handle it.
 <P><CODE>violates()</CODE> is an abstract method and it will abort if you attempt
 to invoke it directly.  It is the heart of all Policy modules, and
 your subclass <B>must</B> override this method.
+
+</P></DD>
+<DT><A NAME="violation(%20%24description%2c%20%24explanation%2c%20%24element%20)"><CODE>violation( $description, $explanation, $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a reference to a new <CODE>Perl::Critic::Violation</CODE> object. The
+arguments are a description of the violation (as string), an
+explanation for the policy (as string) or a series of page numbers in
+PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> element that caused
+the violation.
+
+</P>
+<P>These are the same as the constructor to <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>,
+but without the severity.  The Policy itself knows the severity.
 
 </P></DD>
 <DT><A NAME="applies_to()"><CODE>applies_to()</CODE>

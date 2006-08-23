@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Subroutines::ProhibitBuiltinHomonyms</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -35,7 +35,11 @@ for a list of built-ins.
   sub print {} #not ok
 
   #You get the idea...</PRE>
-<HR>
+
+<P>Exceptions are made for <CODE>BEGIN</CODE>, <CODE>END</CODE>, <CODE>INIT</CODE> and <CODE>CHECK</CODE>
+blocks, as well as <CODE>AUTOLOAD</CODE> and <CODE>import</CODE> subroutines.
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

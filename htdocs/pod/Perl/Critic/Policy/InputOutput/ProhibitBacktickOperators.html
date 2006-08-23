@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -34,7 +34,8 @@ output and let the application decide what to do with it.
 
 
 </P>
-<PRE>  use IPC::Open3;
+<PRE>  use IPC::Open3 'open3';
+  $SIG{CHLD} = 'IGNORE';
 
   @output = `some_command`;                      #not ok
 
@@ -49,6 +50,10 @@ output and let the application decide what to do with it.
 
 <P>This policy also prohibits the generalized form of backticks seen as
 <CODE>qx{}</CODE>.
+
+</P>
+<P>See <A HREF="../../../../perlipc.html">perlipc</A> for more discussion on using <CODE>wait()</CODE> instead of
+<CODE>$SIG{CHLD} = 'IGNORE'</CODE>.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

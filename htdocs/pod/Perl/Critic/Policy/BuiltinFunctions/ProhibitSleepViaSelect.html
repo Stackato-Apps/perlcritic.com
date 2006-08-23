@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -28,9 +28,9 @@
 </A></H1>
 
 <P>Conway discourages the use of <CODE>select()</CODE> for performing non-integer
-sleeps.  Although its documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, its something that
-generally requires the reader to RTFM to figure out what <CODE>select()</CODE>
-is supposed to be doing.  Instead, Conway recommends that you use the
+sleeps.  Although documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, it's something that
+generally requires the reader to read <CODE>perldoc -f select</CODE> to figure out what it should be
+doing.  Instead, Conway recommends that you use the
 <CODE>Time::HiRes</CODE> module when you want to sleep.
 
 </P>

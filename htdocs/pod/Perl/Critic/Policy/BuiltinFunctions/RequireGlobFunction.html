@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::BuiltinFunctions::RequireGlobFunction</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -25,8 +25,8 @@
 
 </A></H1>
 
-<P>Conway discourages the use of the <CODE>&lt;..&gt;</CODE> construct for globbing, as
-its heavily associated with I/O in most people's minds.  Instead, he recommends
+<P>Conway discourages the use of the <CODE> &lt;..</CODE> &gt; construct for globbing, as it is easily
+confused with the angle bracket file input operator.  Instead, he recommends
 the use of the <CODE>glob()</CODE> function as it makes it much more obvious what you're
 attempting to do.
 

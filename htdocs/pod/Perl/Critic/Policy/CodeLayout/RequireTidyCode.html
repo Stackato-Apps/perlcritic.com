@@ -1,12 +1,14 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::CodeLayout::RequireTidyCode</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -36,6 +38,28 @@ to do that is to use <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>.  This 
 you're code hasn't been run through Perl::Tidy.
 
 </P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This Policy accepts an additional key-value pair in the constructor.
+The key must be <CODE>perltidyrc</CODE> and the value is the filename of a
+Perl::Tidy configuration file.  The default is <CODE>undef</CODE>, which tells
+Perl::Tidy to look in it's default location.  Users of Perl::Critic
+can configure this in their <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE>  [CodeLayout::RequireTidyCode]
+  perltidyrc = /usr/share/perltidy.conf</PRE>
+
+<P>As a special case, setting <CODE>perltidyrc</CODE> to the empty string tells
+Perl::Tidy not to load any configuration file at all and just use
+Perl::Tidy's own default style.
+
+</P>
+<PRE>  [CodeLayout::RequireTidyCode]
+  perltidyrc = </PRE>
+<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -50,7 +74,6 @@ Perl::Tidy is not installed, this policy is silently ignored.
 </A></H1>
 
 <P><A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>
-
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

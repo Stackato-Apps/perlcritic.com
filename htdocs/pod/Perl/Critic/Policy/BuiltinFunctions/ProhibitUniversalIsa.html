@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitUniversalIsa</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -30,7 +30,7 @@
 <PRE>  print UNIVERSAL::isa($obj, 'Foo::Bar') ? 'yes' : 'no';  #not ok
   print eval { $obj-&gt;isa('Foo::Bar') } ? 'yes' : 'no';    #ok</PRE>
 
-<P>As of Perl 5.9.3, the use of UNIVERSAL::isa as a function has been
+<P>As of Perl 5.9.3, the use of <CODE>UNIVERSAL::isa</CODE> as a function has been
 deprecated and the method form is preferred instead.  Formerly, the
 functional form was recommended because it gave valid results even
 when the object was <CODE>undef</CODE> or an unblessed scalar.  However, the
@@ -40,7 +40,7 @@ facades.
 
 </P>
 <P>Another alternative to UNIVERSAL::isa is the <CODE>_INSTANCE</CODE> method of
-Param::Util.
+Param::Util, which is faster.
 
 </P>
 <P>See the CPAN module <A HREF="../../../../UNIVERSAL/isa.html">UNIVERSAL::isa</A> for an incendiary discussion of

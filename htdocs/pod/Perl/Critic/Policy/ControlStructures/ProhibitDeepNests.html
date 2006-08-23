@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ControlStructures::ProhibitDeepNests</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ControlStructures::ProhibitDeepNests
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Deeply nested code is often hard to understand and may be a sign that
+it needs to be refactored.  There are several good books on how to
+refactor code.  I like Martin Fowler's &quot;Refactoring: Improving The
+Design of Existing Code&quot;.
+
+
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
+The key should be <CODE>max_nests</CODE> and the value should be an integer
+indicating the maximum number nested structures to allow.  Each for-loop,
+if-else, while, and until block is counted as one nest.  Postfix forms
+of these constructs are not counted.  The default maximum is 5.  When
+using the <A HREF="../../../../Perl/Critic.html">Perl::Critic</A> engine, these can be configured in the
+<I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE> [ControlStructures::ProhibitDeepNests]
+ max_nests = 3</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

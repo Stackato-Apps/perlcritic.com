@@ -1,14 +1,14 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Variables::ProhibitPunctuationVars</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#NOTES">NOTES
+</A><LI><A HREF="#EXCEPTIONS">EXCEPTIONS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -38,13 +38,26 @@ give them clear names.
   use English qw(-no_match_vars);
   local $OUTPUT_AUTOFLUSH = undef;        #ok</PRE>
 <HR>
-<H1><A NAME="NOTES">NOTES
+<H1><A NAME="EXCEPTIONS">EXCEPTIONS
 
 </A></H1>
 
 <P>The scratch variables <CODE>$_</CODE> and <CODE>@_</CODE> are very common and have no
 equivalent name in <A HREF="../../../../English.html">English</A>, so they are exempt from this policy.
-All the $n variables associated with regex captures are exempt too.
+The same goes for the less-frequently-used default filehandle <CODE>_</CODE>
+used by stat().  All the regexp capture variables (<CODE>$1</CODE>, <CODE>$2</CODE>, ...)
+are exempt too.
+
+</P>
+<P>You can add more exceptions to your configuration.  In your
+perlcriticrc file, add a block like this:
+
+</P>
+<PRE>  [Variables::ProhibitPunctuationVars]
+  allow = $@ $!</PRE>
+
+<P>The <CODE>allow</CODE> property should be a whitespace-delimited list of
+punctutation variables.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

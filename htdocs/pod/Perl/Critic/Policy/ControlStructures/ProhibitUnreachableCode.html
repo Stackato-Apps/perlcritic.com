@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::ControlStructures::ProhibitUnreachableCode</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -37,12 +37,27 @@ the program flow.  This includes calls to <CODE>exit</CODE>, <CODE>die</CODE>, <
 </P>
 <P>Code is reachable if any of the following conditions are true:
 
-</P>
-<PRE>  * Flow-altering statement has a conditional attached to it
-  * Statement is on the right side of an operator C&lt;&amp;&amp;&gt;, C&lt;||&gt;, C&lt;and&gt;, or C&lt;or&gt;.
-  * Code is prefixed with a label (can potentially be reached via C&lt;goto&gt;)
-  * Code is a subroutine
-  *</PRE>
+</P><DL><DT><A NAME="*%20Flow-altering%20statement%20has%20a%20conditional%20attached%20to%20it">* Flow-altering statement has a conditional attached to it
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="*%20Statement%20is%20on%20the%20right%20side%20of%20an%20operator%20%26%26%2c%20%7c%7c%2c%20and%2c%20or%20or.">* Statement is on the right side of an operator <CODE>&amp;&amp;</CODE>, <CODE>||</CODE>, <CODE>and</CODE>, or <CODE>or</CODE>.
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="*%20Code%20is%20prefixed%20with%20a%20label%20(can%20potentially%20be%20reached%20via%20goto)">* Code is prefixed with a label (can potentially be reached via <CODE>goto</CODE>)
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="*%20Code%20is%20a%20subroutine">* Code is a subroutine
+
+</A></DT>
+<DD>
+</DD>
+</DL>
 <HR>
 <H1><A NAME="EXAMPLES">EXAMPLES
 

@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
-<TITLE>DEVELOPER</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<TITLE>Perl::Critic::DEVELOPER</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -22,7 +22,7 @@
 
 </A></H1>
 
-<P>DEVELOPER - How to make new Perl::Critic::Policy modules
+<P>Perl::Critic::DEVELOPER - How to make new Perl::Critic::Policy modules
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -30,14 +30,14 @@
 </A></H1>
 
 <P>This document describes how to create a new Policy module for
-<A HREF="Perl/Critic.html">Perl::Critic</A>.  It is intended for developers who wish to extend
+<A HREF="../../Perl/Critic.html">Perl::Critic</A>.  It is intended for developers who wish to extend
 Perl::Critic to enforce their own custom coding standards.  Although
 the Perl::Critic distribution already includes a number of Policies
 based on Damian Conway's book &quot;Perl Best Practices&quot;, Perl::Critic is
 not limited to his guidelines and can be used to enforce any practice,
 preference, or style that you want to follow.  In fact, you can even
 write Policies to enforce contradictory guidelines.  All you need to
-do is write a corresponding <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass, which
+do is write a corresponding <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass, which
 may require as little as 10 lines of code..
 
 </P><HR>
@@ -45,22 +45,22 @@ may require as little as 10 lines of code..
 
 </A></H1>
 
-<P>The heart of Perl::Critic is <A HREF="PPI.html">PPI</A>, which is a parser and lexer for
+<P>The heart of Perl::Critic is <A HREF="../../PPI.html">PPI</A>, which is a parser and lexer for
 Perl.  PPI transforms a file of Perl source code into a Document
 Object Model (DOM).  Each token in the document is represented by one
-of the various PPI classes (for example: <A HREF="PPI/Token/Operator.html">PPI::Token::Operator</A>,
-<A HREF="PPI/Token/Word.html">PPI::Token::Word</A>).  The tokens are then organized into a hierarchy
-of structural classes (for example: <A HREF="PPI/Statement/Expression.html">PPI::Statement::Expression</A>,
-<A HREF="PPI/Structure/Subroutine.html">PPI::Structure::Subroutine</A>).  The root node of the hierarchy is the
-<A HREF="PPI/Document.html">PPI::Document</A>.
+of the various PPI classes (for example: <A HREF="../../PPI/Token/Operator.html">PPI::Token::Operator</A>,
+<A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>).  The tokens are then organized into a hierarchy
+of structural classes (for example: <A HREF="../../PPI/Statement/Expression.html">PPI::Statement::Expression</A>,
+<A HREF="../../PPI/Structure/Subroutine.html">PPI::Structure::Subroutine</A>).  The root node of the hierarchy is the
+<A HREF="../../PPI/Document.html">PPI::Document</A>.
 
 </P>
-<P>The <A HREF="Perl/Critic.html">Perl::Critic</A> engine traverses each node in the <A HREF="PPI/Document.html">PPI::Document</A>
-tree and invokes each of the <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses at the
+<P>The <A HREF="../../Perl/Critic.html">Perl::Critic</A> engine traverses each node in the <A HREF="../../PPI/Document.html">PPI::Document</A>
+tree and invokes each of the <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses at the
 appropriate node.  The Policy can inspect the node, look at the
 surrounding nodes, and do whatever else it wants.  If the Policy
 decides that that a coding standard has been violated, it returns one
-or more <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects.  If there are no
+or more <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects.  If there are no
 violations, then the Policy returns nothing.
 
 </P>
@@ -79,7 +79,7 @@ expression.  The reasons for this Policy are discussed in detail in
 </A></H1>
 
 <P>First, the Policy module needs to have a name.  Perl::Critic uses
-<A HREF="Module/Pluggable.html">Module::Pluggable</A> to automatically discover all modules that are in
+<A HREF="../../Module/Pluggable.html">Module::Pluggable</A> to automatically discover all modules that are in
 the <CODE>Perl::Critic::Policy</CODE> namespace.  Also, we've adopted the
 convention of grouping Policies into directories according to the
 table of contents in Conway's book &quot;Perl Best Practices.&quot;  Since the
@@ -91,7 +91,7 @@ call it &quot;Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep&quot;.
 <PRE>  package Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep;</PRE>
 
 <P>Next, we set some pragmas and load the modules that we'll need.  All
-Policy modules inherit from the <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> class, which
+Policy modules inherit from the <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> class, which
 provides no-op implementations of the basic methods.  Our job is to
 override these methods to make them do something useful.
 
@@ -108,7 +108,7 @@ Perl::Critic to be a hypocrite, now do we?
   use base 'Perl::Critic::Policy';</PRE>
 
 <P>This following is a pretty standard way to declare a version number
-for you module, and it's also required for self-compliance.  But the
+for your module, and it's also required for self-compliance.  But the
 <CODE>ProhibitStringyEval</CODE> policy doesn't approve of using <CODE>eval</CODE> in this
 manner, so we attach the &quot;## no critic&quot; comments to tell Perl::Critic
 to overlook this line of code.
@@ -125,43 +125,54 @@ details, or a reference to an array of integers that correspond to
 page numbers in the &quot;Perl Best Practices&quot; book.
 
 </P>
-<PRE>  my $desc = q{Expression form of 'grep'};
+<PRE>  my $desc = q{Expression form of &quot;grep&quot;};
   my $expl = [169];</PRE>
 
-<P>Here we define the <CODE>default_severity()</CODE> method, which should return a
+<P>Most policies don't need to override the new() method provided by
+<A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>.  However, if your policy is configurable via
+<I>.perlcriticrc</I> you will need to override the constructor to examine
+the <CODE>%args</CODE> values.  See
+<A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitCascadingIfElse.html">Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse</A>
+for a simple example and
+<A HREF="../../Perl/Critic/Policy/Documentation/RequirePodSections.html">Perl::Critic::Policy::Documentation::RequirePodSections</A> for a more
+complex example.
+
+</P>
+<P>Next we define the <CODE>default_severity()</CODE> method, which should return a
 scalar value indicating the severity of violating this Policy.
 Severity values range from 1 to 5, where 5 is the &quot;most severe.&quot;  In
 general, level 5 is reserved for things that are frequently misused
-and/or cause bugs.  Level 1 is for things that are highly subject and
-purely cosmetic.  The <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> package exports several
+and/or cause bugs.  Level 1 is for things that are highly subjective or
+purely cosmetic.  The <A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> package exports several
 severity constants that you can use here.
 
 </P>
 <PRE>  sub default_severity  { return $SEVERITY_HIGH }</PRE>
 
-<P>Next we define which types of PPI objects this Policy should be
-invoked on.  The applies_to() method returns a list of PPI package
-names.  As Perl::Critic traverses the document, it will call the
-<CODE>violates()</CODE> method from this module whenever it encounters one of the
-PPI types that are given here.  In this case, we just want to test
-calls to <CODE>grep</CODE>.  Since the token &quot;grep&quot; is a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A>, we
-return that name from the <CODE>applies_to()</CODE> method.
+<P>Next we indicate what parts of the code this policy will analyze, like
+statements or variables or conditionals or POD.  These parts are
+specified as PPI classes like <A HREF="../../PPI/Statement.html">PPI::Statement</A>,
+<A HREF="../../PPI/Token/Symbol.html">PPI::Token::Symbol</A>, <A HREF="../../PPI/Structure/Conditional.html">PPI::Structure::Conditional</A> or
+<A HREF="../../PPI/Token/Pod.html">PPI::Token::Pod</A> respectively.  The applies_to() method returns a
+list of PPI package names.  (You can get that list of package names
+via <CODE>perldoc PPI</CODE>.)  As Perl::Critic traverses the document, it will
+call the <CODE>violates()</CODE> method from this module whenever it encounters
+one of the PPI types that are given here.  In this case, we just want
+to test calls to <CODE>grep</CODE>.  Since the token &quot;grep&quot; is a
+<A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, we return that name from the <CODE>applies_to()</CODE>
+method.
 
 </P>
 <PRE>  sub applies_to { return 'PPI::Token::Word' }</PRE>
 
-<P>Until this point, we've been writing static methods.  However, we
-<B>are</B> writing an object class.  <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> provides a
-default constructor that simply returns a blessed hash reference.  So
-in most cases, you don't need to write your own constructor.  But if
-your Policy requires any special parameters, you can write a custom
-constructor that accepts those parameters.
+<P>Note that applies_to() is purely a performance enhancement -- if you
+want your policy to analyze every <A HREF="../../PPI/Element.html">PPI::Element</A>, that's just fine.
 
 </P>
 <P>Now comes the interesting part.  The <CODE>violates()</CODE> method does all the
 work.  It is always called with 2 arguments: a reference to the
-current node or &quot;element&quot; that Perl::Critic is traversing, and a
-reference to the entire PPI document. [And since this is an object
+current PPI element instance that Perl::Critic is traversing, and a
+reference to the entire PPI document. [And since this is an instance
 method, there will be an additional argument that is a reference to
 this object (<CODE>$self</CODE>), but you already knew that!]
 
@@ -169,13 +180,14 @@ this object (<CODE>$self</CODE>), but you already knew that!]
 <PRE>  sub violates {
       my ( $self, $elem, $doc ) = @_;</PRE>
 
-<P>Next, we do some tests to make sure we have the right &quot;type&quot; of
-element.  We know it will be a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A> because that's what
-we declared back in the <CODE>applies_to()</CODE> method.  However, we didn't
-specify exactly which &quot;word&quot; we were looking for.  Evaluating a PPI
-element in a string context returns the literal form of the code.  So
-we make sure that this PPI::Token::Word is, in fact, &quot;grep&quot;.  If it's
-not, then we don't' need to bother examining it.
+<P>The violates() method then often performs some tests to make sure we
+have the right &quot;type&quot; of element.  In our example, we know that the
+element will be a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> because that's what we declared
+back in the <CODE>applies_to()</CODE> method.  However, we didn't specify
+exactly which &quot;word&quot; we were looking for.  Evaluating a PPI element in
+a string context returns the literal form of the code.  So we make
+sure that this PPI::Token::Word is, in fact, &quot;grep&quot;.  If it's not,
+then we don't' need to bother examining it.
 
 </P>
 <PRE>    return if !($elem eq 'grep');</PRE>
@@ -185,14 +197,15 @@ called on object references.  It is possible for someone to declare a
 bareword hash key as <CODE>&lt;%hash = ( grep =</CODE> 'foo' )&gt;&gt;.  We don't want to
 test those types of elements because they don't represent function
 calls to <CODE>grep</CODE>.  So we use some handy utility functions from
-<A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this &quot;grep&quot; is actually in
+<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this &quot;grep&quot; is actually in
 the right context.
 
 </P>
 <PRE>    return if is_method_call($elem);
-    return if is_hash_key($elem);</PRE>
+    return if is_hash_key($elem);
+    return if is_subroutine_name($elem);</PRE>
 
-<P>Now that we know this element is a function call to <CODE>grep</CODE>, we can
+<P>Now that we know this element is a call to the <CODE>grep</CODE> function, we can
 look at the nearby elements to see what kind of arguments are being
 passed to it.  Every PPI element is linked to its siblings, parent,
 and children (if it has any).  Since those siblings could just be
@@ -203,7 +216,7 @@ whitespace, we use the <CODE>snext_sibling()</CODE> to get the next code-sibling
 <PRE>    my $sib = $elem-&gt;snext_sibling() || return;</PRE>
 
 <P>In Perl, the parenthesis around argument lists are usually optional,
-and PPI packs the elements into a <A HREF="PPI/Structure/List.html">PPI::Structure::List</A> object when
+and PPI packs the elements into a <A HREF="../../PPI/Structure/List.html">PPI::Structure::List</A> object when
 parens are used.  So if the sibling is a PPI::Structure::List, we pull
 out the first (significant) child of that list.  This child will be
 the first argument to <CODE>grep</CODE>.  If parens were not used, then the
@@ -214,15 +227,15 @@ sibling itself is the first argument.
 
 <P>Finally, we now have a reference to the first argument to <CODE>grep</CODE>.  If
 that argument is a block (i.e. something in curly braces), then it
-will be a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>, in which case our Policy is
+will be a <A HREF="../../PPI/Structure/Block.html">PPI::Structure::Block</A>, in which case our Policy is
 satisfied and we just return nothing.
 
 </P>
 <PRE>    return if !$arg || $arg-&gt;isa('PPI::Structure::Block');</PRE>
 
-<P>But if it is not a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>, then we know that this
+<P>But if it is not a <A HREF="../../PPI/Structure/Block.html">PPI::Structure::Block</A>, then we know that this
 call to <CODE>grep</CODE> must be using the expression form, and that violates
-our Policy.  So we create and return a new <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>
+our Policy.  So we create and return a new <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>
 object, passing in the description, explanation, and severity of the
 violation, as well as a reference to the PPI element that caused the
 violation.  And that's all there is to it!
@@ -234,13 +247,13 @@ violation.  And that's all there is to it!
 
   1;</PRE>
 
-<P>One last thing -- When you import Perl::Critic::Violation, it extracts
+<P>One last thing -- When you import <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>, it extracts
 the DESCRIPTION section from the POD in your Policy module.  That text
 can displayed in the diagnostic output when the Violations objects are
 stringified.  So please include a DESCRIPTION section in the POD for
 your Policy.  It should succinctly describe the behavior and
 motivation for your Policy and include a few examples of both good and
-bad code.
+bad code.  Here's an example:
 
 </P>
 <PRE>  =pod
@@ -273,7 +286,7 @@ bad code.
 
 </A></H1>
 
-<P>Copyright (c) 2005 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

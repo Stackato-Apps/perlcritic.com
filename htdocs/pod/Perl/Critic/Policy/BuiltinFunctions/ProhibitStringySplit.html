@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval</TITLE>
+<TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit</TITLE>
 <LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -20,21 +20,28 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>The string form of <CODE>eval</CODE> is recompiled every time it is executed,
-whereas the block form is only compiled once.  Also, the string form
-doesn't give compile-time warnings.
+<P>The <CODE>split</CODE> function always interprets the PATTERN argument as a
+regular expression, even if you specify it as a string.  This causes
+much confusion if the string contains regex metacharacters.  So for
+clarity, always express the PATTERN argument as a regex.
 
 </P>
-<PRE>  eval &quot;print $foo&quot;;        #not ok
-  eval {print $foo};        #ok</PRE>
-<HR>
+<PRE>  $string = 'Fred|Barney';
+  @names = split '|', $string; #not ok, is ('F', 'r', 'e', 'd', '|', 'B', 'a' ...)
+  @names = split m/[|]/, $string; #ok, is ('Fred', Barney')</PRE>
+
+<P>When the PATTERN is a single space the <CODE>split</CODE> function has special
+behavior, so Perl::Critic forgives that usage.  See <CODE>&quot;perldoc -f
+split&quot;</CODE> for more information.
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

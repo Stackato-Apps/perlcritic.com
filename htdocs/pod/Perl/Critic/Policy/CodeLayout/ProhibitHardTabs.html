@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::CodeLayout::ProhibitHardTabs</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -31,12 +31,13 @@ those tabs are anywhere other than a leading position.  Because
 various applications and devices represent tabs differently, they can
 cause you code to look vastly different to other people.  Any decent
 editor can be configured to expand tabs into spaces.  <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>
-also does this for you.  
+also does this for you.
 
 </P>
-<P>This Policy catches all tabs in your source code, including POD, quotes,
-and HEREDOCS.  However, tabs in a leading position are allowed.  If you want
-to forbid all tabs everywhere, put this to your <I>.perlcriticrc</I> file:
+<P>This Policy catches all tabs in your source code, including POD,
+quotes, and HEREDOCS.  The contents of the <CODE>__DATA__</CODE> section are not
+examined.  Tabs in a leading position are allowed, but if you want to
+forbid all tabs everywhere, put this to your <I>.perlcriticrc</I> file:
 
 </P>
 <PRE>  [CodeLayout::ProhibitHardTabs]

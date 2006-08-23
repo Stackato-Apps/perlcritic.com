@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Variables::ProhibitLocalVars</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -48,7 +48,7 @@ module to give those variables more meaningful names.
 
 </A></H1>
 
-<P>If an external module uses package variables as it's interface, then
+<P>If an external module uses package variables as its interface, then
 using <CODE>local</CODE> is actually a pretty sensible thing to do.  So
 Perl::Critic will not complain if you <CODE>local</CODE>-ize variables with a
 fully qualified name such as <CODE>$Some::Package::foo</CODE>.  However, if

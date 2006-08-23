@@ -1,0 +1,120 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#SYNOPSIS">SYNOPSIS
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Document - Caching wrapper around PPI::Document
+
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+
+<PRE>    use PPI::Document;
+    use Perl::Critic::Document;
+    my $doc = PPI::Document-&gt;new('Foo.pm');
+    $doc = Perl::Critic::Document-&gt;new($doc);
+    ## Then use the instance just like a PPI::Document</PRE>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Perl::Critic does a lot of iterations over the PPI document tree via
+the <CODE>PPI::Document::find()</CODE> method.  To save some time, this class
+pre-caches a lot of the common <CODE>find()</CODE> calls in a single traversal.
+Then, on subsequent requests we return the cached data.
+
+</P>
+<P>This is implemented as a facade, where method calls are handed to the
+stored <CODE>PPI::Document</CODE> instance.
+
+</P><HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>This facade does not implement the overloaded operators from
+<A HREF="PPI/Document.html">PPI::Document</A> (that is, the <CODE>use overload ...</CODE> work). Therefore,
+users of this facade must not rely on that syntactic sugar.  So, for
+example, instead of <CODE>my $source = &quot;$doc&quot;;</CODE> you should write <CODE>my
+$source = $doc-</CODE>content();&gt;
+
+</P>
+<P>Perhaps there is a CPAN module out there which implements a facade
+better than we do here?
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="%24pkg-%3enew(%24doc)">$pkg-&gt;new($doc)
+
+</A></DT>
+<DD>
+Create a new instance referencing a PPI::Document instance.
+
+</DD>
+<DT><A NAME="%24self-%3efind(%24wanted)">$self-&gt;find($wanted)
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24self-%3efind_first(%24wanted)">$self-&gt;find_first($wanted)
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24self-%3efind_any(%24wanted)">$self-&gt;find_any($wanted)
+
+</A></DT>
+<DD>
+If <CODE>$wanted</CODE> is a simple PPI class name, then the cache is employed.
+Otherwise we forward the call to the corresponding method of the
+<CODE>PPI::Document</CODE> instance.
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006 Chris Dolan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>
