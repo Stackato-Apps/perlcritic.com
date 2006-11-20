@@ -23,6 +23,7 @@ Please go <a href="/">back</a> and try again.
 </div>
 
 <div id="footer">
-    <hr/>                        
+    <hr/>
+    <p><a href="mailto:web-users@perlcritic.tigris.org?subject=perlcritic.com feedback">Send Us Feedback.</a></p>
     <p class="copyright">&copy;2006 Perl::Critic, all rights reserved</p>
 </div>
