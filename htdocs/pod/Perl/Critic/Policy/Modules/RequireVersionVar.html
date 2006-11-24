@@ -22,8 +22,7 @@
 
 <P>Perl::Critic::Policy::Modules::RequireVersionVar
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -43,12 +42,11 @@ have to declare it like one of these:
   $MyPackage::VERSION = 1.01;
   use vars qw($VERSION);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 633 $</CODE> keyword to automatically
+<P>A common practice is to use the <CODE>$Revision: 881 $</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 633 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
-<HR>
+<PRE>  our ($VERSION) = '$Revision: 881 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -58,15 +56,13 @@ or 'v-strings.'  However, this Policy only insists that the
 <CODE>$VERSION</CODE> be defined somehow.  I may try to extend this in the
 future.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

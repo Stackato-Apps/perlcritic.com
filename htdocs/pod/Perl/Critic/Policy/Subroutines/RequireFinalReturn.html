@@ -22,12 +22,12 @@
 
 <P>Perl::Critic::Policy::Subroutines::RequireFinalReturn
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Require all subroutines to terminate with a <CODE>return</CODE> (or a <CODE>goto</CODE>).
+<P>Require all subroutines to terminate explicitly with one of the
+following: <CODE>return</CODE>, <CODE>goto</CODE>, <CODE>die</CODE>, <CODE>exit</CODE>, <CODE>carp</CODE> or <CODE>croak</CODE>.
 
 </P>
 <P>Subroutines without explicit return statements at their ends can be
@@ -65,8 +65,7 @@ value, so a wrong guess returns the right password!  Adding a
 </P>
 <P>The only exception allowed is an empty subroutine.
 
-</P><HR>
-<H1><A NAME="LIMITATIONS">LIMITATIONS
+</P><H1><A NAME="LIMITATIONS">LIMITATIONS
 
 </A></H1>
 
@@ -75,20 +74,13 @@ construction is too complicated to analyze right now.  Besides, a
 better form is the return outside of the ternary like this: <CODE>return
 foo ? 1 : bar ? 2 : 3</CODE>
 
-</P>
-<P>Also, this policy doesn't allow you to terminate a subroutine with
-<CODE>die</CODE>, <CODE>exit</CODE>, <CODE>croak</CODE>, or <CODE>confess</CODE>.  We'll try and fix that in
-the future.
-
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

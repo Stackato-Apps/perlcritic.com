@@ -24,8 +24,7 @@
 
 <P>Perl::Critic::Utils - Utility subs and vars for Perl::Critic
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -33,8 +32,7 @@
 for developing <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses.  Unless you are
 writing Policy modules, you probably don't care about this package.
 
-</P><HR>
-<H1><A NAME="EXPORTED%20SUBS">EXPORTED SUBS
+</P><H1><A NAME="EXPORTED%20SUBS">EXPORTED SUBS
 
 </A></H1>
 <DL><DT><A NAME="find_keywords(%20%24doc%2c%20%24keyword%20)"><CODE>find_keywords( $doc, $keyword )</CODE>
@@ -132,6 +130,27 @@ if <CODE>is_hash_key</CODE>, <CODE>is_method_call</CODE>, and <CODE>is_subroutin
 return false for the given element.
 
 </DD>
+<DT><A NAME="first_arg(%20%24element%20)"><CODE>first_arg( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which is
+usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), return the first argument.  This is similar
+of <CODE>parse_arg_list()</CODE> and follows the same logic.  Note that for the code:
+
+</P>
+<PRE>  int($x + 0.5)</PRE>
+
+<P>this function will return just the <CODE>$x</CODE>, not the whole expression.  This is
+different from the behavior of <CODE>parse_arg_list()</CODE>.  Another caveat is:
+
+</P>
+<PRE>  int(($x + $y) + 0.5)</PRE>
+
+<P>which returns <CODE>($x + $y)</CODE> as a <A HREF="../../PPI/Structure/List.html">PPI::Structure::List</A> instance.
+
+</P></DD>
 <DT><A NAME="parse_arg_list(%20%24element%20)"><CODE>parse_arg_list( $element )</CODE>
 
 </A></DT>
@@ -151,9 +170,19 @@ present).
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>/#!.*perl/</CODE>.  If so,
-it is judged to be a script instead of a module.
+Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>/#!.*/</CODE>.  If so,
+it is judged to be a script instead of a module.  See <CODE>shebang_line()</CODE>.
 
+</DD>
+<DT><A NAME="policy_long_name(%20)"><CODE> policy_long_name( ) </CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="policy_short_name(%20)"><CODE> policy_short_name( ) </CODE>
+
+</A></DT>
+<DD>
 </DD>
 <DT><A NAME="all_perl_files(%20%40directories%20)"><CODE>all_perl_files( @directories )</CODE>
 
@@ -195,12 +224,32 @@ the <CODE>set_format</CODE> method in <A HREF="../../Perl/Critic/Violation.html"
 
 </A></DT>
 <DD>
-Given <CODE>@list</CODE>, return a hash where <CODE>@list</CODE> is in the keys and
-each value is 1.
+Given <CODE>@list</CODE>, return a hash where <CODE>@list</CODE> is in the keys and each
+value is 1.  Duplicate values in <CODE>@list</CODE> are silently squished.
+
+</DD>
+<DT><A NAME="interpolate(%20%24literal%20)"><CODE>interpolate( $literal )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <CODE>$literal</CODE> string that may contain control characters
+(e.g.. '\t' '\n'), this function does a double interpolation on the
+string and returns it as if it had been declared in double quotes.
+For example:
+
+</P>
+<PRE>  'foo \t bar \n' ...becomes... &quot;foo \t bar \n&quot;</PRE>
+</DD>
+<DT><A NAME="shebang_line(%20%24document%20)"><CODE>shebang_line( $document )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>#!</CODE>.  If so,
+return that line.  Otherwise return undef.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="EXPORTED%20VARIABLES">EXPORTED VARIABLES
 
 </A></H1>
@@ -281,7 +330,8 @@ without the sigil.
 </A></DT>
 <DD>
 These character constants give clear names to commonly-used strings
-that can be hard to read when surrounded by quotes.
+that can be hard to read when surrounded by quotes and other
+punctuation.
 
 </DD>
 <DT><A NAME="%24SEVERITY_HIGHEST"><CODE>$SEVERITY_HIGHEST</CODE>
@@ -327,15 +377,13 @@ with string equality.  <CODE>$FALSE ne $EMPTY</CODE>.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

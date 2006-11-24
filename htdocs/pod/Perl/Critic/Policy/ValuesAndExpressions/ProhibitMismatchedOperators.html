@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Using the wrong operator type for a value can obscure coding intent
+and possibly lead to subtle errors.  An example of this is mixing a
+string equality operator with a numeric value, or vice-versa.
+
+</P>
+<PRE>  if ($foo == 'bar') {}     #not ok
+  if ($foo eq 'bar') {}     #ok
+  if ($foo eq 123) {}       #not ok
+  if ($foo == 123) {}       #ok</PRE>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>If <A HREF="../../../../warnings.html">warnings</A> are enabled, the Perl interpreter usually warns you
+about using mismatched operators at run-time.  This Policy does
+essentially the same thing, but at author-time.  That way, you can
+find our about them sooner.
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Peter Guzis &lt;pguzis@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006 Peter Guzis.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

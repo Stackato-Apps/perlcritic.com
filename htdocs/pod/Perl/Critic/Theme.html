@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Theme</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><UL>
+<LI><A HREF="#THEME%20EXPRESSIONS">THEME EXPRESSIONS
+
+</A></UL>
+<LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Theme - Construct thematic sets of policies
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This is a helper class for evaluating theme expressions into sets of Policy
+objects.  There are no user-serviceable parts here.
+
+</P><H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="new(%20-theme%20%3d%3e%20%24theme_expression%2c%20-policies%20%3d%3e%20%5c%40polcies%20)"><CODE>new( -theme =&gt; $theme_expression, -policies =&gt; \@polcies )</CODE>
+
+</A></DT>
+<DD>
+Returns a reference to a new Perl::Critic::Theme object.  <CODE>-theme</CODE> is a
+string expression that defines how to construct the Theme. <CODE>-policies</CODE> is a
+reference to an array of <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects, from which the Theme
+will be constructed.  See <A HREF="#THEME%20EXPRESSIONS">&quot;THEME EXPRESSIONS&quot;</A> for more information.
+
+</DD>
+<DT><A NAME="members()"><CODE> members() </CODE>
+
+</A></DT>
+<DD>
+Returns a list of Policy objects that comprise this Theme.
+
+</DD>
+<DT><A NAME="expression()"><CODE> expression() </CODE>
+
+</A></DT>
+<DD>
+Returns the theme expression that was used to construct this Theme.  See
+<A HREF="#THEME%20EXPRESSIONS">&quot;THEME EXPRESSIONS&quot;</A> for more information.
+
+</DD>
+</DL>
+<H2><A NAME="THEME%20EXPRESSIONS">THEME EXPRESSIONS
+
+</A></H2>
+
+<P>Theme expressions are simple mathematical expressions, where the operands are
+the names of any of the themes associated with the Perl::Critic::Polices.
+Each operand represents the set of all Policies that are declared with or
+configured with that particular theme.
+
+</P>
+<P>Theme names can be combined with basic mathematical operators into arbitrarily
+complex expressions.  Precedence is the same as normal mathematics, but you
+can use parens to enforce precedence as well.  Supported operators are:
+
+</P>
+<PRE>   Operator       Altertative         Meaning
+   ----------------------------------------------------------------------------
+   *              and                 Intersection
+   -              not                 Difference
+   +              or                  Union</PRE>
+
+<P>See &lt;Perl::Critic/&quot;CONFIGURATION&quot;&gt; for more information about customizing the
+themes.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Thalhammer  &lt;thaljef@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006 Jeffrey Thalhammer
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::PolicyListing</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::PolicyListing - Display information about Policies
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This is a helper class that formats a set of Policy objects for
+pretty-printing.  There are no user-serviceable parts here.
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+<DL><DT><A NAME="new(%20-policies%20%3d%3e%20%5c%40POLICY_OBJECTS%20)"><CODE>new( -policies =&gt; \@POLICY_OBJECTS )</CODE>
+
+</A></DT>
+<DD>
+Returns a reference to a new <CODE>Perl::Critic::PolicyListing</CODE> object.
+
+</DD>
+</DL>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="short_listing()"><CODE>short_listing()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of strings, where each string is a one-line summary of the
+default severity, policy name, and default themes for each Policy that was
+given to the constructor of this PolicyListing.
+
+</DD>
+<DT><A NAME="long_listing()"><CODE>long_listing()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of strings, where each string is a multi-line summary of the
+policy name, default themes, and default severity for each Policy that was
+given to the constructor of this PolicyListing.  The format is suitable for
+use in the <I>.perlcriticrc</I> file.
+
+</DD>
+</DL>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

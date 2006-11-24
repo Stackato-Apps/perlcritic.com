@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -22,8 +22,7 @@
 
 <P>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -34,15 +33,14 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>  # $Revision: 633 $
+<PRE>  # $Revision: 882 $
   # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 633 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
-<HR>
+<PRE>  our ($VERSION) = '$Revision: 882 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
@@ -62,15 +60,13 @@ this:
 source control systems are descended from RCS, so the keywords
 supported by CVS and Subversion are probably the same.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

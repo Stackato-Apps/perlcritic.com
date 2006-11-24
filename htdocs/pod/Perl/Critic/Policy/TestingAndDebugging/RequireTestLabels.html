@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::TestingAndDebugging::RequireTestLabels</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::TestingAndDebugging::RequireTestLabels
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Most Perl modules with regression tests use <A HREF="../../../../Test/More.html">Test::More</A> as
+infrastructure for writing and running those tests.  It has an easy,
+procedural syntax for writing comparisons of results to expectations.
+
+</P>
+<P>Most of the Test::More functions allow the programmer to add an
+optional label that describes what each test is trying to judge.  When
+a test goes wrong, these labels are very useful for quickly
+determining where the problem originated.
+
+</P>
+<P>This policy enforces that all Test::More functions have labels where
+applicable.  This only applies to code that has a <CODE>use Test::More</CODE> or
+<CODE>require Test::More</CODE> declaration (see below to add more test modules
+to the list).
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
+The key should be 'modules' and the value is a string of
+space-delimited fully qualified module names.  These can be configured
+in the <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE> [TestingAndDebugging::RequireTestLabels]
+ modules = My::Test::SubClass  Some::Other::Module</PRE>
+
+<P>The module list always implicitly includes <A HREF="../../../../Test/More.html">Test::More</A>.
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2006 Chris Dolan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

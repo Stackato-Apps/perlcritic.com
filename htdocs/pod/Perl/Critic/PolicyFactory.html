@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#SUBROUTINES">SUBROUTINES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::PolicyFactory - Instantiate Policy objects
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This is a helper class that instantiates <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+objects with the user's preferred parameters. There are no
+user-serviceable parts here.
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+<DL><DT><A NAME="new(%20-profile%20%3d%3e%20%24profile%2c%20-policy_names%20%3d%3e%20%5c%40policy_names%20)"><CODE>new( -profile =&gt; $profile, -policy_names =&gt; \@policy_names )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a reference to a new Perl::Critic::PolicyFactory object.
+
+</P>
+<P><B>-profile</B> is a reference to a <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.
+This argument is required.
+
+</P>
+<P><B>-policy_names</B> is a reference to an array of fully-qualified Policy
+names.  Internally, the PolicyFactory will create one instance each of
+the named Policies.
+
+</P></DD>
+</DL>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="create_policy(%20-policy%20%3d%3e%20%24policy_name%2c%20-params%20%3d%3e%20%5c%25param_hash%20)"><CODE>create_policy( -policy =&gt; $policy_name, -params =&gt; \%param_hash )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Creates one Policy object.  If the object cannot be instantiated, it
+will throw a fatal exception.  Otherwise, it returns a reference to
+the new Policy object.
+
+</P>
+<P><B>-policy</B> is the name of a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.
+The <CODE>'Perl::Critic::Policy'</CODE> portion of the name can be omitted for
+brevity.  This argument is required.
+
+</P>
+<P><B>-params</B> is an optional reference to hash of parameters that will be
+passed into the constructor of the Policy.  If <CODE>-params</CODE> is not
+defined, we will use the appropriate Policy parameters from the
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
+
+</P></DD>
+<DT><A NAME="policies()"><CODE> policies() </CODE>
+
+</A></DT>
+<DD>
+Returns a list of of references to all the <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+objects that were created by this PolicyFactory.
+
+</DD>
+</DL>
+<H1><A NAME="SUBROUTINES">SUBROUTINES
+
+</A></H1>
+
+<P>Perl::Critic::PolicyFactory has a few static subroutines that are used
+internally, but may be useful to you in some way.
+
+</P><DL><DT><A NAME="site_policy_names()"><CODE>site_policy_names()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of all the Policy modules that are currently installed
+in the Perl::Critic:Policy namespace.  These will include modules that
+are distributed with Perl::Critic plus any third-party modules that
+have been installed.
+
+</DD>
+<DT><A NAME="native_policy_names()"><CODE>native_policy_names()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of all the Policy modules that have been distributed
+with Perl::Critic.  Does not include any third-party modules.
+
+</DD>
+</DL>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

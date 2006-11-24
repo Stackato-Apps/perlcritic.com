@@ -20,28 +20,25 @@
 
 <P>Perl::Critic::Policy::BuiltinFunctions::RequireGlobFunction
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Conway discourages the use of the <CODE> &lt;..</CODE> &gt; construct for globbing, as it is easily
-confused with the angle bracket file input operator.  Instead, he recommends
-the use of the <CODE>glob()</CODE> function as it makes it much more obvious what you're
-attempting to do.
+<P>Conway discourages the use of the <CODE> &lt;..</CODE> &gt; construct for globbing, as
+it is easily confused with the angle bracket file input operator.
+Instead, he recommends the use of the <CODE>glob()</CODE> function as it makes
+it much more obvious what you're attempting to do.
 
 </P>
 <PRE>  @files = &lt;*.pl&gt;;              # not ok
   @files = glob( &quot;*.pl&quot; );      # ok</PRE>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Graham TerMarsch &lt;graham@howlingfrog.com&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

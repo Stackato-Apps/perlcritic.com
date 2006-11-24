@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -39,8 +38,7 @@ previous or final.
 <P>This policy tests against a list of ambiguous words for variable
 names.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 
@@ -59,7 +57,6 @@ separated by spaces.  Any specified list replaces the default list.
 </P>
 <PRE>    my $pkg = 'Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames';
     my $policy = $pkg-&gt;new(forbid =&gt; 'last set');</PRE>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -82,7 +79,6 @@ via a perlcriticrc file.
     forbid = last set left right no abstract contract record second close</PRE>
 </DD>
 </DL>
-<HR>
 <H1><A NAME="BUGS">BUGS
 
 </A></H1>
@@ -98,15 +94,13 @@ example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
 
 </P>
 <PRE>    my $previous_record = $Foo::last;</PRE>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

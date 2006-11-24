@@ -22,8 +22,7 @@
 
 <P>Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -36,11 +35,14 @@ to an anonymous filehandle.  Alternatively, see the <A HREF="../../../../IO/Hand
 <A HREF="../../../../IO/File.html">IO::File</A> or <A HREF="../../../../FileHandle.html">FileHandle</A> modules for an object-oriented approach.
 
 </P>
-<PRE>  open FH, '&lt;', $some_file;           #not ok
-  open my $fh, '&lt;', $some_file;       #ok
-  my $fh = IO::File-&gt;new($some_file); #ok</PRE>
-<HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+<PRE>    open FH, '&lt;', $some_file;           #not ok
+    open my $fh, '&lt;', $some_file;       #ok
+    my $fh = IO::File-&gt;new($some_file); #ok</PRE>
+
+<P>There are three exceptions: STDIN, STDOUT and STDERR.  These three
+standard filehandles are always package variables.
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
@@ -49,15 +51,13 @@ to an anonymous filehandle.  Alternatively, see the <A HREF="../../../../IO/Hand
 </P>
 <P><A HREF="../../../../IO/File.html">IO::File</A>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

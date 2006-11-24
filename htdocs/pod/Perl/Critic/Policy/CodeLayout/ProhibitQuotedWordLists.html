@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -39,22 +38,24 @@ it easy to add to the list in the future.
 </P>
 <PRE>  @list = ('foo', 'bar', 'baz');  #not ok
   @list = qw(foo bar baz);        #ok</PRE>
-<HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the constructor.
-The key must be <CODE>min_elements</CODE> and the value is the minimum number of
-elements in the list.  Lists with fewer elements will be overlooked by
-this Policy.  The default is 2.  Users of Perl::Critic can configure
-this in their <I>.perlcriticrc</I> file like this:
+<P>This policy can be configured to only pay attention to word lists with
+at least a particular number of elements.  By default, this value is 2,
+which means that lists containing zero or one elements are ignored.
+The minimum list size to be looked at can be specified by giving a
+value for <CODE>min_elements</CODE> in <I>.perlcriticrc</I> like this:
 
 </P>
 <PRE>  [CodeLayout::ProhibitQuotedWordLists]
   min_elements = 4</PRE>
-<HR>
-<H1><A NAME="NOTES">NOTES
+
+<P>This would cause this policy to only complain about lists containing
+four or more words.
+
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -63,19 +64,17 @@ tried to make this Policy smart by targeting only &quot;lists&quot; that could
 be sensibly expressed with <CODE>qw()</CODE>.  However, there may be some edge
 cases that I haven't covered.  If you find one, send me a note.
 
-</P><HR>
-<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+</P><H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
 </A></H1>
 
 <P>This policy was formerly called <CODE>RequireQuotedWords</CODE> which seemed a
-little counterintuitive.  If you get lots of &quot;Cannot load policy
+little counter-intuitive.  If you get lots of &quot;Cannot load policy
 module&quot; errors, then you probably need to change <CODE>RequireQuotedWords</CODE>
 to <CODE>ProhibitQuotedWordLists</CODE> in your <I>.perlcriticrc</I> file.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
@@ -84,8 +83,7 @@ to <CODE>ProhibitQuotedWordLists</CODE> in your <I>.perlcriticrc</I> file.
 </P>
 <P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

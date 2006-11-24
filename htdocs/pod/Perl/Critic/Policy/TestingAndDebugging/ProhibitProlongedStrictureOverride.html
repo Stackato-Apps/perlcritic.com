@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::TestingAndDebugging::ProhibitProlongedStrictureOverride</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitProlongedStrictureOverride
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Every agrees that <CODE>use strict</CODE> is the first step to writing maintainable code
+in Perl.  However, sometimes <CODE>strict</CODE> is a little too strict.  In those
+cases, you can turn it off briefly with a <CODE>no strict</CODE> directive.
+
+</P>
+<P>This policy checks that <CODE>no strict</CODE> is only in effect for a small number of
+statements.
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+
+<P>The default number of statements allowed per <CODE>no strict</CODE> is three.  To
+override this number, put the following in your <I>.perlcriticrc</I>:
+
+</P>
+<PRE> [TestingAndDebugging::ProhibitProlongedStrictureOverride]
+ statements = 5</PRE>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (C) 2006 Chris Dolan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

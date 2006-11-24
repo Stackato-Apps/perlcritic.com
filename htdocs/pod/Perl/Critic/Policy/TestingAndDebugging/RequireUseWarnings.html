@@ -24,19 +24,17 @@
 
 <P>Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Using warnings is probably the single most effective way to improve
-the quality of your code.  This policy requires that the <CODE>'use
-warnings'</CODE> statement must come before any other statements except
-<CODE>package</CODE>, <CODE>require</CODE>, and other <CODE>use</CODE> statements.  Thus, all the
-code in the entire package will be affected.
+<P>Using warnings, and paying attention to what they say, is probably the
+single most effective way to improve the quality of your code.  This
+policy requires that the <CODE>'use warnings'</CODE> statement must come before
+any other statements except <CODE>package</CODE>, <CODE>require</CODE>, and other <CODE>use</CODE>
+statements.  Thus, all the code in the entire package will be affected.
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -63,22 +61,19 @@ still allow the warnings to be disabled for all your legacy code.
 Perl::Critic will only report violations of this policy that occur on
 lines after the <CODE>&quot;## use critic&quot;</CODE> pseudo-pragma.
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseStrict.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict</A>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

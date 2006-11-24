@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Config</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -14,9 +14,11 @@
 
 </A><LI><A HREF="#SUBROUTINES">SUBROUTINES
 
-</A><LI><A HREF="#ADVANCED%20USAGE">ADVANCED USAGE
-
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#THE%20POLICIES">THE POLICIES
+
+</A><LI><A HREF="#POLICY%20THEMES">POLICY THEMES
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -30,32 +32,34 @@
 
 <P>Perl::Critic::Config - Find and load Perl::Critic user-preferences
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>Perl::Critic::Config takes care of finding and processing
-user-preferences for <A HREF="../../Perl/Critic.html">Perl::Critic</A>.  The Config object defines which
+user-preferences for <A HREF="Perl/Critic.html">Perl::Critic</A>.  The Config object defines which
 Policy modules will be loaded into the Perl::Critic engine and how
 they should be configured.  You should never really need to
 instantiate Perl::Critic::Config directly because the Perl::Critic
 constructor will do it for you.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS ] )</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -force =&gt; $B, -verbose =&gt; $N ] )</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="new()"><CODE>new()</CODE>
 
 </A></DT>
 <DD>
 
-<P>Returns a reference to a new Perl::Critic::Config object, which is
-basically just a blessed hash of configuration parameters.  There
-aren't any special methods for getting and setting individual values,
-so just treat it like an ordinary hash.  All arguments are optional
-key-value pairs as follows:
+<P>Returns a reference to a new Perl::Critic::Config object.  The default
+value for all arguments can be defined in your <I>.perlcriticrc</I> file.
+See the <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section for more information about that.
+All arguments are optional key-value pairs as follows:
 
 </P>
 <P><B>-profile</B> is a path to a configuration file. If <CODE>$FILE</CODE> is not
@@ -77,6 +81,14 @@ redefine the severity level for any Policy in their <I>.perlcriticrc</I>
 file.  See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> for more information.
 
 </P>
+<P><B>-theme</B> is special string that defines a set of Policies based on
+their respective themes.  If <CODE>-theme</CODE> is given, only policies that
+are members of that set will be loaded.  See the <A HREF="#POLICY%20THEMES">&quot;POLICY THEMES&quot;</A>
+section for more information about themes.  Unless the <CODE>-severity</CODE>
+option is explicitly given, setting <CODE>-theme</CODE> causes the <CODE>-severity</CODE>
+to be set to 1.
+
+</P>
 <P><B>-include</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Policies
 that match at least one <CODE>m/$PATTERN/imx</CODE> will be loaded into this
 Config, irrespective of the severity settings.  You can use it in
@@ -90,36 +102,58 @@ Config, irrespective of the severity settings.  You can use it in
 conjunction with the <CODE>-include</CODE> option.  Note that <CODE>-exclude</CODE> takes
 precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
+</P>
+<P><B>-top</B> is the maximum number of Violations to return when ranked by
+their severity levels.  This must be a positive integer.  Violations
+are still returned in the order that they occur within the file.
+Unless the <CODE>-severity</CODE> option is explicitly given, setting <CODE>-top</CODE>
+silently causes the <CODE>-severity</CODE> to be set to 1.
+
+</P>
+<P><B>-only</B> is a boolean value.  If set to a true value, Perl::Critic
+will only choose from Policies that are mentioned in the user's
+profile.  If set to a false value (which is the default), then
+Perl::Critic chooses from all the Policies that it finds at your site.
+
+</P>
+<P><B>-force</B> controls whether Perl::Critic observes the magical <CODE>&quot;## no
+critic&quot;</CODE> pseudo-pragmas in your code.  If set to a true value,
+Perl::Critic will analyze all code.  If set to a false value (which is
+the default) Perl::Critic will ignore code that is tagged with these
+comments.  See <A HREF="#BENDING%20THE%20RULES">&quot;BENDING THE RULES&quot;</A> for more information.
+
+</P>
+<P><B>-verbose</B> can be a positive integer (from 1 to 10), or a literal
+format specification.  See <A HREF="Perl/Critic/Violations.html">Perl::Critic::Violations</A> for an
+explanation of format specifications.
+
 </P></DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
-<DL><DT><A NAME="add_policy(%20-policy%20%3d%3e%20%24policy_name%2c%20-config%20%3d%3e%20%5c%25config_hash%20)"><CODE>add_policy( -policy =&gt; $policy_name, -config =&gt; \%config_hash )</CODE>
+<DL><DT><A NAME="add_policy(%20-policy%20%3d%3e%20%24policy_name%2c%20-params%20%3d%3e%20%5c%25param_hash%20)"><CODE>add_policy( -policy =&gt; $policy_name, -params =&gt; \%param_hash )</CODE>
 
 </A></DT>
 <DD>
 
-<P>Loads a Policy object and adds into this Config.  If the object
-cannot be instantiated, it will throw a warning and return a false
-value.  Otherwise, it returns a reference to this Config.  Arguments
-are key-value pairs as follows:
+<P>Creates a Policy object and loads it into this Config.  If the object
+cannot be instantiated, it will throw a fatal exception.  Otherwise,
+it returns a reference to this Critic.
 
 </P>
-<P><B>-policy</B> is the name of a <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass
+<P><B>-policy</B> is the name of a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass
 module.  The <CODE>'Perl::Critic::Policy'</CODE> portion of the name can be
 omitted for brevity.  This argument is required.
 
 </P>
-<P><B>-config</B> is an optional reference to a hash of Policy configuration
-parameters (Note that this is <B>not</B> a Perl::Critic::Config object). The
-contents of this hash reference will be passed into to the constructor
-of the Policy module.  See the documentation in the relevant Policy
-module for a description of the arguments it supports.
+<P><B>-params</B> is an optional reference to a hash of Policy parameters.
+The contents of this hash reference will be passed into to the
+constructor of the Policy module.  See the documentation in the
+relevant Policy module for a description of the arguments it supports.
 
 </P></DD>
-<DT><A NAME="policies()"><CODE>policies()</CODE>
+<DT><A NAME="policies()"><CODE> policies() </CODE>
 
 </A></DT>
 <DD>
@@ -128,8 +162,64 @@ have been loaded into this Config.  Objects will be in the order that
 they were loaded.
 
 </DD>
+<DT><A NAME="exclude()"><CODE> exclude() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-exclude</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="include()"><CODE> include() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-include</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="force()"><CODE> force() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-force</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="only()"><CODE> only() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-only</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="severity()"><CODE> severity() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-severity</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="theme()"><CODE> theme() </CODE>
+
+</A></DT>
+<DD>
+Returns the <A HREF="Perl/Critic/Theme.html">Perl::Critic::Theme</A> object that was created for
+this Config.
+
+</DD>
+<DT><A NAME="top()"><CODE> top() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-top</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="verbose()"><CODE> verbose() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-verbose</CODE> attribute for this Config.
+
+</DD>
 </DL>
-<HR>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
 </A></H1>
@@ -137,17 +227,7 @@ they were loaded.
 <P>Perl::Critic::Config has a few static subroutines that are used
 internally, but may be useful to you in some way.
 
-</P><DL><DT><A NAME="find_profile_path()"><CODE>find_profile_path()</CODE>
-
-</A></DT>
-<DD>
-Searches the <CODE>PERLCRITIC</CODE> environment variable, the current
-directory, and you home directory (in that order) for a
-<I>.perlcriticrc</I> file.  If the file is found, the full path is
-returned.  Otherwise, returns undef;
-
-</DD>
-<DT><A NAME="site_policies()"><CODE>site_policies()</CODE>
+</P><DL><DT><A NAME="site_policy_names()"><CODE>site_policy_names()</CODE>
 
 </A></DT>
 <DD>
@@ -157,7 +237,7 @@ are distributed with Perl::Critic plus any third-party modules that
 have been installed.
 
 </DD>
-<DT><A NAME="native_policies()"><CODE>native_policies()</CODE>
+<DT><A NAME="native_policy_names()"><CODE>native_policy_names()</CODE>
 
 </A></DT>
 <DD>
@@ -166,49 +246,50 @@ with Perl::Critic.  Does not include any third-party modules.
 
 </DD>
 </DL>
-<HR>
-<H1><A NAME="ADVANCED%20USAGE">ADVANCED USAGE
-
-</A></H1>
-
-<P>All the Policy modules that ship with Perl::Critic are in the
-<CODE>&quot;Perl::Critic::Policy&quot;</CODE> namespace.  To load modules from an alternate
-namespace, import Perl::Critic::Config using the <CODE>-namespace</CODE> option
-like this:
-
-</P>
-<PRE>  use Perl::Critic::Config -namespace =&gt; 'Foo::Bar'; #Loads from Foo::Bar::*</PRE>
-
-<P>At the moment, only one alternate namespace may be specified.  Unless
-Policy module names are fully qualified, Perl::Critic::Config assumes
-that all Policies are in the specified namespace.  So if you want to
-use Policies from multiple namespaces, you will need to use the full
-module name in your <I>.perlcriticrc</I> file.
-
-</P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>The default configuration file is called <I>.perlcriticrc</I>.
-Perl::Critic::Config will look for this file in the current directory
-first, and then in your home directory.  Alternatively, you can set
-the PERLCRITIC environment variable to explicitly point to a different
-file in another location.  If none of these files exist, and the
-<CODE>-profile</CODE> option is not given to the constructor, then all the
-modules that are found in the Perl::Critic::Policy namespace will be
-loaded with their default configuration.
+<P>Most of the settings for Perl::Critic and each of the Policy modules
+can be controlled by a configuration file.  The default configuration
+file is called <I>.perlcriticrc</I>.  <A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> will look
+for this file in the current directory first, and then in your home
+directory.  Alternatively, you can set the <CODE>PERLCRITIC</CODE> environment
+variable to explicitly point to a different file in another location.
+If none of these files exist, and the <CODE>-profile</CODE> option is not given
+on the command line, then all Policies will be loaded with their
+default configuration.
 
 </P>
-<P>The format of the configuration file is a series of named sections
-that contain key-value pairs separated by '='. Comments should
-start with '#' and can be placed on a separate line or after the
-name-value pairs if you desire.  The general recipe is a series of
-blocks like this:
+<P>The format of the configuration file is a series of INI-style
+blocks that contain key-value pairs separated by '='. Comments
+should start with '#' and can be placed on a separate line or after
+the name-value pairs if you desire.
+
+</P>
+<P>Default settings for Perl::Critic itself can be set <B>before the first
+named block.</B>  For example, putting any or all of these at the top of
+your configuration file will set the default value for the
+corresponding Perl::Critic constructor argument.
+
+</P>
+<PRE>    severity  = 3                                     #Integer from 1 to 5
+    only      = 1                                     #Zero or One
+    force     = 0                                     #Zero or One
+    verbose   = 4                                     #Integer or format spec
+    top       = 50                                    #A positive integer
+    theme     = risky + (pbp * security) - cosmetic   #A theme expression
+    include   = NamingConventions ClassHierarchies    #Space-delimited list
+    exclude   = Variables  Modules::RequirePackage    #Space-delimited list</PRE>
+
+<P>The remainder of the configuration file is a series of blocks like
+this:
 
 </P>
 <PRE>    [Perl::Critic::Policy::Category::PolicyName]
     severity = 1
+    set_themes = foo bar
+    add_themes = baz
     arg1 = value1
     arg2 = value2</PRE>
 
@@ -260,8 +341,18 @@ Perl::Critic::Config constructor.
     severity = 2
 
     [ControlStructures::ProhibitPostfixControls]
-    allow = if unless  #A policy-specific configuration
+    allow = if unless  #My custom configuration
     severity = 2
+
+    #--------------------------------------------------------------
+    # Give these policies a custom theme.  I can activate just
+    # these policies by saying (-theme =&gt; 'larry + curly')
+
+    [Modules::RequireFilenameMatchesPackage]
+    add_themes = larry
+
+    [TestingAndDebugging::RequireTestLables]
+    add_themes = curly moe
 
     #--------------------------------------------------------------
     # I do not agree with these at all, so never load them
@@ -273,23 +364,98 @@ Perl::Critic::Config constructor.
     # For all other Policies, I accept the default severity,
     # so no additional configuration is required for them.</PRE>
 
-<P>A few sample configuration files are included in this distribution
-under the <I>t/samples</I> directory. The <I>perlcriticrc.none</I> file
-demonstrates how to disable Policy modules.  The
-<I>perlcriticrc.levels</I> file demonstrates how to redefine the severity
-level for any given Policy module.  The <I>perlcriticrc.pbp</I> file
-configures Perl::Critic to load only Policies described in Damian
-Conway's book &quot;Perl Best Practices.&quot;
+<P>For additional configuration examples, see the <I>perlcriticrc</I> file
+that is included in this <I>t/examples</I> directory of this distribution.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="THE%20POLICIES">THE POLICIES
+
+</A></H1>
+
+<P>A large number of Policy modules are distributed with Perl::Critic.
+They are described briefly in the companion document
+<A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more detail in the individual
+modules themselves.
+
+</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
+
+</A></H1>
+
+<P><B>NOTE:</B> As of version 0.21, policy themes are still considered
+experimental.  The implementation of this feature may change in a
+future release.  Additionally, the default theme names that ship with
+Perl::Critic may also change.  But this is a pretty cool feature, so
+read on...
+
+</P>
+<P>Each Policy is defined with one or more &quot;themes&quot;.  Themes can be used
+to create arbitrary groups of Policies.  They are intended to provide
+an alternative mechanism for selecting your preferred set of Policies.
+The Policies that ship with Perl::Critic have been grouped into themes
+that are roughly analogous to their severity levels.  Folks who find
+the numeric severity levels awkward can use these mnemonic theme names
+instead.
+
+</P>
+<PRE>    Severity Level                   Equivalent Theme
+    ---------------------------------------------------------------------------
+    5                                danger
+    4                                risky
+    3                                unreliable
+    2                                readability
+    1                                cosmetic
+</PRE>
+
+<P>Say <CODE>`perlcritic -list`</CODE> to get a listing of all available policies
+and the themes that are associated with each one.  You can also change
+the theme for any Policy in your <I>.perlcriticrc</I> file.  See the
+<A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section for more information about that.
+
+</P>
+<P>Using the <CODE>-theme</CODE> command-line option, you can combine themes with
+mathematical and boolean operators to create an arbitrarily complex
+expression that represents a custom &quot;set&quot; of Policies.  The following
+operators are supported
+
+</P>
+<PRE>   Operator       Altertative         Meaning
+   ----------------------------------------------------------------------------
+   *              and                 Intersection
+   -              not                 Difference
+   +              or                  Union</PRE>
+
+<P>Operator precedence is the same as that of normal mathematics.  You
+can also use parenthesis to enforce precedence.  Here are some examples:
+
+</P>
+<PRE>   Expression                  Meaning
+   ----------------------------------------------------------------------------
+   pbp * risky                 All policies that are &quot;pbp&quot; AND &quot;risky&quot;
+   pbp and risky               Ditto
+
+   danger + risky              All policies that are &quot;danger&quot; OR &quot;risky&quot;
+   pbp or risky                Ditto
+
+   pbp - cosmetic              All policies that are &quot;pbp&quot; BUT NOT &quot;risky&quot;
+   pbp not cosmetic            Ditto
+
+   -unreliable                All policies that are NOT &quot;unreliable&quot;
+   not unreliable             Ditto
+
+   (pbp - danger) * risky      All policies that are &quot;pbp&quot; BUT NOT &quot;danger&quot;, AND &quot;risky&quot;
+   (pbp not danger) and risky  Ditto</PRE>
+
+<P>Theme names are case-insensitive.  If <CODE>-theme</CODE> is set to an empty
+string, then it is equivalent to the set of all policies.  A theme
+name that doesn't exist is equivalent to an empty set.  Please See
+<A HREF="http://en.wikipedia.org/wiki/Set">http://en.wikipedia.org/wiki/Set</A> for a discussion on set theory.
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

@@ -24,45 +24,53 @@
 
 <P>Perl::Critic::TestUtils - Utility functions for testing new Policies
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
-<PRE>  use Perl::Critic::TestUtils qw(critique pcritique);
+<PRE>  use Perl::Critic::TestUtils qw(critique pcritique fcritique);
 
   my $code = '&lt;&lt;END_CODE';
+  package Foo::Bar;
   $foo = frobulator();
   $baz = $foo ** 2;
+  1;
   END_CODE
 
   # Critique code against all loaded policies...
   my $perl_critic_config = { -severity =&gt; 2 };
-  my $violation_count = critique( $code, $perl_critic_config);
+  my $violation_count = critique( \$code, $perl_critic_config);
 
   # Critique code against one policy...
   my $custom_policy = 'Miscellanea::ProhibitFrobulation'
-  my $violation_count = pcritique( $code, $custom_policy );</PRE>
-<HR>
+  my $violation_count = pcritique( $custom_policy, \$code );
+
+  # Critique code against one filename-related policy...
+  my $custom_policy = 'Modules::RequireFilenameMatchesPackage'
+  my $violation_count = fcritique( $custom_policy, \$code, 'Foo/Bar.pm' );</PRE>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This module is not used directly by <A HREF="../../Perl/Critic.html">Perl::Critic</A> but it provides a
-few handy subroutines for testing new Perl::Critic::Policy modules.
-Look at the test scripts that ship with Perl::Critic for more examples
-of how to use these subroutines.
+<P>This module is used by <A HREF="../../Perl/Critic.html">Perl::Critic</A> only for self-testing. It
+provides a few handy subroutines for testing new Perl::Critic::Policy
+modules.  Look at the test scripts that ship with Perl::Critic for
+more examples of how to use these subroutines.
 
-</P><HR>
-<H1><A NAME="EXPORTS">EXPORTS
+</P><H1><A NAME="EXPORTS">EXPORTS
 
 </A></H1>
-<DL><DT><A NAME="critique(%20%24policy_name%2c%20%24code_string_ref%20)">critique( $policy_name, $code_string_ref )
+<DL><DT><A NAME="critique(%20%24code_string_ref%2c%20%24config_ref%20)">critique( $code_string_ref, $config_ref )
 
 </A></DT>
 <DD>
 </DD>
-<DT><A NAME="pcritique(%20%24policy_name%2c%20%24string_ref%2c%20%24config_ref%20)">pcritique( $policy_name, $string_ref, $config_ref )
+<DT><A NAME="pcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24config_ref%20)">pcritique( $policy_name, $code_string_ref, $config_ref )
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="fcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24filename%2c%20%24config_ref%20)">fcritique( $policy_name, $code_string_ref, $filename, $config_ref )
 
 </A></DT>
 <DD>
@@ -73,15 +81,13 @@ of how to use these subroutines.
 <DD>
 </DD>
 </DL>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

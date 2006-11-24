@@ -24,8 +24,7 @@
 
 <P>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -41,7 +40,13 @@ elegant anyway.
 
   use IO::File;
   my $fh = IO::File-&gt;new( 'output.txt', q{&gt;} ); # even better!</PRE>
-<HR>
+
+<P>It's also more explicitly clear to define the input mode of the
+file, as in the difference between these two:
+
+</P>
+<PRE>  open( $fh, 'foo.txt' );       # BAD: Reader must think what default mode is
+  open( $fh, '&lt;', 'foo.txt' );  # GOOD: Reader can see open mode</PRE>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -50,8 +55,7 @@ elegant anyway.
 STDIN, STDOUT, or STDERR.  But for now, this Policy doesn't provide
 that loophole.
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
@@ -60,15 +64,13 @@ that loophole.
 </P>
 <P><A HREF="../../../../IO/File.html">IO::File</A>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
