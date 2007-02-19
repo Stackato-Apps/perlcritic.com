@@ -46,6 +46,20 @@ font-size: 14px;
 font-weight: bold;
 text-transform: uppercase;}
 
+#home .radio-buttons
+{clear: both;
+overflow: hidden;
+border: 1px solid #000;
+text-align: center;
+width: 100%;}
+
+
+#home .radio-buttons label
+{margin-right: 1em;
+float: left;
+text-transform: lowercase;
+text-align: center;}
+
 #home .button
 {border-style: solid;
 border-width: 3px;

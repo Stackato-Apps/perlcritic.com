@@ -55,6 +55,13 @@ text-decoration: underline;}
 
 [%- END -%] 
 
+[%- IF violations.size == 0 -%]
+    
+Congratulations! No violations were found at this severity level.
+You might want to try again using a more restrictive severity level.
+
+[%- END -%]
+
 </pre>
 </body>
 </html>
