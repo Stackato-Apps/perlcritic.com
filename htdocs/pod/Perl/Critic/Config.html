@@ -32,7 +32,8 @@
 
 <P>Perl::Critic::Config - Find and load Perl::Critic user-preferences
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -43,10 +44,11 @@ they should be configured.  You should never really need to
 instantiate Perl::Critic::Config directly because the Perl::Critic
 constructor will do it for you.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -force =&gt; $B, -verbose =&gt; $N ] )</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-singlepolicy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -singlepolicy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -force =&gt; $B, -verbose =&gt; $N ] )</CODE>
 
 </A></DT>
 <DD>
@@ -103,6 +105,12 @@ conjunction with the <CODE>-include</CODE> option.  Note that <CODE>-exclude</CO
 precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
 </P>
+<P><B>-singlepolicy</B> is a string <CODE>PATTERN</CODE>.  Only the policy that matches
+<CODE>m/$PATTERN/imx</CODE> will be used.  This value overrides the
+<CODE>-severity</CODE>, <CODE>-theme</CODE>, <CODE>-include</CODE>, <CODE>-exclude</CODE>, and <CODE>-only</CODE>
+options.
+
+</P>
 <P><B>-top</B> is the maximum number of Violations to return when ranked by
 their severity levels.  This must be a positive integer.  Violations
 are still returned in the order that they occur within the file.
@@ -129,6 +137,7 @@ explanation of format specifications.
 
 </P></DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -197,6 +206,13 @@ Returns the value of the <CODE>-only</CODE> attribute for this Config.
 Returns the value of the <CODE>-severity</CODE> attribute for this Config.
 
 </DD>
+<DT><A NAME="singlepolicy()"><CODE> singlepolicy() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-singlepolicy</CODE> attribute for this Config.
+
+</DD>
 <DT><A NAME="theme()"><CODE> theme() </CODE>
 
 </A></DT>
@@ -220,6 +236,7 @@ Returns the value of the <CODE>-verbose</CODE> attribute for this Config.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
 </A></H1>
@@ -237,15 +254,8 @@ are distributed with Perl::Critic plus any third-party modules that
 have been installed.
 
 </DD>
-<DT><A NAME="native_policy_names()"><CODE>native_policy_names()</CODE>
-
-</A></DT>
-<DD>
-Returns a list of all the Policy modules that have been distributed
-with Perl::Critic.  Does not include any third-party modules.
-
-</DD>
 </DL>
+<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -257,7 +267,7 @@ for this file in the current directory first, and then in your home
 directory.  Alternatively, you can set the <CODE>PERLCRITIC</CODE> environment
 variable to explicitly point to a different file in another location.
 If none of these files exist, and the <CODE>-profile</CODE> option is not given
-on the command line, then all Policies will be loaded with their
+to the constructor, then all Policies will be loaded with their
 default configuration.
 
 </P>
@@ -361,13 +371,15 @@ Perl::Critic::Config constructor.
     [-NamingConventions::ProhibitMixedCaseSubs]
 
     #--------------------------------------------------------------
-    # For all other Policies, I accept the default severity,
-    # so no additional configuration is required for them.</PRE>
+    # For all other Policies, I accept the default severity, theme
+    # and other parameters, so no additional configuration is
+    # required for them.</PRE>
 
 <P>For additional configuration examples, see the <I>perlcriticrc</I> file
 that is included in this <I>t/examples</I> directory of this distribution.
 
-</P><H1><A NAME="THE%20POLICIES">THE POLICIES
+</P><HR>
+<H1><A NAME="THE%20POLICIES">THE POLICIES
 
 </A></H1>
 
@@ -376,33 +388,34 @@ They are described briefly in the companion document
 <A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more detail in the individual
 modules themselves.
 
-</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
+</P><HR>
+<H1><A NAME="POLICY%20THEMES">POLICY THEMES
 
 </A></H1>
 
-<P><B>NOTE:</B> As of version 0.21, policy themes are still considered
-experimental.  The implementation of this feature may change in a
-future release.  Additionally, the default theme names that ship with
-Perl::Critic may also change.  But this is a pretty cool feature, so
-read on...
+<P>Each Policy is defined with one or more &quot;themes&quot;.  Themes can be used to
+create arbitrary groups of Policies.  They are intended to provide an
+alternative mechanism for selecting your preferred set of Policies.  For
+example, you may wish disable a certain subset of Policies when analyzing test
+scripts.  Conversely, you may wish to enable only a specific subset of
+Policies when analyzing modules.
 
 </P>
-<P>Each Policy is defined with one or more &quot;themes&quot;.  Themes can be used
-to create arbitrary groups of Policies.  They are intended to provide
-an alternative mechanism for selecting your preferred set of Policies.
-The Policies that ship with Perl::Critic have been grouped into themes
-that are roughly analogous to their severity levels.  Folks who find
-the numeric severity levels awkward can use these mnemonic theme names
-instead.
+<P>The Policies that ship with Perl::Critic are have been broken into the
+following themes.  This is just our attempt to provide some basic logical
+groupings.  You are free to invent new themes that suit your needs.
 
 </P>
-<PRE>    Severity Level                   Equivalent Theme
-    ---------------------------------------------------------------------------
-    5                                danger
-    4                                risky
-    3                                unreliable
-    2                                readability
-    1                                cosmetic
+<PRE>    THEME             DESCRIPTION
+    --------------------------------------------------------------------------
+    core              All policies that ship with Perl::Critic
+    pbp               Policies that come directly from &quot;Perl Best Practices&quot;
+    bugs              Policies that that prevent or reveal bugs
+    maintenance       Policies that affect the long-term health of the code
+    cosmetic          Policies that only have a superficial effect
+    complexity        Policies that specificaly relate to code complexity
+    security          Policies that relate to security issues
+    tests             Policies that are specific to test scripts
 </PRE>
 
 <P>Say <CODE>`perlcritic -list`</CODE> to get a listing of all available policies
@@ -411,13 +424,12 @@ the theme for any Policy in your <I>.perlcriticrc</I> file.  See the
 <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section for more information about that.
 
 </P>
-<P>Using the <CODE>-theme</CODE> command-line option, you can combine themes with
-mathematical and boolean operators to create an arbitrarily complex
-expression that represents a custom &quot;set&quot; of Policies.  The following
-operators are supported
+<P>Using the <CODE>-theme</CODE> option, you can combine theme names with mathematical and
+boolean operators to create an arbitrarily complex expression that represents
+a custom &quot;set&quot; of Policies.  The following operators are supported
 
 </P>
-<PRE>   Operator       Altertative         Meaning
+<PRE>   Operator       Alternative         Meaning
    ----------------------------------------------------------------------------
    *              and                 Intersection
    -              not                 Difference
@@ -429,37 +441,40 @@ can also use parenthesis to enforce precedence.  Here are some examples:
 </P>
 <PRE>   Expression                  Meaning
    ----------------------------------------------------------------------------
-   pbp * risky                 All policies that are &quot;pbp&quot; AND &quot;risky&quot;
-   pbp and risky               Ditto
+   pbp * bugs                  All policies that are &quot;pbp&quot; AND &quot;bugs&quot;
+   pbp and bugs                Ditto
 
-   danger + risky              All policies that are &quot;danger&quot; OR &quot;risky&quot;
-   pbp or risky                Ditto
+   bugs + cosmetic             All policies that are &quot;bugs&quot; OR &quot;cosmetic&quot;
+   bugs or cosmetic            Ditto
 
-   pbp - cosmetic              All policies that are &quot;pbp&quot; BUT NOT &quot;risky&quot;
+   pbp - cosmetic              All policies that are &quot;pbp&quot; BUT NOT &quot;cosmetic&quot;
    pbp not cosmetic            Ditto
 
-   -unreliable                All policies that are NOT &quot;unreliable&quot;
-   not unreliable             Ditto
+   -maintenance                All policies that are NOT &quot;maintenance&quot;
+   not maintenance             Ditto
 
-   (pbp - danger) * risky      All policies that are &quot;pbp&quot; BUT NOT &quot;danger&quot;, AND &quot;risky&quot;
-   (pbp not danger) and risky  Ditto</PRE>
+   (pbp - bugs) * complexity     All policies that are &quot;pbp&quot; BUT NOT &quot;bugs&quot;,
+                                    AND &quot;complexity&quot;
+   (pbp not bugs) and complexity  Ditto</PRE>
 
-<P>Theme names are case-insensitive.  If <CODE>-theme</CODE> is set to an empty
-string, then it is equivalent to the set of all policies.  A theme
-name that doesn't exist is equivalent to an empty set.  Please See
+<P>Theme names are case-insensitive.  If <CODE>-theme</CODE> is set to an empty string,
+then it is equivalent to the set of all Policies.  A theme name that doesn't
+exist is equivalent to an empty set.  Please See
 <A HREF="http://en.wikipedia.org/wiki/Set">http://en.wikipedia.org/wiki/Set</A> for a discussion on set theory.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

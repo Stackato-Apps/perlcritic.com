@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#METHODS">METHODS
 
@@ -26,7 +26,8 @@
 
 <P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -38,25 +39,28 @@ previous or final.
 <P>This policy tests against a list of ambiguous words for variable
 names.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the constructor,
-The key is 'forbid' and the value is a string of forbidden words
-separated by spaces.  Any specified list replaces the default list.
+<P>The default list of forbidden words is:
 
 </P>
-<P>The default list is:
+<PRE>  last set left right no abstract contract record second close bases</PRE>
+
+<P>This list can be changed by giving a value for <CODE>forbid</CODE> of a series of
+forbidden words separated by spaces.
 
 </P>
-<PRE>    last set left right no abstract contract record second close bases</PRE>
-
-<P>For example, to override the default list:
+<P>For example, if you decide that <CODE>bases</CODE> is an OK name for variables (e.g.
+in bioinformatics), then put something like the following in
+<CODE>$HOME/.perlcriticrc</CODE>:
 
 </P>
-<PRE>    my $pkg = 'Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames';
-    my $policy = $pkg-&gt;new(forbid =&gt; 'last set');</PRE>
+<PRE>  [NamingConventions::ProhibitAmbiguousNames]
+  forbid = last set left right no abstract contract record second close</PRE>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -64,21 +68,12 @@ separated by spaces.  Any specified list replaces the default list.
 
 </A></DT>
 <DD>
+This can be called as a class or instance method.  It returns the list
+of words that are forbidden by default.
 
-<P>This can be called as a class or instance method.  It returns the list
-of words that are forbidden by default.  This list can be overridden
-via a perlcriticrc file.
-
-</P>
-<P>For example, if you decide that <CODE>bases</CODE> is an OK name for variables
-(e.g. in bioinformatics), then put something like the following in
-<CODE>$HOME/.perlcriticrc</CODE>:
-
-</P>
-<PRE>    [NamingConventions::ProhibitAmbiguousNames]
-    forbid = last set left right no abstract contract record second close</PRE>
 </DD>
 </DL>
+<HR>
 <H1><A NAME="BUGS">BUGS
 
 </A></H1>
@@ -94,17 +89,19 @@ example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
 
 </P>
 <PRE>    my $previous_record = $Foo::last;</PRE>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2005-2007 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

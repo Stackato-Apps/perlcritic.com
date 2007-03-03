@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -24,7 +24,8 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -57,15 +58,15 @@ when it follows a loop break such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE
       next if $condition;               #ok
       last LOOP if $other_condition;    #also ok
   }</PRE>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
-The key should be 'allow' and the value is a string of space-delimited
-keywords.  Choose from <CODE>if</CODE>, <CODE>for</CODE>, <CODE>unless</CODE>, <CODE>until</CODE>,and
-<CODE>while</CODE>.  When using the <A HREF="../../../../Perl/Critic.html">Perl::Critic</A> engine, these can be
-configured in the <I>.perlcriticrc</I> file like this:
+<P>A set of constructs to be ignored by this policy can specified by giving a
+value for 'allow' of a string of space-delimited keywords: <CODE>if</CODE>, <CODE>for</CODE>,
+<CODE>unless</CODE>, <CODE>until</CODE>, and/or <CODE>while</CODE>.  An example of specifying allowed
+flow-control structures in a <I>.perlcriticrc</I> file:
 
 </P>
 <PRE> [ControlStructures::ProhibitPostfixControls]
@@ -73,7 +74,8 @@ configured in the <I>.perlcriticrc</I> file like this:
 
 <P>By default, all postfix control keywords are prohibited.
 
-</P><H1><A NAME="NOTES">NOTES
+</P><HR>
+<H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -83,17 +85,19 @@ permit you to use a postfix <CODE>if</CODE> when the statement begins with one
 of those functions.  It is also pretty common to use <CODE>warn</CODE>, <CODE>carp</CODE>,
 and <CODE>cluck</CODE> with a postfix <CODE>if</CODE>, so those are allowed too.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

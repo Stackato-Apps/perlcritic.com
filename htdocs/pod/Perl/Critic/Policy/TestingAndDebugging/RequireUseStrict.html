@@ -8,8 +8,6 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#NOTES">NOTES
-
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -24,62 +22,41 @@
 
 <P>Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Using strictures is probably the single most effective way to improve
-the quality of your code.  This policy requires that the <CODE>'use
-strict'</CODE> statement must come before any other statements except
-<CODE>package</CODE>, <CODE>require</CODE>, and other <CODE>use</CODE> statements.  Thus, all the
-code in the entire package will be affected.
+<P>Using strictures is probably the single most effective way to improve the
+quality of your code.  This policy requires that the <CODE>'use strict'</CODE> statement
+must come before any other statements except <CODE>package</CODE>, <CODE>require</CODE>, and other
+<CODE>use</CODE> statements.  Thus, all the code in the entire package will be affected.
 
-</P><H1><A NAME="NOTES">NOTES
-
-</A></H1>
-
-<P>Up through version 0.15, this Policy only reported a violation for the
-first offending statement.  Starting in version 0.15_03, this Policy
-was modified to report a violation for every offending statement.
-This change closes a loophole with the <CODE>&quot;## no critic&quot;</CODE>
-pseudo-pragmas.  But for old legacy code that isn't strict, it
-produces <B>a lot</B> of violations.  The best way to alleviate the
-problem is to organize your code like this.
-
-</P>
-<PRE>  ## no critic 'RequireUseStrict';
-  ## Legacy code goes here...
-
-  use strict;
-  ## New code goes here...</PRE>
-
-<P>In this manner, you can develop new code that is strict, but allow the
-strictures to be disabled for all your legacy code.  Perl::Critic will
-only report violations of this policy that occur on lines after the
-<CODE>&quot;## use critic&quot;</CODE> pseudo-pragma.
-
-</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
+<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/ProhibitNoStrict.html">Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
-<P>This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.  The full text of this license
-can be found in the LICENSE file included with this module
+<P>This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.  The full text of this license can be found in
+the LICENSE file included with this module
 
 </P>
 </BODY>

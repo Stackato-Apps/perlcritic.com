@@ -89,6 +89,10 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitTwoArgOpen"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitTwoArgOpen.html">Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireCheckedOpen"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireCheckedOpen.html">Perl::Critic::Policy::InputOutput::RequireCheckedOpen</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireCheckedClose"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireCheckedClose.html">Perl::Critic::Policy::InputOutput::RequireCheckedClose</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireBracedFileHandleWithPrint"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireBracedFileHandleWithPrint.html">Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aMiscellanea%3a%3aProhibitFormats"><A HREF="../../Perl/Critic/Policy/Miscellanea/ProhibitFormats.html">Perl::Critic::Policy::Miscellanea::ProhibitFormats</A>
@@ -153,6 +157,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aTestingAndDebugging%3a%3aRequireUseWarnings"><A HREF="../../Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitCommaSeparatedStatements"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitCommaSeparatedStatements.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitConstantPragma"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitConstantPragma.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitConstantPragma</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitEmptyQuotes"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitEmptyQuotes.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes</A>
@@ -189,6 +195,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProhibitPackageVars"><A HREF="../../Perl/Critic/Policy/Variables/ProhibitPackageVars.html">Perl::Critic::Policy::Variables::ProhibitPackageVars</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProhibitPerl4PackageNames"><A HREF="../../Perl/Critic/Policy/Variables/ProhibitPerl4PackageNames.html">Perl::Critic::Policy::Variables::ProhibitPerl4PackageNames</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProhibitPunctuationVars"><A HREF="../../Perl/Critic/Policy/Variables/ProhibitPunctuationVars.html">Perl::Critic::Policy::Variables::ProhibitPunctuationVars</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProtectPrivateVars"><A HREF="../../Perl/Critic/Policy/Variables/ProtectPrivateVars.html">Perl::Critic::Policy::Variables::ProtectPrivateVars</A>
@@ -212,7 +220,8 @@
 
 <P>Perl::Critic::PolicySummary - Description of the bundled Policy modules
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -226,7 +235,8 @@ severity.  If you don't agree with the default severity, you can
 change it in your <I>.perlcriticrc</I> file.  See the documentation of
 each module for it's specific details.
 
-</P><H1><A NAME="POLICIES">POLICIES
+</P><HR>
+<H1><A NAME="POLICIES">POLICIES
 
 </A></H1>
 <H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
@@ -463,6 +473,18 @@ each module for it's specific details.
 
 <P>Write <CODE>open $fh, q{&lt;}, $filename;</CODE> instead of <CODE>open $fh, &quot;&lt;$filename&quot;;</CODE> [Severity 5]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireCheckedOpen"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireCheckedOpen.html">Perl::Critic::Policy::InputOutput::RequireCheckedOpen</A>
+
+</A></H2>
+
+<P>Write <CODE>my $error = open $fh, $mode, $filename;</CODE> instead of <CODE>open $fh, $mode, $filename;</CODE> [Severity 3]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireCheckedClose"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireCheckedClose.html">Perl::Critic::Policy::InputOutput::RequireCheckedClose</A>
+
+</A></H2>
+
+<P>Write <CODE>my $error = close $fh;</CODE> instead of <CODE>close $fh;</CODE> [Severity 3]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aRequireBracedFileHandleWithPrint"><A HREF="../../Perl/Critic/Policy/InputOutput/RequireBracedFileHandleWithPrint.html">Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint</A>
 
 </A></H2>
@@ -655,6 +677,12 @@ each module for it's specific details.
 
 <P>Always <CODE>use warnings</CODE> [Severity 4]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitCommaSeparatedStatements"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitCommaSeparatedStatements.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements</A>
+
+</A></H2>
+
+<P>Don't use the comma operator as a statement separator. [Severity 4]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitConstantPragma"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitConstantPragma.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitConstantPragma</A>
 
 </A></H2>
@@ -763,6 +791,12 @@ each module for it's specific details.
 
 <P>Eliminate globals declared with <CODE>our</CODE> or <CODE>use vars</CODE> [Severity 3]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProhibitPerl4PackageNames"><A HREF="../../Perl/Critic/Policy/Variables/ProhibitPerl4PackageNames.html">Perl::Critic::Policy::Variables::ProhibitPerl4PackageNames</A>
+
+</A></H2>
+
+<P>Use double colon (::) to separate package name components instead of single quotes ('). [Severity 2]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aProhibitPunctuationVars"><A HREF="../../Perl/Critic/Policy/Variables/ProhibitPunctuationVars.html">Perl::Critic::Policy::Variables::ProhibitPunctuationVars</A>
 
 </A></H2>
@@ -793,17 +827,19 @@ each module for it's specific details.
 
 <P>Negative array index should be used [Severity 4]
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

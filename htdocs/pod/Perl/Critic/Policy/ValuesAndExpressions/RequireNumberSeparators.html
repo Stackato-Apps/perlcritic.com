@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -24,7 +24,8 @@
 
 <P>Perl::Critic::Policy::ValuesAndExpressions::RequireNumberSeparators
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -39,20 +40,20 @@ three digits to be separated.
 
  $long_float = 12345678.001;   #not ok
  $long_float = 12_345_678.001; #ok</PRE>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the <CODE>new</CODE> method.
-The key is 'min_value' and the value is the minimum absolute value of
-numbers that must be separated.  The default is 10,000.  Thus, all
-numbers &gt;= 10,000 and &lt;= -10,000 must be separated.  Users of the
-Perl::Critic engine can configure this in their <I>.perlcriticrc</I> like
-this:
+<P>The minimum absolute value of numbers that must contain separators can
+be configured via the <CODE>min_value</CODE> option.  The default is 10,000;
+thus, all numbers &gt;= 10,000 and &lt;= -10,000 must have separators.  For
+example:
 
 </P>
 <PRE>  [ValuesAndExpressions::RequireNumberSeparators]
-  min_value = 100000    #That's one-hundred-thousand!</PRE>
+  min_value = 100000    # That's one-hundred-thousand!</PRE>
+<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -61,17 +62,19 @@ this:
 decimal (base 10) numbers.  And it is obviously biased toward Western
 notation.  I'll try and address those issues in the future.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

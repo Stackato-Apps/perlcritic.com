@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -24,7 +24,8 @@
 
 <P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -33,39 +34,42 @@ if you were wise enough to <CODE>use strict</CODE> in the first place, then it
 doesn't make sense to disable it completely.  By default, any <CODE>no
 strict</CODE> statement will violate this policy.  However, you can
 configure this Policy to allow certain types of strictures to be
-disabled (See <A HREF="../../../../Configuration.html">Configuration</A>).  A bare <CODE>no strict</CODE> statement will
+disabled (See <A HREF="../../../../CONFIGURATION.html">CONFIGURATION</A>).  A bare <CODE>no strict</CODE> statement will
 always raise a violation.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy accepts one key-value pair in the constructor.  The key is
-'allow' and the value is a string of whitespace delimited stricture
-types that you want to permit.  These can be 'vars', 'subs' and/or
-'refs'.  Users of the Perl::Critic engine can configure this in their
-<I>.perlcriticrc</I> file like this:
+<P>The permitted strictures can be configured via the <CODE>allow</CODE> option.
+The value is a list of whitespace-delimited stricture types that you
+want to permit.  These can be <CODE>vars</CODE>, <CODE>subs</CODE> and/or <CODE>refs</CODE>.  An
+example of this customization:
 
 </P>
-<PRE>  [TestingAndDebugging::ProhibitStrictureDisabling]
+<PRE>  [TestingAndDebugging::ProhibitNoStrict]
   allow = vars subs refs</PRE>
+<HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequirePackageStricture.html">Perl::Critic::Policy::TestingAndDebugging::RequirePackageStricture</A>
+<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseStrict.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

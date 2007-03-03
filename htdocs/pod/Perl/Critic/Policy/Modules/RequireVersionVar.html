@@ -22,7 +22,8 @@
 
 <P>Perl::Critic::Policy::Modules::RequireVersionVar
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -38,15 +39,16 @@ particular revision of your file like this:
 have to declare it like one of these:
 
 </P>
-<PRE>  our $VERSION = 1.01;
-  $MyPackage::VERSION = 1.01;
+<PRE>  our $VERSION = 1.031;
+  $MyPackage::VERSION = 1.031;
   use vars qw($VERSION);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 881 $</CODE> keyword to automatically
+<P>A common practice is to use the <CODE>$Revision: 1238 $</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 881 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<PRE>  our ($VERSION) = '$Revision: 1238 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -56,17 +58,19 @@ or 'v-strings.'  However, this Policy only insists that the
 <CODE>$VERSION</CODE> be defined somehow.  I may try to extend this in the
 future.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::InputOutput::RequireCheckedOpen</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#ACKNOWLEDGMENTS">ACKNOWLEDGMENTS
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::RequireCheckedOpen
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>The perl builtin I/O function <CODE>open</CODE> returns a false value on failure. That
+value should always be checked to ensure that the open was successful.
+
+
+</P>
+<PRE>  my $error = open( $filehanle, $mode, $filname );                  # ok
+  open( $filehanle, $mode, $filname ) or die &quot;unable to open: $!&quot;;  # ok
+  open( $filehanle, $mode, $filname );                              # not ok</PRE>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Andrew Moore &lt;amoore@mooresystems.com&gt;
+
+</P><HR>
+<H1><A NAME="ACKNOWLEDGMENTS">ACKNOWLEDGMENTS
+
+</A></H1>
+
+<P>This policy module is based heavily on policies written by Jeffrey Ryan
+Thalhammer &lt;thaljef@cpan.org&gt;.
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Andrew Moore.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

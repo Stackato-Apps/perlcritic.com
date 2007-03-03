@@ -20,20 +20,64 @@
 
 <P>Perl::Critic::Policy::Variables::RequireLexicalLoopIterators
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
+
+<P><CODE>for</CODE>/<CODE>foreach</CODE> loops <I>always</I> create new lexical variables for named
+iterators.  In other words
+
+</P>
+<PRE>  for $zed (...) {
+     ...
+  }</PRE>
+
+<P>is equivalent to
+
+</P>
+<PRE>  for my $zed (...) {
+     ...
+  }</PRE>
+
+<P>This may not seem like a big deal until you see code like
+
+</P>
+<PRE>  my $bicycle;
+  for $bicycle (@things_attached_to_the_bike_rack) {
+      if (
+              $bicycle-&gt;is_red()
+          and $bicycle-&gt;has_baseball_card_in_spokes()
+          and $bicycle-&gt;has_bent_kickstand()
+      ) {
+          $bicycle-&gt;remove_lock();
+
+          last;
+      }
+  }
+
+  if ( $bicycle and $bicycle-&gt;is_unlocked() ) {
+      ride_home($bicycle);
+  }</PRE>
+
+<P>which is not going to allow you to arrive in time for  dinner with your family
+because the <CODE>$bicycle</CODE> outside the loop is different from the <CODE>$bicycle</CODE>
+inside the loop.  You may have freed your bicycle, but you can't remember
+which one it was.
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

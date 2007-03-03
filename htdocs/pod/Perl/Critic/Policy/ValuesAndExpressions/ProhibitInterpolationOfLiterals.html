@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -24,7 +24,8 @@
 
 <P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -45,17 +46,20 @@ the reader know that you really did intend the string to be literal.
 
   print qq{$foobar};  #preferred
   print qq{foobar\n}; #preferred</PRE>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the constructor,
-The key is 'allow' and the value is a string of quote styles
-that are exempt from this policy.  Valid styles are <CODE>qq{}</CODE>, <CODE>qq()</CODE>,
-<CODE>qq[]</CODE>, and <CODE>qq//</CODE>. Multiple styles should be separated by
-whitespace.  This is useful because some folks have configured their
-editor to apply special syntax highlighting within certain styles of
-quotes.  For example, you can tweak <CODE>vim</CODE> to use SQL highlighting for
+<P>The types of quoting styles to exempt from this policy can be
+configured via the <CODE>allow</CODE> option.  This must be a
+whitespace-delimited combination of some or all of the following
+styles: <CODE>qq{}</CODE>, <CODE>qq()</CODE>, <CODE>qq[]</CODE>, and <CODE>qq//</CODE>.
+
+</P>
+<P>This is useful because some folks have configured their editor to
+apply special syntax highlighting within certain styles of quotes.
+For example, you can tweak <CODE>vim</CODE> to use SQL highlighting for
 everything that appears within <CODE>qq{}</CODE> or <CODE>qq[]</CODE> quotes.  But if
 those strings are literal, Perl::Critic will complain.  To prevent
 this, put the following in your <I>.perlcriticrc</I> file:
@@ -63,23 +67,26 @@ this, put the following in your <I>.perlcriticrc</I> file:
 </P>
 <PRE>  [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
   allow = qq{} qq[]</PRE>
+<HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/RequireInterpolationOfMetachars.html">Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

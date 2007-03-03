@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -25,7 +25,8 @@
 
 <P>Perl::Critic::Policy::Subroutines::ProhibitExcessComplexity
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -47,20 +48,20 @@ into smaller subroutines.  Mark Dominus book &quot;Higher Order Perl&quot; also
 describes callbacks, recursion, memoization, iterators, and other
 techniques that help create simple and extensible Perl code.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the <CODE>new</CODE> method.
-The key is 'max_mccabe' and the value is the maximum acceptable McCabe
-score.  Any subroutine with a McCabe score higher than this number
-will generate a policy violation.  The default is 20.  Users of the
-Perl::Critic engine can configure this in their <I>.perlcriticrc</I> like
-this:
+<P>The maximum acceptable McCabe can be set with the <CODE>max_mccabe</CODE>
+configuration item.  Any subroutine with a McCabe score higher than
+this number will generate a policy violation.  The default is 20.  An
+example section for a <I>.perlcriticrc</I>:
 
 </P>
 <PRE>  [Subroutines::ProhibitExcessComplexity]
   max_mccabe = 30</PRE>
+<HR>
 <H1><A NAME="NOTES">NOTES
 
 
@@ -78,17 +79,19 @@ number.  So don't get offended if your code triggers this Policy.
 Just consider if there <B>might</B> be a simpler way to get the job done.
 
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

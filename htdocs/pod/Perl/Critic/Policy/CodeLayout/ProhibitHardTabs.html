@@ -8,6 +8,10 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#NOTES">NOTES
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -20,7 +24,8 @@
 
 <P>Perl::Critic::Policy::CodeLayout::ProhibitHardTabs
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -35,28 +40,41 @@ also does this for you.
 </P>
 <P>This Policy catches all tabs in your source code, including POD,
 quotes, and HEREDOCS.  The contents of the <CODE>__DATA__</CODE> section are not
-examined.  Tabs in a leading position are allowed, but if you want to
-forbid all tabs everywhere, put this to your <I>.perlcriticrc</I> file:
+examined.
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>Tabs in a leading position are allowed, but if you want to forbid all tabs
+everywhere, put this to your <I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [CodeLayout::ProhibitHardTabs]
-  allow_leading_tabs = 0</PRE>
+<PRE>    [CodeLayout::ProhibitHardTabs]
+    allow_leading_tabs = 0</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+</A></H1>
 
 <P>Beware that Perl::Critic may report the location of the string that
 contains the tab, not the actual location of the tab, so you may need
 to do some hunting.  I'll try and fix this in the future.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

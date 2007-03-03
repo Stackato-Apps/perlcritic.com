@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -26,7 +26,8 @@
 
 <P>Perl::Critic::Policy::CodeLayout::RequireTidyCode
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -36,15 +37,16 @@ consistent layout, regardless of the specifics.  And the easiest way
 to do that is to use <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>.  This policy will complain if
 you're code hasn't been run through Perl::Tidy.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy accepts an additional key-value pair in the constructor.
-The key must be <CODE>perltidyrc</CODE> and the value is the filename of a
-Perl::Tidy configuration file.  The default is <CODE>undef</CODE>, which tells
-Perl::Tidy to look in it's default location.  Users of Perl::Critic
-can configure this in their <I>.perlcriticrc</I> file like this:
+<P>This policy can be configured to tell Perl::Tidy to use a particular
+<I>perltidyrc</I> file or no configuration at all.  By default, Perl::Tidy is told
+to look in its default location for configuration.  Perl::Critic can be told to
+tell Perl::Tidy to use a specific configuration file by putting an entry in a
+<I>.perlcriticrc</I> file like this:
 
 </P>
 <PRE>  [CodeLayout::RequireTidyCode]
@@ -57,6 +59,7 @@ Perl::Tidy's own default style.
 </P>
 <PRE>  [CodeLayout::RequireTidyCode]
   perltidyrc = </PRE>
+<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -65,23 +68,26 @@ Perl::Tidy's own default style.
 latest version of Perl::Tidy can be downloaded from CPAN.  If
 Perl::Tidy is not installed, this policy is silently ignored.
 
-</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

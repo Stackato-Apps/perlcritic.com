@@ -8,9 +8,11 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#EXPORTED%20SUBS">EXPORTED SUBS
+</A><LI><A HREF="#IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
-</A><LI><A HREF="#EXPORTED%20VARIABLES">EXPORTED VARIABLES
+</A><LI><A HREF="#IMPORTABLE%20VARIABLES">IMPORTABLE VARIABLES
+
+</A><LI><A HREF="#IMPORT%20TAGS">IMPORT TAGS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -24,15 +26,17 @@
 
 <P>Perl::Critic::Utils - Utility subs and vars for Perl::Critic
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This module exports several static subs and variables that are useful
-for developing <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses.  Unless you are
-writing Policy modules, you probably don't care about this package.
+<P>This module provides several static subs and variables that are useful for
+developing <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses.  Unless you are writing Policy
+modules, you probably don't care about this package.
 
-</P><H1><A NAME="EXPORTED%20SUBS">EXPORTED SUBS
+</P><HR>
+<H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A></H1>
 <DL><DT><A NAME="find_keywords(%20%24doc%2c%20%24keyword%20)"><CODE>find_keywords( $doc, $keyword )</CODE>
@@ -40,17 +44,19 @@ writing Policy modules, you probably don't care about this package.
 </A></DT>
 <DD>
 
-<P><B>DEPRECATED:</B> Since version 0.11, every Policy is evaluated at each
-element of the document.  So you shouldn't need to go looking for a
-particular keyword.
+<P><B>DEPRECATED:</B> Since version 0.11, every Policy is evaluated at each element
+of the document.  So you shouldn't need to go looking for a particular
+keyword.  If you <I>do</I> want to use this, please import it via the
+<CODE>:deprecated</CODE> tag, rather than directly, to mark the module as needing
+updating.
 
 </P>
 <P>Given a <A HREF="../../PPI/Document.html">PPI::Document</A> as <CODE>$doc</CODE>, returns a reference to an array
-containing all the <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> elements that match
-<CODE>$keyword</CODE>.  This can be used to find any built-in function, method
-call, bareword, or reserved keyword.  It will not match variables,
-subroutine names, literal strings, numbers, or symbols.  If the
-document doesn't contain any matches, returns undef.
+containing all the <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> elements that match <CODE>$keyword</CODE>.  This
+can be used to find any built-in function, method call, bareword, or reserved
+keyword.  It will not match variables, subroutine names, literal strings,
+numbers, or symbols.  If the document doesn't contain any matches, returns
+undef.
 
 </P></DD>
 <DT><A NAME="is_perl_global(%20%24element%20)"><CODE>is_perl_global( $element )</CODE>
@@ -58,29 +64,97 @@ document doesn't contain any matches, returns undef.
 </A></DT>
 <DD>
 Given a <A HREF="../../PPI/Token/Symbol.html">PPI::Token::Symbol</A> or a string, returns true if that token
-represents one of the global variables provided by the <A HREF="../../English.html">English</A>
-module, or one of the builtin global variables like <CODE>%SIG</CODE>, <CODE>%ENV</CODE>,
-or <CODE>@ARGV</CODE>.  The sigil on the symbol is ignored, so things like
-<CODE>$ARGV</CODE> or <CODE>$ENV</CODE> will still return true.
+represents one of the global variables provided by the <A HREF="../../English.html">English</A> module, or
+one of the builtin global variables like <CODE>%SIG</CODE>, <CODE>%ENV</CODE>, or <CODE>@ARGV</CODE>.  The
+sigil on the symbol is ignored, so things like <CODE>$ARGV</CODE> or <CODE>$ENV</CODE> will still
+return true.
 
 </DD>
 <DT><A NAME="is_perl_builtin(%20%24element%20)"><CODE>is_perl_builtin( $element )</CODE>
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> or a string, returns true if that token
-represents a call to any of the builtin functions defined in Perl
-5.8.8
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8.
 
 </DD>
+<DT><A NAME="is_perl_builtin_with_list_context(%20%24element%20)"><CODE>is_perl_builtin_with_list_context( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that provide a list context to the following tokens.
+
+</DD>
+<DT><A NAME="is_perl_builtin_with_multiple_arguments(%20%24element%20)"><CODE>is_perl_builtin_with_multiple_arguments( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that <B>can</B> take multiple arguments.
+
+</DD>
+<DT><A NAME="is_perl_builtin_with_no_arguments(%20%24element%20)"><CODE>is_perl_builtin_with_no_arguments( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that <B>cannot</B> take any arguments.
+
+</DD>
+<DT><A NAME="is_perl_builtin_with_one_argument(%20%24element%20)"><CODE>is_perl_builtin_with_one_argument( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that takes <B>one and only one</B> argument.
+
+</DD>
+<DT><A NAME="is_perl_builtin_with_optional_argument(%20%24element%20)"><CODE>is_perl_builtin_with_optional_argument( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that takes <B>no more than one</B> argument.
+
+</P>
+<P>The sets of values for which <CODE>is_perl_builtin_with_multiple_arguments()</CODE>,
+<CODE>is_perl_builtin_with_no_arguments()</CODE>,
+<CODE>is_perl_builtin_with_one_argument()</CODE>, and
+<CODE>is_perl_builtin_with_optional_argument()</CODE> return true are disjoint and
+their union is precisely the set of values that <CODE>is_perl_builtin()</CODE> will
+return true for.
+
+</P></DD>
+<DT><A NAME="is_perl_builtin_with_zero_and_or_one_arguments(%20%24element%20)"><CODE>is_perl_builtin_with_zero_and_or_one_arguments( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, <A HREF="../../PPI/Statement/Sub.html">PPI::Statement::Sub</A>, or string, returns true
+if that token represents a call to any of the builtin functions defined in
+Perl 5.8.8 that takes no and/or one argument.
+
+</P>
+<P>Returns true if any of <CODE>is_perl_builtin_with_no_arguments()</CODE>,
+<CODE>is_perl_builtin_with_one_argument()</CODE>, and
+<CODE>is_perl_builtin_with_optional_argument()</CODE> returns true.
+
+</P></DD>
 <DT><A NAME="precedence_of(%20%24element%20)"><CODE>precedence_of( $element )</CODE>
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Token/Operator.html">PPI::Token::Operator</A> or a string, returns the precedence of
-the operator, where 1 is the highest precedence.  Returns undef if the
-precedence can't be determined (which is usually because it is not an
-operator).
+Given a <A HREF="../../PPI/Token/Operator.html">PPI::Token::Operator</A> or a string, returns the precedence of the
+operator, where 1 is the highest precedence.  Returns undef if the precedence
+can't be determined (which is usually because it is not an operator).
 
 </DD>
 <DT><A NAME="is_hash_key(%20%24element%20)"><CODE>is_hash_key( $element )</CODE>
@@ -88,13 +162,12 @@ operator).
 </A></DT>
 <DD>
 
-<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A>, returns true if the element is a hash key.
-PPI doesn't distinguish between regular barewords (like keywords or
-subroutine calls) and barewords in hash subscripts (which are
-considered literal).  So this subroutine is useful if your Policy is
-searching for <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> elements and you want to filter out
-the hash subscript variety.  In both of the following examples, 'foo'
-is considered a hash key:
+<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A>, returns true if the element is a hash key.  PPI
+doesn't distinguish between regular barewords (like keywords or subroutine
+calls) and barewords in hash subscripts (which are considered literal).  So
+this subroutine is useful if your Policy is searching for <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>
+elements and you want to filter out the hash subscript variety.  In both of
+the following examples, 'foo' is considered a hash key:
 
 </P>
 <PRE>  $hash1{foo} = 1;
@@ -104,30 +177,30 @@ is considered a hash key:
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which
-is usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), returns true if the function is a
-method being called on some reference.  Basically, it just looks to see
-if the preceding operator is &quot;-&gt;&quot;.  This is useful for distinguishing
-static function calls from object method calls.
+Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which is
+usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), returns true if the function is a method being
+called on some reference.  Basically, it just looks to see if the preceding
+operator is &quot;-&gt;&quot;.  This is useful for distinguishing static function calls
+from object method calls.
 
 </DD>
 <DT><A NAME="is_subroutine_name(%20%24element%20)"><CODE>is_subroutine_name( $element )</CODE>
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, returns true if the element is the name
-of a subroutine declaration.  This is useful for distinguishing
-barewords and from function calls from subroutine declarations.
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, returns true if the element is the name of a
+subroutine declaration.  This is useful for distinguishing barewords and from
+function calls from subroutine declarations.
 
 </DD>
 <DT><A NAME="is_function_call(%20%24element%20)"><CODE>is_function_call( $element )</CODE>
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> returns true if the element appears to be
-call to a static function.  Specifically, this function returns true
-if <CODE>is_hash_key</CODE>, <CODE>is_method_call</CODE>, and <CODE>is_subroutine_name</CODE> all
-return false for the given element.
+Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> returns true if the element appears to be call to
+a static function.  Specifically, this function returns true if
+<CODE>is_hash_key</CODE>, <CODE>is_method_call</CODE>, and <CODE>is_subroutine_name</CODE> all return false
+for the given element.
 
 </DD>
 <DT><A NAME="first_arg(%20%24element%20)"><CODE>first_arg( $element )</CODE>
@@ -136,8 +209,8 @@ return false for the given element.
 <DD>
 
 <P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which is
-usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), return the first argument.  This is similar
-of <CODE>parse_arg_list()</CODE> and follows the same logic.  Note that for the code:
+usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), return the first argument.  This is similar of
+<CODE>parse_arg_list()</CODE> and follows the same logic.  Note that for the code:
 
 </P>
 <PRE>  int($x + 0.5)</PRE>
@@ -155,45 +228,47 @@ different from the behavior of <CODE>parse_arg_list()</CODE>.  Another caveat is
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which
-is usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), splits the argument expressions
-into arrays of tokens.  Returns a list containing references to each
-of those arrays.  This is useful because parens are optional when
-calling a function, and PPI parses them very differently.  So this
-method is a poor-man's parse tree of PPI nodes.  It's not bullet-proof
-because it doesn't respect precedence.  In general, I don't like the
-way this function works, so don't count on it to be stable (or even
-present).
+Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which is
+usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), splits the argument expressions into arrays of
+tokens.  Returns a list containing references to each of those arrays.  This
+is useful because parens are optional when calling a function, and PPI parses
+them very differently.  So this method is a poor-man's parse tree of PPI
+nodes.  It's not bullet-proof because it doesn't respect precedence.  In
+general, I don't like the way this function works, so don't count on it to be
+stable (or even present).
 
 </DD>
 <DT><A NAME="is_script(%20%24document%20)"><CODE>is_script( $document )</CODE>
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>/#!.*/</CODE>.  If so,
-it is judged to be a script instead of a module.  See <CODE>shebang_line()</CODE>.
+Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>/#!.*/</CODE>.  If so, it is
+judged to be a script instead of a module.  See <CODE>shebang_line()</CODE>.
 
 </DD>
-<DT><A NAME="policy_long_name(%20)"><CODE> policy_long_name( ) </CODE>
+<DT><A NAME="policy_long_name(%20%24policy_name%20)"><CODE> policy_long_name( $policy_name ) </CODE>
 
 </A></DT>
 <DD>
+Given a policy class name in long or short form, return the long form.
+
 </DD>
-<DT><A NAME="policy_short_name(%20)"><CODE> policy_short_name( ) </CODE>
+<DT><A NAME="policy_short_name(%20%24policy_name%20)"><CODE> policy_short_name( $policy_name ) </CODE>
 
 </A></DT>
 <DD>
+Given a policy class name in long or short form, return the short form.
+
 </DD>
 <DT><A NAME="all_perl_files(%20%40directories%20)"><CODE>all_perl_files( @directories )</CODE>
 
 </A></DT>
 <DD>
 
-<P>Given a list of directories, recursively searches through all the
-directories (depth first) and returns a list of paths for all the
-files that are Perl code files.  Any administrative files for CVS or
-Subversion are skipped, as are things that look like temporary or
-backup files.
+<P>Given a list of directories, recursively searches through all the directories
+(depth first) and returns a list of paths for all the files that are Perl code
+files.  Any administrative files for CVS or Subversion are skipped, as are
+things that look like temporary or backup files.
 
 </P>
 <P>A Perl code file is:
@@ -210,22 +285,33 @@ backup files.
 </DD>
 </DL>
 </DD>
+<DT><A NAME="severity_to_number(%20%24severity%20)"><CODE>severity_to_number( $severity )</CODE>
+
+</A></DT>
+<DD>
+If <CODE>$severity</CODE> is given as an integer, this function returns <CODE>$severity</CODE> but
+normalized to lie between <CODE>$SEVERITY_LOWEST</CODE> and <CODE>$SEVERITY_HIGHEST</CODE>.  If
+<CODE>$severity</CODE> is given as a string, this function returns the corresponding
+severity number.  If the string doesn't have a corresponding number, this
+function will throw an exception.
+
+</DD>
 <DT><A NAME="verbosity_to_format(%20%24verbosity_level%20)"><CODE>verbosity_to_format( $verbosity_level )</CODE>
 
 </A></DT>
 <DD>
-Given a verbosity level between 1 and 10, returns the corresponding
-predefined format string.  These formats are suitable for passing to
-the <CODE>set_format</CODE> method in <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>.  See the
-<A HREF="../../perlcritic.html">perlcritic</A> documentation for a listing of the predefined formats.
+Given a verbosity level between 1 and 10, returns the corresponding predefined
+format string.  These formats are suitable for passing to the <CODE>set_format</CODE>
+method in <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>.  See the <A HREF="../../perlcritic.html">perlcritic</A> documentation for
+a listing of the predefined formats.
 
 </DD>
 <DT><A NAME="hashify(%20%40list%20)"><CODE>hashify( @list )</CODE>
 
 </A></DT>
 <DD>
-Given <CODE>@list</CODE>, return a hash where <CODE>@list</CODE> is in the keys and each
-value is 1.  Duplicate values in <CODE>@list</CODE> are silently squished.
+Given <CODE>@list</CODE>, return a hash where <CODE>@list</CODE> is in the keys and each value is
+1.  Duplicate values in <CODE>@list</CODE> are silently squished.
 
 </DD>
 <DT><A NAME="interpolate(%20%24literal%20)"><CODE>interpolate( $literal )</CODE>
@@ -233,10 +319,9 @@ value is 1.  Duplicate values in <CODE>@list</CODE> are silently squished.
 </A></DT>
 <DD>
 
-<P>Given a <CODE>$literal</CODE> string that may contain control characters
-(e.g.. '\t' '\n'), this function does a double interpolation on the
-string and returns it as if it had been declared in double quotes.
-For example:
+<P>Given a <CODE>$literal</CODE> string that may contain control characters (e.g.. '\t'
+'\n'), this function does a double interpolation on the string and returns it
+as if it had been declared in double quotes.  For example:
 
 </P>
 <PRE>  'foo \t bar \n' ...becomes... &quot;foo \t bar \n&quot;</PRE>
@@ -245,42 +330,32 @@ For example:
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>#!</CODE>.  If so,
-return that line.  Otherwise return undef.
+Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with <CODE>#!</CODE>.  If so, return that
+line.  Otherwise return undef.
+
+</DD>
+<DT><A NAME="words_from_string(%20%24str%20)"><CODE>words_from_string( $str )</CODE>
+
+</A></DT>
+<DD>
+Given config string <I>$str</I>, return all the words from the string.  This is
+safer than splitting on whitespace.
+
+</DD>
+<DT><A NAME="is_unchecked_call(%20%24element%20)"><CODE>is_unchecked_call( $element )</CODE>
+
+</A></DT>
+<DD>
+Given a <A HREF="../../PPI/Element.html">PPI::Element</A>, test to see if it contains a function call whose
+return value is not checked.
 
 </DD>
 </DL>
-<H1><A NAME="EXPORTED%20VARIABLES">EXPORTED VARIABLES
+<HR>
+<H1><A NAME="IMPORTABLE%20VARIABLES">IMPORTABLE VARIABLES
 
 </A></H1>
-<DL><DT><A NAME="%40BUILTINS"><CODE>@BUILTINS</CODE>
-
-</A></DT>
-<DD>
-
-<P><B>DEPRECATED:</B>  Use <CODE>is_perl_builtin()</CODE> instead.
-
-</P>
-<P>This is a list of all the built-in functions provided by Perl 5.8.  I
-imagine this is useful for distinguishing native and non-native
-function calls.
-
-</P></DD>
-<DT><A NAME="%40GLOBALS"><CODE>@GLOBALS</CODE>
-
-</A></DT>
-<DD>
-
-<P><B>DEPRECATED:</B>  Use <CODE>is_perl_global()</CODE> instead.
-
-</P>
-<P>This is a list of all the magic global variables provided by the
-<A HREF="../../English.html">English</A> module.  Also includes commonly-used global like <CODE>%SIG</CODE>,
-<CODE>%ENV</CODE>, and <CODE>@ARGV</CODE>.  The list contains only the variable name,
-without the sigil.
-
-</P></DD>
-<DT><A NAME="%24COMMA"><CODE>$COMMA</CODE>
+<DL><DT><A NAME="%24COMMA"><CODE>$COMMA</CODE>
 
 </A></DT>
 <DD>
@@ -329,9 +404,29 @@ without the sigil.
 
 </A></DT>
 <DD>
-These character constants give clear names to commonly-used strings
-that can be hard to read when surrounded by quotes and other
-punctuation.
+</DD>
+<DT><A NAME="%24SLASH"><CODE>$SLASH</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24BSLASH"><CODE>$BSLASH</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24LEFT_PAREN"><CODE>$LEFT_PAREN</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24RIGHT_PAREN"><CODE>$RIGHT_PAREN</CODE>
+
+</A></DT>
+<DD>
+These character constants give clear names to commonly-used strings that can
+be hard to read when surrounded by quotes and other punctuation.  Can be
+imported in one go via the <CODE>:characters</CODE> tag.
 
 </DD>
 <DT><A NAME="%24SEVERITY_HIGHEST"><CODE>$SEVERITY_HIGHEST</CODE>
@@ -359,8 +454,9 @@ punctuation.
 </A></DT>
 <DD>
 These numeric constants define the relative severity of violating each
-<A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>.  The <CODE>get_severity</CODE> and <CODE>default_severity</CODE>
-methods of every Policy subclass must return one of these values.
+<A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>.  The <CODE>get_severity</CODE> and <CODE>default_severity</CODE> methods
+of every Policy subclass must return one of these values. Can be imported via
+the <CODE>:severities</CODE> tag.
 
 </DD>
 <DT><A NAME="%24TRUE"><CODE>$TRUE</CODE>
@@ -373,21 +469,163 @@ methods of every Policy subclass must return one of these values.
 </A></DT>
 <DD>
 These are simple booleans. 1 and 0 respectively.  Be mindful of using these
-with string equality.  <CODE>$FALSE ne $EMPTY</CODE>.
+with string equality.  <CODE>$FALSE ne $EMPTY</CODE>.  Can be imported via the
+<CODE>:booleans</CODE> tag.
 
 </DD>
 </DL>
+<HR>
+<H1><A NAME="IMPORT%20TAGS">IMPORT TAGS
+
+</A></H1>
+
+<P>The following groups of functions and constants are available as parameters to
+a <CODE>use Perl::Critic::Util</CODE> statement.
+
+</P><DL><DT><A NAME="%3aall"><CODE>:all</CODE>
+
+</A></DT>
+<DD>
+The lot.
+
+</DD>
+<DT><A NAME="%3abooleans"><CODE>:booleans</CODE>
+
+</A></DT>
+<DD>
+Includes:
+<CODE>$TRUE</CODE>, <CODE>$FALSE</CODE>
+
+</DD>
+<DT><A NAME="%3aseverities"><CODE>:severities</CODE>
+
+</A></DT>
+<DD>
+Includes:
+<CODE>$SEVERITY_HIGHEST</CODE>,
+<CODE>$SEVERITY_HIGH</CODE>,
+<CODE>$SEVERITY_MEDIUM</CODE>,
+<CODE>$SEVERITY_LOW</CODE>,
+<CODE>$SEVERITY_LOWEST</CODE>,
+<CODE>@SEVERITY_NAMES</CODE>
+
+</DD>
+<DT><A NAME="%3acharacters"><CODE>:characters</CODE>
+
+</A></DT>
+<DD>
+Includes:
+<CODE>$COLON</CODE>,
+<CODE>$COMMA</CODE>,
+<CODE>$DQUOTE</CODE>,
+<CODE>$EMPTY</CODE>,
+<CODE>$FATCOMMA</CODE>,
+<CODE>$PERIOD</CODE>,
+<CODE>$PIPE</CODE>,
+<CODE>$QUOTE</CODE>,
+<CODE>$SCOLON</CODE>,
+<CODE>$SPACE</CODE>,
+<CODE>$SLASH</CODE>,
+<CODE>$BSLASH</CODE>
+<CODE>$LEFT_PAREN</CODE>
+<CODE>$RIGHT_PAREN</CODE>
+
+</DD>
+<DT><A NAME="%3aclassification"><CODE>:classification</CODE>
+
+</A></DT>
+<DD>
+Includes:
+<CODE>&amp;is_function_call</CODE>,
+<CODE>&amp;is_hash_key</CODE>,
+<CODE>&amp;is_method_call</CODE>,
+<CODE>&amp;is_perl_builtin</CODE>,
+<CODE>&amp;is_perl_global</CODE>,
+<CODE>&amp;is_script</CODE>,
+<CODE>&amp;is_subroutine_name</CODE>,
+<CODE>&amp;is_unchecked_call</CODE>
+
+</DD>
+<DT><A NAME="%3adata_conversion"><CODE>:data_conversion</CODE>
+
+</A></DT>
+<DD>
+
+<P>Generic manipulation, not having anything specific to do with Perl::Critic.
+
+</P>
+<P>Includes:
+<CODE>&amp;hashify</CODE>,
+<CODE>&amp;words_from_string</CODE>,
+<CODE>&amp;interpolate</CODE>
+
+</P></DD>
+<DT><A NAME="%3appi"><CODE>:ppi</CODE>
+
+</A></DT>
+<DD>
+
+<P>Things for dealing with <A HREF="../../PPI.html">PPI</A>, other than classification.
+
+</P>
+<P>Includes:
+<CODE>&amp;first_arg</CODE>,
+<CODE>&amp;parse_arg_list</CODE>
+
+</P></DD>
+<DT><A NAME="%3ainternal_lookup"><CODE>:internal_lookup</CODE>
+
+</A></DT>
+<DD>
+
+<P>Translations between internal representations.
+
+</P>
+<P>Includes:
+<CODE>&amp;severity_to_number</CODE>,
+<CODE>&amp;verbosity_to_format</CODE>
+
+</P></DD>
+<DT><A NAME="%3alanguage"><CODE>:language</CODE>
+
+</A></DT>
+<DD>
+
+<P>Information about Perl not programmatically available elsewhere.
+
+</P>
+<P>Includes:
+<CODE>&amp;precedence_of</CODE>
+
+</P></DD>
+<DT><A NAME="%3adeprecated"><CODE>:deprecated</CODE>
+
+</A></DT>
+<DD>
+
+<P>Not surprisingly, things that are deprecated.  It is preferred to use this tag
+to get to these functions, rather than the function names themselves, so as to
+mark any module using them as needing cleanup.
+
+</P>
+<P>Includes:
+<CODE>&amp;find_keywords</CODE>
+
+</P></DD>
+</DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

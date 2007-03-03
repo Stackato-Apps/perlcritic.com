@@ -22,7 +22,8 @@
 
 <P>Perl::Critic::Policy::Modules::RequireExplicitPackage
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -34,11 +35,10 @@ encapsulation and common decency require your module to keep its
 innards to itself.
 
 </P>
-<P>As for scripts, most people understand that the default package is
-<CODE>main</CODE>, so this Policy doesn't apply to files that begin with a perl
-shebang.  If you want to require an explicit <CODE>package</CODE>
-declaration in all files, including programs, then add the following to
-your <I>.perlcriticrc</I> file
+<P>As for programs, most people understand that the default package is <CODE>main</CODE>, so
+this Policy doesn't apply to files that begin with a perl shebang.  If you want
+to require an explicit <CODE>package</CODE> declaration in all files, including programs,
+then add the following to your <I>.perlcriticrc</I> file
 
 </P>
 <PRE>  [Modules::RequireExplicitPackage]
@@ -48,7 +48,8 @@ your <I>.perlcriticrc</I> file
 all.  But make sure you understand them before assuming that you
 should do it too.
 
-</P><H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+</P><HR>
+<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
 </A></H1>
 
@@ -57,17 +58,19 @@ a bit odd.  If you get lots of &quot;Cannot load policy module&quot; errors,
 then you probably need to change <CODE>ProhibitUnpackagedCode</CODE> to
 <CODE>RequireExplicitPackage</CODE> in your <I>.perlcriticrc</I> file.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

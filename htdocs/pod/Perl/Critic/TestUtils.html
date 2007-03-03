@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::TestUtils</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -11,6 +11,10 @@
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#EXPORTS">EXPORTS
+
+</A><LI><A HREF="#.run%20file%20information"><I>.run</I> file information
+
+</A><LI><A HREF="#BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -24,7 +28,8 @@
 
 <P>Perl::Critic::TestUtils - Utility functions for testing new Policies
 
-</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -48,50 +53,216 @@
   # Critique code against one filename-related policy...
   my $custom_policy = 'Modules::RequireFilenameMatchesPackage'
   my $violation_count = fcritique( $custom_policy, \$code, 'Foo/Bar.pm' );</PRE>
+<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This module is used by <A HREF="../../Perl/Critic.html">Perl::Critic</A> only for self-testing. It
+<P>This module is used by <A HREF="Perl/Critic.html">Perl::Critic</A> only for self-testing. It
 provides a few handy subroutines for testing new Perl::Critic::Policy
 modules.  Look at the test scripts that ship with Perl::Critic for
 more examples of how to use these subroutines.
 
-</P><H1><A NAME="EXPORTS">EXPORTS
+</P><HR>
+<H1><A NAME="EXPORTS">EXPORTS
 
 </A></H1>
-<DL><DT><A NAME="critique(%20%24code_string_ref%2c%20%24config_ref%20)">critique( $code_string_ref, $config_ref )
+<DL><DT><A NAME="block_perlcriticrc()">block_perlcriticrc()
 
 </A></DT>
 <DD>
+If a user has a <I>~/.perlcriticrc</I> file, this can interfere with testing.
+This handy method disables the search for that file -- simply call it at the
+top of your <I>.t</I> program.  Note that this is not easily reversible, but that
+should not matter.
+
+</DD>
+<DT><A NAME="critique(%20%24code_string_ref%2c%20%24config_ref%20)">critique( $code_string_ref, $config_ref )
+
+</A></DT>
+<DD>
+Test a block of code against the specified Perl::Critic::Config instance (or
+<CODE>undef</CODE> for the default).  Returns the number of violations that occurred
+
 </DD>
 <DT><A NAME="pcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24config_ref%20)">pcritique( $policy_name, $code_string_ref, $config_ref )
 
 </A></DT>
 <DD>
+Like <CODE>critique()</CODE>, but tests only a single policy instead of the whole bunch.
+
 </DD>
 <DT><A NAME="fcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24filename%2c%20%24config_ref%20)">fcritique( $policy_name, $code_string_ref, $filename, $config_ref )
 
 </A></DT>
 <DD>
-</DD>
-<DT><A NAME="block_perlcriticrc()">block_perlcriticrc()
+
+<P>Like <CODE>pcritique()</CODE>, but pretends that the code was loaded from the specified
+filename.  This is handy for testing policies like
+<CODE>Modules::RequireFilenameMatchesPackage</CODE> which care about the filename that
+the source derived from.
+
+</P>
+<P>The <CODE>$filename</CODE> parameter must be a relative path, not absolute.  The file
+and all necessary subdirectories will be created via <A HREF="File/Temp.html">File::Temp</A> and will be
+automatically deleted.
+
+</P></DD>
+<DT><A NAME="subtests_in_tree(%20%24dir%20)">subtests_in_tree( $dir )
 
 </A></DT>
 <DD>
+Searches the specified directory recursively for <I>.run</I> files.  Each one
+found is parsed and a hash-of-list-of-hashes is returned.  The outer hash is
+keyed on policy short name, like <CODE>Modules::RequireEndWithOne</CODE>.  The inner
+hash specifies a single test to be handed to <CODE>pcritique()</CODE> or <CODE>fcritique()</CODE>,
+including the code string, test name, etc.  See below for the syntax of the
+<I>.run</I> files.
+
+</DD>
+<DT><A NAME="should_skip_author_tests()">should_skip_author_tests()
+
+</A></DT>
+<DD>
+Answers whether author tests should run.
+
+</DD>
+<DT><A NAME="get_author_test_skip_message()">get_author_test_skip_message()
+
+</A></DT>
+<DD>
+Returns a string containing the message that should be emitted when a test
+is skipped due to it being an author test when author tests are not enabled.
+
+</DD>
+<DT><A NAME="starting_points_including_examples()">starting_points_including_examples()
+
+</A></DT>
+<DD>
+Returns a list of the directories contain code that needs to be tested when it
+is desired that the examples be included.
+
+</DD>
+<DT><A NAME="bundled_policy_names()">bundled_policy_names()
+
+</A></DT>
+<DD>
+Returns a list of Policy packages that come bundled with this package.  This
+functions by searching <I>MANIFEST</I> for <I>lib/Perl/Critic/Policy/*.pm</I> and
+converts the results to package names.
+
 </DD>
 </DL>
+<HR>
+<H1><A NAME=".run%20file%20information"><I>.run</I> file information
+
+</A></H1>
+
+<P>Testing a policy follows a very simple pattern:
+
+</P>
+<PRE>    * Policy name
+        * Subtest name
+        * Optional parameters
+        * Number of failures expected
+        * Optional exception expected
+        * Optional filename for code</PRE>
+
+<P>Each of the subtests for a policy is collected in a single <I>.run</I> file, with
+test properties as comments in front of each code block that describes how we expect
+Perl::Critic to react to the code.  For example, say you have a policy called
+Variables::ProhibitVowels:
+
+</P>
+<PRE>    (In file t/Variables/ProhibitVowels.run)
+
+    ## name Basics
+    ## failures 1
+    ## cut
+
+    my $vrbl_nm = 'foo';    # Good, vowel-free name
+    my $wango = 12;         # Bad, pronouncable name
+
+
+    ## name Sometimes Y
+    ## failures 1
+    ## cut
+
+    my $yllw = 0;       # &quot;y&quot; not a vowel here
+    my $rhythm = 12;    # But here it is</PRE>
+
+<P>These are called &quot;subtests&quot;, and two are shown above.  The beauty of
+incorporating multiple subtests in a file is that the <I>.run</I> is itself a
+(mostly) valid Perl file, and not hidden in a HEREDOC, so your editor's
+color-coding still works, and it is much easier to work with the code and the
+POD.
+
+</P>
+<P>If you need to pass any configuration parameters for your subtest, do so like
+this:
+
+</P>
+<PRE>    ## parms { allow_y =&gt; 0 }</PRE>
+
+<P>If it's a TODO subtest (probably because of some weird corner of
+PPI that we exercised that Adam is getting around to fixing, right?),
+then make a <CODE>##TODO</CODE> entry.
+
+</P>
+<PRE>    ## TODO Should pass when PPI 1.xxx comes out</PRE>
+
+<P>If the code is expected to trigger an exception in the policy, indicate that
+like so:
+
+</P>
+<PRE>    ## error 1</PRE>
+
+<P>If you want to test the error message, mark it with <CODE>/.../</CODE> to indicate a
+<CODE>like()</CODE> test:
+
+</P>
+<PRE>    ## error /Can't load Foo::Bar/</PRE>
+
+<P>If the policy you are testing cares about the filename of the code, you can
+indicate that <CODE>fcritique</CODE> should be used like so (see <CODE>fcritique</CODE> for more
+details):
+
+</P>
+<PRE>    ## filename lib/Foo/Bar.pm</PRE>
+
+<P>The value of <CODE>parms</CODE> will get <CODE>eval</CODE>ed and passed to <CODE>pcritique()</CODE>,
+so be careful.
+
+</P>
+<P>Note that nowhere within the <I>.run</I> file itself do you specify the
+policy that you're testing.  That's implicit within the filename.
+
+</P><HR>
+<H1><A NAME="BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
+
+</A></H1>
+
+<P>Test that we have a t/*/*.run for each lib/*/*.pm
+
+</P>
+<P>Allow us to specify the nature of the failures, and which one.  If
+there are 15 lines of code, and six of them fail, how do we know
+they're the right six?
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+and the rest of the <A HREF="Perl/Critic.html">Perl::Critic</A> team.
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2005-2007 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

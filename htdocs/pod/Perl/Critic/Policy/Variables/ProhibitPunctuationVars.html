@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#EXCEPTIONS">EXCEPTIONS
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -22,7 +22,8 @@
 
 <P>Perl::Critic::Policy::Variables::ProhibitPunctuationVars
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -36,15 +37,15 @@ give them clear names.
 
   use English qw(-no_match_vars);
   local $OUTPUT_AUTOFLUSH = undef;        #ok</PRE>
-<H1><A NAME="EXCEPTIONS">EXCEPTIONS
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>The scratch variables <CODE>$_</CODE> and <CODE>@_</CODE> are very common and have no
-equivalent name in <A HREF="../../../../English.html">English</A>, so they are exempt from this policy.
-The same goes for the less-frequently-used default filehandle <CODE>_</CODE>
-used by stat().  All the regexp capture variables (<CODE>$1</CODE>, <CODE>$2</CODE>, ...)
-are exempt too.
+<P>The scratch variables <CODE>$_</CODE> and <CODE>@_</CODE> are very common and are pretty
+well understood, so they are exempt from this policy.  The same goes
+for the less-frequently-used default filehandle <CODE>_</CODE> used by stat().
+All the regexp capture variables (<CODE>$1</CODE>, <CODE>$2</CODE>, ...) are exempt too.
 
 </P>
 <P>You can add more exceptions to your configuration.  In your
@@ -57,17 +58,19 @@ perlcriticrc file, add a block like this:
 <P>The <CODE>allow</CODE> property should be a whitespace-delimited list of
 punctuation variables.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

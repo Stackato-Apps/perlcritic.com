@@ -26,7 +26,8 @@
 
 <P>Perl::Critic::Document - Caching wrapper around PPI::Document
 
-</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -35,6 +36,7 @@
     my $doc = PPI::Document-&gt;new('Foo.pm');
     $doc = Perl::Critic::Document-&gt;new($doc);
     ## Then use the instance just like a PPI::Document</PRE>
+<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -48,7 +50,8 @@ Then, on subsequent requests we return the cached data.
 <P>This is implemented as a facade, where method calls are handed to the
 stored <CODE>PPI::Document</CODE> instance.
 
-</P><H1><A NAME="CAVEATS">CAVEATS
+</P><HR>
+<H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
 
@@ -62,7 +65,8 @@ $source = $doc-</CODE>content();&gt;
 <P>Perhaps there is a CPAN module out there which implements a facade
 better than we do here?
 
-</P><H1><A NAME="METHODS">METHODS
+</P><HR>
+<H1><A NAME="METHODS">METHODS
 
 </A></H1>
 <DL><DT><A NAME="%24pkg-%3enew(%24doc)">$pkg-&gt;new($doc)
@@ -104,17 +108,19 @@ Returns the filename for the source code if applicable
 </A></DT>
 <DD>
 To be compatible with other modules that expect to get a PPI::Document, the
-Perl::Critic::Document class masqerades as the PPI::Document class.
+Perl::Critic::Document class masquerades as the PPI::Document class.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

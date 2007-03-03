@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -24,53 +24,56 @@
 
 <P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>There are good reasons for disabling certain kinds of warnings.  But
-if you were wise enough to <CODE>use warnings</CODE> in the first place, then it
-doesn't make sense to disable them completely.  By default, any <CODE>no
-warnings</CODE> statement will violate this policy.  However, you can
-configure this Policy to allow certain types of warnings to be
-disabled (See <A HREF="../../../../Configuration.html">Configuration</A>).  A bare <CODE>no warnings</CODE> statement will
-always raise a violation.
+<P>There are good reasons for disabling certain kinds of warnings.  But if you
+were wise enough to <CODE>use warnings</CODE> in the first place, then it doesn't make
+sense to disable them completely.  By default, any <CODE>no warnings</CODE> statement
+will violate this policy.  However, you can configure this Policy to allow
+certain types of warnings to be disabled (See <A HREF="../../../../Configuration.html">Configuration</A>).  A bare <CODE>no
+warnings</CODE> statement will always raise a violation.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy accepts one key-value pair in the constructor.  The key is
-'allow' and the value is a string of whitespace delimited warning
-types that you are willing to disable.  See <A HREF="../../../../perllexwarn.html">perllexwarn</A> for a list
-of possible warning types.  Users of the Perl::Critic engine can
-configure this in their <I>.perlcriticrc</I> file like this:
+<P>The permitted warning types can be configured via the <CODE>allow</CODE> option.  The
+value is a list of whitespace-delimited warning types that you want to be able
+to disable.  See <A HREF="../../../../perllexwarn.html">perllexwarn</A> for a list of possible warning types.  An
+example of this customization:
 
 </P>
-<PRE>  [TestingAndDebugging::ProhibitWarningsDisabling]
+<PRE>  [TestingAndDebugging::ProhibitNoWarnings]
   allow = uninitialized once</PRE>
+<HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequirePackageWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequirePackageWarnings</A>
+<P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
-<P>This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.  The full text of this license
-can be found in the LICENSE file included with this module
+<P>This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.  The full text of this license can be found in
+the LICENSE file included with this module
 
 </P>
 </BODY>

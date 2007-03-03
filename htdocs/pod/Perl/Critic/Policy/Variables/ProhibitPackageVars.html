@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -22,7 +24,8 @@
 
 <P>Perl::Critic::Policy::Variables::ProhibitPackageVars
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -54,7 +57,36 @@ around this, the Policy overlooks any variables that are in ALL_CAPS.
 This forces you to put all your exported variables in ALL_CAPS too, which
 seems to be the usual practice anyway.
 
-</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>There is room for exceptions.  Some modules, like the core File::Find
+module, use package variables as their only interface, and others
+like Data::Dumper use package variables as their most common
+interface.  These module can be specified from your <I>.perlcriticrc</I>
+file, and the policy will ignore them.
+
+</P>
+<PRE>    [Variables::ProhibitPackageVars]
+    packages = File::Find Data::Dumper</PRE>
+
+<P>This is the default setting.  Using <CODE>packages =</CODE>  will override
+these defaults.
+
+</P>
+<P>You can also add packages to the defaults like so:
+
+</P>
+<PRE>    [Variables::ProhibitPackageVars]
+    add_packages = My::Package</PRE>
+
+<P>You can add package <CODE>main</CODE> to the list of packages, but that will
+only OK variables explicitly in the <CODE>main</CODE> package.
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
@@ -63,17 +95,19 @@ seems to be the usual practice anyway.
 </P>
 <P><A HREF="../../../../Perl/Critic/Policy/Variables/ProhibitLocalVars.html">Perl::Critic::Policy::Variables::ProhibitLocalVars</A>
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

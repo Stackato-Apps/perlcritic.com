@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -22,7 +22,8 @@
 
 <P>Perl::Critic::Policy::TestingAndDebugging::RequireTestLabels
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -42,14 +43,15 @@ applicable.  This only applies to code that has a <CODE>use Test::More</CODE> or
 <CODE>require Test::More</CODE> declaration (see below to add more test modules
 to the list).
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
-The key should be 'modules' and the value is a string of
-space-delimited fully qualified module names.  These can be configured
-in the <I>.perlcriticrc</I> file like this:
+<P>A list of additional modules to require label parameters be passed to
+their methods can be specified with the <CODE>modules</CODE> option.  The list
+must consist of whitespace-delimited, fully-qualified module names.
+For example:
 
 </P>
 <PRE> [TestingAndDebugging::RequireTestLabels]
@@ -57,13 +59,15 @@ in the <I>.perlcriticrc</I> file like this:
 
 <P>The module list always implicitly includes <A HREF="../../../../Test/More.html">Test::More</A>.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

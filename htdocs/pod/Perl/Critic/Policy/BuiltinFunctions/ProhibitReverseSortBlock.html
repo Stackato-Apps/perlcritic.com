@@ -8,7 +8,6 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -21,17 +20,32 @@
 
 <P>Perl::Critic::Policy::BuiltinFunctions::ProhibitReverseSortBlock
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
-
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
+
+<P>Conway says that it is much clearer to use <CODE>reverse</CODE> than to flip <CODE>$a</CODE> and
+<CODE>$b</CODE> around in a <CODE>sort</CODE> block.  He also suggests that, in newer perls,
+<CODE>reverse</CODE> is specifically looked for and optimized, and in the case of a
+simple reversed string <CODE>sort</CODE>, using <CODE>reverse</CODE> with a <CODE>sort</CODE> with no block
+is faster even in old perls.
+
+</P>
+<PRE>  my @foo = sort { $b cmp $a } @bar;         #not ok
+  my @foo = reverse sort @bar;               #ok
+
+  my @foo = sort { $b &lt;=&gt; $a } @bar;         #not ok
+  my @foo = reverse sort { $a &lt;=&gt; $b } @bar; #ok</PRE>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

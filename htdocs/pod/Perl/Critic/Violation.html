@@ -30,7 +30,8 @@
 
 <P>Perl::Critic::Violation - Represents policy violations
 
-</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -43,6 +44,7 @@
   my $sev  = 5;                   #Severity level of this violation
 
   my $vio  = Perl::Critic::Violation-&gt;new($desc, $expl, $node, $sev);</PRE>
+<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -54,7 +56,8 @@ about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</CODE> method of a
 subclasses must return a list of these Perl::Critic::Violation
 objects.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%24description%2c%20%24explanation%2c%20%24element%2c%20%24severity%20)"><CODE>new( $description, $explanation, $element, $severity )</CODE>
@@ -69,6 +72,7 @@ the violation, and the severity of the violation (as an integer).
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -186,6 +190,7 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="FIELDS">FIELDS
 
 </A></H1>
@@ -194,17 +199,17 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 </A></DT>
 <DD>
 
-<P>This variable is deprecated.  Use the <CODE>set_format</CODE> and <CODE>get_format</CODE>
-class methods instead.
+<P><B>DEPRECATED:</B> Use the <CODE>set_format</CODE> and <CODE>get_format</CODE> methods instead.
 
 </P>
-<P>Sets the format for all Violation objects when they are evaluated in
-string context.  The default is <CODE>'%d at line %l, column %c. %e'</CODE>.
-See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.  If you want to change
-<CODE>$FORMAT</CODE>, you should probably localize it first.
+<P>Sets the format for all Violation objects when they are evaluated in string
+context.  The default is <CODE>'%d at line %l, column %c. %e'</CODE>.  See
+<A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.  If you want to change <CODE>$FORMAT</CODE>, you
+should probably localize it first.
 
 </P></DD>
 </DL>
+<HR>
 <H1><A NAME="OVERLOADS">OVERLOADS
 
 </A></H1>
@@ -219,18 +224,19 @@ the way <CODE>sprintf</CODE> works.  If you want to know the specific formatting
 capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape characters are:
 
 </P>
-<PRE>  Escape    Meaning
-  -------   -----------------------------------------------------------------
-  %m        Brief description of the violation
-  %f        Name of the file where the violation occurred.
-  %l        Line number where the violation occurred
-  %c        Column number where the violation occurred
-  %e        Explanation of violation or page numbers in PBP
-  %d        Full diagnostic discussion of the violation
-  %r        The string of source code that caused the violation
-  %P        Name of the Policy module that created the violation
-  %p        Name of the Policy without the Perl::Critic::Policy:: prefix
-  %s        The severity level of the violation</PRE>
+<PRE>    Escape    Meaning
+    -------   ----------------------------------------------------------------
+    %c        Column number where the violation occurred
+    %d        Full diagnostic discussion of the violation
+    %e        Explanation of violation or page numbers in PBP
+    %F        Just the name of the file where the violation occurred.
+    %f        Path to the file where the violation occurred.
+    %l        Line number where the violation occurred
+    %m        Brief description of the violation
+    %P        Full name of the Policy module that created the violation
+    %p        Name of the Policy without the Perl::Critic::Policy:: prefix
+    %r        The string of source code that caused the violation
+    %s        The severity level of the violation</PRE>
 
 <P>Here are some examples:
 
@@ -250,17 +256,19 @@ capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Val
                     separated by underscores.  Well-recognized acronyms can be in ALL
                     CAPS, but must be separated by underscores from other parts of the
                     name.&quot;</PRE>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::PolicyListing</TITLE>
+<TITLE>Perl::Critic::ProfilePrototype</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -24,15 +24,15 @@
 
 </A></H1>
 
-<P>Perl::Critic::PolicyListing - Display information about Policies
+<P>Perl::Critic::ProfilePrototype - Generate a Perl::Critic profile
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This is a helper class that formats a set of Policy objects for
-pretty-printing.  There are no user-serviceable parts here.
+<P>This is a helper class that generates a prototype of a <A HREF="../../Perl/Critic.html">Perl::Critic</A> profile
+(e.g. a <I>.perlcriticrc</I> file. There are no user-serviceable parts here.
 
 </P><HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -42,7 +42,7 @@ pretty-printing.  There are no user-serviceable parts here.
 
 </A></DT>
 <DD>
-Returns a reference to a new <CODE>Perl::Critic::PolicyListing</CODE> object.
+Returns a reference to a new <CODE>Perl::Critic::ProfilePrototype</CODE> object.
 
 </DD>
 </DL>
@@ -54,7 +54,7 @@ Returns a reference to a new <CODE>Perl::Critic::PolicyListing</CODE> object.
 
 </A></DT>
 <DD>
-Returns a string representation of this <CODE>PolicyListing</CODE>.  See
+Returns a string representation of this <CODE>ProfilePrototype</CODE>.  See
 <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for more information.
 
 </DD>
@@ -65,9 +65,11 @@ Returns a string representation of this <CODE>PolicyListing</CODE>.  See
 </A></H1>
 
 <P>When a <A HREF="../../Perl/Critic/ProfilePrototype.html">Perl::Critic::ProfilePrototype</A> is evaluated in string context, it
-produces a one-line summary of the default severity, policy name, and default
-themes for each <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> object that was given to the
-constructor of this <CODE>PolicyListing</CODE>.
+produces a multi-line summary of the policy name, default themes, and default
+severity for each <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> object that was given to the
+constructor of this <CODE>ProfilePrototype</CODE>.  If the Policy supports an additional
+parameters, they will also be listed (but commented-out).  The format is
+suitable for use as a <I>.perlcriticrc</I> file.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

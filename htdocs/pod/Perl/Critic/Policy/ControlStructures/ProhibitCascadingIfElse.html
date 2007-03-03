@@ -8,7 +8,7 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -22,7 +22,8 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,30 +47,31 @@ hash lookup instead.  See <A HREF="Switch.html">Switch</A> for another approach.
   else{                      #ok
       $foo = $default;
   }</PRE>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy accepts an additional key-value pair in the <CODE>new</CODE> method.
-The key should be <CODE>max_elsif</CODE> and the value should be an integer
-indicating the maximum number of <CODE>elsif</CODE> alternatives to allow.  The
-default is 2.  When using the <A HREF="Perl/Critic.html">Perl::Critic</A> engine, these can be
-configured in the <I>.perlcriticrc</I> file like this:
+<P>This policy can be configured with a maximum number of <CODE>elsif</CODE> alternatives
+to allow.  The default is 2.  This can be specified via a <CODE>max_elsif</CODE> item in
+the <I>.perlcriticrc</I> file:
 
 </P>
 <PRE> [ControlStructures::ProhibitCascadingIfElse]
  max_elsif = 3</PRE>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2006 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify
