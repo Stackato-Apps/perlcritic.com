@@ -30,8 +30,7 @@
 
 <P>Perl::Critic::Violation - Represents policy violations
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -44,7 +43,6 @@
   my $sev  = 5;                   #Severity level of this violation
 
   my $vio  = Perl::Critic::Violation-&gt;new($desc, $expl, $node, $sev);</PRE>
-<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -56,8 +54,7 @@ about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</CODE> method of a
 subclasses must return a list of these Perl::Critic::Violation
 objects.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%24description%2c%20%24explanation%2c%20%24element%2c%20%24severity%20)"><CODE>new( $description, $explanation, $element, $severity )</CODE>
@@ -72,7 +69,6 @@ the violation, and the severity of the violation (as an integer).
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -95,8 +91,9 @@ an array of page numbers in PBP.
 
 </A></DT>
 <DD>
-Returns a two-element list containing the line and column number where
-this Violation occurred.
+Returns a three-element array reference containing the line and real
+&amp; virtual column numbers where this Violation occurred, as in
+<A HREF="../../PPI/Element.html">PPI::Element</A>.
 
 </DD>
 <DT><A NAME="filename()"><CODE>filename()</CODE>
@@ -190,7 +187,6 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="FIELDS">FIELDS
 
 </A></H1>
@@ -209,7 +205,6 @@ should probably localize it first.
 
 </P></DD>
 </DL>
-<HR>
 <H1><A NAME="OVERLOADS">OVERLOADS
 
 </A></H1>
@@ -256,15 +251,13 @@ capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Val
                     separated by underscores.  Well-recognized acronyms can be in ALL
                     CAPS, but must be separated by underscores from other parts of the
                     name.&quot;</PRE>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

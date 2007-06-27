@@ -49,6 +49,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aProhibitQuotedWordLists"><A HREF="../../Perl/Critic/Policy/CodeLayout/ProhibitQuotedWordLists.html">Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aProhibitTrailingWhitespace"><A HREF="../../Perl/Critic/Policy/CodeLayout/ProhibitTrailingWhitespace.html">Perl::Critic::Policy::CodeLayout::ProhibitTrailingWhitespace</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aRequireConsistentNewlines"><A HREF="../../Perl/Critic/Policy/CodeLayout/RequireConsistentNewlines.html">Perl::Critic::Policy::CodeLayout::RequireConsistentNewlines</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aRequireTidyCode"><A HREF="../../Perl/Critic/Policy/CodeLayout/RequireTidyCode.html">Perl::Critic::Policy::CodeLayout::RequireTidyCode</A>
@@ -220,8 +222,7 @@
 
 <P>Perl::Critic::PolicySummary - Description of the bundled Policy modules
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -235,8 +236,7 @@ severity.  If you don't agree with the default severity, you can
 change it in your <I>.perlcriticrc</I> file.  See the documentation of
 each module for it's specific details.
 
-</P><HR>
-<H1><A NAME="POLICIES">POLICIES
+</P><H1><A NAME="POLICIES">POLICIES
 
 </A></H1>
 <H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
@@ -352,6 +352,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Write <CODE>qw(foo bar baz)</CODE> instead of <CODE>('foo', 'bar', 'baz')</CODE> [Severity 2]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aProhibitTrailingWhitespace"><A HREF="../../Perl/Critic/Policy/CodeLayout/ProhibitTrailingWhitespace.html">Perl::Critic::Policy::CodeLayout::ProhibitTrailingWhitespace</A>
+
+</A></H2>
+
+<P>Don't use whitespace at the end of lines. [Severity 1]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aCodeLayout%3a%3aRequireConsistentNewlines"><A HREF="../../Perl/Critic/Policy/CodeLayout/RequireConsistentNewlines.html">Perl::Critic::Policy::CodeLayout::RequireConsistentNewlines</A>
 
@@ -827,15 +833,13 @@ each module for it's specific details.
 
 <P>Negative array index should be used [Severity 4]
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

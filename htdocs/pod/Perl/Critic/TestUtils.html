@@ -28,8 +28,7 @@
 
 <P>Perl::Critic::TestUtils - Utility functions for testing new Policies
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -53,7 +52,6 @@
   # Critique code against one filename-related policy...
   my $custom_policy = 'Modules::RequireFilenameMatchesPackage'
   my $violation_count = fcritique( $custom_policy, \$code, 'Foo/Bar.pm' );</PRE>
-<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -63,8 +61,7 @@ provides a few handy subroutines for testing new Perl::Critic::Policy
 modules.  Look at the test scripts that ship with Perl::Critic for
 more examples of how to use these subroutines.
 
-</P><HR>
-<H1><A NAME="EXPORTS">EXPORTS
+</P><H1><A NAME="EXPORTS">EXPORTS
 
 </A></H1>
 <DL><DT><A NAME="block_perlcriticrc()">block_perlcriticrc()
@@ -153,7 +150,6 @@ converts the results to package names.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME=".run%20file%20information"><I>.run</I> file information
 
 </A></H1>
@@ -237,8 +233,7 @@ so be careful.
 <P>Note that nowhere within the <I>.run</I> file itself do you specify the
 policy that you're testing.  That's implicit within the filename.
 
-</P><HR>
-<H1><A NAME="BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
+</P><H1><A NAME="BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
 
 </A></H1>
 
@@ -249,16 +244,14 @@ policy that you're testing.  That's implicit within the filename.
 there are 15 lines of code, and six of them fail, how do we know
 they're the right six?
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 and the rest of the <A HREF="Perl/Critic.html">Perl::Critic</A> team.
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

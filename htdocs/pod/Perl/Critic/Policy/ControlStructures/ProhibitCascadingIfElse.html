@@ -22,8 +22,7 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -35,7 +34,7 @@ hash lookup instead.  See <A HREF="Switch.html">Switch</A> for another approach.
 <PRE>  if ($condition1) {         #ok
       $foo = 1;
   }
-  elseif ($condition2) {     #ok
+  elsif ($condition2) {      #ok
       $foo = 2;
   }
   elsif ($condition3) {      #ok
@@ -44,10 +43,9 @@ hash lookup instead.  See <A HREF="Switch.html">Switch</A> for another approach.
   elsif ($condition4) {      #too many!
       $foo = 4;
   }
-  else{                      #ok
+  else {                     #ok
       $foo = $default;
   }</PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -59,15 +57,13 @@ the <I>.perlcriticrc</I> file:
 </P>
 <PRE> [ControlStructures::ProhibitCascadingIfElse]
  max_elsif = 3</PRE>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

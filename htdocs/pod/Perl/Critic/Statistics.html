@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Statistics - Compile stats on Perl::Critic violations
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This class accumulates statistics on Perl::Critic violations across one or
+more files.  NOTE: This class is experimental and subject to change.
+
+</P><H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="new()"><CODE>new()</CODE>
+
+</A></DT>
+<DD>
+Create a new instance of Perl::Critic::Statistics.  No arguments are supported
+at this time.
+
+</DD>
+<DT><A NAME="accumulate(%20%24doc%2c%20%5c%40violations%20)"><CODE> accumulate( $doc, \@violations ) </CODE>
+
+</A></DT>
+<DD>
+Accumulates statistics about the <CODE>$doc</CODE> and the <CODE>@violations</CODE> that were
+found.
+
+</DD>
+<DT><A NAME="modules()"><CODE>modules()</CODE>
+
+</A></DT>
+<DD>
+The number of chunks of code (usually files) that have been analyzed.
+
+</DD>
+<DT><A NAME="subs()"><CODE>subs()</CODE>
+
+</A></DT>
+<DD>
+The total number of subroutines analyzed by this Critic.
+
+</DD>
+<DT><A NAME="statements()"><CODE>statements()</CODE>
+
+</A></DT>
+<DD>
+The total number of statements analyzed by this Critic.
+
+</DD>
+<DT><A NAME="lines_of_code()"><CODE>lines_of_code()</CODE>
+
+</A></DT>
+<DD>
+The total number of lines of code analyzed by this Critic.
+
+</DD>
+<DT><A NAME="violations_by_severity()"><CODE>violations_by_severity()</CODE>
+
+</A></DT>
+<DD>
+The number of violations of each severity found by this Critic as a
+reference to a hash keyed by severity.
+
+</DD>
+<DT><A NAME="violations_by_policy()"><CODE>violations_by_policy()</CODE>
+
+</A></DT>
+<DD>
+The number of violations of each policy found by this Critic as a
+reference to a hash keyed by full policy name.
+
+</DD>
+<DT><A NAME="total_violations()"><CODE>total_violations()</CODE>
+
+</A></DT>
+<DD>
+The the total number of violations found by this Critic.
+
+</DD>
+<DT><A NAME="average_sub_mccabe()"><CODE>average_sub_mccabe()</CODE>
+
+</A></DT>
+<DD>
+The average McCabe score of all scanned subroutines.
+
+</DD>
+<DT><A NAME="violations_per_line_of_code()"><CODE>violations_per_line_of_code()</CODE>
+
+</A></DT>
+<DD>
+The total violations divided by the lines of code.
+
+</DD>
+</DL>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Elliot Shank
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

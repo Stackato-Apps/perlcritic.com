@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#SOURCE">SOURCE
 
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
 </A><LI><A HREF="#NEW%20FEATURES">NEW FEATURES
 
 </A><LI><A HREF="#BUGS%2fLIMITATIONS">BUGS/LIMITATIONS
@@ -28,19 +30,24 @@
 
 <P>TODO - Things for Perl::Critic developers to do
 
-</P><HR>
-<H1><A NAME="SOURCE">SOURCE
+</P><H1><A NAME="SOURCE">SOURCE
 
 </A></H1>
 
 <PRE>    #######################################################################
-    #      $URL: http://perlcritic.tigris.org/svn/perlcritic/tags/Perl-Critic-0.19/TODO.pod $
-    #     $Date: 2006-08-20 13:46:40 -0700 (Sun, 20 Aug 2006) $
+    #      $URL: http://perlcritic.tigris.org/svn/perlcritic/tags/Perl-Critic-1.053/TODO.pod $
+    #     $Date: 2007-06-03 13:16:10 -0700 (Sun, 03 Jun 2007) $
     #   $Author: thaljef $
-    # $Revision: 633 $
+    # $Revision: 1578 $
     #######################################################################</PRE>
-<HR>
-<H1><A NAME="NEW%20FEATURES">NEW FEATURES
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P>Perl-Critic-More is a separate distribution for less-widely-accepted
+policies.  It contains its own TODO.pod.
+
+</P><H1><A NAME="NEW%20FEATURES">NEW FEATURES
 
 </A></H1>
 <DL><DT><A NAME="*%20Report%20Safari%20sections%20in%20addition%20to%20book%20page%20numbers.">* Report Safari sections in addition to book page numbers.
@@ -48,25 +55,19 @@
 </A></DT>
 <DD>
 </DD>
-<DT><A NAME="*%20Report%20some%20statistics%20on%20the%20violations%20and%20the%20source%20code.">* Report some statistics on the violations and the source code.
+<DT><A NAME="*%20Allow%20policies%20to%20say%20that%20they've%20had%20enough%20and%20to%20not%20use%20them%20for%20the%20rest%20of%20the%20current%20document.">* Allow policies to say that they've had enough and to not use them for the rest of the current document.
 
 </A></DT>
 <DD>
-e.g. Number of violations of each policy/severity.  Total lines of code,
-number of subroutines, average number of statements/operators per sub.
+Primarily for things like <CODE>RequireUseStrict</CODE> and <CODE>ProhibitMagicNumbers</CODE>.
+Replace current workaround for <CODE>RequireUseStrict</CODE>.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="BUGS%2fLIMITATIONS">BUGS/LIMITATIONS
 
 </A></H1>
-<DL><DT><A NAME="*%20Errors%20in%20.perlcriticrc%20are%20silent">* Errors in .perlcriticrc are silent
-
-</A></DT>
-<DD>
-</DD>
-<DT><A NAME="*%20Modules%3a%3aRequireVersionVar">* Modules::RequireVersionVar
+<DL><DT><A NAME="*%20Modules%3a%3aRequireVersionVar">* Modules::RequireVersionVar
 
 </A></DT>
 <DD>
@@ -77,10 +78,15 @@ Doesn't enforce three-part versions
 
 </A></DT>
 <DD>
-Don't allow compound names with forbidden words, like &quot;last_record&quot;.
+
+<P>Don't allow compound names with forbidden words, like &quot;last_record&quot;.
 Allow forbidden words in RHS of variable declarations
 
-</DD>
+</P>
+<P>Also, we should make it easeir to add (or delete) words from the
+forbbiden list.
+
+</P></DD>
 <DT><A NAME="*%20Subroutines%3a%3aProtectPrivateSubs">* Subroutines::ProtectPrivateSubs
 
 </A></DT>
@@ -94,32 +100,61 @@ difference between that and <CODE>$self-&gt;_foo()</CODE>
 </A></DT>
 <DD>
 
-<P>This should not complain about using warn or die if it's not in a function.
+<P>This should not complain about using <CODE>warn</CODE> or <CODE>die</CODE> if it's not in a
+function, or if it's not in a non-main:: package.
 
 </P>
-<P>Also, if the error string ends with a &quot;\n&quot;, then the line number
-and package information is not shown, so it doesn't matter if you
-use carp/confess or not.  For example:
-
-</P>
-<PRE>    my $fh;
-    if ( !open( $fh, '&lt;', $filename ) ) {
-        warn &quot;ack: $filename: $!\n&quot;;
-        return;
-    }</PRE>
-
-<P>I just want to print a warning and move on.  The location is irrelevant.
+<P>Also, should allow <CODE>die</CODE> when it is obvious that the &quot;message&quot; is a reference.
 
 </P></DD>
-</DL>
-<HR>
-<H1><A NAME="OTHER%20PBP%20POLICIES%20THAT%20SEEM%20FEASIBLE%20TO%20IMPLEMENT">OTHER PBP POLICIES THAT SEEM FEASIBLE TO IMPLEMENT
-
-</A></H1>
-<DL><DT><A NAME="*%20ValuesAndExpressions%3a%3aProhibitCommaSeparatedStatements%20(p68)">* ValuesAndExpressions::ProhibitCommaSeparatedStatements (p68)
+<DT><A NAME="*%20RegularExpressions%3a%3aProhibitCaptureWithoutTest">* RegularExpressions::ProhibitCaptureWithoutTest
 
 </A></DT>
 <DD>
+
+<P>Allow this construct:
+
+</P>
+<PRE>    for ( ... ) {
+        next unless /(....)/;
+        if ( $1 ) {
+            ....
+        }
+    }</PRE>
+
+<P>Right now, P::C thinks that the <CODE>$1</CODE> isn't legal to use because it's
+&quot;outside&quot; of the match.  The thing is, we can only get to the <CODE>if</CODE>
+if the regex matched.
+    while ( $str =~ /(expression)/ )
+
+</P></DD>
+<DT><A NAME="*%20CodeLayout%3a%3aProhibitParensWithBuiltins">* CodeLayout::ProhibitParensWithBuiltins
+
+</A></DT>
+<DD>
+Some builtin functions (particularly those that take a variable number of
+scalar arguments) should probably get parens.  This policy should be enhanced
+to allow the user to specify a list of builtins that are expempt from the
+policy.
+
+</DD>
+<DT><A NAME="*%20InputOutput%3a%3aRequireCheckedOpen%20and%20RequireCheckedClose">* InputOutput::RequireCheckedOpen and RequireCheckedClose
+
+</A></DT>
+<DD>
+These policies should not report violations if 'use Fatal' is in effect.
+
+</DD>
+</DL>
+<H1><A NAME="OTHER%20PBP%20POLICIES%20THAT%20SEEM%20FEASIBLE%20TO%20IMPLEMENT">OTHER PBP POLICIES THAT SEEM FEASIBLE TO IMPLEMENT
+
+</A></H1>
+<DL><DT><A NAME="*%20ControlStructures%3a%3aProhibitComplexMappings%20(p113)">* ControlStructures::ProhibitComplexMappings (p113)
+
+</A></DT>
+<DD>
+Base this on RequireSimpleSortBlock.  Make number of statements configurable
+
 </DD>
 <DT><A NAME="*%20ValuesAndExpressions%3a%3aRequireListParens%20(p71)">* ValuesAndExpressions::RequireListParens (p71)
 
@@ -130,17 +165,26 @@ use carp/confess or not.  For example:
 
 </A></DT>
 <DD>
-Look for grep in a scalar context and recommend any() instead.
-Perhaps we need to distinguish cases like:
-   $count += grep {qr/foo/} @list;
 
-</DD>
-<DT><A NAME="*%20Variables%3a%3aRequireLocalizedPunctuationVars%20(p81)">* Variables::RequireLocalizedPunctuationVars (p81)
+<P>Look for <CODE>grep</CODE> in a scalar context and recommend <CODE>any()</CODE> instead.
+Perhaps we need to distinguish cases like:
+
+</P>
+<PRE>    $count += grep {qr/foo/} @list;</PRE>
+
+<P>OTOH, this assumes that the common use of scalar grep is to check
+for existence.  I'm not sure that's the case.
+
+</P></DD>
+<DT><A NAME="*%20ValuesAndExpressions%3a%3aProhibitImplicitNewlines%20(p60-61)">* ValuesAndExpressions::ProhibitImplicitNewlines (p60-61)
 
 </A></DT>
 <DD>
+Forbid multi-line strings with implicit newlines.  Use concatenation or
+heredoc instead.
+
 </DD>
-<DT><A NAME="*%20Variables%3a%3aProhibitTopicChangeInListFunction%20(p114)">* Variables::ProhibitTopicChangeInListFunction (p114)
+<DT><A NAME="*%20Variables%3a%3aRequireLocalizedPunctuationVars%20(p81)">* Variables::RequireLocalizedPunctuationVars (p81)
 
 </A></DT>
 <DD>
@@ -153,18 +197,6 @@ Base it on Pod::Spell or Test::Spelling. Add a &quot;=for stopwords&quot;
 section for words to skip, as per Pod::Spell.
 
 </DD>
-<DT><A NAME="*%20BuiltinFunctions%3a%3aProhibitReverseSortBlock%20(p152)">* BuiltinFunctions::ProhibitReverseSortBlock (p152)
-
-</A></DT>
-<DD>
-
-<P>Don't allow first instance of <CODE>$b</CODE> to be before first instance of <CODE>$a</CODE>.
-
-</P>
-<P>[Note: already implemented by Chris Dolan, but not committed yet due
-to PPI bugs.  Ask Chris for the patch.]
-
-</P></DD>
 <DT><A NAME="*%20Subroutines%3a%3aRequireArgUnpacking%20(p178)">* Subroutines::RequireArgUnpacking (p178)
 
 </A></DT>
@@ -183,12 +215,12 @@ less than N <A HREF="PPI/Statement/Variable.html">PPI::Statement::Variable</A>s 
 shift.
 
 </DD>
-<DT><A NAME="*%20InputOutput%3a%3aRequireErrorChecking%20(p208)">* InputOutput::RequireErrorChecking (p208)
+<DT><A NAME="*%20InputOutput%3a%3aRequireChecked*%20for%20system%20calls%20(p208)">* InputOutput::RequireChecked* for system calls (p208)
 
 </A></DT>
 <DD>
-Forbid open, print, close in void context, unless &quot;use Fatal&quot; is in
-effect.
+Add policies to ensure checking the return values of system calls. See
+InputOutputRequireCheckedOpen.
 
 </DD>
 <DT><A NAME="*%20InputOutput%3a%3aRequireBriefOpen%20(p209)">* InputOutput::RequireBriefOpen (p209)
@@ -208,13 +240,8 @@ same lexical FH
 
 </A></DT>
 <DD>
-</DD>
-<DT><A NAME="*%20Miscellanea%3a%3aProhibitObnoxiousComments">* Miscellanea::ProhibitObnoxiousComments
-
-</A></DT>
-<DD>
-Forbid excessive hash marks e.g. &quot;#### This is a loud comment ####&quot;.
-Make the obnoxious pattern configurable
+If you're reading from STDIN, chances are you're really wanting to
+read from the magic filehandle.
 
 </DD>
 <DT><A NAME="*%20RegularExpressions%3a%3aRequireBracesForMultiline%20(p242)">* RegularExpressions::RequireBracesForMultiline (p242)
@@ -236,7 +263,7 @@ Make the obnoxious pattern configurable
 
 </A></DT>
 <DD>
-This will be avoided for ASCII-only code
+This will be avoided for ASCII-only code.
 
 </DD>
 <DT><A NAME="*%20RegularExpressions%3a%3aProhibitUnusedCapture%20(p252)">* RegularExpressions::ProhibitUnusedCapture (p252)
@@ -244,7 +271,7 @@ This will be avoided for ASCII-only code
 </A></DT>
 <DD>
 Look for LHS of regexp or use of <CODE>$1</CODE>, <CODE>$2</CODE>, ... before next
-regexp
+regexp.
 
 </DD>
 <DT><A NAME="*%20RegularExpressions%3a%3aProhibitComplexRegexps%20(p261)">* RegularExpressions::ProhibitComplexRegexps (p261)
@@ -271,19 +298,25 @@ Can't be <CODE>qr/\s*\\A\s*\((?:\?:)?(?:\s*\w+\s*\|)*\s*\w+\s*\)\s*\\z/</CODE>
 or <CODE>qr/\s*\\A\s*\w+\s*\\z/</CODE>
 
 </DD>
-<DT><A NAME="*%20TestingAndDebugging%3a%3aProhibitProlongedStrictureOverride%20(p443)">* TestingAndDebugging::ProhibitProlongedStrictureOverride (p443)
-
-</A></DT>
-<DD>
-This conflicts with TestingAndDebugging::ProhibitNoStrict
-
-</DD>
 </DL>
-<HR>
 <H1><A NAME="NON-PBP%20POLICIES%20WANTED">NON-PBP POLICIES WANTED
 
 </A></H1>
-<DL><DT><A NAME="*%20BuiltInFunctions%3a%3aRequireConstantSprintfFormat">* BuiltInFunctions::RequireConstantSprintfFormat
+<DL><DT><A NAME="*%20TBD%3a%3aVariableNotUsed">* TBD::VariableNotUsed
+
+</A></DT>
+<DD>
+Detect a variable that has a value assigned to it, but never used.
+
+</DD>
+<DT><A NAME="*%20TBD%3a%3aAllProgramsNeedShebangs">* TBD::AllProgramsNeedShebangs
+
+</A></DT>
+<DD>
+Anything that is a program should have a shebang line.  This includes .t files.
+
+</DD>
+<DT><A NAME="*%20BuiltInFunctions%3a%3aRequireConstantSprintfFormat">* BuiltInFunctions::RequireConstantSprintfFormat
 
 </A></DT>
 <DD>
@@ -292,7 +325,41 @@ This conflicts with TestingAndDebugging::ProhibitNoStrict
 
 </A></DT>
 <DD>
-<A HREF="http://home.earthlink.net/~josh.jore/new-warnings/slides/slide1.html">http://home.earthlink.net/~josh.jore/new-warnings/slides/slide1.html</A>
+<A HREF="http://diotalevi.isa-geek.net/~josh/yapc-lint/slides/slide5.html">http://diotalevi.isa-geek.net/~josh/yapc-lint/slides/slide5.html</A>
+
+</DD>
+<DT><A NAME="*%20Miscellanea%3a%3aProhibitObnoxiousComments">* Miscellanea::ProhibitObnoxiousComments
+
+</A></DT>
+<DD>
+Forbid excessive hash marks e.g. &quot;#### This is a loud comment ####&quot;.
+Make the obnoxious pattern configurable
+
+</DD>
+<DT><A NAME="*%20ValuesAndExpressions%3a%3aRequireNotOperator">* ValuesAndExpressions::RequireNotOperator
+
+</A></DT>
+<DD>
+Require the use of &quot;not&quot; instead of &quot;!&quot;, except when this would contradict
+ProhibitMixedBooleanOperators.  This may be better suited for
+Perl::Critic::More.
+
+</DD>
+<DT><A NAME="*%20Modules%3a%3aRequireExplicitImporting">* Modules::RequireExplicitImporting
+
+</A></DT>
+<DD>
+Require every <CODE>use</CODE> statement to have an explicit import list.  You could
+still get around this by calling <CODE>import</CODE> directly.
+
+</DD>
+<DT><A NAME="*%20Modules%3a%3aForbidImporting">* Modules::ForbidImporting
+
+</A></DT>
+<DD>
+Require every <CODE>use</CODE> to have an explicitly empty import list.  This is for
+folks who like to see fully-qualified function names.  Should probably provide
+a list of exempt modules (like FindBin);
 
 </DD>
 <DT><A NAME="*%20ControlStructures%3a%3aProhibitIncludeViaDo">* ControlStructures::ProhibitIncludeViaDo
@@ -302,34 +369,13 @@ This conflicts with TestingAndDebugging::ProhibitNoStrict
 Forbid <CODE>do &quot;foo.pl&quot;</CODE>.  Not sure about this policy name.
 
 </DD>
-<DT><A NAME="*%20CodingStyle%3a%3aProhibitNonASCII">* CodingStyle::ProhibitNonASCII
-
-</A></DT>
-<DD>
-Definitely low severity!  Only looks at code, not comments or POD
-
-</DD>
-<DT><A NAME="*%20Miscellanea%3a%3aRequireMinimumPerlVersion">* Miscellanea::RequireMinimumPerlVersion
-
-</A></DT>
-<DD>
-Every module should have something like <CODE>use 5.6.0</CODE>
-
-</DD>
-<DT><A NAME="*%20Miscellanea%3a%3aProhibit5006isms">* Miscellanea::Prohibit5006isms
-
-</A></DT>
-<DD>
-Keep the code 5.005 compatible Low severity
-
-</DD>
 <DT><A NAME="*%20Variables%3a%3aProhibitUseVars">* Variables::ProhibitUseVars
 
 </A></DT>
 <DD>
-Require <CODE>our $foo</CODE> instead.  This contradicts
-Miscellanea::Prohibit5006isms.  Maybe verify <CODE>use 5.6</CODE> before
-applying this policy.  Low severity.
+Disallow <CODE>use vars qw(...)</CODE> and require <CODE>our $foo</CODE> instead.  This
+contradicts Miscellanea::Prohibit5006isms.  Maybe verify <CODE>use 5.6</CODE>
+before applying this policy.  Low severity.
 
 </DD>
 <DT><A NAME="*%20VariablesAndExpressions%3a%3aProhibitQuotedHashKeys">* VariablesAndExpressions::ProhibitQuotedHashKeys
@@ -341,15 +387,7 @@ is against what Damian says.  Suggested by Adam Kennedy.  Low
 severity.
 
 </DD>
-<DT><A NAME="*%20Miscellanea%3a%3aB%3a%3aLint">* Miscellanea::B::Lint
-
-</A></DT>
-<DD>
-Create a compatibility layer for the <A HREF="B/Lint.html">B::Lint</A> code analyzer.  Make
-it very clear that this runs code and thus is a security hole.
-
-</DD>
-<DT><A NAME="*%20CodingStyle%3a%3aProhibitFunctionalNew">* CodingStyle::ProhibitFunctionalNew
+<DT><A NAME="*%20CodeLayout%3a%3aProhibitFunctionalNew">* CodeLayout::ProhibitFunctionalNew
 
 </A></DT>
 <DD>
@@ -360,59 +398,100 @@ Good: <CODE>Foo::Bar-&gt;new</CODE>, Bad: <CODE>new Foo::Bar</CODE>
 
 </A></DT>
 <DD>
-VariablesAndExpressions::ProhibitComplexVersion (medium severity)
+</DD>
+<DT><A NAME="*%20VariablesAndExpressions%3a%3aProhibitComplexVersion%20(medium%20severity)">* VariablesAndExpressions::ProhibitComplexVersion (medium severity)
+
+</A></DT>
+<DD>
 <A HREF="http://rt.cpan.org/Ticket/Display.html?id=20439">http://rt.cpan.org/Ticket/Display.html?id=20439</A>
 
 </DD>
-<DT><A NAME="*%20Tests%3a%3aRequireTestDescriptions">* Tests::RequireTestDescriptions
+<DT><A NAME="*%20Documentation%3a%3aRequireSynopsis">* Documentation::RequireSynopsis
 
 </A></DT>
 <DD>
-
-<P>If Test::More is detected:
-
-</P>
-<PRE>   ok $foo;                        # not ok
-   ok $foo, 'foo got populated';   # ok
-   is $foo, 'bar';                 # not ok
-   is $foo, 'bar', 'foo value';    # ok</PRE>
 </DD>
-<DT><A NAME="*%20ValuesAndExpressions%3a%3aProhibitUselessQuotingOfVariables">* ValuesAndExpressions::ProhibitUselessQuotingOfVariables
+<DT><A NAME="*%20Documentation%3a%3aRequireLicense">* Documentation::RequireLicense
+
+</A></DT>
+<DD>
+These are simplified versions of Documentation::RequirePodSections.
+
+</DD>
+<DT><A NAME="*%20Miscellaneous%3a%3aProhibitBoilerplate">* Miscellaneous::ProhibitBoilerplate
 
 </A></DT>
 <DD>
 
-<P>I've seen a lot of beginners do things like this:
+<P>Complain about copy-and-paste code or docs from h2xs, Module::Starter::*,
+etc.
 
 </P>
-<PRE>    open( my $fh, &quot;$filename&quot; );</PRE>
-
-<P>There's no reason for <CODE>$filename</CODE> to be quoted.  (except stringifying
-overloaded instances)
+<P>Here's a non-PPI implementation:
+<A HREF="http://search.cpan.org/src/JJORE/Carp-Clan-5.8/t/04boilerplate.t">http://search.cpan.org/src/JJORE/Carp-Clan-5.8/t/04boilerplate.t</A>
 
 </P></DD>
-<DT><A NAME="*%20Variables%3a%3aProhibitPerl4PackageNames">* Variables::ProhibitPerl4PackageNames
+<DT><A NAME="*%20BuiltinFunctions%3a%3aProhibitExtraneousScalarCall">* BuiltinFunctions::ProhibitExtraneousScalarCall
 
 </A></DT>
 <DD>
-Forbid old-schoole package names like Foo'Bar'Baz.  This should also
-apply to any variables or subroutines that get declared/called.
-
+Recommend that <CODE>if (scalar @array)</CODE> be rewritten as <CODE>if (@array)</CODE>.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="REFACTORINGS%20and%20ENHANCEMENTS">REFACTORINGS and ENHANCEMENTS
 
 </A></H1>
-<DL><DT><A NAME="*%20Alias%20-verbose%20to%20-format%20option%20in%20Test%3a%3aP%3a%3aC.">* Alias -verbose to -format option in Test::P::C.
+<DL><DT><A NAME="*%20MOVE%20THE%20LINE-DISABLING%20INTO%20P%3a%3aC%3a%3aDocument">* MOVE THE LINE-DISABLING INTO P::C::Document
 
 </A></DT>
 <DD>
-Give it same functionality as the -verbose option in `perlcritic`
+
+<P>All the code that deals with finding all the '##no critic' comments and noting
+which policies are disabled at each line seems like it would be better placed
+in Perl::Critic::Document.  P::C::Document could then provide methods to
+indicate if a policy is disabled at a particular line.  So the basic algorithm
+in Perl::Critic might look something like this:
+
+</P>
+<PRE>  foreach $element (@PPI_ELEMENTS) {
+     foreach $policy (@POLICIES) {
+        $line = $element-&gt;location-&gt;[0];
+        next if $doc-&gt;policy_is_disabled_at_line( $policy, $line );
+        push @violations, $policy-&gt;violates( $elem, $doc );
+     }
+  }</PRE>
+</DD>
+<DT><A NAME="*%20Some%20means%20of%20detecting%20%22runnaway%22%20%23%23no%20critic">* Some means of detecting &quot;runnaway&quot; <CODE>##no critic</CODE>
+
+</A></DT>
+<DD>
+Elliot was talking to a couple of users at ETech and one of their major
+concerns was that they were using <CODE>##no critic</CODE> and forgetting to do a
+<CODE>##use critic</CODE> after the problematic section.  Perhaps an option to
+<I>perlcritic</I> to scan for such things is in order.
 
 </DD>
-<DT><A NAME="*%20Enhance%20P%3a%3aC%3a%3acritique()%20to%20accept%20file%20names%2c%20directories%2c%20or%20code%20strings%20(as%20refs)">* Enhance P::C::critique() to accept file names, directories, or code strings (as refs)
+<DT><A NAME="*%20Change%20API%20to%20use%20named%20parameters">* Change API to use named parameters
+
+</A></DT>
+<DD>
+Most of the methods on the public classes use named parameters for passing
+arguments.  I'd like to extend that pattern to include all object-methods.
+Static methods can still use positional parameters.
+
+</DD>
+<DT><A NAME="*%20Allow%20more%20flexible%20Policy%20parameter%20parsing">* Allow more flexible Policy parameter parsing
+
+</A></DT>
+<DD>
+Several policies use <CODE>words_from_string()</CODE> to split their parameters into
+words.  This function is currently limited to splitting on whitespace.  It
+would be nice to allow some lattitude for users who might try and use commas
+or some other kind of delimiter.
+
+</DD>
+<DT><A NAME="*%20Enhance%20P%3a%3aC%3a%3acritique()%20to%20accept%20files%2c%20directories%2c%20or%20code%20strings">* Enhance P::C::critique() to accept files, directories, or code strings
 
 </A></DT>
 <DD>
@@ -432,31 +511,120 @@ Just like <I>bin/perlcritic</I> does now.
     mkdir $cache_path, oct 700 if (! -d $cache_path);
     PPI::Cache-&gt;import(path =&gt; $cache_path);</PRE>
 
+<P>This cachedir should perhaps include the PPI version number!  At least
+until PPI incorporates it's own version number in the cache.
+
+</P>
 <P>(see <I>t/40_criticize.t</I> for a more robust implementation)
 
 </P></DD>
+<DT><A NAME="*%20Use%20hash-lookup%20instead%20of%20List%3a%3aMoreUtils%3a%3aany%20function.">* Use hash-lookup instead of <CODE>List::MoreUtils::any</CODE> function.
+
+</A></DT>
+<DD>
+
+<P>In several places, Perl::Critic uses <CODE>List::MoreUtils::any</CODE> to see if
+a string is a member of a list.  Instead, I suggest using a named
+subroutine that does a hash-lookup like this:
+
+</P>
+<PRE>    my %logical_ops = hashify( qw( ! || &amp;&amp; ||= &amp;&amp;= and or not ) );
+    sub is_logical_op { return exists $logical_ops{ $_[0] }; }</PRE>
+</DD>
 </DL>
-<HR>
 <H1><A NAME="PPI%20BUGS">PPI BUGS
 
 </A></H1>
 
 <P>We're waiting on the following bugs to get fixed in a CPAN release of PPI:
 
-</P><DL><DT><A NAME="*%20goto%20as%20a%20PPI%3a%3aStatement%3a%3aBreak%20instance">* <CODE>goto</CODE> as a PPI::Statement::Break instance
+</P><DL><DT><A NAME="literal()">literal()
 
 </A></DT>
 <DD>
-Broken through PPI v1.115, fixed in PPI SVN, needed to remove
-workaround from Subroutines::RequireFinalReturn
+ValuesAndExpressions::RequireNumberSeparators uses a stringy eval to
+numify.  Current PPI SVN has code for the
+PPI::Token::Number-&gt;literal() method which numifies from source.  When
+we depend on a PPI version higher than 1.118, the _to_number()
+function in that policy can be removed in favor of literal().
 
 </DD>
-<DT><A NAME="*%20RT%20%2319629%3a%20End%20of%20list%20mistakenly%20seen%20as%20end%20of%20statement">* RT #19629: End of list mistakenly seen as end of statement
+<DT><A NAME="Newlines">Newlines
 
 </A></DT>
 <DD>
-Broken through PPI v1.115, fixed in PPI SVN, needed for
-BuiltinFunctions::ProhibitReverseSortBlock
+
+<P>PPI does not preserve newlines.  That makes
+CodeLayout::RequireConsistentNewlines impossible to implement under PPI.  For
+now, it's implemented by pulling the source out of the file and skipping PPI.
+
+</P>
+<P>It's unlikely that PPI will support mixde newlines anytime soon.
+
+</P></DD>
+<DT><A NAME="Anonymous%20constructors%20in%20lists">Anonymous constructors in lists
+
+</A></DT>
+<DD>
+
+<P>The following parses wrong in PPI v1.118.  A PPI fix is in progress.
+
+</P>
+<PRE>  bless( {} );</PRE>
+
+<P>When this is fixed, uncomment a few tests in t/20_policies_classhierarchies.t
+
+</P></DD>
+<DT><A NAME="Hash%20constructors%20with%20a%20parenthesis%20directly%20to%20the%20left.">Hash constructors with a parenthesis directly to the left.
+
+</A></DT>
+<DD>
+
+<P>The <A HREF="PPI/Statement.html">PPI::Statement</A> surrounding the <A HREF="PPI/Constructor.html">PPI::Constructor</A> returns undef
+for <CODE>location()</CODE> for the following:
+
+</P>
+<PRE>  ({})</PRE>
+
+<P>The same problem exists for
+
+</P>
+<PRE>  ({} )</PRE>
+
+<P>but not for
+
+</P>
+<PRE>  ( {})</PRE>
+
+<P>Logged as RT #23788.
+
+</P>
+<P>Remove trinary operator usage in RequireUseStrict, RequireUseWarnings, and
+RequireExplicitPackage once this is fixed.
+
+</P></DD>
+<DT><A NAME="PPI%3a%3aStructure%3a%3aBlocks%20being%20generated%20instead%20of%20PPI%3a%3aStructure%3a%3aConstructor"><A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>s being generated instead of <A HREF="PPI/Structure/Constructor.html">PPI::Structure::Constructor</A>
+
+</A></DT>
+<DD>
+
+<P>For complicated data structures, <CODE>{ blah =&gt; blah }</CODE> will result in a
+<A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A> being created, instead of a
+<A HREF="PPI/Structure/Constructor.html">PPI::Structure::Constructor</A>.
+
+</P>
+<P>ValuesAndExpressions::ProhibitCommaSeparatedStatements and other policies have
+workarounds for this.
+
+</P></DD>
+<DT><A NAME="Operators">Operators
+
+</A></DT>
+<DD>
+ValuesAndExpressions::ProhibitMismatchedOperators has two workarounds
+for PPI bugs with parsing operators.  Many of these bugs have been
+fixed in PPI, so it would be good to check if those workarounds are
+still needed.
 
 </DD>
 </DL>

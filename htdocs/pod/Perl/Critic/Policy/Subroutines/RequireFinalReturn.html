@@ -24,8 +24,7 @@
 
 <P>Perl::Critic::Policy::Subroutines::RequireFinalReturn
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -67,8 +66,7 @@ solves the problem.
 </P>
 <P>The only exception allowed is an empty subroutine.
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -79,7 +77,6 @@ well.  Just put something like this in your <I>.perlcriticrc</I>:
 </P>
 <PRE>  [Subroutines::RequireFinalReturns]
   terminal_funcs = quit abort bailout</PRE>
-<HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 
 </A></H1>
@@ -89,15 +86,13 @@ construction is too complicated to analyze right now.  Besides, a
 better form is the return outside of the ternary like this: <CODE>return
 foo ? 1 : bar ? 2 : 3</CODE>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

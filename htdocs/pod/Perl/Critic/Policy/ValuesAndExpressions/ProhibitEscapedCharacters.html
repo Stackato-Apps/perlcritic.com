@@ -23,8 +23,7 @@
 
 <P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEscapedCharacters
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -33,23 +32,20 @@ values.  The syntax is less compact, but dramatically more readable.
 
 </P>
 <PRE>  $str = &quot;\X7F\x06\x22Z&quot;;                         # not ok
-  
+
   use charnames ':full';
   $str = &quot;\N{DELETE}\N{ACKNOWLEDGE}\N{CANCEL}Z&quot;;  # ok</PRE>
-<HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 
 </A></H1>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

@@ -60,8 +60,7 @@
 
 <P>Perl::Critic - Critique Perl source code for best-practices
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -70,7 +69,6 @@
   my $critic = Perl::Critic-&gt;new();
   my @violations = $critic-&gt;critique($file);
   print @violations;</PRE>
-<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -112,8 +110,7 @@ HTTP-post, such as one of these:
 <P>Please note that the perlcritic web-service is still alpha code.  The URL and
 interface to the service are subject to change.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -force =&gt; $B, -verbose =&gt; $N ] )</CODE>
@@ -255,7 +252,6 @@ option causes all the other options to be silently ignored.
 
 </P></DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -311,8 +307,16 @@ Returns the <A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> object th
 to this Critic.
 
 </DD>
+<DT><A NAME="statistics()"><CODE> statistics() </CODE>
+
+</A></DT>
+<DD>
+Returns the <A HREF="Perl/Critic/Statistics.html">Perl::Critic::Statistics</A> object that was created for this
+Critic.  The Statistics object accumulates data for all files that are
+analyzed by this Critic.
+
+</DD>
 </DL>
-<HR>
 <H1><A NAME="FUNCTIONAL%20INTERFACE">FUNCTIONAL INTERFACE
 
 </A></H1>
@@ -338,8 +342,7 @@ those supported by the <CODE>Perl::Critic::new</CODE> method.  Here are some exa
 <P>None of the other object-methods are currently supported as static
 functions.  Sorry.
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -480,8 +483,7 @@ that is included in this <I>examples</I> directory of this distribution.
 <P>Damian Conway's own Perl::Critic configuration is also included in this
 distribution as <I>examples/perlcriticrc-conway</I>.
 
-</P><HR>
-<H1><A NAME="THE%20POLICIES">THE POLICIES
+</P><H1><A NAME="THE%20POLICIES">THE POLICIES
 
 </A></H1>
 
@@ -491,9 +493,13 @@ in more detail in the individual modules themselves.  Say <CODE>&quot;perlcritic
 PATTERN&quot;</CODE> to see the perldoc for all Policy modules that match the regex
 <CODE>m/PATTERN/imx</CODE>
 
+</P>
+<P>There are a number of distributions of additional policies on CPAN.  If
+<A HREF="Perl/Critic.html">Perl::Critic</A> doesn't contain a policy that you want, some one may have
+already written it.  Some of these can be found via <A HREF="Bundle/Perl/Critic.html">Bundle::Perl::Critic</A>.
 
-</P><HR>
-<H1><A NAME="POLICY%20THEMES">POLICY THEMES
+
+</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
 
 </A></H1>
 
@@ -543,8 +549,7 @@ operators are:
 <P>Theme names are case-insensitive.  If the <CODE>-theme</CODE> is set to an empty string,
 then it evaluates as true all Policies.
 
-</P><HR>
-<H1><A NAME="BENDING%20THE%20RULES">BENDING THE RULES
+</P><H1><A NAME="BENDING%20THE%20RULES">BENDING THE RULES
 
 </A></H1>
 
@@ -646,8 +651,7 @@ as specific as possible about which policies you want to disable (i.e. never
 use a bare <CODE>&quot;## no critic&quot;</CODE>).  If Perl::Critic complains about your code, try
 and find a compliant solution before resorting to this feature.
 
-</P><HR>
-<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+</P><H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
 </A></H1>
 
@@ -728,8 +732,7 @@ written for earlier versions.  Converting your policies to work with the new
 version is pretty easy and actually results in cleaner code.  See
 <A HREF="Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> for an up-to-date guide on creating Policy modules.
 
-</P><HR>
-<H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
+</P><H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
 
 </A></H1>
 
@@ -742,7 +745,6 @@ version is pretty easy and actually results in cleaner code.  See
   is a policy that you think is important or that we have overlooked,
   we would be very grateful for contributions, or you can simply load
   your own private set of policies into Perl::Critic.</PRE>
-<HR>
 <H1><A NAME="EXTENDING%20THE%20CRITIC">EXTENDING THE CRITIC
 
 </A></H1>
@@ -768,8 +770,7 @@ can design Policies that will help you catch those costly defects <B>before</B>
 they go into production.  To discuss your needs with the Perl::Critic team,
 just contact <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
 
-</P><HR>
-<H1><A NAME="PREREQUISITES">PREREQUISITES
+</P><H1><A NAME="PREREQUISITES">PREREQUISITES
 
 </A></H1>
 
@@ -818,8 +819,7 @@ testing:
 </P>
 <P><A HREF="Test/Pod/Coverage.html">Test::Pod::Coverage</A>
 
-</P><HR>
-<H1><A NAME="BUGS">BUGS
+</P><H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
@@ -828,8 +828,11 @@ any bugs, particularly false-positives or false-negatives from a
 Perl::Critic::Policy, please submit them to
 <A HREF="http://rt.cpan.org/NoAuth/Bugs.html?Dist=Perl-Critic">http://rt.cpan.org/NoAuth/Bugs.html?Dist=Perl-Critic</A>.  Thanks.
 
-</P><HR>
-<H1><A NAME="CREDITS">CREDITS
+</P>
+<P>Most policies will produce false-negatives if they cannot understand a
+particular block of code.
+
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -853,15 +856,13 @@ Perl::Critic::Policy, please submit them to
 </P>
 <P>and Sharon, my wife - For putting up with my all-night code sessions.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
