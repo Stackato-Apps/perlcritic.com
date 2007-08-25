@@ -14,7 +14,11 @@
 <LI><A HREF="#THEME%20RULES">THEME RULES
 
 </A></UL>
-<LI><A HREF="#AUTHOR">AUTHOR
+<LI><A HREF="#SUBROUTINES">SUBROUTINES
+
+</A><LI><A HREF="#CONSTANTS">CONSTANTS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
 
@@ -26,17 +30,19 @@
 
 <P>Perl::Critic::Theme - Construct thematic sets of policies
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>This is a helper class for evaluating theme expressions into sets of Policy
 objects.  There are no user-serviceable parts here.
 
-</P><H1><A NAME="METHODS">METHODS
+</P><HR>
+<H1><A NAME="METHODS">METHODS
 
 </A></H1>
-<DL><DT><A NAME="new(%20-rule%20%3d%3e%20%24rule_expression"><CODE>new( -rule =&gt; $rule_expression</CODE>
+<DL><DT><A NAME="new(%20-rule%20%3d%3e%20%24rule_expression%20)"><CODE>new( -rule =&gt; $rule_expression )</CODE>
 
 </A></DT>
 <DD>
@@ -87,13 +93,43 @@ parens to enforce precedence as well.  Supported operators are:
 themes for each Policy.
 
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="SUBROUTINES">SUBROUTINES
+
+</A></H1>
+<DL><DT><A NAME="cook_rule(%20%24rule%20)"><CODE>cook_rule( $rule )</CODE>
+
+</A></DT>
+<DD>
+Standardize a rule into a almost executable Perl code.  The &quot;almost&quot; comes
+from the fact that theme names are left as is.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="CONSTANTS">CONSTANTS
+
+</A></H1>
+<DL><DT><A NAME="%24RULE_INVALID_CHARACTER_REGEX"><CODE>$RULE_INVALID_CHARACTER_REGEX</CODE>
+
+</A></DT>
+<DD>
+A regular expression that will return the first character in the matched
+expression that is not valid in a rule.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Thalhammer  &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

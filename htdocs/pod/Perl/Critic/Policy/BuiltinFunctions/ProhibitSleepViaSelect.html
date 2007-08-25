@@ -22,34 +22,38 @@
 
 <P>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>Conway discourages the use of <CODE>select()</CODE> for performing non-integer
 sleeps.  Although documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, it's something that
-generally requires the reader to read <CODE>perldoc -f select</CODE> to figure out what it should be
-doing.  Instead, Conway recommends that you use the
-<CODE>Time::HiRes</CODE> module when you want to sleep.
+generally requires the reader to read <CODE>perldoc -f select</CODE> to figure
+out what it should be doing.  Instead, Conway recommends that you use
+the <CODE>Time::HiRes</CODE> module when you want to sleep.
 
 </P>
 <PRE>  select undef, undef, undef, 0.25;         # not ok
 
   use Time::HiRes;
   sleep( 0.25 );                            # ok</PRE>
+<HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Time/HiRes.html">Time::HiRes</A>.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Graham TerMarsch &lt;graham@howlingfrog.com&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

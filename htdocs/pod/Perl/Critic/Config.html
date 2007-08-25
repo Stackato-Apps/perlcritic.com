@@ -30,9 +30,10 @@
 
 </A></H1>
 
-<P>Perl::Critic::Config - Find and load Perl::Critic user-preferences
+<P>Perl::Critic::Config - The Perl::Critic user-preferences, combined from any profile file and command-line parameters.
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -43,10 +44,11 @@ they should be configured.  You should never really need to
 instantiate Perl::Critic::Config directly because the Perl::Critic
 constructor will do it for you.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-singlepolicy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -singlepolicy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -force =&gt; $B, -verbose =&gt; $N ] )</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-single-policy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%2c%20-color%20%3d%3e%20%24B%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -single-policy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N, -color =&gt; $B ] )</CODE>
 
 </A></DT>
 <DD>
@@ -103,7 +105,7 @@ conjunction with the <CODE>-include</CODE> option.  Note that <CODE>-exclude</CO
 precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
 </P>
-<P><B>-singlepolicy</B> is a string <CODE>PATTERN</CODE>.  Only the policy that matches
+<P><B>-single-policy</B> is a string <CODE>PATTERN</CODE>.  Only the policy that matches
 <CODE>m/$PATTERN/imx</CODE> will be used.  This value overrides the
 <CODE>-severity</CODE>, <CODE>-theme</CODE>, <CODE>-include</CODE>, <CODE>-exclude</CODE>, and <CODE>-only</CODE>
 options.
@@ -122,19 +124,40 @@ profile.  If set to a false value (which is the default), then
 Perl::Critic chooses from all the Policies that it finds at your site.
 
 </P>
+<P><B>-profile-strictness</B> is an enumerated value, one of
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_WARN">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_WARN&quot;</A> (the
+default),
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>, and
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A>.  If set
+to <A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>,
+Perl::Critic will make certain warnings about problems found in a
+<I>.perlcriticrc</I> or file specified via the <B>-profile</B> option fatal.
+For example, Perl::Critic normally only <CODE>warn</CODE>s about profiles
+referring to non-existent Policies, but this value makes this
+situation fatal.  Correspondingly,
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A> makes
+Perl::Critic shut up about these things.
+
+</P>
 <P><B>-force</B> controls whether Perl::Critic observes the magical <CODE>&quot;## no
 critic&quot;</CODE> pseudo-pragmas in your code.  If set to a true value,
 Perl::Critic will analyze all code.  If set to a false value (which is
 the default) Perl::Critic will ignore code that is tagged with these
-comments.  See <A HREF="#BENDING%20THE%20RULES">&quot;BENDING THE RULES&quot;</A> for more information.
+comments.  See <A HREF="Perl/Critic.html#BENDING%20THE%20RULES">Perl::Critic/&quot;BENDING THE RULES&quot;</A> for more
+information.
 
 </P>
 <P><B>-verbose</B> can be a positive integer (from 1 to 10), or a literal
 format specification.  See <A HREF="Perl/Critic/Violations.html">Perl::Critic::Violations</A> for an
 explanation of format specifications.
 
+</P>
+<P><B>-color</B> is not used by Perl::Critic but is provided for the benefit
+of <A HREF="perlcritic.html">perlcritic</A>.
+
 </P></DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -196,6 +219,14 @@ Returns the value of the <CODE>-force</CODE> attribute for this Config.
 Returns the value of the <CODE>-only</CODE> attribute for this Config.
 
 </DD>
+<DT><A NAME="profile_strictness()"><CODE> profile_strictness() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-profile-strictness</CODE> attribute for this
+Config.
+
+</DD>
 <DT><A NAME="severity()"><CODE> severity() </CODE>
 
 </A></DT>
@@ -203,11 +234,11 @@ Returns the value of the <CODE>-only</CODE> attribute for this Config.
 Returns the value of the <CODE>-severity</CODE> attribute for this Config.
 
 </DD>
-<DT><A NAME="singlepolicy()"><CODE> singlepolicy() </CODE>
+<DT><A NAME="single_policy()"><CODE> single_policy() </CODE>
 
 </A></DT>
 <DD>
-Returns the value of the <CODE>-singlepolicy</CODE> attribute for this Config.
+Returns the value of the <CODE>-single-policy</CODE> attribute for this Config.
 
 </DD>
 <DT><A NAME="theme()"><CODE> theme() </CODE>
@@ -232,7 +263,15 @@ Returns the value of the <CODE>-top</CODE> attribute for this Config.
 Returns the value of the <CODE>-verbose</CODE> attribute for this Config.
 
 </DD>
+<DT><A NAME="color()"><CODE> color() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color</CODE> attribute for this Config.
+
+</DD>
 </DL>
+<HR>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
 </A></H1>
@@ -251,6 +290,7 @@ have been installed.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -285,7 +325,8 @@ corresponding Perl::Critic constructor argument.
     top       = 50                                    #A positive integer
     theme     = risky + (pbp * security) - cosmetic   #A theme expression
     include   = NamingConventions ClassHierarchies    #Space-delimited list
-    exclude   = Variables  Modules::RequirePackage    #Space-delimited list</PRE>
+    exclude   = Variables  Modules::RequirePackage    #Space-delimited list
+    color     = 1                                     #Zero or One</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like
 this:
@@ -373,7 +414,8 @@ Perl::Critic::Config constructor.
 <P>For additional configuration examples, see the <I>perlcriticrc</I> file
 that is included in this <I>t/examples</I> directory of this distribution.
 
-</P><H1><A NAME="THE%20POLICIES">THE POLICIES
+</P><HR>
+<H1><A NAME="THE%20POLICIES">THE POLICIES
 
 </A></H1>
 
@@ -382,7 +424,8 @@ They are described briefly in the companion document
 <A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more detail in the individual
 modules themselves.
 
-</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
+</P><HR>
+<H1><A NAME="POLICY%20THEMES">POLICY THEMES
 
 </A></H1>
 
@@ -455,13 +498,15 @@ then it is equivalent to the set of all Policies.  A theme name that doesn't
 exist is equivalent to an empty set.  Please See
 <A HREF="http://en.wikipedia.org/wiki/Set">http://en.wikipedia.org/wiki/Set</A> for a discussion on set theory.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

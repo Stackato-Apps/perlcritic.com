@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A long chain of method calls usually indicates that the code knows too
+much about the interrelationships between objects.  If the code is
+able to directly navigate far down a network of objects, then when the
+network changes structure in the future, the code will need to be
+modified to deal with the change.  The code is too tightly coupled and
+is brittle.
+
+
+</P>
+<PRE>  $x = $y-&gt;a;           #ok
+  $x = $y-&gt;a-&gt;b;        #ok
+  $x = $y-&gt;a-&gt;b-&gt;c;     #questionable, but allowed by default
+  $x = $y-&gt;a-&gt;b-&gt;c-&gt;d;  #not ok
+</PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy has one option: <CODE>max_chain_length</CODE> which controls how far
+the code is allowed to navigate.  The default value is 3.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

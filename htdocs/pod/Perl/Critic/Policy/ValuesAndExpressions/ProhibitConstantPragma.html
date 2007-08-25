@@ -20,7 +20,8 @@
 
 <P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitConstantPragma
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -32,14 +33,17 @@ pragma because barewords don't interpolate.  Instead use the
 <PRE>  use constant FOOBAR =&gt; 42;  #not ok
 
   use Readonly;
-  Readonly  my $FOOBAR =&gt; 42;  #ok</PRE>
+  Readonly my $FOOBAR =&gt; 42;  #ok
+  Readonly::Scalar my $FOOBAR =&gt; 42;  #ok</PRE>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

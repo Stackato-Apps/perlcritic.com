@@ -22,9 +22,10 @@
 
 </A></H1>
 
-<P>Perl::Critic::Defaults - Manage default settings for Perl::Critic
+<P>Perl::Critic::Defaults - The global configuration default values.
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -32,19 +33,27 @@
 constructing a <A HREF="../../Perl/Critic/Config.html">Perl::Critic::Config</A> object.  There are no
 user-serviceable parts here.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%25DEFAULT_PARAMS%20)"><CODE> new( %DEFAULT_PARAMS ) </CODE>
 
 </A></DT>
 <DD>
-Returns a reference to a new <CODE>Perl::Critic::Defaults</CODE> object.  The
-arguments are name-value pairs that correspond to the methods listed
-below.
 
-</DD>
+<P>Returns a reference to a new <CODE>Perl::Critic::Defaults</CODE> object.  You
+can override the coded defaults by passing in name-value pairs that
+correspond to the methods listed below.
+
+</P>
+<P>This is usually only invoked by <A HREF="../../Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>, which
+passes in the global values from a <I>.perlcriticrc</I> file.  This object
+contains no information for individual Policies.
+
+</P></DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -78,7 +87,15 @@ there are no default exclusion patterns, then the list will be empty.
 Returns the default value of the <CODE>only</CODE> flag (Either 1 or 0).
 
 </DD>
-<DT><A NAME="singlepolicy()"><CODE> singlepolicy() </CODE>
+<DT><A NAME="profile_strictness()"><CODE> profile_strictness() </CODE>
+
+</A></DT>
+<DD>
+Returns the default value of <CODE>profile_strictness</CODE> as an unvalidated
+string.
+
+</DD>
+<DT><A NAME="single_policy()"><CODE> single_policy() </CODE>
 
 </A></DT>
 <DD>
@@ -114,14 +131,23 @@ Returns the default <CODE>verbose</CODE> setting. (Either a number or format
 string).
 
 </DD>
+<DT><A NAME="color()"><CODE> color() </CODE>
+
+</A></DT>
+<DD>
+Returns the default <CODE>color</CODE> setting. (Either 1 or 0).
+
+</DD>
 </DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

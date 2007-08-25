@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Subroutines::RequireArgUnpacking</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Subroutines::RequireArgUnpacking
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Subroutines that use <CODE>@_</CODE> directly instead of unpacking the arguments to
+local variables first have two major problems.  First, they are very hard to
+read.  If you're going to refer to your variables by number instead of by
+name, you may as well be writing assembler code!  Second, <CODE>@_</CODE> contains
+aliases to the original variables!  If you modify the contents of a <CODE>@_</CODE>
+entry, then you are modifying the variable outside of your subroutine.  For
+example:
+
+</P>
+<PRE>   sub print_local_var_plus_one {
+       my ($var) = @_;
+       print ++$var;
+   }
+   sub print_var_plus_one {
+       print ++$_[0];
+   }
+
+   my $x = 2;
+   print_local_var_plus_one($x); # prints &quot;3&quot;, $x is still 2
+   print_var_plus_one($x);       # prints &quot;3&quot;, $x is now 3 !
+   print $x;                     # prints &quot;3&quot;</PRE>
+
+<P>This is spooky action-at-a-distance and is very hard to debug if it's not
+intentional and well-documented (like <CODE>chop</CODE> or <CODE>chomp</CODE>).
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy is lenient for subroutines which have <CODE>N</CODE> or fewer top-level
+statements, where <CODE>N</CODE> defaults to ZERO.  You can override this to set it to a
+higher number with the <CODE>short_subroutine_statements</CODE> setting.  This is very
+much not recommended but perhaps you REALLY need high performance.  To do
+this, put entries in a <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE>  [Subroutines::RequireArgUnpacking]
+  short_subroutine_statements = 2</PRE>
+<HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>PPI doesn't currently detect anonymous subroutines, so we don't check those.
+This should just work when PPI gains that feature.
+
+</P>
+<P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.  That's
+deprecated anyway.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

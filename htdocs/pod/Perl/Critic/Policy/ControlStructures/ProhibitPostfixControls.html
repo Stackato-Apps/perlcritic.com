@@ -24,7 +24,8 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -57,6 +58,7 @@ when it follows a loop break such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE
       next if $condition;               #ok
       last LOOP if $other_condition;    #also ok
   }</PRE>
+<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -72,7 +74,8 @@ flow-control structures in a <I>.perlcriticrc</I> file:
 
 <P>By default, all postfix control keywords are prohibited.
 
-</P><H1><A NAME="NOTES">NOTES
+</P><HR>
+<H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -82,13 +85,15 @@ permit you to use a postfix <CODE>if</CODE> when the statement begins with one
 of those functions.  It is also pretty common to use <CODE>warn</CODE>, <CODE>carp</CODE>,
 and <CODE>cluck</CODE> with a postfix <CODE>if</CODE>, so those are allowed too.
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

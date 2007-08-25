@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Subroutines::ProhibitManyArgs
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Subroutines that expect large numbers of arguments are hard to use
+because programmers routinely have to look at documentation to
+remember the order of those arguments.  Many arguments is often a sign
+that a subroutine should be refactored or that an object should be
+passed to the routine.
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>By default, this policy allows up to 5 arguments without warning.  To
+change this threshold, put entries in a <I>.perlcriticrc</I> file like
+this:
+
+</P>
+<PRE>  [Subroutines::ProhibitManyArgs]
+  max_arguments = 6</PRE>
+<HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>PPI doesn't currently detect anonymous subroutines, so we don't check those.
+This should just work when PPI gains that feature.
+
+</P>
+<P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.  That's
+deprecated anyway.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

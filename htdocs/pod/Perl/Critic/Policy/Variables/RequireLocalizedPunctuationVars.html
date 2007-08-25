@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Punctuation variables (and their English.pm equivalents) are global
+variables.  Messing with globals is dangerous in a complex program as
+it can lead to very subtle and hard to fix bugs.  If you must change a
+magic variable in a non-trivial program, do it in a local scope.
+
+</P>
+<P>For example, to slurp a filehandle into a scalar, it's common to set
+the record separator to undef instead of a newline.  If you choose to
+do this (instead of using <A HREF="../../../../File/Slurp.html">File::Slurp</A>!) then be sure to localize
+the global and change it for as short a time as possible.
+
+</P>
+<PRE>   # BAD:
+   $/ = undef;
+   my $content = &lt;$fh&gt;;
+
+   # BETTER:
+   my $content;
+   {
+       local $/ = undef;
+       $content = &lt;$fh&gt;;
+   }
+
+   # A popular idiom:
+   my $content = do { local $/ = undef; &lt;$fh&gt; };</PRE>
+<HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>The current PPI (v1.118) has a bug where $^ variables absorb following
+whitespace by mistake.  This makes it harder to spot those as magic
+variables.  Hopefully this will be fixed by PPI 1.200.  In the
+meantime, we have a workaround in this module.
+
+</P>
+<P>Additionally, PPI v1.118 fails to recognize %! and %^H as magic
+variables.  PPI instead sees the &quot;%&quot; as a modulus operator.  We have
+no workaround for that bug right now.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

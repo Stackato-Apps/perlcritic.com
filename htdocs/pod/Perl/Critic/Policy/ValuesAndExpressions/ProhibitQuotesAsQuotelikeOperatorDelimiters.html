@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#SUGGESTED%20BY">SUGGESTED BY
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>With the obvious exception of using single-quotes to prevent
+interpolation, using quotes with the quote-like operators kind of
+defeats the purpose of them and produces obfuscated code, causing
+problems for future maintainers and their editors/IDEs.
+
+</P>
+<PRE>  $x = q&quot;q&quot;;                #not ok
+  $x = q'q';                #not ok
+  $x = q`q`;                #not ok
+
+  $x = qq&quot;q&quot;;               #not ok
+  $x = qr&quot;r&quot;;               #not ok
+  $x = qw&quot;w&quot;;               #not ok
+
+  $x = qx`date`;            #not ok
+
+  $x =~ m&quot;m&quot;;               #not ok
+  $x =~ s&quot;s&quot;x&quot;;             #not ok
+  $x =~ tr&quot;t&quot;r&quot;;            #not ok
+  $x =~ y&quot;x&quot;y&quot;;             #not ok
+
+  $x =~ m'$x';              #ok
+  $x =~ s'$x'y';            #ok
+  $x = qr'$x'm;             #ok
+  $x = qx'finger foo@bar';  #ok
+</PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy has three options: <CODE>single_quote_allowed_operators</CODE>,
+<CODE>double_quote_allowed_operators</CODE>, and
+<CODE>back_quote_allowed_operators</CODE>, which control which operators are
+allowed to use each of <CODE>'</CODE>, <CODE>&quot;</CODE>, <CODE>`</CODE> as delimiters, respectively.
+
+</P>
+<P>The values allowed for these options are a whitespace delimited
+selection of the <CODE>m</CODE>, <CODE>q</CODE>, <CODE>qq</CODE>, <CODE>qr</CODE>, <CODE>qw</CODE>, <CODE>qx</CODE>, <CODE>s</CODE>, <CODE>tr</CODE>,
+and <CODE>y</CODE> operators.
+
+</P>
+<P>By default, double quotes and back quotes (backticks) are not allowed
+as delimiters for any operators and single quotes are allowed as
+delimiters for the <CODE>m</CODE>, <CODE>qr</CODE>, <CODE>qx</CODE>, and <CODE>s</CODE> operators.  These
+defaults are equivalent to having the following in your
+<I>.perlcriticrc</I>:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters]
+  single_quote_allowed_operators = m s qr qx
+  double_quote_allowed_operators =
+  back_quote_allowed_operators =
+</PRE>
+<HR>
+<H1><A NAME="SUGGESTED%20BY">SUGGESTED BY
+
+</A></H1>
+
+<P>MSCHWERN
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

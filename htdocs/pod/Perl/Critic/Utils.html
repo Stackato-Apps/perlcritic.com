@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#IMPORT%20TAGS">IMPORT TAGS
 
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -26,7 +28,8 @@
 
 <P>Perl::Critic::Utils - Utility subs and vars for Perl::Critic
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -34,7 +37,8 @@
 developing <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses.  Unless you are writing Policy
 modules, you probably don't care about this package.
 
-</P><H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
+</P><HR>
+<H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A></H1>
 <DL><DT><A NAME="find_keywords(%20%24doc%2c%20%24keyword%20)"><CODE>find_keywords( $doc, $keyword )</CODE>
@@ -213,6 +217,13 @@ Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>, returns true i
 module that is being included via <CODE>use</CODE>, <CODE>require</CODE>, or <CODE>no</CODE>.
 
 </DD>
+<DT><A NAME="is_integer(%20%24value%20)"><CODE>is_integer( $value )</CODE>
+
+</A></DT>
+<DD>
+Answers whether the parameter, as a string, looks like an integral value.
+
+</DD>
 <DT><A NAME="is_class_name(%20%24element%20)"><CODE>is_class_name( $element )</CODE>
 
 </A></DT>
@@ -306,6 +317,17 @@ general, I don't like the way this function works, so don't count on it to be
 stable (or even present).
 
 </DD>
+<DT><A NAME="split_nodes_on_comma(%20%40nodes%20)"><CODE>split_nodes_on_comma( @nodes )</CODE>
+
+</A></DT>
+<DD>
+
+<P>This has the same return type as <CODE>parse_arg_list()</CODE> but expects to be passed
+the nodes that represent the interior of a list, like:
+
+</P>
+<PRE>  'foo', 1, 2, 'bar'</PRE>
+</DD>
 <DT><A NAME="is_script(%20%24document%20)"><CODE>is_script( $document )</CODE>
 
 </A></DT>
@@ -321,14 +343,14 @@ judged to be a script instead of a module.  See <CODE>shebang_line()</CODE>.
 Given a <A HREF="../../PPI/Token.html">PPI::Token</A>, answer whether it appears to be in a void context.
 
 </DD>
-<DT><A NAME="policy_long_name(%20%24policy_name%20)"><CODE> policy_long_name( $policy_name ) </CODE>
+<DT><A NAME="policy_long_name(%20%24policy_name%20)"><CODE>policy_long_name( $policy_name )</CODE>
 
 </A></DT>
 <DD>
 Given a policy class name in long or short form, return the long form.
 
 </DD>
-<DT><A NAME="policy_short_name(%20%24policy_name%20)"><CODE> policy_short_name( $policy_name ) </CODE>
+<DT><A NAME="policy_short_name(%20%24policy_name%20)"><CODE>policy_short_name( $policy_name )</CODE>
 
 </A></DT>
 <DD>
@@ -369,6 +391,13 @@ normalized to lie between <CODE>$SEVERITY_LOWEST</CODE> and <CODE>$SEVERITY_HIGH
 <CODE>$severity</CODE> is given as a string, this function returns the corresponding
 severity number.  If the string doesn't have a corresponding number, this
 function will throw an exception.
+
+</DD>
+<DT><A NAME="is_valid_numeric_verbosity(%20%24severity%20)"><CODE>is_valid_numeric_verbosity( $severity )</CODE>
+
+</A></DT>
+<DD>
+Answers whether the argument has a translation to a Violation format.
 
 </DD>
 <DT><A NAME="verbosity_to_format(%20%24verbosity_level%20)"><CODE>verbosity_to_format( $verbosity_level )</CODE>
@@ -426,6 +455,7 @@ return value is not checked.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="IMPORTABLE%20VARIABLES">IMPORTABLE VARIABLES
 
 </A></H1>
@@ -455,6 +485,11 @@ return value is not checked.
 <DD>
 </DD>
 <DT><A NAME="%24DQUOTE"><CODE>$DQUOTE</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="%24BACKTICK"><CODE>$BACKTICK</CODE>
 
 </A></DT>
 <DD>
@@ -533,6 +568,21 @@ of every Policy subclass must return one of these values. Can be imported via
 the <CODE>:severities</CODE> tag.
 
 </DD>
+<DT><A NAME="%24DEFAULT_VERBOSITY"><CODE>$DEFAULT_VERBOSITY</CODE>
+
+</A></DT>
+<DD>
+The default numeric verbosity.
+
+</DD>
+<DT><A NAME="%24DEFAULT_VERBOSITY_WITH_FILE_NAME"><CODE>$DEFAULT_VERBOSITY_WITH_FILE_NAME</CODE>
+
+</A></DT>
+<DD>
+The numeric verbosity that corresponds to the format indicated by
+<CODE>$DEFAULT_VERBOSITY</CODE>, but with the file name prefixed to it.
+
+</DD>
 <DT><A NAME="%24TRUE"><CODE>$TRUE</CODE>
 
 </A></DT>
@@ -548,6 +598,7 @@ with string equality.  <CODE>$FALSE ne $EMPTY</CODE>.  Can be imported via the
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="IMPORT%20TAGS">IMPORT TAGS
 
 </A></H1>
@@ -596,6 +647,7 @@ Includes:
 <CODE>$PERIOD</CODE>,
 <CODE>$PIPE</CODE>,
 <CODE>$QUOTE</CODE>,
+<CODE>$BACKTICK</CODE>,
 <CODE>$SCOLON</CODE>,
 <CODE>$SPACE</CODE>,
 <CODE>$SLASH</CODE>,
@@ -608,10 +660,12 @@ Includes:
 
 </A></DT>
 <DD>
-Includes:
+
+<P>Includes:
 <CODE>&amp;is_function_call</CODE>,
 <CODE>&amp;is_hash_key</CODE>,
 <CODE>&amp;is_included_module_name</CODE>,
+<CODE>&amp;is_integer</CODE>,
 <CODE>&amp;is_method_call</CODE>,
 <CODE>&amp;is_package_declaration</CODE>,
 <CODE>&amp;is_perl_builtin</CODE>,
@@ -625,8 +679,12 @@ Includes:
 <CODE>&amp;is_script</CODE>,
 <CODE>&amp;is_subroutine_name</CODE>,
 <CODE>&amp;is_unchecked_call</CODE>
+<CODE>&amp;is_valid_numeric_verbosity</CODE>
 
-</DD>
+</P>
+<P>See also <A HREF="../../Perl/Critic/Utils/PPI.html">Perl::Critic::Utils::PPI</A>.
+
+</P></DD>
 <DT><A NAME="%3adata_conversion"><CODE>:data_conversion</CODE>
 
 </A></DT>
@@ -652,6 +710,9 @@ Includes:
 <P>Includes:
 <CODE>&amp;first_arg</CODE>,
 <CODE>&amp;parse_arg_list</CODE>
+
+</P>
+<P>See also <A HREF="../../Perl/Critic/Utils/PPI.html">Perl::Critic::Utils::PPI</A>.
 
 </P></DD>
 <DT><A NAME="%3ainternal_lookup"><CODE>:internal_lookup</CODE>
@@ -694,13 +755,24 @@ mark any module using them as needing cleanup.
 
 </P></DD>
 </DL>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../Perl/Critic/Utils/Constants.html">Perl::Critic::Utils::Constants</A>,
+<A HREF="../../Perl/Critic/Utils/McCabe.html">Perl::Critic::Utils::McCabe</A>,
+<A HREF="../../Perl/Critic/Utils/PPI.html">Perl::Critic::Utils::PPI</A>,
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

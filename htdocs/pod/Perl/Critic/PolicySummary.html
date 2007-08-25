@@ -11,7 +11,11 @@
 </A><LI><A HREF="#POLICIES">POLICIES
 
 </A><UL>
-<LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
+<LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitBooleanGrep"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitBooleanGrep.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitBooleanGrep</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitComplexMappings"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitComplexMappings.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitComplexMappings</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitReverseSortBlock"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitReverseSortBlock.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitReverseSortBlock</A>
 
@@ -73,6 +77,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aControlStructures%3a%3aProhibitUntilBlocks"><A HREF="../../Perl/Critic/Policy/ControlStructures/ProhibitUntilBlocks.html">Perl::Critic::Policy::ControlStructures::ProhibitUntilBlocks</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aPodSpelling"><A HREF="../../Perl/Critic/Policy/Documentation/PodSpelling.html">Perl::Critic::Policy::Documentation::PodSpelling</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aRequirePodAtEnd"><A HREF="../../Perl/Critic/Policy/Documentation/RequirePodAtEnd.html">Perl::Critic::Policy::Documentation::RequirePodAtEnd</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aRequirePodSections"><A HREF="../../Perl/Critic/Policy/Documentation/RequirePodSections.html">Perl::Critic::Policy::Documentation::RequirePodSections</A>
@@ -84,6 +90,8 @@
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitBarewordFileHandles"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitBarewordFileHandles.html">Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitInteractiveTest"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitInteractiveTest.html">Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitJoinedReadline"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitJoinedReadline.html">Perl::Critic::Policy::InputOutput::ProhibitJoinedReadline</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitOneArgSelect"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitOneArgSelect.html">Perl::Critic::Policy::InputOutput::ProhibitOneArgSelect</A>
 
@@ -106,6 +114,8 @@
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitAutomaticExportation"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitAutomaticExportation.html">Perl::Critic::Policy::Modules::ProhibitAutomaticExportation</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitEvilModules"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitEvilModules.html">Perl::Critic::Policy::Modules::ProhibitEvilModules</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitExcessMainComplexity"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitExcessMainComplexity.html">Perl::Critic::Policy::Modules::ProhibitExcessMainComplexity</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitMultiplePackages"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitMultiplePackages.html">Perl::Critic::Policy::Modules::ProhibitMultiplePackages</A>
 
@@ -141,9 +151,15 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitExplicitReturnUndef"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitExplicitReturnUndef.html">Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitNestedSubs"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitNestedSubs.html">Perl::Critic::Policy::Subroutines::ProhibitNestedSubs</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitManyArgs"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitManyArgs.html">Perl::Critic::Policy::Subroutines::ProhibitManyArgs</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitSubroutinePrototypes"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitSubroutinePrototypes.html">Perl::Critic::Policy::Subroutines::ProhibitSubroutinePrototypes</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProtectPrivateSubs"><A HREF="../../Perl/Critic/Policy/Subroutines/ProtectPrivateSubs.html">Perl::Critic::Policy::Subroutines::ProtectPrivateSubs</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aRequireArgUnpacking"><A HREF="../../Perl/Critic/Policy/Subroutines/RequireArgUnpacking.html">Perl::Critic::Policy::Subroutines::RequireArgUnpacking</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aRequireFinalReturn"><A HREF="../../Perl/Critic/Policy/Subroutines/RequireFinalReturn.html">Perl::Critic::Policy::Subroutines::RequireFinalReturn</A>
 
@@ -167,17 +183,21 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitEscapedCharacters"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitEscapedCharacters.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitEscapedCharacters</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitImplicitNewlines"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitImplicitNewlines.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitImplicitNewlines</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitInterpolationOfLiterals"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitInterpolationOfLiterals.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitLeadingZeros"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitLeadingZeros.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitLeadingZeros</A>
 
-</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitMagicNumbers"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitMagicNumbers.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers</A>
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitLongChainsOfMethodCalls"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitLongChainsOfMethodCalls.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitMismatchedOperators"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitMismatchedOperators.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitMixedBooleanOperators"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitMixedBooleanOperators.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitNoisyQuotes"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitNoisyQuotes.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitNoisyQuotes</A>
+
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitQuotesAsQuotelikeOperatorDelimiters"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitQuotesAsQuotelikeOperatorDelimiters.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters</A>
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitVersionStrings"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitVersionStrings.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings</A>
 
@@ -207,6 +227,8 @@
 
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireLexicalLoopIterators"><A HREF="../../Perl/Critic/Policy/Variables/RequireLexicalLoopIterators.html">Perl::Critic::Policy::Variables::RequireLexicalLoopIterators</A>
 
+</A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireLocalizedPunctuationVars"><A HREF="../../Perl/Critic/Policy/Variables/RequireLocalizedPunctuationVars.html">Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars</A>
+
 </A><LI><A HREF="#Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireNegativeIndices"><A HREF="../../Perl/Critic/Policy/Variables/RequireNegativeIndices.html">Perl::Critic::Policy::Variables::RequireNegativeIndices</A>
 
 </A></UL>
@@ -222,7 +244,8 @@
 
 <P>Perl::Critic::PolicySummary - Description of the bundled Policy modules
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -231,15 +254,28 @@ Policy modules have been categorized according to the table of
 contents in Damian Conway's book <B>Perl Best Practices</B>.  Since most
 coding standards take the form &quot;do this...&quot; or &quot;don't do that...&quot;, I
 have adopted the convention of naming each module <CODE>RequireSomething</CODE>
-or <CODE>ProhibitSomething</CODE>.  Each Policy is listed here with it's default
+or <CODE>ProhibitSomething</CODE>.  Each Policy is listed here with its default
 severity.  If you don't agree with the default severity, you can
 change it in your <I>.perlcriticrc</I> file.  See the documentation of
-each module for it's specific details.
+each module for its specific details.
 
-</P><H1><A NAME="POLICIES">POLICIES
+</P><HR>
+<H1><A NAME="POLICIES">POLICIES
 
 </A></H1>
-<H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
+<H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitBooleanGrep"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitBooleanGrep.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitBooleanGrep</A>
+
+</A></H2>
+
+<P>Use <CODE>List::MoreUtils::any</CODE> instead of <CODE>grep</CODE> in boolean context [Severity 2]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitComplexMappings"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitComplexMappings.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitComplexMappings</A>
+
+</A></H2>
+
+<P>Map blocks should have a single statement [Severity 3]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aBuiltinFunctions%3a%3aProhibitLvalueSubstr"><A HREF="../../Perl/Critic/Policy/BuiltinFunctions/ProhibitLvalueSubstr.html">Perl::Critic::Policy::BuiltinFunctions::ProhibitLvalueSubstr</A>
 
 </A></H2>
 
@@ -425,6 +461,12 @@ each module for it's specific details.
 
 <P>Write <CODE>while(! $condition)</CODE> instead of <CODE>until($condition)</CODE> [Severity 2]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aPodSpelling"><A HREF="../../Perl/Critic/Policy/Documentation/PodSpelling.html">Perl::Critic::Policy::Documentation::PodSpelling</A>
+
+</A></H2>
+
+<P>Check your spelling [Severity 1]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aDocumentation%3a%3aRequirePodAtEnd"><A HREF="../../Perl/Critic/Policy/Documentation/RequirePodAtEnd.html">Perl::Critic::Policy::Documentation::RequirePodAtEnd</A>
 
 </A></H2>
@@ -460,6 +502,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Use prompt() instead of -t [Severity 5]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitJoinedReadline"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitJoinedReadline.html">Perl::Critic::Policy::InputOutput::ProhibitJoinedReadline</A>
+
+</A></H2>
+
+<P>Use &quot;local $/ = undef&quot; or File::Slurp instead of joined readline [Severity 3]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aInputOutput%3a%3aProhibitOneArgSelect"><A HREF="../../Perl/Critic/Policy/InputOutput/ProhibitOneArgSelect.html">Perl::Critic::Policy::InputOutput::ProhibitOneArgSelect</A>
 
@@ -526,6 +574,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Ban modules that aren't blessed by your shop. [Severity 5]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitExcessMainComplexity"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitExcessMainComplexity.html">Perl::Critic::Policy::Modules::ProhibitExcessMainComplexity</A>
+
+</A></H2>
+
+<P>Minimize complexity in code that is <B>outside</B> of subroutines. [Severity 3]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aModules%3a%3aProhibitMultiplePackages"><A HREF="../../Perl/Critic/Policy/Modules/ProhibitMultiplePackages.html">Perl::Critic::Policy::Modules::ProhibitMultiplePackages</A>
 
@@ -629,6 +683,18 @@ each module for it's specific details.
 
 <P>Return failure with bare <CODE>return</CODE> instead of <CODE>return undef</CODE> [Severity 5]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitNestedSubs"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitNestedSubs.html">Perl::Critic::Policy::Subroutines::ProhibitNestedSubs</A>
+
+</A></H2>
+
+<P><CODE>sub never { sub correct {} }</CODE> [Severity 5]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitManyArgs"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitManyArgs.html">Perl::Critic::Policy::Subroutines::ProhibitManyArgs</A>
+
+</A></H2>
+
+<P>Too many arguments [Severity 3]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aProhibitSubroutinePrototypes"><A HREF="../../Perl/Critic/Policy/Subroutines/ProhibitSubroutinePrototypes.html">Perl::Critic::Policy::Subroutines::ProhibitSubroutinePrototypes</A>
 
 </A></H2>
@@ -640,6 +706,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Prevent access to private subs in other packages [Severity 3]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aRequireArgUnpacking"><A HREF="../../Perl/Critic/Policy/Subroutines/RequireArgUnpacking.html">Perl::Critic::Policy::Subroutines::RequireArgUnpacking</A>
+
+</A></H2>
+
+<P>Always unpack <CODE>@_</CODE> first [Severity 4]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aSubroutines%3a%3aRequireFinalReturn"><A HREF="../../Perl/Critic/Policy/Subroutines/RequireFinalReturn.html">Perl::Critic::Policy::Subroutines::RequireFinalReturn</A>
 
@@ -707,6 +779,12 @@ each module for it's specific details.
 
 <P>Write <CODE>&quot;\N{DELETE}&quot;</CODE> instead of <CODE>&quot;\x7F&quot;</CODE>, etc. [Severity 2]
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitImplicitNewlines"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitImplicitNewlines.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitImplicitNewlines</A>
+
+</A></H2>
+
+<P>Use concatenation or HEREDOCs instead of literal line breaks in strings [Severity 3]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitInterpolationOfLiterals"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitInterpolationOfLiterals.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</A>
 
 </A></H2>
@@ -719,11 +797,11 @@ each module for it's specific details.
 
 <P>Write <CODE>oct(755)</CODE> instead of <CODE>0755</CODE> [Severity 5]
 
-</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitMagicNumbers"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitMagicNumbers.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers</A>
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitLongChainsOfMethodCalls"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitLongChainsOfMethodCalls.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls</A>
 
 </A></H2>
 
-<P>Use <A HREF="../../Readonly.html">Readonly</A> to give meaningful names for numeric literals. [Severity 2]
+<P>Long chains of method calls indicate tightly coupled code [Severity 2]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitMismatchedOperators"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitMismatchedOperators.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators</A>
 
@@ -742,6 +820,12 @@ each module for it's specific details.
 </A></H2>
 
 <P>Use <CODE>q{}</CODE> or <CODE>qq{}</CODE> instead of quotes for awkward-looking strings. [Severity 2]
+
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitQuotesAsQuotelikeOperatorDelimiters"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitQuotesAsQuotelikeOperatorDelimiters.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters</A>
+
+</A></H2>
+
+<P>Don't use quotes (<CODE>'</CODE>, <CODE>&quot;</CODE>, <CODE>`</CODE>) as delimiters for the quote-like operators. [Severity 3]
 
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aValuesAndExpressions%3a%3aProhibitVersionStrings"><A HREF="../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitVersionStrings.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings</A>
 
@@ -827,19 +911,27 @@ each module for it's specific details.
 
 <P>Write <CODE>for my $element (@list) {...}</CODE> instead of <CODE>for $element (@list) {...}</CODE>
 
+</P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireLocalizedPunctuationVars"><A HREF="../../Perl/Critic/Policy/Variables/RequireLocalizedPunctuationVars.html">Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars</A>
+
+</A></H2>
+
+<P>Magic variables should be assigned as &quot;local&quot; [Severity 2]
+
 </P><H2><A NAME="Perl%3a%3aCritic%3a%3aPolicy%3a%3aVariables%3a%3aRequireNegativeIndices"><A HREF="../../Perl/Critic/Policy/Variables/RequireNegativeIndices.html">Perl::Critic::Policy::Variables::RequireNegativeIndices</A>
 
 </A></H2>
 
 <P>Negative array index should be used [Severity 4]
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

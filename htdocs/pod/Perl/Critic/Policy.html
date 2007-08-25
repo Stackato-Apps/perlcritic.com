@@ -26,7 +26,8 @@
 
 <P>Perl::Critic::Policy - Base class for all Policy modules
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -38,21 +39,47 @@ below.  For a detailed explanation on how to make new Policy modules,
 please see the <A HREF="../../Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> document included in this
 distribution.
 
-</P><H1><A NAME="METHODS">METHODS
+</P><HR>
+<H1><A NAME="METHODS">METHODS
 
 </A></H1>
 <DL><DT><A NAME="new(key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20)"><CODE>new(key1 =&gt; value1, key2 =&gt; value2 ... )</CODE>
 
 </A></DT>
 <DD>
-Returns a reference to a new subclass of Perl::Critic::Policy. If
-your Policy requires any special arguments, they should be passed
-in here as key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify
-these in their config file.  Unless you override the <CODE>new</CODE> method,
-the default method simply returns a reference to an empty hash that
-has been blessed into your subclass.
 
-</DD>
+<P>Returns a reference to a new subclass of Perl::Critic::Policy. If your
+Policy requires any special arguments, they will be passed in here as
+key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify these in their
+config file.  Unless you override the <CODE>new</CODE> method, the default
+method simply returns a reference to an empty hash that has been
+blessed into your subclass.  However, you really should not override
+this; override <CODE>initialize_if_enabled()</CODE> instead.
+
+</P>
+<P>This constructor is always called regardless of whether the user has
+enabled this Policy or not.
+
+</P></DD>
+<DT><A NAME="initialize_if_enabled(%20%7b%20key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20%7d%20)"><CODE>initialize_if_enabled( { key1 =&gt; value1, key2 =&gt; value2 ... } )</CODE>
+
+</A></DT>
+<DD>
+
+<P>This receives the same parameters as <CODE>new()</CODE>, but as a reference to a
+hash, and is only invoked if this Policy is enabled by the user.
+Thus, this is the preferred place for subclasses to do any
+initialization.
+
+</P>
+<P>Implementations of this method should return a boolean value
+indicating whether the Policy should continue to be enabled.  For most
+subclasses, this will always be <CODE>$TRUE</CODE>.  Policies that depend upon
+external modules or other system facilities that may or may not be
+available should test for the availability of these dependencies and
+return <CODE>$FALSE</CODE> if they are not.
+
+</P></DD>
 <DT><A NAME="violates(%20%24element%2c%20%24document%20)"><CODE> violates( $element, $document ) </CODE>
 
 </A></DT>
@@ -193,6 +220,7 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="DOCUMENTATION">DOCUMENTATION
 
 </A></H1>
@@ -203,7 +231,8 @@ POD.  This information is displayed by Perl::Critic if the verbosity
 level is set accordingly.  Therefore, please include a DESCRIPTION
 section in the POD for any Policy modules that you author.  Thanks.
 
-</P><H1><A NAME="OVERLOADS">OVERLOADS
+</P><HR>
+<H1><A NAME="OVERLOADS">OVERLOADS
 
 </A></H1>
 
@@ -216,23 +245,65 @@ on the current value of the <CODE>$FORMAT</CODE> package variable.
 the way <CODE>sprintf</CODE> works.  If you want to know the specific formatting
 capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape characters are:
 
-</P>
-<PRE>  Escape    Meaning
-  -------   -----------------------------------------------------------------
-  %O        Comma-delimited list of supported policy parameters
-  %P        Name of the Policy module
-  %p        Name of the Policy without the Perl::Critic::Policy:: prefix
-  %S        The default severity level of the policy
-  %s        The current severity level of the policy
-  %T        The default themes for the policy
-  %t        The current themes for the policy</PRE>
+</P><DL><DT><A NAME="%25O"><CODE>%O</CODE>
+
+</A></DT>
+<DD>
+Comma-delimited list of supported policy parameters.
+
+</DD>
+<DT><A NAME="%25P"><CODE>%P</CODE>
+
+</A></DT>
+<DD>
+Name of the Policy module.
+
+</DD>
+<DT><A NAME="%25p"><CODE>%p</CODE>
+
+</A></DT>
+<DD>
+Name of the Policy without the <CODE>Perl::Critic::Policy::</CODE> prefix.
+
+</DD>
+<DT><A NAME="%25S"><CODE>%S</CODE>
+
+</A></DT>
+<DD>
+The default severity level of the policy.
+
+</DD>
+<DT><A NAME="%25s"><CODE>%s</CODE>
+
+</A></DT>
+<DD>
+The current severity level of the policy.
+
+</DD>
+<DT><A NAME="%25T"><CODE>%T</CODE>
+
+</A></DT>
+<DD>
+The default themes for the policy.
+
+</DD>
+<DT><A NAME="%25t"><CODE>%t</CODE>
+
+</A></DT>
+<DD>
+The current themes for the policy.
+
+</DD>
+</DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

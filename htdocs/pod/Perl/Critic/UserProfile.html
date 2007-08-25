@@ -22,9 +22,10 @@
 
 </A></H1>
 
-<P>Perl::Critic::UserProfile - Interface to the user's profile
+<P>Perl::Critic::UserProfile - The contents of the user's profile, often <I>.perlcriticrc</I>.
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -32,20 +33,27 @@
 profile, which is usually stored in a <I>.perlcriticrc</I> file. There are
 no user-serviceable parts here.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20-profile%20%3d%20%24p%20)%20%3e"><CODE> new( -profile =</CODE> $p ) &gt;
 
 </A></DT>
 <DD>
-<B>-profile</B> is the path to the user's profile.  If -profile is not
+
+<P><B>-profile</B> is the path to the user's profile.  If -profile is not
 defined, then it looks for the profile at <I>./.perlcriticrc</I> and then
 <I>$HOME/.perlcriticrc</I>.  If neither of those files exists, then the
 UserProfile is created with default values.
 
-</DD>
+</P>
+<P>This object does not take into account any command-line overrides;
+<A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> does that.
+
+</P></DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -74,31 +82,42 @@ one, returns true if the user has explicitly enabled that policy in
 their user profile.
 
 </DD>
-<DT><A NAME="policy_params()"><CODE> policy_params() </CODE>
+<DT><A NAME="policy_params(%20%24policy%20)"><CODE> policy_params( $policy ) </CODE>
 
 </A></DT>
 <DD>
-Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> object or the name of one,
-returns a reference to a hash of the user's configuration parameters for that
-policy.
+Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> object or the name of
+one, returns a reference to a hash of the user's configuration
+parameters for that policy.
 
 </DD>
 <DT><A NAME="listed_policies()"><CODE> listed_policies() </CODE>
 
 </A></DT>
 <DD>
-Returns a list of the names of all the Policies that are mentioned in the
-profile.  The Policy names will be fully qualified (e.g. Perl::Critic::Foo).
+Returns a list of the names of all the Policies that are mentioned in
+the profile.  The Policy names will be fully qualified (e.g.
+Perl::Critic::Foo).
+
+</DD>
+<DT><A NAME="source()"><CODE> source() </CODE>
+
+</A></DT>
+<DD>
+The place where the profile information came from, if available.
+Usually the path to a <I>.perlcriticrc</I>.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

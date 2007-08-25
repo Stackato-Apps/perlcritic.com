@@ -20,9 +20,10 @@
 
 </A></H1>
 
-<P>Perl::Critic::Utils::McCabe
+<P>Perl::Critic::Utils::McCabe - Functions that calculate the McCabe score of source code.
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -34,7 +35,8 @@ conditional statements and operators within a set of code.  See
 some discussion about the McCabe number and other complexity metrics.
 
 
-</P><H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
+</P><HR>
+<H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A></H1>
 <DL><DT><A NAME="calculate_mccabe_of_sub(%20%24sub%20)"><CODE>calculate_mccabe_of_sub( $sub )</CODE>
@@ -45,14 +47,24 @@ Calculates an approximation of the McCabe number of the code in a
 <A HREF="PPI/Statement/Sub.html">PPI::Statement::Sub</A>.
 
 </DD>
+<DT><A NAME="calculate_mccabe_of_main(%20%24doc%20)"><CODE>calculate_mccabe_of_main( $doc )</CODE>
+
+</A></DT>
+<DD>
+Calculates an approximation of the McCabe number of all the code in a
+<A HREF="PPI/Statement/Document.html">PPI::Statement::Document</A> that is <B>not</B> contained in a subroutine.
+
+</DD>
 </DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

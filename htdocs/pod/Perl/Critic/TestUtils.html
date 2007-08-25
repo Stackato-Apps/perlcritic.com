@@ -28,7 +28,8 @@
 
 <P>Perl::Critic::TestUtils - Utility functions for testing new Policies
 
-</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -52,6 +53,7 @@
   # Critique code against one filename-related policy...
   my $custom_policy = 'Modules::RequireFilenameMatchesPackage'
   my $violation_count = fcritique( $custom_policy, \$code, 'Foo/Bar.pm' );</PRE>
+<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -61,7 +63,8 @@ provides a few handy subroutines for testing new Perl::Critic::Policy
 modules.  Look at the test scripts that ship with Perl::Critic for
 more examples of how to use these subroutines.
 
-</P><H1><A NAME="EXPORTS">EXPORTS
+</P><HR>
+<H1><A NAME="EXPORTS">EXPORTS
 
 </A></H1>
 <DL><DT><A NAME="block_perlcriticrc()">block_perlcriticrc()
@@ -74,12 +77,28 @@ top of your <I>.t</I> program.  Note that this is not easily reversible, but tha
 should not matter.
 
 </DD>
+<DT><A NAME="critique_with_violations(%20%24code_string_ref%2c%20%24config_ref%20)">critique_with_violations( $code_string_ref, $config_ref )
+
+</A></DT>
+<DD>
+Test a block of code against the specified Perl::Critic::Config instance (or
+<CODE>undef</CODE> for the default).  Returns the violations that occurred.
+
+</DD>
 <DT><A NAME="critique(%20%24code_string_ref%2c%20%24config_ref%20)">critique( $code_string_ref, $config_ref )
 
 </A></DT>
 <DD>
 Test a block of code against the specified Perl::Critic::Config instance (or
-<CODE>undef</CODE> for the default).  Returns the number of violations that occurred
+<CODE>undef</CODE> for the default).  Returns the number of violations that occurred.
+
+</DD>
+<DT><A NAME="pcritique_with_violations(%20%24policy_name%2c%20%24code_string_ref%2c%20%24config_ref%20)">pcritique_with_violations( $policy_name, $code_string_ref, $config_ref )
+
+</A></DT>
+<DD>
+Like <CODE>critique_with_violations()</CODE>, but tests only a single policy instead of
+the whole bunch.
 
 </DD>
 <DT><A NAME="pcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24config_ref%20)">pcritique( $policy_name, $code_string_ref, $config_ref )
@@ -89,6 +108,22 @@ Test a block of code against the specified Perl::Critic::Config instance (or
 Like <CODE>critique()</CODE>, but tests only a single policy instead of the whole bunch.
 
 </DD>
+<DT><A NAME="fcritique_with_violations(%20%24policy_name%2c%20%24code_string_ref%2c%20%24filename%2c%20%24config_ref%20)">fcritique_with_violations( $policy_name, $code_string_ref, $filename, $config_ref )
+
+</A></DT>
+<DD>
+
+<P>Like <CODE>pcritique_with_violations()</CODE>, but pretends that the code was loaded
+from the specified filename.  This is handy for testing policies like
+<CODE>Modules::RequireFilenameMatchesPackage</CODE> which care about the filename that
+the source derived from.
+
+</P>
+<P>The <CODE>$filename</CODE> parameter must be a relative path, not absolute.  The file
+and all necessary subdirectories will be created via <A HREF="File/Temp.html">File::Temp</A> and will be
+automatically deleted.
+
+</P></DD>
 <DT><A NAME="fcritique(%20%24policy_name%2c%20%24code_string_ref%2c%20%24filename%2c%20%24config_ref%20)">fcritique( $policy_name, $code_string_ref, $filename, $config_ref )
 
 </A></DT>
@@ -149,7 +184,16 @@ functions by searching <I>MANIFEST</I> for <I>lib/Perl/Critic/Policy/*.pm</I> an
 converts the results to package names.
 
 </DD>
+<DT><A NAME="names_of_policies_willing_to_work()">names_of_policies_willing_to_work()
+
+</A></DT>
+<DD>
+Returns a list of the packages of policies that are willing to function on
+the current system.
+
+</DD>
 </DL>
+<HR>
 <H1><A NAME=".run%20file%20information"><I>.run</I> file information
 
 </A></H1>
@@ -233,7 +277,8 @@ so be careful.
 <P>Note that nowhere within the <I>.run</I> file itself do you specify the
 policy that you're testing.  That's implicit within the filename.
 
-</P><H1><A NAME="BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
+</P><HR>
+<H1><A NAME="BUGS%20AND%20CAVEATS%20AND%20TODO%20ITEMS">BUGS AND CAVEATS AND TODO ITEMS
 
 </A></H1>
 
@@ -244,14 +289,16 @@ policy that you're testing.  That's implicit within the filename.
 there are 15 lines of code, and six of them fail, how do we know
 they're the right six?
 
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 and the rest of the <A HREF="Perl/Critic.html">Perl::Critic</A> team.
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 

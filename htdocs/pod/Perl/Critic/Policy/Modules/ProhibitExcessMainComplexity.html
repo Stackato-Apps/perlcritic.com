@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Modules::ProhibitExcessMainComplexity
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>All else being equal, complicated code is more error-prone and more expensive
+to maintain than simpler code.  The first step towards managing complexity is
+to establish formal complexity metrics.  One such metric is the McCabe score,
+which describes the number of possible paths through a block of code.  This
+Policy approximates the McCabe score by summing the number of conditional
+statements and operators within a block of code.  Research has shown that a
+McCabe score higher than 20 is a sign of high-risk, potentially untestable
+code.  See <A HREF="http://www.sei.cmu.edu/str/descriptions/cyclomatic_body.html">http://www.sei.cmu.edu/str/descriptions/cyclomatic_body.html</A> for
+some discussion about the McCabe number and other complexity metrics.
+
+</P>
+<P>Whereas <A HREF="Perl/Critic/Policy/Subroutines/ProhibitExcessComplexity.html">Perl::Critic::Policy::Subroutines::ProhibitExcessComplexity</A> scores
+the complexity of each subroutine, this Policy scores the total complexity of
+all the code that is <B>outside</B> of any subroutine declaration.
+
+</P>
+<P>The usual prescription for reducing complexity is to refactor code into
+smaller subroutines.  Mark Dominus book &quot;Higher Order Perl&quot; also describes
+callbacks, recursion, memoization, iterators, and other techniques that help
+create simple and extensible Perl code.
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>The maximum acceptable McCabe score can be set with the <CODE>max_mccabe</CODE>
+configuration item.  If the sum of all code <B>outside</B> any subroutine has a
+McCabe score higher than this number, it will generate a Policy violation.
+The default is 20.  An example section for a <I>.perlcriticrc</I>:
+
+</P>
+<PRE>  [Modules::ProhibitExcessMainComplexity]
+  max_mccabe = 30</PRE>
+<HR>
+<H1><A NAME="NOTES">NOTES
+
+
+</A></H1>
+
+<PRE>  &quot;Everything should be made as simple as possible, but no simpler.&quot;
+
+                                                  -- Albert Einstein
+</PRE>
+
+<P>Complexity is subjective, but formal complexity metrics are still incredibly
+valuable.  Every problem has an inherent level of complexity, so it is not
+necessarily optimal to minimize the McCabe number.  So don't get offended if
+your code triggers this Policy.  Just consider if there <B>might</B> be a simpler
+way to get the job done.
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="Perl/Critic/Policy/Subroutines/ProhibitExcessComplexity.html">Perl::Critic::Policy::Subroutines::ProhibitExcessComplexity</A>
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

@@ -26,17 +26,19 @@
 
 <P>Perl::Critic::PolicyFactory - Instantiate Policy objects
 
-</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>This is a helper class that instantiates <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects with
 the user's preferred parameters. There are no user-serviceable parts here.
 
-</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20-profile%20%3d%3e%20%24profile"><CODE>new( -profile =&gt; $profile</CODE>
+<DL><DT><A NAME="new(%20-profile%20%3d%3e%20%24profile%2c%20-errors%20%3d%3e%20%24config_errors%20)"><CODE>new( -profile =&gt; $profile, -errors =&gt; $config_errors )</CODE>
 
 </A></DT>
 <DD>
@@ -47,8 +49,14 @@ the user's preferred parameters. There are no user-serviceable parts here.
 <P><B>-profile</B> is a reference to a <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.  This
 argument is required.
 
+</P>
+<P><B>-errors</B> is a reference to an instance of <A HREF="Perl/Critic/ConfigErrors.html">Perl::Critic::ConfigErrors</A>.
+This argument is optional.  If specified, than any problems found will be
+added to the object.
+
 </P></DD>
 </DL>
+<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -71,17 +79,29 @@ This argument is required.
 into the constructor of the Policy.  If <CODE>-params</CODE> is not defined, we will use
 the appropriate Policy parameters from the <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
 
+</P>
+<P>Note that the Policy will not have had
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on it, so it may not
+yet be usable.
+
 </P></DD>
 <DT><A NAME="create_all_policies()"><CODE> create_all_policies() </CODE>
 
 </A></DT>
 <DD>
-Constructs and returns one instance of each <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass
+
+<P>Constructs and returns one instance of each <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass
 that is installed on the local system.  Each Policy will be created with the
 appropriate parameters from the user's configuration profile.
 
-</DD>
+</P>
+<P>Note that the Policies will not have had
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on them, so they may
+not yet be usable.
+
+</P></DD>
 </DL>
+<HR>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
 </A></H1>
@@ -100,13 +120,15 @@ installed.
 
 </DD>
 </DL>
+<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
