@@ -1,4 +1,4 @@
-<VirtualHost 208.109.27.120:80>
+<VirtualHost 72.167.115.82:80>
 
     ServerName perlcritic.com
     ServerAlias www.perlcritic.com www.perlcritic.org perlcritic.org
