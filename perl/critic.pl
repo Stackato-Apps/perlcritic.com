@@ -68,15 +68,24 @@ sub critique_source_code {
 
 sub load_source_code {
     my ($HL, $source_fh) = @_;
-    my $cooked = q{};
-    my $raw    = q{};
+    my $formatted_source_code = q{};
+    my $raw_source_code       = q{};
+    my $line_number           = 1;
 
-    while( my $line = <$source_fh> ) {
-	$cooked .= $HL->format_string( $line );
-        $raw    .= $line;
+    while( my $line_of_source_code = <$source_fh> ) {
+        $raw_source_code .= $line_of_source_code;
+	my $formatted_line = $HL->format_string( $line_of_source_code );
+        $formatted_source_code .= prepend_line_number($formatted_line, $line_number);
+	$line_number++;
     }
 
-    return (\$raw, \$cooked);
+    return (\$raw_source_code, \$formatted_source_code);
+}
+
+sub prepend_line_number {
+    my ($line_text, $line_number) = @_;
+    my $anchor = sprintf '<a name="%i">%04i: </a>', $line_number, $line_number;
+    return $anchor . $line_text;
 }
 
 #-----------------------------------------------------------------------------
