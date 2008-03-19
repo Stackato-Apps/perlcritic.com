@@ -1,12 +1,14 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -71,8 +73,33 @@ when called like a subroutine.
 
 </P>
 <PRE>  print( join q{, }, 2, 3, 5, 7 );
-  &quot;: the single-digit primes.\n&quot;;</PRE>
+  &quot;: the single-digit primes.\n&quot;;
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy can be configured to allow the last statement in a <CODE>map</CODE>
+or <CODE>grep</CODE> block to be comma separated.  This is done via the
+<CODE>allow_last_statement_to_be_comma_separated_in_map_and_grep</CODE> option
+like so:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitCommaSeparatedStatements]
+  allow_last_statement_to_be_comma_separated_in_map_and_grep = 1</PRE>
+
+<P>With this option off (the default), the following code violates this
+policy.
+
+</P>
+<PRE>  %hash = map {$_, 1} @list;</PRE>
+
+<P>With this option on, this statement is allowed.  Even if this option
+is off, using a fat comma <CODE>=&gt;</CODE> works, but that forces
+stringification on the first value, which may not be what you want.
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -84,7 +111,7 @@ when called like a subroutine.
 
 </A></H1>
 
-<P>Copyright (c) 2007 Elliot Shank.  All rights reserved.
+<P>Copyright (c) 2007-2008 Elliot Shank.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

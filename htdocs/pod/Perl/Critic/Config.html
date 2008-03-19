@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -20,6 +20,8 @@
 
 </A><LI><A HREF="#POLICY%20THEMES">POLICY THEMES
 
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -30,7 +32,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Config - The Perl::Critic user-preferences, combined from any profile file and command-line parameters.
+<P>Perl::Critic::Config - The final derived Perl::Critic configuration, combined from any profile file and command-line parameters.
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -48,7 +50,7 @@ constructor will do it for you.
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-single-policy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%2c%20-color%20%3d%3e%20%24B%20%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -single-policy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N, -color =&gt; $B ] )</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-single-policy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -single-policy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N, -color =&gt; $B, -criticism-fatal =&gt; $B] )</CODE>
 
 </A></DT>
 <DD>
@@ -154,6 +156,12 @@ explanation of format specifications.
 </P>
 <P><B>-color</B> is not used by Perl::Critic but is provided for the benefit
 of <A HREF="perlcritic.html">perlcritic</A>.
+
+</P>
+<P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for the benefit
+of <A HREF="criticism.html">criticism</A>.
+
+
 
 </P></DD>
 </DL>
@@ -268,6 +276,13 @@ Returns the value of the <CODE>-verbose</CODE> attribute for this Config.
 </A></DT>
 <DD>
 Returns the value of the <CODE>-color</CODE> attribute for this Config.
+
+</DD>
+<DT><A NAME="criticism_fatal()"><CODE> criticism_fatal() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-criticsm-fatal</CODE> attribute for this Config.
 
 </DD>
 </DL>
@@ -499,6 +514,14 @@ exist is equivalent to an empty set.  Please See
 <A HREF="http://en.wikipedia.org/wiki/Set">http://en.wikipedia.org/wiki/Set</A> for a discussion on set theory.
 
 </P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="Perl/Critic/Defaults.html">Perl::Critic::Defaults</A>, <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -510,7 +533,7 @@ exist is equivalent to an empty set.  Please See
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

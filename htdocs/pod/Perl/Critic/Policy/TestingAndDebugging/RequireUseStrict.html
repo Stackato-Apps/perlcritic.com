@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -32,6 +32,10 @@ quality of your code.  This policy requires that the <CODE>'use strict'</CODE> s
 must come before any other statements except <CODE>package</CODE>, <CODE>require</CODE>, and other
 <CODE>use</CODE> statements.  Thus, all the code in the entire package will be affected.
 
+</P>
+<P>There is a special exemption for <A HREF="../../../../Moose.html">Moose</A> because it enforces strictness; i.e.
+<CODE>'use Moose'</CODE> is treated as equivalent to <CODE>'use strict'</CODE>.
+
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
@@ -51,7 +55,7 @@ must come before any other statements except <CODE>package</CODE>, <CODE>require
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify it under

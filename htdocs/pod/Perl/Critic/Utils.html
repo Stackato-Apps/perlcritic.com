@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Utils</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -26,7 +26,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Utils - Utility subs and vars for Perl::Critic
+<P>Perl::Critic::Utils - General utility subroutines and constants for Perl::Critic and derivative distributions.
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -310,9 +310,9 @@ different from the behavior of <CODE>parse_arg_list()</CODE>.  Another caveat is
 Given a <A HREF="../../PPI/Element.html">PPI::Element</A> that is presumed to be a function call (which is
 usually a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A>), splits the argument expressions into arrays of
 tokens.  Returns a list containing references to each of those arrays.  This
-is useful because parens are optional when calling a function, and PPI parses
-them very differently.  So this method is a poor-man's parse tree of PPI
-nodes.  It's not bullet-proof because it doesn't respect precedence.  In
+is useful because parentheses are optional when calling a function, and PPI
+parses them very differently.  So this method is a poor-man's parse tree of
+PPI nodes.  It's not bullet-proof because it doesn't respect precedence.  In
 general, I don't like the way this function works, so don't count on it to be
 stable (or even present).
 
@@ -662,24 +662,24 @@ Includes:
 <DD>
 
 <P>Includes:
-<CODE>&amp;is_function_call</CODE>,
-<CODE>&amp;is_hash_key</CODE>,
-<CODE>&amp;is_included_module_name</CODE>,
-<CODE>&amp;is_integer</CODE>,
-<CODE>&amp;is_method_call</CODE>,
-<CODE>&amp;is_package_declaration</CODE>,
-<CODE>&amp;is_perl_builtin</CODE>,
-<CODE>&amp;is_perl_global</CODE>,
-<CODE>&amp;is_perl_builtin_with_list_context</CODE>
-<CODE>&amp;is_perl_builtin_with_multiple_arguments</CODE>
-<CODE>&amp;is_perl_builtin_with_no_arguments</CODE>
-<CODE>&amp;is_perl_builtin_with_one_argument</CODE>
-<CODE>&amp;is_perl_builtin_with_optional_argument</CODE>
-<CODE>&amp;is_perl_builtin_with_zero_and_or_one_arguments</CODE>
-<CODE>&amp;is_script</CODE>,
-<CODE>&amp;is_subroutine_name</CODE>,
-<CODE>&amp;is_unchecked_call</CODE>
-<CODE>&amp;is_valid_numeric_verbosity</CODE>
+<CODE>is_function_call</CODE>,
+<CODE>is_hash_key</CODE>,
+<CODE>is_included_module_name</CODE>,
+<CODE>is_integer</CODE>,
+<CODE>is_method_call</CODE>,
+<CODE>is_package_declaration</CODE>,
+<CODE>is_perl_builtin</CODE>,
+<CODE>is_perl_global</CODE>,
+<CODE>is_perl_builtin_with_list_context</CODE>
+<CODE>is_perl_builtin_with_multiple_arguments</CODE>
+<CODE>is_perl_builtin_with_no_arguments</CODE>
+<CODE>is_perl_builtin_with_one_argument</CODE>
+<CODE>is_perl_builtin_with_optional_argument</CODE>
+<CODE>is_perl_builtin_with_zero_and_or_one_arguments</CODE>
+<CODE>is_script</CODE>,
+<CODE>is_subroutine_name</CODE>,
+<CODE>is_unchecked_call</CODE>
+<CODE>is_valid_numeric_verbosity</CODE>
 
 </P>
 <P>See also <A HREF="../../Perl/Critic/Utils/PPI.html">Perl::Critic::Utils::PPI</A>.
@@ -694,9 +694,9 @@ Includes:
 
 </P>
 <P>Includes:
-<CODE>&amp;hashify</CODE>,
-<CODE>&amp;words_from_string</CODE>,
-<CODE>&amp;interpolate</CODE>
+<CODE>hashify</CODE>,
+<CODE>words_from_string</CODE>,
+<CODE>interpolate</CODE>
 
 </P></DD>
 <DT><A NAME="%3appi"><CODE>:ppi</CODE>
@@ -708,8 +708,8 @@ Includes:
 
 </P>
 <P>Includes:
-<CODE>&amp;first_arg</CODE>,
-<CODE>&amp;parse_arg_list</CODE>
+<CODE>first_arg</CODE>,
+<CODE>parse_arg_list</CODE>
 
 </P>
 <P>See also <A HREF="../../Perl/Critic/Utils/PPI.html">Perl::Critic::Utils::PPI</A>.
@@ -724,8 +724,8 @@ Includes:
 
 </P>
 <P>Includes:
-<CODE>&amp;severity_to_number</CODE>,
-<CODE>&amp;verbosity_to_format</CODE>
+<CODE>severity_to_number</CODE>,
+<CODE>verbosity_to_format</CODE>
 
 </P></DD>
 <DT><A NAME="%3alanguage"><CODE>:language</CODE>
@@ -737,7 +737,7 @@ Includes:
 
 </P>
 <P>Includes:
-<CODE>&amp;precedence_of</CODE>
+<CODE>precedence_of</CODE>
 
 </P></DD>
 <DT><A NAME="%3adeprecated"><CODE>:deprecated</CODE>
@@ -751,7 +751,7 @@ mark any module using them as needing cleanup.
 
 </P>
 <P>Includes:
-<CODE>&amp;find_keywords</CODE>
+<CODE>find_keywords</CODE>
 
 </P></DD>
 </DL>
@@ -776,7 +776,7 @@ mark any module using them as needing cleanup.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

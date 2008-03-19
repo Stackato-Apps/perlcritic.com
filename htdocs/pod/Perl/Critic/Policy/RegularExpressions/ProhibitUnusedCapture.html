@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><UL>
+<LI><A HREF="#Regexp%3a%3aParser">Regexp::Parser
+
+</A><LI><A HREF="#qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
+
+</A></UL>
+<LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitUnusedCapture
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Perl regular expressions have multiple types of grouping syntax.  The basic
+parentheses (e.g. <CODE>m/(foo)/</CODE>) captures into the magic variable <CODE>$1</CODE>.
+Non-capturing groups (e.g. <CODE>m/(?:foo)/</CODE> are useful because they have better
+runtime performance and do not copy strings to the magic global capture
+variables.
+
+</P>
+<P>It's also easier on the maintenance programmer if you consistently use
+capturing vs. non-capturing groups, because that programmer can tell more
+easily which regexps can be refactored without breaking surrounding code which
+may use the captured values.
+
+</P><HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+<H2><A NAME="Regexp%3a%3aParser">Regexp::Parser
+
+</A></H2>
+
+<P>We use <A HREF="Regexp/Parser.html">Regexp::Parser</A> to analyze the regular expression syntax.  This is an
+optional module for Perl::Critic, so it will not be automatically installed by
+CPAN for you.  If you wish to use this policy, you must install that module
+first.
+
+</P><H2><A NAME="qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
+
+</A></H2>
+
+<P>This policy can be confused by interpolation of <CODE>qr//</CODE> elements, but those
+are always false negatives.  For example:
+
+</P>
+<PRE>    my $foo_re = qr/(foo)/;
+    my ($foo) = m/$foo_re (bar)/x;</PRE>
+
+<P>A human can tell that this should be a violation because there are two
+captures but only the first capture is used, not the second.  The policy only
+notices that there is one capture in the regexp and remains happy.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

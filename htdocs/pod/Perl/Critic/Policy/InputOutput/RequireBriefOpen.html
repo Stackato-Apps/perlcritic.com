@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><UL>
+<LI><A HREF="#IO%3a%3aFile-%3enew"><CODE>IO::File-&gt;new</CODE>
+
+</A><LI><A HREF="#Is%20it%20the%20right%20lexical%3f">Is it the right lexical?
+
+</A></UL>
+<LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::RequireBriefOpen
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>One way that production systems fail unexpectedly is by running out of
+filehandles.  Filehandles are a finite resource on every operating system that
+I'm aware of, and running out of them is virtually impossible to recover from.
+The solution is to not run out in the first place.  What causes programs to
+run out of filehandles?  Usually, it's leaks: you open a filehandle and forget
+to close it, or just wait a really long time before closing it.
+
+</P>
+<P>This problem is rarely exposed by test systems, because the tests rarely run
+long enough or have enough load to hit the filehandle limit.  So, the best way
+to avoid the problem is 1) always close all filehandles that you open and 2)
+close them as soon as is practical.
+
+</P>
+<P>This policy takes note of calls to <CODE>open()</CODE> where there is no matching
+<CODE>close()</CODE> call within <CODE>N</CODE> lines of code.  If you really need to do a lot of
+processing on an open filehandle, then you can move that processing to another
+method like this:
+
+</P>
+<PRE>    sub process_data_file {
+        my ($self, $filename) = @_;
+        open my $fh, '&lt;', $filename
+            or croak 'Failed to read datafile ' .  $filename . '; ' . $OS_ERROR;
+        $self-&gt;_parse_input_data($fh);
+        close $fh;
+        return;
+    }
+    sub _parse_input_data {
+        my ($self, $fh) = @_;
+        while (my $line = &lt;$fh&gt;) {
+            ...
+        }
+        return;
+    }</PRE>
+
+<P>As a special case, this policy also allows code to return the filehandle after
+the <CODE>open</CODE> instead of closing it.  Just like the close, however, that
+<CODE>return</CODE> has to be within the right number of lines.  From there, you're on
+your own to figure out whether the code is promptly closing the filehandle.
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy allows <CODE>close()</CODE> invocations to be up to <CODE>N</CODE> lines after their
+corresponding <CODE>open()</CODE> calls, where <CODE>N</CODE> defaults to 9.  You can override
+this to set it to a different number with the <CODE>lines</CODE> setting.  To do this,
+put entries in a <I>.perlcriticrc</I> file like this:
+
+</P>
+<PRE>  [InputOutput::RequireBriefOpen]
+  lines = 5</PRE>
+<HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+<H2><A NAME="IO%3a%3aFile-%3enew"><CODE>IO::File-&gt;new</CODE>
+
+</A></H2>
+
+<P>This policy only looks for explicit <CODE>open</CODE> calls.  It does not detect calls
+to <CODE>CORE::open</CODE> or <CODE>IO::File-&gt;new</CODE> or the like.
+
+</P><H2><A NAME="Is%20it%20the%20right%20lexical%3f">Is it the right lexical?
+
+</A></H2>
+
+<P>We don't currently check for redeclared filehandles.  So the following code
+is false negative, for example, because the outer scoped filehandle is not closed:
+
+</P>
+<PRE>    open my $fh, '&lt;', $file1 or croak;
+    if (open my $fh, '&lt;', $file2) {
+        print &lt;$fh&gt;;
+        close $fh;
+    }</PRE>
+
+<P>This is a contrived example, but it isn't uncommon for people to use <CODE>$fh</CODE>
+for the name of the filehandle every time.  Perhaps it's time to think of
+better variable names...
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

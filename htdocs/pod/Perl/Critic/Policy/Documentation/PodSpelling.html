@@ -1,10 +1,11 @@
 <HTML>
 <HEAD>
-<TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
-<LI><A HREF="#NAME">NAME
+<LI><A HREF="#Test%20The%20Spell%20Command">Test The Spell Command
+
+</A><LI><A HREF="#NAME">NAME
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
@@ -19,6 +20,10 @@
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
 
 </A></UL>
+<HR>
+<H1><A NAME="Test%20The%20Spell%20Command">Test The Spell Command
+
+</A></H1>
 <HR>
 <H1><A NAME="NAME">NAME
 
@@ -74,8 +79,8 @@ a <I>.perlcriticrc</I> file like this:
 
 </P>
 <PRE>  [Documentation::PodSpelling]
-  spellcommand = aspell list
-  stopwords = gibbles foobar</PRE>
+  spell_command = aspell list
+  stop_words = gibbles foobar</PRE>
 
 <P>The default spell command is <CODE>aspell list</CODE> and it is interpreted as a
 shell command.  We parse the individual arguments via
@@ -113,7 +118,7 @@ checking program.
 
 </A></H1>
 
-<P>Copyright (c) 2007 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

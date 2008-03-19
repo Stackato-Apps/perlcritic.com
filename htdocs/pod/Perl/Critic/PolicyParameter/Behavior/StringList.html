@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::PolicyParameter::Behavior::StringList - Actions appropriate for a parameter that is a list of strings.
+
+</P>
+<P>NOTE: Do not instantiate this class.  Use the singleton instance held
+onto by <A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A>.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Provides a standard set of functionality for a string list
+<A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> so that the developer of a policy
+does not have to provide it her/himself.
+
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="initialize_parameter(%20%24parameter%2c%20%24specification%20)"><CODE>initialize_parameter( $parameter, $specification )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Plug in the functionality this behavior provides into the parameter,
+based upon the configuration provided by the specification.
+
+</P>
+<P>This behavior looks for one configuration item:
+
+</P><DL><DT><A NAME="always_present_values">always_present_values
+
+</A></DT>
+<DD>
+Optional.  Values that should always be included, regardless of what
+the configuration of the parameter specifies, as an array reference.
+
+</DD>
+</DL>
+</DD>
+<DT><A NAME="generate_parameter_description(%20%24parameter%20)"><CODE>generate_parameter_description( $parameter )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Create a description of the parameter, based upon the description on
+the parameter itself, but enhancing it with information from this
+behavior.
+
+</P>
+<P>In this specific case, the always present values are added at the end.
+
+</P></DD>
+</DL>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006-2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

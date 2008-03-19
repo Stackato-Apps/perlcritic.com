@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#BUGS">BUGS
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitEscapedMetacharacters
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Ever heard of leaning toothpick syndrome?  That comes from writing
+regular expressions that match on characters that are significant in
+regular expressions.  For example, the expression to match four
+forward slashes looks like:
+
+</P>
+<PRE>    m/\/\/\/\//;</PRE>
+
+<P>Well, this policy doesn't solve that problem (write it as <CODE>m{////}</CODE>
+instead!) but solves a related one.  As seen above, the escapes make
+the expression hard to parse visually.  One solution is to use
+character classes.  You see, inside of character classes, the only
+characters that are special are <CODE>\</CODE>, <CODE>]</CODE>, <CODE>^</CODE> and <CODE>-</CODE>, so you don't need
+to escape the others.  So instead of the following loose IPv4 address matcher:
+
+</P>
+<PRE>    m/ \d+ \. \d+ \. \d+ \. \d+ /x;</PRE>
+
+<P>You could write:
+
+</P>
+<PRE>    m/ \d+ [.] \d+ [.] \d+ [.] \d+ /x;</PRE>
+
+<P>which is certainly more readable, if less recognizable prior the
+publication of Perl Best Practices.  (Of course, you should really use
+<A HREF="Regexp/Common/net.html">Regexp::Common::net</A> to match IPv4 addresses!)
+
+</P>
+<P>Specifically, this policy forbids backslashes immediately prior to the following characters:
+
+</P>
+<PRE>    { } ( ) . * + ? | #</PRE>
+
+<P>We make special exception for <CODE>$</CODE> because <CODE>/[$]/</CODE> turns into
+<CODE>/[5.008006/</CODE> for Perl 5.8.6.  We also make an exception for <CODE>^</CODE>
+because it has special meaning (negation) in a character class.
+Finally, <CODE>[</CODE> and <CODE>]</CODE> are exempt, of course, because they are awkward
+to represent in character classes.
+
+</P>
+<P>Note that this policy does not forbid unnecessary escaping.  So go
+ahead and (pointlessly) escape <CODE>!</CODE> characters.
+
+</P><HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Perl treats <CODE>m/[#]/x</CODE> in unexpected ways.
+I think it's a bug in Perl itself, but am not 100% sure that I have
+not simply misunderstood...
+
+</P>
+<P>This part makes sense:
+
+</P>
+<PRE>  &quot;#f&quot; =~ m/[#]f/x;     # match
+  &quot;#f&quot; =~ m/[#]a/x;     # no match</PRE>
+
+<P>This doesn't:
+
+</P>
+<PRE>  $qr  = qr/f/;
+  &quot;#f&quot; =~ m/[#]$qr/x; # no match</PRE>
+
+<P>Neither does this:
+
+</P>
+<PRE>  print qr/[#]$qr/x;  # yields '(?x-ism:[#]$qr
+                                )'</PRE>
+<HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

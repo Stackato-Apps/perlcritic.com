@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Exception::AggregateConfiguration - A collection of a set of problems found in the configuration and/or command-line options.
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A set of configuration settings can have multiple problems.  This is
+an object for collecting all the problems found so that the user can
+see them in one run.
+
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="add_exception(%20%24exception%20)"><CODE>add_exception( $exception )</CODE>
+
+</A></DT>
+<DD>
+Accumulate the parameter with rest of the exceptions.
+
+
+</DD>
+<DT><A NAME="add_exceptions_from(%20%24aggregate%20)"><CODE>add_exceptions_from( $aggregate )</CODE>
+
+</A></DT>
+<DD>
+Accumulate the exceptions from another instance of this class.
+
+
+</DD>
+<DT><A NAME="exceptions()"><CODE>exceptions()</CODE>
+
+</A></DT>
+<DD>
+Returns a reference to an array of the collected exceptions.
+
+
+</DD>
+<DT><A NAME="add_exception_or_rethrow(%20%24eval_error%20)"><CODE>add_exception_or_rethrow( $eval_error )</CODE>
+
+</A></DT>
+<DD>
+If the parameter is an instance of
+<A HREF="Perl/Critic/Exception/Configuration.html">Perl::Critic::Exception::Configuration</A> or
+<A HREF="Perl/Critic/Exception/AggregateConfiguration.html">Perl::Critic::Exception::AggregateConfiguration</A>, add it.
+Otherwise, <CODE>die</CODE> with the parameter, if it is a reference, or
+<CODE>confess</CODE> with it.  If the parameter is false, simply returns.
+
+
+</DD>
+<DT><A NAME="has_exceptions()"><CODE>has_exceptions()</CODE>
+
+</A></DT>
+<DD>
+Answer whether any configuration problems have been found.
+
+
+</DD>
+<DT><A NAME="full_message()"><CODE>full_message()</CODE>
+
+</A></DT>
+<DD>
+Concatenate the exception messages.  See
+<A HREF="Exception/Class.html#full_message">Exception::Class/&quot;full_message&quot;</A>.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

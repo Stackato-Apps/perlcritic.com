@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::InputOutput::ProhibitExplicitStdin</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::ProhibitExplicitStdin
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Perl has a useful magic filehandle called <CODE>*ARGV</CODE> that checks the
+command line and if there are any arguments, opens and reads those as
+files.  If there are no arguments, <CODE>*ARGV</CODE> behaves like <CODE>*STDIN</CODE>
+instead.  This behavior is almost always what you want if you want to
+create a program that reads from <CODE>STDIN</CODE>.  This is often written in
+one of the following two equivalent forms:
+
+</P>
+<PRE>  while (&lt;ARGV&gt;) {
+    # ... do something with each input line ...
+  }
+  # or, equivalently:
+  while (&lt;&gt;) {
+    # ... do something with each input line ...
+  }</PRE>
+
+<P>If you want to prompt for user input, try special purpose modules like
+<A HREF="../../../../IO/Prompt.html">IO::Prompt</A>.
+
+</P><HR>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>Due to a bug in the current version of PPI (v1.119_03) and earlier,
+the readline operator is often misinterpreted as less-than and
+greater-than operators after a comma.  Therefore, this policy misses important cases like
+
+</P>
+<PRE>  my $content = join '', &lt;STDIN&gt;;</PRE>
+
+<P>because it interprets that line as the nonsensical statement:
+
+</P>
+<PRE>  my $content = join '', &lt; STDIN &gt;;</PRE>
+
+<P>When that PPI bug is fixed, this policy should start catching those
+violations automatically.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

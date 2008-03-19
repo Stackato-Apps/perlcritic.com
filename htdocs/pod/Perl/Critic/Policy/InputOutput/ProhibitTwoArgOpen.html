@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -37,7 +37,7 @@ elegant anyway.
 
 </P>
 <PRE>  open( $fh, '&gt;output.txt' );          # not ok
-  open( $fh, q{&gt;}, 'output.txt );      # ok
+  open( $fh, q{&gt;}, 'output.txt' );     # ok
 
   use IO::File;
   my $fh = IO::File-&gt;new( 'output.txt', q{&gt;} ); # even better!</PRE>

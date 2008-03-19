@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Defaults</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -11,6 +11,8 @@
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -22,7 +24,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Defaults - The global configuration default values.
+<P>Perl::Critic::Defaults - The global configuration default values, combined with command-line values.
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -99,7 +101,7 @@ string.
 
 </A></DT>
 <DD>
-Returns the default single-policy pattern.  (As a string.)
+Returns the default <CODE>single-policy</CODE> pattern.  (As a string.)
 
 </DD>
 <DT><A NAME="severity()"><CODE> severity() </CODE>
@@ -138,8 +140,22 @@ string).
 Returns the default <CODE>color</CODE> setting. (Either 1 or 0).
 
 </DD>
+<DT><A NAME="criticism_fatal()"><CODE> criticism_fatal() </CODE>
+
+</A></DT>
+<DD>
+Returns the default <CODE>criticism-fatal</CODE> setting (Either 1 or 0).
+
+</DD>
 </DL>
 <HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../Perl/Critic/Config.html">Perl::Critic::Config</A>, <A HREF="../../Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -151,7 +167,7 @@ Returns the default <CODE>color</CODE> setting. (Either 1 or 0).
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

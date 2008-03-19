@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -54,7 +54,14 @@ the global and change it for as short a time as possible.
 
    # A popular idiom:
    my $content = do { local $/ = undef; &lt;$fh&gt; };</PRE>
-<HR>
+
+<P>This policy also allows the use of <CODE>my</CODE>.  Perl prevents using <CODE>my</CODE>
+with &quot;proper&quot; punctuation variables, but allows <CODE>$a</CODE>, <CODE>@ARGV</CODE>, the
+names declared by <A HREF="../../../../English.html">English</A>, etc.  This is not a good coding
+practice, however it is not the concern of this specific policy to
+complain about that.
+
+</P><HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
@@ -74,7 +81,8 @@ no workaround for that bug right now.
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -88,7 +96,7 @@ no workaround for that bug right now.
 
 </A></H1>
 
-<P>Copyright (c) 2007 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

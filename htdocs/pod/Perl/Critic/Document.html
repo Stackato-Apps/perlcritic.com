@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -24,7 +24,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Document - Caching wrapper around PPI::Document
+<P>Perl::Critic::Document - Caching wrapper around a PPI::Document.
 
 </P><HR>
 <H1><A NAME="SYNOPSIS">SYNOPSIS
@@ -76,6 +76,15 @@ better than we do here?
 Create a new instance referencing a PPI::Document instance.
 
 </DD>
+<DT><A NAME="%24self-%3eppi_document()">$self-&gt;ppi_document()
+
+</A></DT>
+<DD>
+Accessor for the wrapped PPI::Document instance.  Note that altering this
+instance in any way can cause unpredictable failures in Perl::Critic's
+subsequent analysis because some caches may fall out of date.
+
+</DD>
 <DT><A NAME="%24self-%3efind(%24wanted)">$self-&gt;find($wanted)
 
 </A></DT>
@@ -124,7 +133,7 @@ Perl::Critic::Document class masquerades as the PPI::Document class.
 
 </A></H1>
 
-<P>Copyright (c) 2006 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2008 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Violation</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -28,7 +28,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Violation - Represents policy violations
+<P>Perl::Critic::Violation - A violation of a Policy found in some source code.
 
 </P><HR>
 <H1><A NAME="SYNOPSIS">SYNOPSIS
@@ -80,7 +80,8 @@ the violation, and the severity of the violation (as an integer).
 
 </A></DT>
 <DD>
-Returns a brief description of the policy that has been violated as a string.
+Returns a brief description of the specific violation.  In other
+words, this value may change on a per violation basis.
 
 </DD>
 <DT><A NAME="explanation()"><CODE>explanation()</CODE>
@@ -88,7 +89,8 @@ Returns a brief description of the policy that has been violated as a string.
 </A></DT>
 <DD>
 Returns an explanation of the policy as a string or as reference to
-an array of page numbers in PBP.
+an array of page numbers in PBP.  This value will generally not change
+based upon the specific code violating the policy.
 
 </DD>
 <DT><A NAME="location()"><CODE>location()</CODE>
@@ -269,7 +271,7 @@ capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Val
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

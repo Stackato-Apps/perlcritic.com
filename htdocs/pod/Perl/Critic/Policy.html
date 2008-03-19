@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -24,7 +24,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy - Base class for all Policy modules
+<P>Perl::Critic::Policy - Base class for all Policy modules.
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -113,6 +113,30 @@ the violation.
 but without the severity.  The Policy itself knows the severity.
 
 </P></DD>
+<DT><A NAME="throw_parameter_value_exception(%20%24option_name%2c%20%24option_value%2c%20%24source%2c%20%24message_suffix%20)"><CODE> throw_parameter_value_exception( $option_name, $option_value, $source, $message_suffix ) </CODE>
+
+</A></DT>
+<DD>
+Create and throw a
+<A HREF="../../Perl/Critic/Exception/Configuration/Option/Policy/ParameterValue.html">Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue</A>.
+Useful in parameter parser implementations.
+
+</DD>
+<DT><A NAME="get_long_name()"><CODE> get_long_name() </CODE>
+
+</A></DT>
+<DD>
+Return the full package name of this policy.
+
+</DD>
+<DT><A NAME="get_short_name()"><CODE> get_short_name() </CODE>
+
+</A></DT>
+<DD>
+Return the name of this policy without the &quot;Perl::Critic::Policy::&quot;
+prefix.
+
+</DD>
 <DT><A NAME="applies_to()"><CODE> applies_to() </CODE>
 
 </A></DT>
@@ -193,21 +217,50 @@ Appends additional themes to this Policy.  Any existing themes are
 preserved.  Duplicate themes will be removed.
 
 </DD>
+<DT><A NAME="parameter_metadata_available()"><CODE> parameter_metadata_available() </CODE>
+
+</A></DT>
+<DD>
+Returns whether information about the parameters is available.
+
+</DD>
+<DT><A NAME="get_parameters()"><CODE> get_parameters() </CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a reference to an array containing instances of
+<A HREF="../../Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A>.
+
+</P>
+<P>Note that this will return an empty list if the parameters for this
+policy are unknown.  In order to differentiate between this
+circumstance and the one where this policy does not take any
+parameters, it is necessary to call <CODE>parameter_metadata_available()</CODE>.
+
+</P></DD>
+<DT><A NAME="get_parameter(%20%24parameter_name%20)"><CODE> get_parameter( $parameter_name ) </CODE>
+
+</A></DT>
+<DD>
+Returns the <A HREF="../../Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> with the specified name.
+
+</DD>
 <DT><A NAME="set_format(%20%24FORMAT%20)"><CODE>set_format( $FORMAT )</CODE>
 
 </A></DT>
 <DD>
-Class method.  Sets the format for all Policy objects when they are evaluated
-in string context.  The default is <CODE>&quot;%p\n&quot;</CODE>.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for
-formatting options.
+Class method.  Sets the format for all Policy objects when they are
+evaluated in string context.  The default is <CODE>&quot;%p\n&quot;</CODE>.  See
+<A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.
 
 </DD>
 <DT><A NAME="get_format()"><CODE>get_format()</CODE>
 
 </A></DT>
 <DD>
-Class method. Returns the current format for all Policy objects when they are
-evaluated in string context.
+Class method. Returns the current format for all Policy objects when
+they are evaluated in string context.
 
 </DD>
 <DT><A NAME="to_string()"><CODE>to_string()</CODE>
@@ -249,7 +302,22 @@ capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Val
 
 </A></DT>
 <DD>
-Comma-delimited list of supported policy parameters.
+List of supported policy parameters.  Takes an option of a format
+string for <A HREF="../../Perl/Critic/PolicyParameter.html#to_formatted_string">Perl::Critic::PolicyParameter/&quot;to_formatted_string&quot;</A>.
+For example, this can be used like <CODE>%{%n - %d\n}O</CODE> to get a list of
+parameter names followed by their descriptions.
+
+</DD>
+<DT><A NAME="%25U"><CODE>%U</CODE>
+
+</A></DT>
+<DD>
+A message stating that the parameters for the policy are unknown if
+<CODE>parameter_metadata_available()</CODE> returns false.  Takes an option of
+what the message should be, which defaults to &quot;Cannot programmatically
+discover what parameters this policy takes.&quot;.  The value of this
+option is interpolated in order to expand the standard escape
+sequences (<CODE>\n</CODE>, <CODE>\t</CODE>, etc.).
 
 </DD>
 <DT><A NAME="%25P"><CODE>%P</CODE>
@@ -307,7 +375,7 @@ The current themes for the policy.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

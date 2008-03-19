@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::InputOutput::RequireCheckedClose</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -32,9 +32,9 @@ value should be checked to ensure that the close was successful.
 
 
 </P>
-<PRE>  my $error = close $filehanle;                   # ok
-  close $filehanle or die &quot;unable to close: $!&quot;;  # ok
-  close $filehanle;                               # not ok</PRE>
+<PRE>  my $error = close $filehandle;                   # ok
+  close $filehandle or die &quot;unable to close: $!&quot;;  # ok
+  close $filehandle;                               # not ok</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
@@ -55,7 +55,7 @@ Thalhammer &lt;thaljef@cpan.org&gt;.
 
 </A></H1>
 
-<P>Copyright (c) 2007 Andrew Moore.  All rights reserved.
+<P>Copyright (c) 2007-2008 Andrew Moore.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

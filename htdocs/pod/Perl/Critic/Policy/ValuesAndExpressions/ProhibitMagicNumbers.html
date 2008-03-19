@@ -1,0 +1,275 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><UL>
+<LI><A HREF="#Ways%20in%20which%20this%20module%20applies%20this%20rule.">Ways in which this module applies this rule.
+
+</A></UL>
+<LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><UL>
+<LI><A HREF="#allowed_values"><CODE>allowed_values</CODE>
+
+</A><LI><A HREF="#allowed_types"><CODE>allowed_types</CODE>
+
+</A></UL>
+<LI><A HREF="#BUGS">BUGS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>What is a &quot;magic number&quot;?  A magic number is a number that appears in
+code without any explanation; e.g.  <CODE>$bank_account_balance *=
+57.492;</CODE>.  You look at that number and have to wonder where that
+number came from.  Since you don't understand the significance of the
+number, you don't understand the code.
+
+</P>
+<P>In general, numeric literals other than <CODE>0</CODE> or <CODE>1</CODE> in should not be
+used.  Use the <A HREF="constant.html">constant</A> pragma or the <A HREF="Readonly.html">Readonly</A> module to give a
+descriptive name to the number.
+
+</P>
+<P>There are, of course, exceptions to when this rule should be applied.
+One good example is positioning of objects in some container like
+shapes on a blueprint or widgets in a user interface.  In these cases,
+the significance of a number can readily be determined by context.
+
+
+</P><H2><A NAME="Ways%20in%20which%20this%20module%20applies%20this%20rule.">Ways in which this module applies this rule.
+
+</A></H2>
+
+<P>By default, this rule is relaxed in that <CODE>2</CODE> is permitted to allow
+for common things like alternation, the STDERR file handle, etc..
+
+</P>
+<P>Numeric literals are allowed in <CODE>use</CODE> and <CODE>require</CODE> statements to
+allow for things like Perl version restrictions and <A HREF="Test/More.html">Test::More</A>
+plans.  Declarations of <CODE>$VERSION</CODE> package variables are permitted.
+Use of <CODE>Readonly</CODE>, <CODE>Readonly::Scalar</CODE>, <CODE>Readonly::Array</CODE>, and
+<CODE>Readonly::Hash</CODE> from the <A HREF="Readonly.html">Readonly</A> module are obviously valid, but
+use of <CODE>Readonly::Scalar1</CODE>, <CODE>Readonly::Array1</CODE>, and
+<CODE>Readonly::Hash1</CODE> are specifically not supported.
+
+</P>
+<P>Use of binary, exponential, hexadecimal, octal, and version numbers,
+even for <CODE>0</CODE> and <CODE>1</CODE>, outside of <CODE>use</CODE>/<CODE>require</CODE>/<CODE>Readonly</CODE>
+statements aren't permitted (but you can change this).
+
+</P>
+<P>There is a special exemption for accessing the last element of an
+array, i.e. <CODE>$x[-1]</CODE>.
+
+
+</P>
+<PRE>  $x = 0;                                   #ok
+  $x = 0.0;                                 #ok
+  $x = 1;                                   #ok
+  $x = 1.0;                                 #ok
+  $x = 1.5;                                 #not ok
+  $x = 0b0                                  #not ok
+  $x = 0b1                                  #not ok
+  $x = 0x00                                 #not ok
+  $x = 0x01                                 #not ok
+  $x = 000                                  #not ok
+  $x = 001                                  #not ok
+  $x = 0e1                                  #not ok
+  $x = 1e1                                  #not ok
+
+  $frobnication_factor = 42;                #not ok
+  use constant FROBNICATION_FACTOR =&gt; 42;   #ok
+
+
+  use 5.6.1;                                #ok
+  use Test::More plan =&gt; 57;                #ok
+  our $VERSION = 0.22;                      #ok
+
+
+  $x = $y[-1]                               #ok
+  $x = $y[-2]                               #not ok
+
+
+
+  foreach my $solid (1..5) {                #not ok
+      ...
+  }
+
+
+  use Readonly;
+
+  Readonly my $REGULAR_GEOMETRIC_SOLIDS =&gt; 5;
+
+  foreach my $solid (1..$REGULAR_GEOMETRIC_SOLIDS) {  #ok
+      ...
+  }
+</PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This policy has two options: <CODE>allowed_values</CODE> and <CODE>allowed_types</CODE>.
+
+
+</P><H2><A NAME="allowed_values"><CODE>allowed_values</CODE>
+
+</A></H2>
+
+<P>The <CODE>allowed_values</CODE> parameter is a whitespace delimited set of
+permitted number <I>values</I>; this does not affect the permitted formats
+for numbers.  The defaults are equivalent to having the following in
+your <I>.perlcriticrc</I>:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
+  allowed_values = 0 1 2</PRE>
+
+<P>Note that this policy forces the values <CODE>0</CODE> and <CODE>1</CODE> into the
+permitted values.  Thus, specifying no values,
+
+</P>
+<PRE>  allowed_values =</PRE>
+
+<P>is the same as simply listing <CODE>0</CODE> and <CODE>1</CODE>:
+
+</P>
+<PRE>  allowed_values = 0 1</PRE>
+
+<P>The special <CODE>all_integers</CODE> value, not surprisingly, allows all
+integral values to pass, subject to the restrictions on number types.
+
+</P>
+<P>Ranges can be specified as two (possibly fractional) numbers separated
+by two periods, optionally suffixed with an increment using the Perl 6
+<CODE>:by()</CODE> syntax.  E.g.
+
+</P>
+<PRE>  allowed_values = 7..10</PRE>
+
+<P>will allow 0, 1, 7, 8, 9, and 10 as literal values.  Using fractional
+values like so
+
+</P>
+<PRE>  allowed_values = -3.5..-0.5:by(0.5)</PRE>
+
+<P>will permit -3.5, -3, -2.5, -2, -2.5, -1, -0.5, 0, and 1.
+Unsurprisingly, the increment defaults to 1, which means that
+
+</P>
+<PRE>  allowed_values = -3.5..-0.5</PRE>
+
+<P>will make -3.5, -2.5, -2.5, -0.5, 0, and 1 valid.
+
+</P>
+<P>Ranges are not lazy, i.e. you'd better have a lot of memory available
+if you use a range of <CODE>1..1000:by(0.01)</CODE>.  Also remember that all of
+this is done using floating-point math, which means that
+<CODE>1..10:by(0.3333)</CODE> is probably not going to be very useful.
+
+</P>
+<P>Specifying an upper limit that is less than the lower limit will
+result in no values being produced by that range.  Negative increments
+are not permitted.
+
+</P>
+<P>Multiple ranges are permitted.
+
+</P>
+<P>To put this all together, the following is a valid, though not likely
+to be used, <I>.perlcriticrc</I> entry:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
+  allowed_values = 3.1415269 82..103 -507.4..57.8:by(0.2) all_integers
+</PRE>
+<H2><A NAME="allowed_types"><CODE>allowed_types</CODE>
+
+</A></H2>
+
+<P>The <CODE>allowed_types</CODE> parameter is a whitespace delimited set of
+subclasses of <A HREF="PPI/Token/Number.html">PPI::Token::Number</A>.
+
+</P>
+<P>Decimal integers are always allowed.  By default, floating-point
+numbers are also allowed.
+
+</P>
+<P>For example, to allow hexadecimal literals, you could configure this
+policy like
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
+  allowed_types = Hex</PRE>
+
+<P>but without specifying anything for <CODE>allowed_values</CODE>, the allowed
+hexadecimal literals will be <CODE>0x00</CODE>, <CODE>0x01</CODE>, and <CODE>0x02</CODE>.  Note,
+also, as soon as you specify a value for this parameter, you must
+include <CODE>Float</CODE> in the list to continue to be able to use floating
+point literals.  This effect can be used to restrict literals to only
+decimal integers:
+
+</P>
+<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
+  allowed_types =</PRE>
+
+<P>If you permit exponential notation, you automatically also allow
+floating point values because an exponential is a subclass of
+floating-point in <A HREF="PPI.html">PPI</A>.
+
+
+</P><HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>There is currently no way to permit version numbers in regular code,
+even if you include them in the allowed_types.  Some may actually
+consider this a feature.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006-2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

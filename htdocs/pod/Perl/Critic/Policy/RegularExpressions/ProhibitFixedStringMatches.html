@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><UL>
+<LI><A HREF="#VARIANTS">VARIANTS
+
+</A></UL>
+<LI><A HREF="#CREDITS">CREDITS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A regular expression that matches just a fixed set of constant strings is wasteful
+of performance and is hard on maintainers.  It is much more readable and
+often faster to use <CODE>eq</CODE> or a hash to match such strings.
+
+</P>
+<PRE>    # Bad
+    my $is_file_function = $token =~ m/\A (?: open | close | read ) \z/xms;
+
+    # Faster and more readable
+    my $is_file_function = $token eq 'open' ||
+                           $token eq 'close' ||
+                           $token eq 'read';</PRE>
+
+<P>For larger numbers of strings, a hash is superior:
+
+</P>
+<PRE>    # Bad
+    my $is_perl_keyword =
+        $token =~ m/\A (?: chomp | chop | chr | crypt | hex | index
+                           lc | lcfirst | length | oct | ord | ... ) \z/xms;
+
+    # Better
+    Readonly::Hash my %PERL_KEYWORDS =&gt; map {$_ =&gt; 1} qw(
+        chomp chop chr crypt hex index lc lcfirst length oct ord ...
+    );
+    my $is_perl_keyword = $PERL_KEYWORD{$token};</PRE>
+<H2><A NAME="VARIANTS">VARIANTS
+
+</A></H2>
+
+<P>This policy detects both grouped and non-grouped strings.  The grouping may or
+may not be capturing.  The grouped body may or may not be alternating.  <CODE>\A</CODE>
+and <CODE>\z</CODE> are always considered anchoring which <CODE>^</CODE> and <CODE>$</CODE> are considered
+anchoring is the <CODE>m</CODE> regexp option is not in use.  Thus, all of these are
+violations:
+
+</P>
+<PRE>    m/^foo$/;
+    m/\A foo \z/x;
+    m/\A foo \z/xm;
+    m/\A(foo)\z/;
+    m/\A(?:foo)\z/;
+    m/\A(foo|bar)\z/;
+    m/\A(?:foo|bar)\z/;</PRE>
+
+<P>Furthermore, this policy detects violations in <CODE>m//</CODE>, <CODE>s///</CODE> and <CODE>qr//</CODE>
+constructs, as you would expect.
+
+</P><HR>
+<H1><A NAME="CREDITS">CREDITS
+
+</A></H1>
+
+<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

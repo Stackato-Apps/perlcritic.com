@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -62,7 +62,7 @@
 
 </A></H1>
 
-<P>Perl::Critic - Critique Perl source code for best-practices
+<P>Perl::Critic - Critique Perl source code for best-practices.
 
 </P><HR>
 <H1><A NAME="SYNOPSIS">SYNOPSIS
@@ -121,7 +121,7 @@ interface to the service are subject to change.
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B )</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -criticism-fatal =&gt; $B)</CODE>
 
 </A></DT>
 <DD>
@@ -263,13 +263,17 @@ value for this option in your <I>.perlcriticrc</I> file.
 
 </P>
 <P><B>-verbose</B> can be a positive integer (from 1 to 11), or a literal format
-specification.  See <A HREF="Perl/Critic/Violations.html">Perl::Critic::Violations</A> for an explanation of format
+specification.  See <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> for an explanation of format
 specifications.  You can set the default value for this option in your
 <I>.perlcriticrc</I> file.
 
 </P>
 <P><B>-color</B> is not used by Perl::Critic but is provided for the benefit of
 <A HREF="perlcritic.html">perlcritic</A>.
+
+</P>
+<P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for the
+benefit of <A HREF="criticism.html">criticism</A>.
 
 </P>
 <P><B>-config</B> is a reference to a <A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> object.  If you have
@@ -406,6 +410,7 @@ constructor argument.
     theme     = (pbp || security) &amp;&amp; bugs             #A theme expression
     include   = NamingConventions ClassHierarchies    #Space-delimited list
     exclude   = Variables  Modules::RequirePackage    #Space-delimited list
+    criticism-fatal = 1                               #Zero or One
     color     = 1                                     #Zero or One</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like this:
@@ -570,8 +575,8 @@ file.  See the <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section fo
 </P>
 <P>Using the <CODE>-theme</CODE> option, you can create an arbitrarily complex rule that
 determines which Policies will be loaded.  Precedence is the same as regular
-Perl code, and you can use parens to enforce precedence as well.  Supported
-operators are:
+Perl code, and you can use parentheses to enforce precedence as well.
+Supported operators are:
 
 </P>
 <PRE>   Operator    Altertative    Example
@@ -656,7 +661,7 @@ family of Policies in one shot like this:
   # Now exempt from NamingConventions::ProhibitMixedCaseSubs
   sub camelHumpSub {}</PRE>
 
-<P>The argument list must be enclosed in parens and must contain one or more
+<P>The argument list must be enclosed in parentheses and must contain one or more
 comma-separated barewords (e.g. don't use quotes).  The <CODE>&quot;## no critic&quot;</CODE>
 pragmas can be nested, and Policies named by an inner pragma will be disabled
 along with those already disabled an outer pragma.
@@ -1009,7 +1014,7 @@ Dolan's project to implement twenty PBP policies.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify it under

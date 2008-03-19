@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::PolicyParameter - Metadata about a parameter for a Policy.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A provider of validation and parsing of parameter values and metadata
+about the parameter.
+
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="get_name()"><CODE>get_name()</CODE>
+
+</A></DT>
+<DD>
+Return the name of the parameter.  This is the key that will be looked
+for in the <I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="get_description()"><CODE>get_description()</CODE>
+
+</A></DT>
+<DD>
+Return an explanation of the significance of the parameter, as
+provided by the developer of the policy.
+
+
+</DD>
+<DT><A NAME="get_default_string()"><CODE>get_default_string()</CODE>
+
+</A></DT>
+<DD>
+Return a representation of the default value of this parameter as it
+would appear if it was specified in a <I>.perlcriticrc</I> file.
+
+
+</DD>
+<DT><A NAME="parse_and_validate_config_value(%20%24parser%2c%20%24config%20)"><CODE>parse_and_validate_config_value( $parser, $config )</CODE>
+
+</A></DT>
+<DD>
+Extract the configuration value for this parameter from the overall
+configuration and initialize the policy based upon it.
+
+
+</DD>
+<DT><A NAME="generate_full_description()"><CODE>generate_full_description()</CODE>
+
+</A></DT>
+<DD>
+
+<P>Produce a more complete explanation of the significance of this
+parameter than the value returned by <CODE>get_description()</CODE>.
+
+</P>
+<P>If no description can be derived, returns the empty string.
+
+</P>
+<P>Note that the result may contain multiple lines.
+
+
+</P></DD>
+<DT><A NAME="to_formatted_string(%20%24format%20)"><CODE>to_formatted_string( $format )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Generate a string representation of this parameter, based upon the
+format.
+
+</P>
+<P>The format is a combination of literal and escape characters similar
+to the way <CODE>sprintf</CODE> works.  If you want to know the specific
+formatting capabilities, look at <A HREF="String/Format.html">String::Format</A>. Valid escape
+characters are:
+
+</P><DL><DT><A NAME="%25n"><CODE>%n</CODE>
+
+</A></DT>
+<DD>
+The name of the parameter.
+
+</DD>
+<DT><A NAME="%25d"><CODE>%d</CODE>
+
+</A></DT>
+<DD>
+The description, as supplied by the programmer.
+
+</DD>
+<DT><A NAME="%25D"><CODE>%D</CODE>
+
+</A></DT>
+<DD>
+The default value, in a parsable form.
+
+</DD>
+<DT><A NAME="%25f"><CODE>%f</CODE>
+
+</A></DT>
+<DD>
+The full description, which is an extension of the value returned by
+<CODE>%d</CODE>.  Takes a parameter of a prefix for the beginning of each line.
+
+
+</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="Perl/Critic/DEVELOPER.html#MAKING%20YOUR%20POLICY%20CONFIGURABLE">Perl::Critic::DEVELOPER/&quot;MAKING YOUR POLICY CONFIGURABLE&quot;</A>
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2006-2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

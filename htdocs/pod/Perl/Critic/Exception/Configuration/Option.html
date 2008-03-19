@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Exception::Configuration::Option - A problem with an option in the <A HREF="Perl/Critic.html">Perl::Critic</A> configuration.
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A representation of a problem found with an option in the
+configuration of <A HREF="Perl/Critic.html">Perl::Critic</A>, whether from a <I>.perlcriticrc</I>,
+another profile file, or command line.
+
+</P>
+<P>This is an abstract class.  It should never be instantiated.
+
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="option_name()"><CODE>option_name()</CODE>
+
+</A></DT>
+<DD>
+The name of the option that was found to be in error.
+
+
+</DD>
+<DT><A NAME="option_value()"><CODE>option_value()</CODE>
+
+</A></DT>
+<DD>
+The value of the option that was found to be in error.
+
+
+</DD>
+<DT><A NAME="message_suffix()"><CODE>message_suffix()</CODE>
+
+</A></DT>
+<DD>
+Any text that should be applied to end of the standard message for
+this kind of exception.
+
+
+</DD>
+<DT><A NAME="message()"><CODE>message()</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="error()"><CODE>error()</CODE>
+
+</A></DT>
+<DD>
+Overridden to call <CODE>full_message()</CODE>.  I.e. any message string in the
+superclass is ignored.
+
+
+</DD>
+<DT><A NAME="full_message()"><CODE>full_message()</CODE>
+
+</A></DT>
+<DD>
+Overridden to turn it into an abstract method to force subclasses to
+implement it.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="Perl/Critic/Exception/Configuration/Option/Global.html">Perl::Critic::Exception::Configuration::Option::Global</A>
+<A HREF="Perl/Critic/Exception/Configuration/Option/Policy.html">Perl::Critic::Exception::Configuration::Option::Policy</A>
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>
