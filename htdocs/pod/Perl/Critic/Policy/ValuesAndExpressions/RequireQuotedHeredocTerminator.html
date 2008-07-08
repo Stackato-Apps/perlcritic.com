@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,29 +24,48 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::RequireQuotedHeredocTerminator
+<P>Perl::Critic::Policy::ValuesAndExpressions::RequireQuotedHeredocTerminator - Write <CODE> print &lt;&lt;'THE_END' </CODE> or <CODE> print &lt;&lt;&quot;THE_END&quot; </CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Putting single or double-quotes around your HEREDOC terminator make it obvious
-to the reader whether the content is going to be interpolated or not.
+<P>Putting single or double-quotes around your HEREDOC terminator make it
+obvious to the reader whether the content is going to be interpolated
+or not.
 
 </P>
-<PRE>  print &lt;&lt;END_MESSAGE;    #not ok
-  Hello World
-  END_MESSAGE
+<PRE>    print &lt;&lt;END_MESSAGE;    #not ok
+    Hello World
+    END_MESSAGE
 
-  print &lt;&lt;'END_MESSAGE';  #ok
-  Hello World
-  END_MESSAGE
+    print &lt;&lt;'END_MESSAGE';  #ok
+    Hello World
+    END_MESSAGE
 
-  print &lt;&lt;&quot;END_MESSAGE&quot;;  #ok
-  $greeting
-  END_MESSAGE</PRE>
+    print &lt;&lt;&quot;END_MESSAGE&quot;;  #ok
+    $greeting
+    END_MESSAGE
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

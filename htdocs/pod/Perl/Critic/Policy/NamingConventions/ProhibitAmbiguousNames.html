@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -24,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames
+<P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames - Don't use vague variable or subroutine names like 'last' or 'record'.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -39,6 +51,7 @@ previous or final.
 <P>This policy tests against a list of ambiguous words for variable
 names.
 
+
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -47,19 +60,20 @@ names.
 <P>The default list of forbidden words is:
 
 </P>
-<PRE>  abstract bases close contract last left no record right second set</PRE>
+<PRE>    abstract bases close contract last left no record right second set</PRE>
 
-<P>This list can be changed by giving a value for <CODE>forbid</CODE> of a series of
-forbidden words separated by spaces.
+<P>This list can be changed by giving a value for <CODE>forbid</CODE> of a series
+of forbidden words separated by spaces.
 
 </P>
-<P>For example, if you decide that <CODE>bases</CODE> is an OK name for variables (e.g.
-in bioinformatics), then put something like the following in
+<P>For example, if you decide that <CODE>bases</CODE> is an OK name for variables
+(e.g.  in bioinformatics), then put something like the following in
 <CODE>$HOME/.perlcriticrc</CODE>:
 
 </P>
-<PRE>  [NamingConventions::ProhibitAmbiguousNames]
-  forbid = last set left right no abstract contract record second close</PRE>
+<PRE>    [NamingConventions::ProhibitAmbiguousNames]
+    forbid = last set left right no abstract contract record second close
+</PRE>
 <HR>
 <H1><A NAME="METHODS">METHODS
 
@@ -70,6 +84,7 @@ in bioinformatics), then put something like the following in
 <DD>
 This can be called as a class or instance method.  It returns the list
 of words that are forbidden by default.
+
 
 </DD>
 </DL>
@@ -88,13 +103,15 @@ assignments where the right hand side uses forbidden names.  For
 example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
 
 </P>
-<PRE>    my $previous_record = $Foo::last;</PRE>
+<PRE>    my $previous_record = $Foo::last;
+</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

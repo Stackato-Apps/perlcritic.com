@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#CREDITS">CREDITS
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::RegularExpressions::ProhibitSingleCharAlternation
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitSingleCharAlternation - Use <CODE>[abc]</CODE> instead of <CODE>a|b|c</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,22 +42,34 @@
 </A></H1>
 
 <P>Character classes (like <CODE>[abc]</CODE>) are significantly faster than single
-character alternations (like <CODE>(?:a|b|c)</CODE>).  This policy complains if you have
-more than one instance of a single character in an alternation.  So
-<CODE>(?:a|the)</CODE> is allowed, but <CODE>(?:a|e|i|o|u)</CODE> is not.
+character alternations (like <CODE>(?:a|b|c)</CODE>).  This policy complains if
+you have more than one instance of a single character in an
+alternation.  So <CODE>(?:a|the)</CODE> is allowed, but <CODE>(?:a|e|i|o|u)</CODE> is not.
 
 </P>
 <P>NOTE: Perl 5.10 (not released as of this writing) has major regexp
 optimizations which may mitigate the performance penalty of
 alternations, which will be rewritten behind the scenes as something
-like character classes.
+like character classes.  Consequently, if you are deploying
+exclusively on 5.10, yo might consider ignoring this policy.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -51,6 +77,7 @@ like character classes.
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

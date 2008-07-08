@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::ProhibitPerl4PackageNames
+<P>Perl::Critic::Policy::Variables::ProhibitPerl4PackageNames - Use double colon (::) to separate package name components instead of single quotes (').
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -35,9 +49,18 @@ are not even aware that the single quote can be used in this manner.
 So, unless you're trying to obfuscate your code, don't use them.
 
 </P>
-<PRE>  package Foo::Bar::Baz;    #ok
-  package Foo'Bar'Baz;      #not ok</PRE>
+<PRE>    package Foo::Bar::Baz;    #ok
+    package Foo'Bar'Baz;      #not ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

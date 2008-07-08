@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse
+<P>Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse - Don't write long &quot;if-elsif-elsif-elsif-elsif...else&quot; chains.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,33 +43,33 @@ longer than a single page or screen.  If testing for equality, use a
 hash lookup instead.  See <A HREF="Switch.html">Switch</A> for another approach.
 
 </P>
-<PRE>  if ($condition1) {         #ok
-      $foo = 1;
-  }
-  elsif ($condition2) {      #ok
-      $foo = 2;
-  }
-  elsif ($condition3) {      #ok
-      $foo = 3;
-  }
-  elsif ($condition4) {      #too many!
-      $foo = 4;
-  }
-  else {                     #ok
-      $foo = $default;
-  }</PRE>
+<PRE>    if ($condition1) {         #ok
+        $foo = 1;
+    }
+    elsif ($condition2) {      #ok
+        $foo = 2;
+    }
+    elsif ($condition3) {      #ok
+        $foo = 3;
+    }
+    elsif ($condition4) {      #too many!
+        $foo = 4;
+    }
+    else {                     #ok
+        $foo = $default;
+    }</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy can be configured with a maximum number of <CODE>elsif</CODE> alternatives
-to allow.  The default is 2.  This can be specified via a <CODE>max_elsif</CODE> item in
-the <I>.perlcriticrc</I> file:
+<P>This policy can be configured with a maximum number of <CODE>elsif</CODE>
+alternatives to allow.  The default is 2.  This can be specified via a
+<CODE>max_elsif</CODE> item in the <I>.perlcriticrc</I> file:
 
 </P>
-<PRE> [ControlStructures::ProhibitCascadingIfElse]
- max_elsif = 3</PRE>
+<PRE>    [ControlStructures::ProhibitCascadingIfElse]
+    max_elsif = 3</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 

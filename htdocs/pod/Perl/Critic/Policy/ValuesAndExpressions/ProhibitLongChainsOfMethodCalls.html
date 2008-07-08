@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitLongChainsOfMethodCalls - Long chains of method calls indicate tightly coupled code.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
 
 
 </P><HR>
@@ -37,10 +48,10 @@ is brittle.
 
 
 </P>
-<PRE>  $x = $y-&gt;a;           #ok
-  $x = $y-&gt;a-&gt;b;        #ok
-  $x = $y-&gt;a-&gt;b-&gt;c;     #questionable, but allowed by default
-  $x = $y-&gt;a-&gt;b-&gt;c-&gt;d;  #not ok
+<PRE>    $x = $y-&gt;a;           #ok
+    $x = $y-&gt;a-&gt;b;        #ok
+    $x = $y-&gt;a-&gt;b-&gt;c;     #questionable, but allowed by default
+    $x = $y-&gt;a-&gt;b-&gt;c-&gt;d;  #not ok
 </PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION

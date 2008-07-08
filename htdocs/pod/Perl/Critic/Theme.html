@@ -30,13 +30,15 @@
 
 <P>Perl::Critic::Theme - Construct thematic sets of policies.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This is a helper class for evaluating theme expressions into sets of Policy
-objects.  There are no user-serviceable parts here.
+<P>This is a helper class for evaluating theme expressions into sets of
+Policy objects.  There are no user-serviceable parts here.
+
 
 </P><HR>
 <H1><A NAME="METHODS">METHODS
@@ -46,27 +48,30 @@ objects.  There are no user-serviceable parts here.
 
 </A></DT>
 <DD>
-Returns a reference to a new Perl::Critic::Theme object.  <CODE>-rule</CODE> is a string
-expression that evaluates to true or false for each Policy.. See <A HREF="#THEME%20RULES">&quot;THEME
-RULES&quot;</A> for more information.
+Returns a reference to a new Perl::Critic::Theme object.  <CODE>-rule</CODE> is
+a string expression that evaluates to true or false for each Policy..
+See <A HREF="#THEME%20RULES">&quot;THEME RULES&quot;</A> for more information.
+
 
 </DD>
 <DT><A NAME="policy_is_thematic(%20-policy%20%3d%3e%20%24policy%20)"><CODE>policy_is_thematic( -policy =&gt; $policy )</CODE>
 
 </A></DT>
 <DD>
-Given a reference to a <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> object, this method returns
-evaluates the rule against the themes that are associated with the Policy.
-Returns 1 if the Policy satisfies the rule, 0 otherwise.
+Given a reference to a <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+object, this method returns evaluates the rule against the themes that
+are associated with the Policy.  Returns 1 if the Policy satisfies the
+rule, 0 otherwise.
+
 
 </DD>
 <DT><A NAME="rule()"><CODE> rule() </CODE>
 
 </A></DT>
 <DD>
-Returns the rule expression that was used to construct this Theme.  The rule
-may have been translated into a normalized expression.  See <A HREF="#THEME%20RULES">&quot;THEME RULES&quot;</A>
-for more information.
+Returns the rule expression that was used to construct this Theme.
+The rule may have been translated into a normalized expression.  See
+<A HREF="#THEME%20RULES">&quot;THEME RULES&quot;</A> for more information.
 
 </DD>
 </DL>
@@ -74,23 +79,25 @@ for more information.
 
 </A></H2>
 
-<P>A theme rule is a simple boolean expression, where the operands are the names
-of any of the themes associated with the Perl::Critic::Polices.
+<P>A theme rule is a simple boolean expression, where the operands are
+the names of any of the themes associated with the
+Perl::Critic::Polices.
 
 </P>
-<P>Theme names can be combined with logical operators to form arbitrarily complex
-expressions.  Precedence is the same as normal mathematics, but you can use
-parentheses to enforce precedence as well.  Supported operators are:
+<P>Theme names can be combined with logical operators to form arbitrarily
+complex expressions.  Precedence is the same as normal mathematics,
+but you can use parentheses to enforce precedence as well.  Supported
+operators are:
 
 </P>
 <PRE>   Operator    Altertative    Example
-   ----------------------------------------------------------------------------
+   ----------------------------------------------------------------
    &amp;&amp;          and            'pbp &amp;&amp; core'
    ||          or             'pbp || (bugs &amp;&amp; security)'
    !           not            'pbp &amp;&amp; ! (portability || complexity)</PRE>
 
-<P>See <A HREF="../../Perl/Critic.html#CONFIGURATION">Perl::Critic/&quot;CONFIGURATION&quot;</A> for more information about customizing the
-themes for each Policy.
+<P>See <A HREF="../../Perl/Critic.html#CONFIGURATION">Perl::Critic/&quot;CONFIGURATION&quot;</A> for more information about
+customizing the themes for each Policy.
 
 
 </P><HR>
@@ -101,8 +108,8 @@ themes for each Policy.
 
 </A></DT>
 <DD>
-Standardize a rule into a almost executable Perl code.  The &quot;almost&quot; comes
-from the fact that theme names are left as is.
+Standardize a rule into a almost executable Perl code.  The &quot;almost&quot;
+comes from the fact that theme names are left as is.
 
 
 </DD>
@@ -115,8 +122,8 @@ from the fact that theme names are left as is.
 
 </A></DT>
 <DD>
-A regular expression that will return the first character in the matched
-expression that is not valid in a rule.
+A regular expression that will return the first character in the
+matched expression that is not valid in a rule.
 
 
 </DD>
@@ -127,6 +134,7 @@ expression that is not valid in a rule.
 </A></H1>
 
 <P>Jeffrey Thalhammer  &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

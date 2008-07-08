@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,52 +22,71 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::RequireLexicalLoopIterators
+<P>Perl::Critic::Policy::Variables::RequireLexicalLoopIterators - Write <CODE>for my $element (@list) {...}</CODE> instead of <CODE>for $element (@list) {...}</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P><CODE>for</CODE>/<CODE>foreach</CODE> loops <I>always</I> create new lexical variables for named
-iterators.  In other words
+<P><CODE>for</CODE>/<CODE>foreach</CODE> loops <I>always</I> create new lexical variables for
+named iterators.  In other words
 
 </P>
-<PRE>  for $zed (...) {
-     ...
-  }</PRE>
+<PRE>    for $zed (...) {
+        ...
+    }</PRE>
 
 <P>is equivalent to
 
 </P>
-<PRE>  for my $zed (...) {
-     ...
-  }</PRE>
+<PRE>    for my $zed (...) {
+        ...
+    }</PRE>
 
 <P>This may not seem like a big deal until you see code like
 
 </P>
-<PRE>  my $bicycle;
-  for $bicycle (@things_attached_to_the_bike_rack) {
-      if (
-              $bicycle-&gt;is_red()
-          and $bicycle-&gt;has_baseball_card_in_spokes()
-          and $bicycle-&gt;has_bent_kickstand()
-      ) {
-          $bicycle-&gt;remove_lock();
+<PRE>    my $bicycle;
+    for $bicycle (@things_attached_to_the_bike_rack) {
+        if (
+                $bicycle-&gt;is_red()
+            and $bicycle-&gt;has_baseball_card_in_spokes()
+            and $bicycle-&gt;has_bent_kickstand()
+        ) {
+            $bicycle-&gt;remove_lock();
 
-          last;
-      }
-  }
+            last;
+        }
+    }
 
-  if ( $bicycle and $bicycle-&gt;is_unlocked() ) {
-      ride_home($bicycle);
-  }</PRE>
+    if ( $bicycle and $bicycle-&gt;is_unlocked() ) {
+        ride_home($bicycle);
+    }</PRE>
 
-<P>which is not going to allow you to arrive in time for  dinner with your family
-because the <CODE>$bicycle</CODE> outside the loop is different from the <CODE>$bicycle</CODE>
-inside the loop.  You may have freed your bicycle, but you can't remember
-which one it was.
+<P>which is not going to allow you to arrive in time for dinner with your
+family because the <CODE>$bicycle</CODE> outside the loop is different from the
+<CODE>$bicycle</CODE> inside the loop.  You may have freed your bicycle, but you
+can't remember which one it was.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -71,6 +94,7 @@ which one it was.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

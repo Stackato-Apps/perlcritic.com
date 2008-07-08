@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,31 +24,50 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyQuotes - Write <CODE>q{}</CODE> instead of <CODE>''</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Don't use quotes for an empty string or any string that is pure whitespace.
-Instead, use <CODE>q{}</CODE> to improve legibility.  Better still, created named values
-like this.  Use the <CODE>x</CODE> operator to repeat characters.
+<P>Don't use quotes for an empty string or any string that is pure
+whitespace.  Instead, use <CODE>q{}</CODE> to improve legibility.  Better still,
+created named values like this.  Use the <CODE>x</CODE> operator to repeat
+characters.
 
 </P>
-<PRE>  $message = '';      #not ok
-  $message = &quot;&quot;;      #not ok
-  $message = &quot;     &quot;; #not ok
+<PRE>    $message = '';      #not ok
+    $message = &quot;&quot;;      #not ok
+    $message = &quot;     &quot;; #not ok
 
-  $message = q{};     #better
-  $message = q{     } #better
+    $message = q{};     #better
+    $message = q{     } #better
 
-  $EMPTY = q{};
-  $message = $EMPTY;      #best
+    $EMPTY = q{};
+    $message = $EMPTY;      #best
 
-  $SPACE = q{ };
-  $message = $SPACE x 5;  #best</PRE>
+    $SPACE = q{ };
+    $message = $SPACE x 5;  #best
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

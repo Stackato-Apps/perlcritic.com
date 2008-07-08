@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringySplit - Write <CODE>split /-/, $string</CODE> instead of <CODE>split '-', $string</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,13 +47,22 @@ much confusion if the string contains regex metacharacters.  So for
 clarity, always express the PATTERN argument as a regex.
 
 </P>
-<PRE>  $string = 'Fred|Barney';
-  @names = split '|', $string; #not ok, is ('F', 'r', 'e', 'd', '|', 'B', 'a' ...)
-  @names = split m/[|]/, $string; #ok, is ('Fred', Barney')</PRE>
+<PRE>    $string = 'Fred|Barney';
+    @names = split '|', $string; #not ok, is ('F', 'r', 'e', 'd', '|', 'B', 'a' ...)
+    @names = split m/[|]/, $string; #ok, is ('Fred', Barney')</PRE>
 
 <P>When the PATTERN is a single space the <CODE>split</CODE> function has special
 behavior, so Perl::Critic forgives that usage.  See <CODE>&quot;perldoc -f
 split&quot;</CODE> for more information.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
@@ -51,12 +74,14 @@ split&quot;</CODE> for more information.
 </P>
 <P><A HREF="../../../../Perl/Critic/Policy/ControlStrucutres/RequireBlockMap.html">Perl::Critic::Policy::ControlStrucutres::RequireBlockMap</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

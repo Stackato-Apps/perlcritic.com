@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitLeadingZeros
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitLeadingZeros - Write <CODE>oct(755)</CODE> instead of <CODE>0755</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -29,8 +43,26 @@
 you really want, its better to use <CODE>oct</CODE> and make it obvious.
 
 </P>
-<PRE>  $var = 041;     #not ok, actually 33
-  $var = oct(41); #ok</PRE>
+<PRE>    $var = 041;     # not ok, actually 33
+    $var = oct(41); # ok
+
+    chmod 0644, $file;                              # ok by default
+    dbmopen %database, 'foo.db', 0600;              # ok by default
+    mkdir $directory, 0755;                         # ok by default
+    sysopen $filehandle, $filename, O_RDWR, 0666;   # ok by default
+    umask 0002;                                     # ok by default</PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>If you want to ban all leading zeros, set <CODE>strict</CODE> to a true value in
+a <I>.perlcriticrc</I> file.
+
+</P>
+<PRE>    [ValuesAndExpressions::ProhibitLeadingZeros]
+    strict = 1
+</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProhibitBuiltinHomonyms
+<P>Perl::Critic::Policy::Subroutines::ProhibitBuiltinHomonyms - Don't declare your own <CODE>open</CODE> function.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -40,6 +53,15 @@ perlfunc`</CODE> for a list of built-ins.
 
 <P>Exceptions are made for <CODE>BEGIN</CODE>, <CODE>END</CODE>, <CODE>INIT</CODE> and <CODE>CHECK</CODE> blocks,
 as well as <CODE>AUTOLOAD</CODE>, <CODE>DESTROY</CODE>, and <CODE>import</CODE> subroutines.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="CAVEATS">CAVEATS

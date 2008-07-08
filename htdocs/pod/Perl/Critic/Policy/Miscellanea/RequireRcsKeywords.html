@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords
+<P>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords - Put source-control keywords in every file.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -34,31 +46,34 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>  # $Revision: 2163 $
-  # $Source: /myproject/lib/foo.pm $</PRE>
+<PRE>    # $Revision: 2537 $
+    # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 2163 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<PRE>    our ($VERSION) = '$Revision: 2537 $' =~ m{ \$Revision: \s+ (\S+) }x;
+</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>By default, this policy only requires the <CODE>Revision</CODE>, <CODE>Source</CODE>, and <CODE>Date</CODE>
-keywords.  To specify alternate keywords, specify a value for <CODE>keywords</CODE> of a
-whitespace delimited series of keywords (without the dollar-signs).  This would
-look something like the following in a <I>.perlcriticrc</I> file:
+<P>By default, this policy only requires the <CODE>Revision</CODE>, <CODE>Source</CODE>, and
+<CODE>Date</CODE> keywords.  To specify alternate keywords, specify a value for
+<CODE>keywords</CODE> of a whitespace delimited series of keywords (without the
+dollar-signs).  This would look something like the following in a
+<I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [Miscellanea::RequireRcsKeywords]
-  keywords = Revision Source Date Author Id</PRE>
+<PRE>    [Miscellanea::RequireRcsKeywords]
+    keywords = Revision Source Date Author Id</PRE>
 
 <P>See the documentation on RCS for a list of supported keywords.  Many
 source control systems are descended from RCS, so the keywords
 supported by CVS and Subversion are probably the same.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -66,6 +81,7 @@ supported by CVS and Subversion are probably the same.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

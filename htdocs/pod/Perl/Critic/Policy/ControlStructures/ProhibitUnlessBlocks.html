@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,23 +24,42 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitUnlessBlocks
+<P>Perl::Critic::Policy::ControlStructures::ProhibitUnlessBlocks - Write <CODE>if(! $condition)</CODE> instead of <CODE>unless($condition)</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Conway discourages using <CODE>unless</CODE> because it leads to double-negatives
-that are hard to understand.  Instead, reverse the logic and use <CODE>if</CODE>.
+<P>Conway discourages using <CODE>unless</CODE> because it leads to
+double-negatives that are hard to understand.  Instead, reverse the
+logic and use <CODE>if</CODE>.
 
 </P>
-<PRE>  unless($condition) { do_something() } #not ok
-  unless(! $no_flag) { do_something() } #really bad
-  if( ! $condition)  { do_something() } #ok</PRE>
+<PRE>    unless($condition) { do_something() } #not ok
+    unless(! $no_flag) { do_something() } #really bad
+    if( ! $condition)  { do_something() } #ok</PRE>
 
 <P>This Policy only covers the block-form of <CODE>unless</CODE>.  For the postfix
 variety, see <CODE>ProhibitPostfixControls</CODE>.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO

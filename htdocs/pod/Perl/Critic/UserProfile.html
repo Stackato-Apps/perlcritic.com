@@ -26,6 +26,7 @@
 
 <P>Perl::Critic::UserProfile - The contents of the user's profile, often <I>.perlcriticrc</I>.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
@@ -34,6 +35,7 @@
 <P>This is a helper class that encapsulates the contents of the user's
 profile, which is usually stored in a <I>.perlcriticrc</I> file. There are
 no user-serviceable parts here.
+
 
 </P><HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -53,44 +55,62 @@ UserProfile is created with default values.
 <P>This object does not take into account any command-line overrides;
 <A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> does that.
 
+
 </P></DD>
 </DL>
 <HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
-<DL><DT><A NAME="defaults()"><CODE> defaults() </CODE>
+<DL><DT><A NAME="options_processor()"><CODE> options_processor() </CODE>
 
 </A></DT>
 <DD>
-Returns the <A HREF="Perl/Critic/Defaults.html">Perl::Critic::Defaults</A> object for this UserProfile.
+Returns the
+<A HREF="Perl/Critic/OptionsProcessor.html">Perl::Critic::OptionsProcessor</A>
+object for this UserProfile.
+
 
 </DD>
 <DT><A NAME="policy_is_disabled(%20%24policy%20)"><CODE> policy_is_disabled( $policy ) </CODE>
 
 </A></DT>
 <DD>
-Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> object or the name of
-one, returns true if the user has disabled that policy in their
-profile.
+Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+object or the name of one, returns true if the user has disabled that
+policy in their profile.
+
 
 </DD>
 <DT><A NAME="policy_is_enabled(%20%24policy%20)"><CODE> policy_is_enabled( $policy ) </CODE>
 
 </A></DT>
 <DD>
-Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> object or the name of
-one, returns true if the user has explicitly enabled that policy in
-their user profile.
+Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+object or the name of one, returns true if the user has explicitly
+enabled that policy in their user profile.
+
 
 </DD>
 <DT><A NAME="policy_params(%20%24policy%20)"><CODE> policy_params( $policy ) </CODE>
 
 </A></DT>
 <DD>
-Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> object or the name of
-one, returns a reference to a hash of the user's configuration
-parameters for that policy.
+Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+object or the name of one, returns a
+<A HREF="Perl/Critic/PolicyConfig.html">Perl::Critic::PolicyConfig</A> for the
+user's configuration parameters for that policy.
+
+
+</DD>
+<DT><A NAME="raw_policy_params(%20%24policy%20)"><CODE> raw_policy_params( $policy ) </CODE>
+
+</A></DT>
+<DD>
+Given a reference to a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+object or the name of one, returns a reference to a hash of the user's
+configuration parameters for that policy.
+
 
 </DD>
 <DT><A NAME="listed_policies()"><CODE> listed_policies() </CODE>
@@ -101,6 +121,7 @@ Returns a list of the names of all the Policies that are mentioned in
 the profile.  The Policy names will be fully qualified (e.g.
 Perl::Critic::Foo).
 
+
 </DD>
 <DT><A NAME="source()"><CODE> source() </CODE>
 
@@ -109,6 +130,7 @@ Perl::Critic::Foo).
 The place where the profile information came from, if available.
 Usually the path to a <I>.perlcriticrc</I>.
 
+
 </DD>
 </DL>
 <HR>
@@ -116,7 +138,9 @@ Usually the path to a <I>.perlcriticrc</I>.
 
 </A></H1>
 
-<P><A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A>, <A HREF="Perl/Critic/Defaults.html">Perl::Critic::Defaults</A>
+<P><A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A>,
+<A HREF="Perl/Critic/OptionsProcessor.html">Perl::Critic::OptionsProcessor</A>
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -124,6 +148,7 @@ Usually the path to a <I>.perlcriticrc</I>.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

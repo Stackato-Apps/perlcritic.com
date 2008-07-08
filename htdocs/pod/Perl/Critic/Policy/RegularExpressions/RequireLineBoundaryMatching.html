@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::RegularExpressions::RequireLineBoundaryMatching
+<P>Perl::Critic::Policy::RegularExpressions::RequireLineBoundaryMatching - Always use the <CODE>/m</CODE> modifier with regular expressions.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,20 +47,30 @@ then beginning and ed of the string.  Adding the '/m' flag to your
 regex makes it behave as most people expect it should.
 
 </P>
-<PRE>  my $match = m{ ^ $pattern $ }x;  #not ok
-  my $match = m{ ^ $pattern $ }xm; #ok</PRE>
+<PRE>    my $match = m{ ^ $pattern $ }x;  #not ok
+    my $match = m{ ^ $pattern $ }xm; #ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
 <P>For common regular expressions like e-mail addresses, phone numbers,
-dates, etc., have a look at the <A HREF="../../../../Regex/Common.html">Regex::Common</A> module.  Also, be
-cautions about slapping modifier flags onto existing regular
+dates, etc., have a look at the <A HREF="../../../../Regex/Common.html">Regex::Common</A> module.
+Also, be cautions about slapping modifier flags onto existing regular
 expressions, as they can drastically alter their meaning.  See
 <A HREF="http://www.perlmonks.org/?node_id=484238">http://www.perlmonks.org/?node_id=484238</A> for an interesting
 discussion on the effects of blindly modifying regular expression
 flags.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -54,6 +78,7 @@ flags.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer  &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

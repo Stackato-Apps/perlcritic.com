@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#ACKNOWLEDGMENT">ACKNOWLEDGMENT
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ControlStructures::ProhibitLabelsWithSpecialBlockNames - Don't use labels that are the same as the special block names.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>When using one of the special Perl blocks <CODE>BEGIN</CODE>, <CODE>END</CODE>, <CODE>CHECK</CODE>,
+<CODE>INIT</CODE>, and <CODE>UNITCHECK</CODE>, it is easy to mistakenly add a colon to the
+end of the block name.  E.g.:
+
+</P>
+<PRE>    # a BEGIN block that gets executed at compile time.
+    BEGIN { &lt;...code...&gt; }
+
+    # an ordinary labeled block that gets executed at run time.
+    BEGIN: { &lt;...code...&gt; }</PRE>
+
+<P>The labels &quot;BEGIN:&quot;, &quot;END:&quot;, etc. are probably errors.  This policy
+prohibits the special Perl block names from being used as labels.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="http://perlbuzz.com/2008/05/colons-invalidate-your-begin-and-end-blocks.html">Perl Buzz article</A>
+on this issue.
+
+
+</P><HR>
+<H1><A NAME="ACKNOWLEDGMENT">ACKNOWLEDGMENT
+
+</A></H1>
+
+<P>Randy Lauen for identifying the problem.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Mike O'Regan
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2008 Mike O'Regan.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

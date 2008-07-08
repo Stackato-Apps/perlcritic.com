@@ -31,7 +31,25 @@
 
 
 </A></UL>
+<LI><A HREF="#ADDITIONAL%20FEATURES">ADDITIONAL FEATURES
+
+</A><UL>
+<LI><A HREF="#default_maximum_violations_per_document()"><CODE>default_maximum_violations_per_document()</CODE>
+
+</A></UL>
+<LI><A HREF="#DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
+
+</A><UL>
+<LI><A HREF="#Create%20a%20Distribution">Create a Distribution
+
+</A><LI><A HREF="#Themes">Themes
+
+</A><LI><A HREF="#Documentation">Documentation
+
+</A></UL>
 <LI><A HREF="#HINT">HINT
+
+</A><LI><A HREF="#VERSION">VERSION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -45,43 +63,49 @@
 
 <P>Perl::Critic::DEVELOPER - How to make new Perl::Critic::Policy modules.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>For developers who want to create custom coding standards, the
-following tells how to create a Policy module for <A HREF="Perl/Critic.html">Perl::Critic</A>.
-Although the Perl::Critic distribution already includes a number of
-Policies based on Damian Conway's book <I>Perl Best Practices</I> (which
-will be referred to via &quot;<I>PBP</I>&quot; from here on), Perl::Critic is not
-limited to his guidelines and can be used to enforce any practice,
-preference, or style that you want to follow.  You can even write
-Policies to enforce contradictory guidelines.  All you need to do is
-write a corresponding <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass, which may
+following tells how to create a Policy module for
+<A HREF="Perl/Critic.html">Perl::Critic</A>.  Although the Perl::Critic distribution
+already includes a number of Policies based on Damian Conway's book
+<I>Perl Best Practices</I> (which will be referred to via &quot;<I>PBP</I>&quot; from
+here on), Perl::Critic is not limited to his guidelines and can be
+used to enforce any practice, preference, or style that you want to
+follow.  You can even write Policies to enforce contradictory
+guidelines.  All you need to do is write a corresponding
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass, which may
 require as little as 10 lines of code.
+
 
 </P><HR>
 <H1><A NAME="BACKGROUND">BACKGROUND
 
 </A></H1>
 
-<P>The heart of Perl::Critic is <A HREF="PPI.html">PPI</A>, a parser and lexer for Perl.  PPI
-transforms Perl source code into a Document Object Model (DOM).  Each
-token in the document is represented by a PPI class, such as
-<A HREF="PPI/Token/Operator.html">PPI::Token::Operator</A> or <A HREF="PPI/Token/Word.html">PPI::Token::Word</A>, and then organized
-into structure classes, like <A HREF="PPI/Statement/Expression.html">PPI::Statement::Expression</A> and
-<A HREF="PPI/Structure/Subroutine.html">PPI::Structure::Subroutine</A>. The root node of the hierarchy is the
-<A HREF="PPI/Document.html">PPI::Document</A>.
+<P>The heart of Perl::Critic is <A HREF="PPI.html">PPI</A>, a parser and lexer for Perl.
+PPI transforms Perl source code into a Document Object Model (DOM).
+Each token in the document is represented by a PPI class, such as
+<A HREF="PPI/Token/Operator.html">PPI::Token::Operator</A> or
+<A HREF="PPI/Token/Word.html">PPI::Token::Word</A>, and then organized into
+structure classes, like
+<A HREF="PPI/Statement/Expression.html">PPI::Statement::Expression</A> and
+<A HREF="PPI/Structure/Subroutine.html">PPI::Structure::Subroutine</A>. The root
+node of the hierarchy is the <A HREF="PPI/Document.html">PPI::Document</A>.
 
 </P>
-<P>The <A HREF="Perl/Critic.html">Perl::Critic</A> engine traverses each node in the <A HREF="PPI/Document.html">PPI::Document</A>
-tree and invokes each of the <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses at the
+<P>The <A HREF="Perl/Critic.html">Perl::Critic</A> engine traverses each node in the
+<A HREF="PPI/Document.html">PPI::Document</A> tree and invokes each of the
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses at the
 appropriate node.  The Policy can inspect the node, look at the
 surrounding nodes, and do whatever else it wants.  If the Policy
 decides that that a coding standard has been violated, it returns one
-or more <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects.  If there are no
-violations, then the Policy returns nothing.
+or more <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects.
+If there are no violations, then the Policy returns nothing.
 
 </P>
 <P>Policies are usually written based on existing policies, so let's look
@@ -91,41 +115,44 @@ goal of this Policy is to enforce that every call to <CODE>grep</CODE> uses a
 block for the first argument and not an expression.  The reasons for
 this Policy are discussed in detail in <I>PBP</I>.
 
+
 </P><HR>
 <H1><A NAME="EXAMPLE%20POLICY">EXAMPLE POLICY
 
 </A></H1>
 
 <P>First, the Policy module needs to have a name.  Perl::Critic uses
-<A HREF="Module/Pluggable.html">Module::Pluggable</A> to automatically discover all modules in the
-<CODE>Perl::Critic::Policy</CODE> namespace.  Also, we've adopted the convention
-of grouping Policies into directories according to the chapters of
-<I>PBP</I>.  Since the goal of this Policy is to enforce the use of block
-arguments to <CODE>grep</CODE> and it comes from the &quot;Builtin Functions&quot; chapter
-of <I>PBP</I>, we call it
+<A HREF="Module/Pluggable.html">Module::Pluggable</A> to automatically discover all
+modules in the <CODE>Perl::Critic::Policy</CODE> namespace.  Also, we've adopted
+the convention of grouping Policies into directories according to the
+chapters of <I>PBP</I>.  Since the goal of this Policy is to enforce the
+use of block arguments to <CODE>grep</CODE> and it comes from the &quot;Builtin
+Functions&quot; chapter of <I>PBP</I>, we call it
 <CODE>&quot;Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep&quot;</CODE>.
 
 </P>
-<PRE>  package Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep;</PRE>
+<PRE>    package Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep;</PRE>
 
 <P>Next, we set some pragmas and load the modules that we'll need.  All
-Policy modules inherit from the <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> class, which
-provides no-op implementations of the basic methods.  Our job is to
-override these methods to make them do something useful.
+Policy modules inherit from the
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> class, which provides
+no-op implementations of the basic methods.  Our job is to override
+these methods to make them do something useful.
 
 </P>
 <P>Technically, <CODE>use strict</CODE> and <CODE>use warnings</CODE> are optional, but we
 don't want Perl::Critic to be a hypocrite, now do we?
 
 </P>
-<PRE>  use strict;
-  use warnings;
-  use Readonly;
+<PRE>    use strict;
+    use warnings;
 
-  use Perl::Critic::Utils qw{ :severities :classification :ppi };
-  use base 'Perl::Critic::Policy';
+    use Readonly;
 
-  our $VERSION = '1.05';</PRE>
+    use Perl::Critic::Utils qw{ :severities :classification :ppi };
+    use base 'Perl::Critic::Policy';
+
+    our $VERSION = '1.05';</PRE>
 
 <P>Next, we'll declare a description and explanation for this Policy.
 The description is always just a string that basically says &quot;this is
@@ -133,35 +160,36 @@ what's wrong.&quot;  The explanation can be either a string with further
 details, or a reference to an array of integers that correspond to
 page numbers in <I>PBP</I>.  We make them read-only because they never
 change.  (See
-<A HREF="Perl/Critic/ValuesAndExpressions.html#ProhibitConstantPragma">Perl::Critic::ValuesAndExpressions/ProhibitConstantPragma</A> for why
-we don't <CODE>use constant</CODE>.)
+<A HREF="Perl/Critic/ValuesAndExpressions/ProhibitConstantPragma.html">Perl::Critic::ValuesAndExpressions::ProhibitConstantPragma</A>
+for why we don't <CODE>use constant</CODE>.)
 
 </P>
-<PRE>  Readonly::Scalar my $DESC =&gt; q{Expression form of &quot;grep&quot;};
-  Readonly::Scalar my $EXPL =&gt; [ 169 ];</PRE>
+<PRE>    Readonly::Scalar my $DESC =&gt; q{Expression form of &quot;grep&quot;};
+    Readonly::Scalar my $EXPL =&gt; [ 169 ];</PRE>
 
 <P>Most policies don't need to override the <CODE>initialize_if_enabled()</CODE>
-method provided by <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>.  However, if your Policy
-is configurable via <I>.perlcriticrc</I>, you should implement a
-<CODE>supported_parameters()</CODE> method and need to implement
-<CODE>initialize_if_enabled()</CODE> to examine the <CODE>$config</CODE> values.  Since
-this Policy isn't configurable, we'll declare that by providing an
-implementation of <CODE>supported_parameters()</CODE> that returns an empty
+method provided by <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>.
+However, if your Policy is configurable via <I>.perlcriticrc</I>, you
+should implement a <CODE>supported_parameters()</CODE> method and need to
+implement <CODE>initialize_if_enabled()</CODE> to examine the <CODE>$config</CODE> values.
+Since this Policy isn't configurable, we'll declare that by providing
+an implementation of <CODE>supported_parameters()</CODE> that returns an empty
 list.
 
 </P>
-<PRE>  sub supported_parameters { return ()                  }</PRE>
+<PRE>    sub supported_parameters { return ()                  }</PRE>
 
 <P>Next, we define the <CODE>default_severity()</CODE> method, which must return an
 integer indicating the severity of violating this Policy.  Severity
 values range from 1 to 5, where 5 is the &quot;most severe.&quot;  In general,
 level 5 is reserved for things that are frequently misused and/or
 cause bugs.  Level 1 is for things that are highly subjective or
-purely cosmetic.  The <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> package exports several
-severity constants that you can use here via the <CODE>:severities</CODE> tag.
+purely cosmetic.  The <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A>
+package exports several severity constants that you can use here via
+the <CODE>:severities</CODE> tag.
 
 </P>
-<PRE>  sub default_severity     { return $SEVERITY_HIGH      }</PRE>
+<PRE>    sub default_severity     { return $SEVERITY_HIGH      }</PRE>
 
 <P>Likewise, the <CODE>default_themes()</CODE> method returns a list of theme
 names.  Themes are intended to be named groups of Policies.  All
@@ -171,38 +199,40 @@ use of <CODE>grep</CODE> without blocks often leads to bugs, we include a
 this Policy should be a member of the <CODE>&quot;pbp&quot;</CODE> theme.
 
 </P>
-<PRE>  sub default_themes       { return qw( core bugs pbp ) }</PRE>
+<PRE>    sub default_themes       { return qw( core bugs pbp ) }</PRE>
 
 <P>As a Policy author, you can assign any themes you want to the Policy.
 If you're publishing a suite of custom Policies, we suggest that you
 create a unique theme that covers all the Policies in the
 distribution.  That way, users can easily enable or disable all of
 your policies at once.  For example, Policies in the
-<A HREF="Perl/Critic/More.html">Perl::Critic::More</A> distribution all have a <CODE>&quot;more&quot;</CODE> theme.
+<A HREF="Perl/Critic/More.html">Perl::Critic::More</A> distribution all have a
+<CODE>&quot;more&quot;</CODE> theme.
 
 </P>
 <P>Next, we indicate what elements of the code this Policy will analyze,
 like statements or variables or conditionals or POD.  These elements
 are specified as PPI classes such as <A HREF="PPI/Statement.html">PPI::Statement</A>,
-<A HREF="PPI/Token/Symbol.html">PPI::Token::Symbol</A>, <A HREF="PPI/Structure/Conditional.html">PPI::Structure::Conditional</A> or
-<A HREF="PPI/Token/Pod.html">PPI::Token::Pod</A> respectively.  The applies_to() method returns a
-list of PPI package names.  (You can get that list of available
-package names via <CODE>perldoc PPI</CODE>.)  As Perl::Critic traverses the
-document, it will call the <CODE>violates()</CODE> method from this module
-whenever it encounters one of the PPI types that are given here.  In
-this case, we just want to test calls to <CODE>grep</CODE>.  Since the token
-&quot;grep&quot; is a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A>, we return that package name from the
-<CODE>applies_to()</CODE> method.
+<A HREF="PPI/Token/Symbol.html">PPI::Token::Symbol</A>,
+<A HREF="PPI/Structure/Conditional.html">PPI::Structure::Conditional</A> or
+<A HREF="PPI/Token/Pod.html">PPI::Token::Pod</A> respectively.  The applies_to()
+method returns a list of PPI package names.  (You can get that list of
+available package names via <CODE>perldoc PPI</CODE>.)  As Perl::Critic
+traverses the document, it will call the <CODE>violates()</CODE> method from
+this module whenever it encounters one of the PPI types that are given
+here.  In this case, we just want to test calls to <CODE>grep</CODE>.  Since the
+token &quot;grep&quot; is a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A>, we return that
+package name from the <CODE>applies_to()</CODE> method.
 
 </P>
-<PRE>  sub applies_to           { return 'PPI::Token::Word'  }</PRE>
+<PRE>    sub applies_to           { return 'PPI::Token::Word'  }</PRE>
 
 <P>If your Policy needs to analyze several different types of elements,
 the <CODE>applies_to</CODE> method may return the name of several PPI packages.
 If your Policy needs to examine the file as a whole, then the
-<CODE>applies_to</CODE> method should return <A HREF="PPI/Document.html">PPI::Document</A>.  Since there is
-only one PPI::Document element, your Policy would only be invoked once
-per file.
+<CODE>applies_to</CODE> method should return <A HREF="PPI/Document.html">PPI::Document</A>.
+Since there is only one PPI::Document element, your Policy would only
+be invoked once per file.
 
 </P>
 <P>Now comes the interesting part.  The <CODE>violates()</CODE> method does all the
@@ -215,39 +245,39 @@ need access to the document as a whole, we ignore the last parameter
 by assigning to <CODE>undef</CODE>.
 
 </P>
-<PRE>  sub violates {
-      my ( $self, $elem, undef ) = @_;</PRE>
+<PRE>    sub violates {
+        my ( $self, $elem, undef ) = @_;</PRE>
 
 <P>The violates() method then often performs some tests to make sure we
 have the right &quot;type&quot; of element.  In our example, we know that the
-element will be a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A> because that's what we declared
-back in the <CODE>applies_to()</CODE> method.  However, we didn't specify
-exactly which &quot;word&quot; we were looking for.  Evaluating a PPI element in
-a string context returns the literal form of the code.  (You can also
-use the c&lt;content()&gt; method.)  So we make sure that this
+element will be a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A> because that's
+what we declared back in the <CODE>applies_to()</CODE> method.  However, we
+didn't specify exactly which &quot;word&quot; we were looking for.  Evaluating a
+PPI element in a string context returns the literal form of the code.
+(You can also use the c&lt;content()&gt; method.)  So we make sure that this
 PPI::Token::Word is, in fact, &quot;grep&quot;.  If it's not, then we don't'
 need to bother examining it.
 
 </P>
-<PRE>      return if $elem ne 'grep';</PRE>
+<PRE>        return if $elem ne 'grep';</PRE>
 
 <P>The <CODE>PPI::Token::Word</CODE> class is also used for barewords and methods
 called on object references.  It is possible for someone to declare a
 bareword hash key as <CODE>&lt;%hash = ( grep =</CODE> 'foo' )&gt;&gt;.  We don't want to
 test those types of elements because they don't represent function
 calls to <CODE>grep</CODE>.  So we use one of handy utility functions from
-<A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this &quot;grep&quot; is actually in
-the right context.  (The <CODE>is_function_call()</CODE> subroutine is brought
-in via the <CODE>:classification</CODE> tag.)
+<A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this
+&quot;grep&quot; is actually in the right context.  (The <CODE>is_function_call()</CODE>
+subroutine is brought in via the <CODE>:classification</CODE> tag.)
 
 </P>
-<PRE>      return if ! is_function_call($elem);</PRE>
+<PRE>        return if ! is_function_call($elem);</PRE>
 
 <P>Now that we know this element is a call to the <CODE>grep</CODE> function, we
 can look at the nearby elements to see what kind of arguments are
 being passed to it.  In the following paragraphs, we discuss how to do
-this manually in order to explore <A HREF="PPI.html">PPI</A>; after that, we'll show how
-this Policy actually uses facilities provided by
+this manually in order to explore <A HREF="PPI.html">PPI</A>; after that, we'll show
+how this Policy actually uses facilities provided by
 <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to get this done.
 
 </P>
@@ -257,46 +287,48 @@ the <CODE>snext_sibling()</CODE> to get the next code-sibling (the &quot;s&quot;
 <CODE>snext_sibling</CODE> stands for &quot;significant&quot;).
 
 </P>
-<PRE>      my $sib = $elem-&gt;snext_sibling() or return;</PRE>
+<PRE>        my $sib = $elem-&gt;snext_sibling() or return;</PRE>
 
 <P>In Perl, the parenthesis around argument lists are usually optional,
-and PPI packs the elements into a <A HREF="PPI/Structure/List.html">PPI::Structure::List</A> object when
-parentheses are used.  So if the sibling is a PPI::Structure::List, we
-pull out the first (significant) child of that list.  This child will
-be the first argument to <CODE>grep</CODE>.  If parentheses were not used, then
-the sibling itself is the first argument.
+and PPI packs the elements into a
+<A HREF="PPI/Structure/List.html">PPI::Structure::List</A> object when parentheses
+are used.  So if the sibling is a PPI::Structure::List, we pull out
+the first (significant) child of that list.  This child will be the
+first argument to <CODE>grep</CODE>.  If parentheses were not used, then the
+sibling itself is the first argument.
 
 </P>
-<PRE>      my $arg = $sib-&gt;isa('PPI::Structure::List') ? $sib-&gt;schild(0) : $sib;</PRE>
+<PRE>        my $arg = $sib-&gt;isa('PPI::Structure::List') ? $sib-&gt;schild(0) : $sib;</PRE>
 
 <P>In actuality, this sort of function argument lookup is common, so
 there is a <A HREF="Perl/Critic/Utils.html#first_arg">Perl::Critic::Utils/&quot;first_arg&quot;</A> subroutine available via
 the <CODE>:ppi</CODE> tag.  So we use that instead.
 
 </P>
-<PRE>      my $arg = first_arg($elem);</PRE>
+<PRE>        my $arg = first_arg($elem);</PRE>
 
 <P>Finally, we now have a reference to the first argument to <CODE>grep</CODE>.  If
 that argument is a block (i.e. something in curly braces), then it
-will be a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>, in which case our Policy is
-satisfied and we just return nothing.
+will be a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>, in which
+case our Policy is satisfied and we just return nothing.
 
 </P>
-<PRE>      return if !$arg;
-      return if $arg-&gt;isa('PPI::Structure::Block');</PRE>
+<PRE>        return if !$arg;
+        return if $arg-&gt;isa('PPI::Structure::Block');</PRE>
 
-<P>But if it is not a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>, then we know that this
-call to <CODE>grep</CODE> must be using the expression form, and that violates
-our Policy.  So we create and return a new <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>
-object via the <A HREF="Perl/Critic/Policy.html#violation">Perl::Critic::Policy/&quot;violation&quot;</A> method, passing in
-the description, explanation, and a reference to the PPI element that
+<P>But if it is not a <A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A>,
+then we know that this call to <CODE>grep</CODE> must be using the expression
+form, and that violates our Policy.  So we create and return a new
+<A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> object via the
+<A HREF="Perl/Critic/Policy.html#violation">Perl::Critic::Policy/&quot;violation&quot;</A> method, passing in the
+description, explanation, and a reference to the PPI element that
 caused the violation.  And that's all there is to it!
 
 </P>
-<PRE>      return $self-&gt;violation( $DESC, $EXPL, $elem );
-  }
+<PRE>        return $self-&gt;violation( $DESC, $EXPL, $elem );
+    }
 
-  1;</PRE>
+    1;</PRE>
 
 <P>One last thing -- people are going to need to understand what is wrong
 with the code when your Policy finds a problem.  It isn't reasonable
@@ -307,28 +339,30 @@ motivation for your Policy and include a few examples of both good and
 bad code.  Here's an example:
 
 </P>
-<PRE>  =pod
+<PRE>    =pod
 
-  =head1 NAME
+    =head1 NAME
 
-  Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep
+    Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep
 
-  =head1 DESCRIPTION
 
-  The expression forms of C&lt;grep&gt; and C&lt;map&gt; are awkward and hard to read.
-  Use the block forms instead.
+    =head1 DESCRIPTION
 
-    @matches = grep  /pattern/,    @list;        #not ok
-    @matches = grep { /pattern/ }  @list;        #ok
+    The expression forms of C&lt;grep&gt; and C&lt;map&gt; are awkward and hard to read.
+    Use the block forms instead.
 
-    @mapped = map  transform($_),    @list;      #not ok
-    @mapped = map { transform($_) }  @list;      #ok
+        @matches = grep  /pattern/,    @list;        #not ok
+        @matches = grep { /pattern/ }  @list;        #ok
 
-  =cut</PRE>
+        @mapped = map  transform($_),    @list;      #not ok
+        @mapped = map { transform($_) }  @list;      #ok
+
+    =cut</PRE>
 
 <P>When your policy has a section like this, users can invoke
-<A HREF="perlcritic.html">perlcritic</A> with a <CODE>--verbose</CODE> parameter of <CODE>10</CODE> or <CODE>11</CODE> to see
-it along with the rest of the output for violations of your policy.
+<A HREF="perlcritic.html">perlcritic</A> with a <CODE>--verbose</CODE> parameter of <CODE>10</CODE> or
+<CODE>11</CODE> to see it along with the rest of the output for violations of
+your policy.
 
 
 </P><HR>
@@ -336,122 +370,123 @@ it along with the rest of the output for violations of your policy.
 
 </A></H1>
 
-<P><A HREF="Perl/Critic.html">Perl::Critic</A> takes care of gathering configuration information for
-your Policy, from whatever source the user specifies.  (See
-<A HREF="Perl/Critic.html#CONFIGURATION">Perl::Critic/&quot;CONFIGURATION&quot;</A> for the details of how a user specifies
-the values you're going to receive.)  What your Policy ends up
-receiving for the value of a parameter is a string with leading and
+<P><A HREF="Perl/Critic.html">Perl::Critic</A> takes care of gathering configuration
+information for your Policy, from whatever source the user specifies.
+(See <A HREF="Perl/Critic.html#CONFIGURATION">Perl::Critic/&quot;CONFIGURATION&quot;</A> for the details of how a user
+specifies the values you're going to receive.)  What your Policy ends
+up receiving for the value of a parameter is a string with leading and
 trailing whitespace removed.  By default, you will need to handle
 conversion of that string to a useful form yourself.  However, if you
 provide some metadata about your parameters, the parameter handling
 will be taken care of for you.  (Additionally, tools that deal with
 Policies themselves can use this information to enhance their
-functionality.  See the <A HREF="perlcritic.html">perlcritic</A> <CODE>--profile-proto</CODE> option for an
-example.)
+functionality.  See the <A HREF="perlcritic.html">perlcritic</A> <CODE>--profile-proto</CODE>
+option for an example.)
 
 </P>
 <P>You can look at
 <A HREF="Perl/Critic/Policy/ControlStructures/ProhibitCascadingIfElse.html">Perl::Critic::Policy::ControlStructures::ProhibitCascadingIfElse</A>
 for a simple example of a configurable Policy and
-<A HREF="Perl/Critic/Policy/Documentation/RequirePodSections.html">Perl::Critic::Policy::Documentation::RequirePodSections</A> for a more
-complex one.
+<A HREF="Perl/Critic/Policy/Documentation/RequirePodSections.html">Perl::Critic::Policy::Documentation::RequirePodSections</A>
+for a more complex one.
 
 </P><H2><A NAME="Do%20It%20All%20Yourself">Do It All Yourself
 
 </A></H2>
 
 <P>The <CODE>initialize_if_enabled()</CODE> method for a Policy receives one
-argument: a reference to a hash of the configuration for the Policy.
-This method is only called if the user's configuration has enabled the
-policy.  It returns a boolean stating whether the Policy should
-continue to be enabled.  Generally, the only reason to return
-<CODE>$FALSE</CODE> is when some external requirement is missing.  For example,
-<A HREF="Perl/Critic/Policy/CodeLayout/RequireTidyCode.html">Perl::Critic::Policy::CodeLayout::RequireTidyCode</A> disables itself
-if <A HREF="Perl/Tidy.html">Perl::Tidy</A> is not installed.
+argument: an instance of
+<A HREF="Perl/Critic/PolicyConfig.html">Perl::Critic::PolicyConfig</A>.  This method
+is only called if the user's configuration has enabled the policy.  It
+returns a boolean stating whether the Policy should continue to be
+enabled.  Generally, the only reason to return <CODE>$FALSE</CODE> is when some
+external requirement is missing.  For example,
+<A HREF="Perl/Critic/Policy/CodeLayout/RequireTidyCode.html">Perl::Critic::Policy::CodeLayout::RequireTidyCode</A>
+disables itself if <A HREF="Perl/Tidy.html">Perl::Tidy</A> is not installed.
 
 </P>
 <P>A basic, do-nothing implementation of <CODE>initialize_if_enabled()</CODE> would
 be:
 
 </P>
-<PRE>  use Perl::Critic::Utils qw&lt; :booleans &gt;;
+<PRE>    use Perl::Critic::Utils qw&lt; :booleans &gt;;
 
-  ...
+    ...
 
-  sub initialize_if_enabled {
-      my ( $self, $config ) = @_;
+    sub initialize_if_enabled {
+        my ( $self, $config ) = @_;
 
-      return $TRUE;
-  }</PRE>
+        return $TRUE;
+    }</PRE>
 
 <P>As stated above, what you get in <CODE>$config</CODE> are trimmed strings.  For
 example, if the user's <I>.perlcritic</I> contains
 
 </P>
-<PRE>  [Your::Policy]
-  foo          = bar baz
-  factor   =     5.52
-  selections =   2 78 92</PRE>
+<PRE>    [Your::Policy]
+    foo          = bar baz
+    factor   =     5.52
+    selections =   2 78 92</PRE>
 
 <P>then <CODE>$config</CODE> will contain the equivalent of
 
 </P>
-<PRE>  my $config = {
-      foo        =&gt; 'bar baz',
-      factor     =&gt; '5.52',
-      selections =&gt; '2 78 92',
-  };</PRE>
+<PRE>    my $config = {
+        foo        =&gt; 'bar baz',
+        factor     =&gt; '5.52',
+        selections =&gt; '2 78 92',
+    };</PRE>
 
 <P>To make this available to the <CODE>violates()</CODE> method, the values are
 usually put into <CODE>$self</CODE> under the name of the configuration item
 prefixed with an underscore.  E.g.
 
 </P>
-<PRE>  sub initialize_if_enabled {
-      my ( $self, $config ) = @_;
+<PRE>    sub initialize_if_enabled {
+        my ( $self, $config ) = @_;
 
-      $self-&gt;{_foo} = $config-&gt;{foo};
-      $self-&gt;{_factor} = $config-&gt;{factor};
-      $self-&gt;{_selections} = $config-&gt;{selections};
+        $self-&gt;{_foo} = $config-&gt;get{foo};
+        $self-&gt;{_factor} = $config-&gt;get{factor};
+        $self-&gt;{_selections} = $config-&gt;get{selections};
 
-      return $TRUE;
-  }</PRE>
+        return $TRUE;
+    }</PRE>
 
 <P>Often, you'll want to convert the configuration values into something
 more useful.  In this example, <CODE>selections</CODE> is supposed to be a list
-of integers.  <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> contains a number of functions
-that can help you with this.  Assuming that <CODE>violates()</CODE> wants to
-have <CODE>selections</CODE> as an array, you'll want to have something like
-this:
+of integers.  <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> contains a
+number of functions that can help you with this.  Assuming that
+<CODE>violates()</CODE> wants to have <CODE>selections</CODE> as an array, you'll want to
+have something like this:
 
 </P>
-<PRE>  use Perl::Critic::Utils qw{ :booleans :characters :data_conversion };
+<PRE>    use Perl::Critic::Utils qw{ :booleans :characters :data_conversion };
 
-  sub initialize_if_enabled {
-      my ( $self, $config ) = @_;
+    sub initialize_if_enabled {
+        my ( $self, $config ) = @_;
 
-      $self-&gt;{_foo} = $config-&gt;{foo};
-      $self-&gt;{_factor} = $config-&gt;{factor};
+        $self-&gt;{_foo} = $config-&gt;get{foo};
+        $self-&gt;{_factor} = $config-&gt;get{factor};
 
-      my $selections = $config-&gt;{selections};
-      $selections = defined $selections ? $selections : $EMPTY_STRING;
-      $self-&gt;{_selections} = [ words_from_string($selections) ];
+        my $selections = $config-&gt;get{selections};
+        $selections = defined $selections ? $selections : $EMPTY_STRING;
+        $self-&gt;{_selections} = [ words_from_string($selections) ];
 
-      return $TRUE;
-  }</PRE>
+        return $TRUE;
+    }</PRE>
 
 <P>Since <CODE>selections</CODE> contains numbers, it may be desirable to change
 the assignment to look like
 
 </P>
-<PRE>  $self-&gt;{_selections} = [ map { $_ + 0 } words_from_string($selections) ];</PRE>
+<PRE>    $self-&gt;{_selections} = [ map { $_ + 0 } words_from_string($selections) ];</PRE>
 
 <P>If <CODE>violates()</CODE> needs to quickly determine whether a particular value
 is in <CODE>selections</CODE>, you would want to use a hash instead of an array,
 like this:
 
 </P>
-<PRE>  $self-&gt;{_selections} = { hashify( words_from_string($selections) ) };</PRE>
+<PRE>    $self-&gt;{_selections} = { hashify( words_from_string($selections) ) };</PRE>
 
 <P>For an example of a Policy that has some simple, but non-standard
 configuration handling, see
@@ -468,11 +503,11 @@ the base constructor; as long as the Policy ended up being a blessed
 hash reference, everything was fine.  Unfortunately, this meant that
 Policies would be loaded and their prerequisites would be <CODE>use</CODE>d,
 even if the Policy wasn't enabled, slowing things down.  Also, this
-severely restricted the core of <A HREF="Perl/Critic.html">Perl::Critic</A>'s ability to enhance
-things.  Use of constructors is deprecated and is incompatible with
-<CODE>supported_parameters()</CODE> metadata below.  Kindly use
-<CODE>initialize_if_enabled()</CODE>, instead, to do any sort of set up that you
-need.
+severely restricted the core of <A HREF="Perl/Critic.html">Perl::Critic</A>'s ability
+to enhance things.  Use of constructors is deprecated and is
+incompatible with <CODE>supported_parameters()</CODE> metadata below.  Kindly
+use <CODE>initialize_if_enabled()</CODE>, instead, to do any sort of set up that
+you need.
 
 
 
@@ -482,20 +517,20 @@ need.
 
 <P>As minimum for a well behaved Policy, you should implement
 <CODE>supported_parameters()</CODE> in order to tell the rest of <CODE>Perl::Critic</CODE>
-what configuration values the Policy looks for, even if it is only to say
-that the Policy is not configurable.  In the simple form, this
+what configuration values the Policy looks for, even if it is only to
+say that the Policy is not configurable.  In the simple form, this
 function returns a list of the names of the parameters the Policy
 supports.  So, for an non-configurable Policy, as in the
 <CODE>RequireBlockGrep</CODE> example above, this looked like
 
 </P>
-<PRE>  sub supported_parameters { return ()                  }</PRE>
+<PRE>    sub supported_parameters { return ()                  }</PRE>
 
 <P>For the example being used in the <CODE>initialize_if_enabled()</CODE> section
 above, this would be
 
 </P>
-<PRE>  sub supported_parameters { return qw&lt; foo factor selections &gt;; }</PRE>
+<PRE>    sub supported_parameters { return qw&lt; foo factor selections &gt;; }</PRE>
 
 <P>Given this information, <CODE>Perl::Critic</CODE> can tell the user when they
 have specified a parameter for a Policy which isn't valid, e.g. when
@@ -511,20 +546,21 @@ hash references instead of strings, with keys of <CODE>name</CODE>,
 <CODE>description</CODE>, and <CODE>default_string</CODE>.  For example,
 
 </P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name           =&gt; 'allowed_values',
-              description    =&gt; 'Individual and ranges of values to allow, and/or &quot;all_integers&quot;.',
-              default_string =&gt; '0 1 2',
-          },
-          {
-              name           =&gt; 'allowed_types',
-              description    =&gt; 'Kind of literals to allow.',
-              default_string =&gt; 'Float',
-          },
-      );
-  }</PRE>
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name           =&gt; 'allowed_values',
+                description    =&gt;
+                    'Individual and ranges of values to allow, and/or &quot;all_integers&quot;.',
+                default_string =&gt; '0 1 2',
+            },
+            {
+                name           =&gt; 'allowed_types',
+                description    =&gt; 'Kind of literals to allow.',
+                default_string =&gt; 'Float',
+            },
+        );
+    }</PRE>
 
 <P>Note that use of constructors is
 <A HREF="#Note%20On%20Constructors">incompatible</A> with specifying parameters in
@@ -546,18 +582,18 @@ parameter allows the user to choose from five specific values and that
 the user can select any combination of them:
 
 </P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name               =&gt; 'allowed_types',
-              description        =&gt; 'Kind of literals to allow.',
-              default_string     =&gt; 'Float',
-              behavior           =&gt; 'enumeration',
-              enumeration_values =&gt; [ qw{ Binary Exp Float Hex Octal } ],
-              enumeration_allow_multiple_values =&gt; 1,
-          },
-      );
-  }</PRE>
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name               =&gt; 'allowed_types',
+                description        =&gt; 'Kind of literals to allow.',
+                default_string     =&gt; 'Float',
+                behavior           =&gt; 'enumeration',
+                enumeration_values =&gt; [ qw{ Binary Exp Float Hex Octal } ],
+                enumeration_allow_multiple_values =&gt; 1,
+            },
+        );
+    }</PRE>
 
 <P>When you specify a behavior, parsing and validation of the
 user-specified and default values is done for you and your
@@ -568,7 +604,8 @@ declaration, the parsed and validated value can be accessed via
 
 </P>
 <P>The behaviors provide additional functionality to <CODE>Perl::Critic</CODE>; for
-more on this, see <A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> and
+more on this, see
+<A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> and
 <A HREF="Perl/Critic/PolicyParameter/Behavior.html">Perl::Critic::PolicyParameter::Behavior</A>.
 
 </P>
@@ -581,7 +618,8 @@ documentation for the implementing class.
 
 </A></H3>
 
-<P>Implemented in <A HREF="Perl/Critic/PolicyParameter/Behavior/String.html">Perl::Critic::PolicyParameter::Behavior::String</A>.
+<P>Implemented in
+<A HREF="Perl/Critic/PolicyParameter/Behavior/String.html">Perl::Critic::PolicyParameter::Behavior::String</A>.
 
 </P>
 <P>The most basic of behaviors, the value of the parameter will be stored
@@ -590,26 +628,39 @@ in the Policy as a string.
 </P>
 <P>This behavior is not configurable.
 
-</P>
-<P><B>Example:</B>
+</P><H4><A NAME="supported_parameters()%20example"><CODE>supported_parameters()</CODE> example
 
-</P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name           =&gt; 'a_string',
-              description    =&gt; 'An example string.',
-              default_string =&gt; 'blah blah blah',
-              behavior       =&gt; 'string',
-          },
-      );
-  }
+</A></H4>
+
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name           =&gt; 'a_string',
+                description    =&gt; 'An example string.',
+                default_string =&gt; 'blah blah blah',
+                behavior       =&gt; 'string',
+            },
+        );
+    }
+</PRE>
+<H4><A NAME="Access%20example">Access example
+
+</A></H4>
+
+<PRE>    sub violates {
+        my ($self, $element, $document) = @_;
+
+        ...
+        my $string = $self-&gt;{_a_string};
+        ...
+    }
 </PRE>
 <H3><A NAME="%22boolean%22">&quot;boolean&quot;
 
 </A></H3>
 
-<P>Implemented in <A HREF="Perl/Critic/PolicyParameter/Behavior/Boolean.html">Perl::Critic::PolicyParameter::Behavior::Boolean</A>.
+<P>Implemented in
+<A HREF="Perl/Critic/PolicyParameter/Behavior/Boolean.html">Perl::Critic::PolicyParameter::Behavior::Boolean</A>.
 
 </P>
 <P>The value of the parameter will be either <A HREF="Perl/Critic/Utils.html#%24TRUE">Perl::Critic::Utils/$TRUE</A>
@@ -618,26 +669,42 @@ or <A HREF="Perl/Critic/Utils.html#%24FALSE">Perl::Critic::Utils/$FALSE</A>.
 </P>
 <P>This behavior is not configurable.
 
-</P>
-<P><B>Example:</B>
+</P><H4><A NAME="supported_parameters()%20example"><CODE>supported_parameters()</CODE> example
 
-</P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name           =&gt; 'a_boolean',
-              description    =&gt; 'An example boolean.',
-              default_string =&gt; '1',
-              behavior       =&gt; 'boolean',
-          },
-      );
-  }
+</A></H4>
+
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name           =&gt; 'a_boolean',
+                description    =&gt; 'An example boolean.',
+                default_string =&gt; '1',
+                behavior       =&gt; 'boolean',
+            },
+        );
+    }
+</PRE>
+<H4><A NAME="Access%20example">Access example
+
+</A></H4>
+
+<PRE>    sub violates {
+        my ($self, $element, $document) = @_;
+
+        ...
+        my $is_whatever = $self-&gt;{_a_boolean};
+        if ($is_whatever) {
+            ...
+        }
+        ...
+    }
 </PRE>
 <H3><A NAME="%22integer%22">&quot;integer&quot;
 
 </A></H3>
 
-<P>Implemented in <A HREF="Perl/Critic/PolicyParameter/Behavior/Integer.html">Perl::Critic::PolicyParameter::Behavior::Integer</A>.
+<P>Implemented in
+<A HREF="Perl/Critic/PolicyParameter/Behavior/Integer.html">Perl::Critic::PolicyParameter::Behavior::Integer</A>.
 
 </P>
 <P>The value is validated against <CODE>m/ \A [-+]? [1-9] [\d_]* \z /xms</CODE>
@@ -645,32 +712,48 @@ or <A HREF="Perl/Critic/Utils.html#%24FALSE">Perl::Critic::Utils/$FALSE</A>.
 underscores are allowed in input values as with Perl numeric literals.
 
 </P>
-<P>This takes two options, <CODE>integer_minimum</CODE> and
-<CODE>integer_maximum</CODE>, which specify endpoints of an inclusive range to
-restrict the value to.  Either, neither, or both may be specified.
+<P>This takes two options, <CODE>integer_minimum</CODE> and <CODE>integer_maximum</CODE>,
+which specify endpoints of an inclusive range to restrict the value
+to.  Either, neither, or both may be specified.
 
-</P>
-<P><B>Example:</B>
+</P><H4><A NAME="supported_parameters()%20example"><CODE>supported_parameters()</CODE> example
 
-</P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name            =&gt; 'an_integer',
-              description     =&gt; 'An example integer.',
-              default_string  =&gt; '5',
-              behavior        =&gt; 'integer',
-              integer_minimum =&gt; 0,
-              integer_maximum =&gt; 10,
-          },
-      );
-  }
+</A></H4>
+
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name            =&gt; 'an_integer',
+                description     =&gt; 'An example integer.',
+                default_string  =&gt; '5',
+                behavior        =&gt; 'integer',
+                integer_minimum =&gt; 0,
+                integer_maximum =&gt; 10,
+            },
+        );
+    }
+</PRE>
+<H4><A NAME="Access%20example">Access example
+
+</A></H4>
+
+<PRE>    sub violates {
+        my ($self, $element, $document) = @_;
+
+        ...
+        my $integer = $self-&gt;{_an_integer};
+        if ($integer &gt; $TURNING_POINT) {
+            ...
+        }
+        ...
+    }
 </PRE>
 <H3><A NAME="%22string%20list%22">&quot;string list&quot;
 
 </A></H3>
 
-<P>Implemented in <A HREF="Perl/Critic/PolicyParameter/Behavior/StringList.html">Perl::Critic::PolicyParameter::Behavior::StringList</A>.
+<P>Implemented in
+<A HREF="Perl/Critic/PolicyParameter/Behavior/StringList.html">Perl::Critic::PolicyParameter::Behavior::StringList</A>.
 
 </P>
 <P>The values will be derived by splitting the input string on blanks.
@@ -680,32 +763,47 @@ be stored as a reference to a hash, with the values being the keys.
 </P>
 <P>This takes one optional option, <CODE>always_present_values</CODE>, of a
 reference to an array of strings that will always be included in the
-parameter value, e.g. if the value of this option is
-<CODE>[ qw{ a b c } ]</CODE> and the user specifies a value of <CODE>'c d e'</CODE>, then
-the value of the parameter will contain <CODE>'a'</CODE>, <CODE>'b'</CODE>, <CODE>'c'</CODE>,
-<CODE>'d'</CODE>, and <CODE>'e'</CODE>.
+parameter value, e.g. if the value of this option is <CODE>[ qw{ a b c }
+]</CODE> and the user specifies a value of <CODE>'c d e'</CODE>, then the value of the
+parameter will contain <CODE>'a'</CODE>, <CODE>'b'</CODE>, <CODE>'c'</CODE>, <CODE>'d'</CODE>, and <CODE>'e'</CODE>.
 
-</P>
-<P><B>Example:</B>
+</P><H4><A NAME="supported_parameters()%20example"><CODE>supported_parameters()</CODE> example
 
-</P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name                  =&gt; 'a_string_list',
-              description           =&gt; 'An example list.',
-              default_string        =&gt; 'red pink blue',
-              behavior              =&gt; 'string list',
-              always_present_values =&gt; [ qw{ green purple} ],
-          },
-      );
-  }
+</A></H4>
+
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name                  =&gt; 'a_string_list',
+                description           =&gt; 'An example list.',
+                default_string        =&gt; 'red pink blue',
+                behavior              =&gt; 'string list',
+                always_present_values =&gt; [ qw{ green purple} ],
+            },
+        );
+    }
+</PRE>
+<H4><A NAME="Access%20example">Access example
+
+</A></H4>
+
+<PRE>    sub violates {
+        my ($self, $element, $document) = @_;
+
+        ...
+        my $list = $self-&gt;{_a_string_list};
+        my @list = keys %{$list};
+        ...
+        return if not $list-&gt;{ $element-&gt;content() };
+        ...
+    }
 </PRE>
 <H3><A NAME="%22enumeration%22">&quot;enumeration&quot;
 
 </A></H3>
 
-<P>Implemented in <A HREF="Perl/Critic/PolicyParameter/Behavior/Enumeration.html">Perl::Critic::PolicyParameter::Behavior::Enumeration</A>.
+<P>Implemented in
+<A HREF="Perl/Critic/PolicyParameter/Behavior/Enumeration.html">Perl::Critic::PolicyParameter::Behavior::Enumeration</A>.
 
 </P>
 <P>The values will be derived by splitting the input string on blanks.
@@ -721,24 +819,51 @@ is required.  A true value can be specified for
 <CODE>enumeration_allow_multiple_values</CODE> to allow the user to pick more
 than one value, but this defaults to false.
 
-</P>
-<P><B>Example:</B>
+</P><H4><A NAME="supported_parameters()%20example"><CODE>supported_parameters()</CODE> example
 
-</P>
-<PRE>  use Perl::Critic::Utils qw{ :characters };
+</A></H4>
 
-  sub supported_parameters {
-      return (
-          {
-              name               =&gt; 'an_enumeration',
-              description        =&gt; 'An example enumeration.',
-              default_string     =&gt; $EMPTY,
-              behavior           =&gt; 'enumeration',
-              enumeration_values =&gt; [ qw{ block statement pod operator } ],
-              enumeration_allow_multiple_values =&gt; 1,
-          },
-      );
-  }
+<PRE>    use Perl::Critic::Utils qw{ :characters };
+
+    sub supported_parameters {
+        return (
+            {
+                name               =&gt; 'a_single_valued_enumeration',
+                description        =&gt;
+                    'An example enumeration that can only have a single value.',
+                default_string     =&gt; $EMPTY,
+                behavior           =&gt; 'enumeration',
+                enumeration_values =&gt; [ qw{ block statement pod operator } ],
+                enumeration_allow_multiple_values =&gt; 0,
+            },
+            {
+                name               =&gt; 'a_multi_valued_enumeration',
+                description        =&gt;
+                    'An example enumeration that can have multiple values.',
+                default_string     =&gt; 'fe',
+                behavior           =&gt; 'enumeration',
+                enumeration_values =&gt; [ qw{ fe fi fo fum } ],
+                enumeration_allow_multiple_values =&gt; 1,
+            },
+        );
+    }
+</PRE>
+<H4><A NAME="Access%20example">Access example
+
+</A></H4>
+
+<PRE>    sub violates {
+        my ($self, $element, $document) = @_;
+
+        ...
+        my $single_value = $self-&gt;{_a_single_valued_enumeration};
+        ...
+        my $multi_value = $self-&gt;{_a_multi_valued_enumeration};
+        if ( $multi_value-&gt;{fum} ) {
+            ...
+        }
+        ...
+    }
 </PRE>
 <H2><A NAME="Using%20a%20Custom%20Parser">Using a Custom Parser
 
@@ -758,20 +883,22 @@ reference to it in the parameter specification with the <CODE>parser</CODE> key.
 For example:
 
 </P>
-<PRE>  sub supported_parameters {
-      return (
-          {
-              name           =&gt; 'file_name',
-              description    =&gt; 'A file for to read a list of values from.',
-              default_string =&gt; undef,
-              behavior       =&gt; 'string',
-              parser         =&gt; \&amp;_parse_file_name,
-          },
-      );
-  }</PRE>
+<PRE>    sub supported_parameters {
+        return (
+            {
+                name           =&gt; 'file_name',
+                description    =&gt; 'A file for to read a list of values from.',
+                default_string =&gt; undef,
+                behavior       =&gt; 'string',
+                parser         =&gt; \&amp;_parse_file_name,
+            },
+        );
+    }</PRE>
 
-<P>A parser is a method on a subclass of <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> that
-takes two parameters: the <A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> that is
+<P>A parser is a method on a subclass of
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> that takes two
+parameters: the
+<A HREF="Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> that is
 being specified and the value string provided by the user.  The method
 is responsible for dealing with any default value and for saving the
 parsed value for later use by the <CODE>violates()</CODE> method.
@@ -781,32 +908,32 @@ parsed value for later use by the <CODE>violates()</CODE> method.
 example declaration:
 
 </P>
-<PRE>  use File::Slurp qw&lt; slurp &gt;;
+<PRE>    use File::Slurp qw&lt; slurp &gt;;
 
-  use Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue
-      qw{ throw_policy_value };
+    use Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue
+        qw{ throw_policy_value };
 
-  sub _parse_file_name {
-      my ($self, $parameter, $config_string) = @_;
+    sub _parse_file_name {
+        my ($self, $parameter, $config_string) = @_;
 
-      my @thingies;
+        my @thingies;
 
-      if ($config_string) {
-          if (not -r $config_string) {
-              throw_policy_value
-                  policy         =&gt; $self-&gt;get_short_name(),
-                  option_name    =&gt; $parameter-&gt;get_name(),
-                  option_value   =&gt; $config_string,
-                  message_suffix =&gt; 'is not readable.';
-          }
+        if ($config_string) {
+            if (not -r $config_string) {
+                throw_policy_value
+                    policy         =&gt; $self-&gt;get_short_name(),
+                    option_name    =&gt; $parameter-&gt;get_name(),
+                    option_value   =&gt; $config_string,
+                    message_suffix =&gt; 'is not readable.';
+            }
 
-          @thingies = slurp $config_string;
-      }
+            @thingies = slurp $config_string;
+        }
 
-      $self-&gt;{_thingies} = \@thingies;
+        $self-&gt;{_thingies} = \@thingies;
 
-      return;
-  }</PRE>
+        return;
+    }</PRE>
 
 <P>Note that, if the value for the parameter is not valid, an instance of
 <A HREF="Perl/Critic/Exception/Configuration/Option/Policy/ParameterValue.html">Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue</A>
@@ -826,11 +953,11 @@ implementation of <CODE>initialize_if_enabled()</CODE>.  If you want to take
 advantage of the supplied parameter handling from within
 implementation of <CODE>initialize_if_enabled()</CODE>, note that the
 information from <CODE>supported_parameters()</CODE> will already have been
-used, with user-supplied parameter values valididated and placed into
+used, with user-supplied parameter values validated and placed into
 the Policy by the time <CODE>initialize_if_enabled()</CODE> has been called.  It
 is likely that you will not need to refer the contents of the
 <CODE>$config</CODE> parameter; just pull the information you need out of
-<CODE>$self</CODE>.
+<CODE>$self</CODE>.  In fact, any value for the parameter values will be gone.
 
 
 
@@ -951,24 +1078,187 @@ the value of the parameter.
 </DD>
 </DL>
 <HR>
+<H1><A NAME="ADDITIONAL%20FEATURES">ADDITIONAL FEATURES
+
+</A></H1>
+<H2><A NAME="default_maximum_violations_per_document()"><CODE>default_maximum_violations_per_document()</CODE>
+
+</A></H2>
+
+<P>Certain problems that a Policy detects can be endemic to a particular
+file; if there's one violation, there's likely to be many.  A good
+example of this is
+<A HREF="Perl/Critic/Policy/TestingAndDebugging/RequireUseStrict.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict</A>;
+if there's one line before <A HREF="#use%20strict">use strict</A>, there's a good chance that
+the entire file is missing <A HREF="#use%20strict">use strict</A>.  In such cases, it's not
+much help to the user to report every single violation.  If you've got
+such a policy, you should override
+<A HREF="Perl/Critic/Policy.html#default_maximum_violations_per_document()">default_maximum_violations_per_document()</A>
+method to provide a limit.  The user can override this value with a
+value for &quot;maximum_violations_per_document&quot; in their <I>.perlcriticrc</I>.
+
+</P>
+<P>See the source code for
+<A HREF="Perl/Critic/Policy/ValuesAndExpressions/ProhibitMagicNumbers.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers</A>
+and
+<A HREF="Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
+for examples.
+
+
+</P><HR>
+<H1><A NAME="DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
+
+</A></H1>
+<H2><A NAME="Create%20a%20Distribution">Create a Distribution
+
+</A></H2>
+
+<P>You need to come up with a name for your set of policies.  Sets of
+add-on policies are generally named <CODE>Perl::Critic::<I>something</I></CODE>,
+e.g. <A HREF="Perl/Critic/More.html">Perl::Critic::More</A>.
+
+</P>
+<P>The module representing the distribution will not actually have any
+functionality; it's just documentation and a name for users to use
+when installing via <A HREF="CPAN.html">CPAN</A>/<A HREF="CPANPLUS.html">CPANPLUS</A>.  The important
+part is that this will include a list of the included policies, with
+descriptions of each.
+
+</P>
+<P>A typical implementation will look like:
+
+</P>
+<PRE>    package Perl::Critic::Example;
+
+    use strict;
+    use warnings;
+
+    our $VERSION = '1.000000';
+
+    1; # Magic true value required at end of module
+
+    __END__
+
+    =head1 NAME
+
+    Perl::Critic::Example - Policies for Perl::Critic that act as an example.
+
+    =head1 AFFILIATION
+
+    This module has no functionality, but instead contains documentation
+    for this distribution and acts as a means of pulling other modules
+    into a bundle.  All of the Policy modules contained herein will have
+    an &quot;AFFILIATION&quot; section announcing their participation in this
+    grouping.
+
+
+    =head1 SYNOPSIS
+
+    Some L&lt;Perl::Critic|Perl::Critic&gt; policies that will help you keep your code
+    nice and compliant.
+
+
+    =head1 DESCRIPTION
+
+    The included policies are:
+
+    =over
+
+    =item L&lt;Perl::Critic::Policy::Documentation::Example|Perl::Critic::Policy::Documentation::Example&gt;
+
+    Complains about some example documentation issues.  [Severity: 3]
+
+
+    =item L&lt;Perl::Critic::Policy::Variables::Example|Perl::Critic::Policy::Variables::Example&gt;
+
+    All modules must have at least one variable.  [Severity: 3]
+
+
+    =back
+
+
+    =head1 CONFIGURATION AND ENVIRONMENT
+
+    All policies included are in the &quot;example&quot; theme.  See the
+    L&lt;Perl::Critic|Perl::Critic&gt; documentation for how to make use of this.
+</PRE>
+<H2><A NAME="Themes">Themes
+
+</A></H2>
+
+<P>Users can choose which policies to enable using themes.  You should
+implement <CODE>default_themes()</CODE> so that users can take advantage of
+this.  In particular, you should use a theme named after your
+distribution in all your policies; this should match the value listed
+in the <CODE>CONFIGURATION AND ENVIRONMENT</CODE> POD section as shown above.
+
+</P>
+<PRE>    default_themes { return qw&lt; example math &gt; }</PRE>
+
+<P>If you're looking for ideas of what themes to do, have a look at the
+output of <CODE>perlcritic --list-themes</CODE>.
+
+
+</P><H2><A NAME="Documentation">Documentation
+
+</A></H2>
+<H3><A NAME="AFFILIATION">AFFILIATION
+
+</A></H3>
+
+<P>Since all policies have to go somewhere under the
+<CODE>Perl::Critic::Policy::</CODE> namespace, it isn't always clear what
+distribution a policy came from when browsing through their
+documentation.  For this reason, you should include an <CODE>AFFILIATION</CODE>
+section in the POD for all of your policies that state where the
+policy comes from.  For example:
+
+</P>
+<PRE>    =head1 AFFILIATION
+
+    This policy is part of L&lt;Perl::Critic::Example|Perl::Critic::Example&gt;.
+</PRE>
+<H3><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H3>
+
+<P>In order to make it clear what can be done with a policy, you should
+always include a <CODE>CONFIGURATION</CODE> section in your POD, even if it's
+only to say:
+
+</P>
+<PRE>    =head1 CONFIGURATION
+
+    This Policy is not configurable except for the standard options.
+</PRE>
+<HR>
 <H1><A NAME="HINT">HINT
 
 </A></H1>
 
-<P>When you're trying to figure out what <A HREF="PPI.html">PPI</A> is going to hand you for
-a chunk of code, there is a <I>tools/ppidump</I> program in the
-<A HREF="Perl/Critic.html">Perl::Critic</A> distribution that will help you.  For example, when
-developing the above RequireBlockGrep example, you might want to try
+<P>When you're trying to figure out what <A HREF="PPI.html">PPI</A> is going to hand you
+for a chunk of code, there is a <I>tools/ppidump</I> program in the
+<A HREF="Perl/Critic.html">Perl::Critic</A> distribution that will help you.  For
+example, when developing the above RequireBlockGrep example, you might
+want to try
 
 </P>
-<PRE>  tools/ppidump '@matches = grep /pattern/, @list;'</PRE>
+<PRE>    tools/ppidump '@matches = grep /pattern/, @list;'</PRE>
 
 <P>and
 
 </P>
-<PRE>  tools/ppidump '@matches = grep { /pattern/ } @list;'</PRE>
+<PRE>    tools/ppidump '@matches = grep { /pattern/ } @list;'</PRE>
 
 <P>to see the differences between the two cases.
+
+
+</P><HR>
+<H1><A NAME="VERSION">VERSION
+
+</A></H1>
+
+<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.088.
 
 
 </P><HR>
@@ -977,6 +1267,7 @@ developing the above RequireBlockGrep example, you might want to try
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

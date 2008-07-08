@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,22 +24,32 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitMutatingListFunctions
+<P>Perl::Critic::Policy::ControlStructures::ProhibitMutatingListFunctions - Don't modify <CODE>$_</CODE> in list functions.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P><CODE>map</CODE>, <CODE>grep</CODE> and other list operators are intended to transform arrays into
-other arrays by applying code to the array elements one by one.  For speed,
-the elements are referenced via a <CODE>$_</CODE> alias rather than copying them.  As a
-consequence, if the code block of the <CODE>map</CODE> or <CODE>grep</CODE> modify <CODE>$_</CODE> in any
-way, then it is actually modifying the source array.  This IS technically
-allowed, but those side effects can be quite surprising, especially when the
-array being passed is <CODE>@_</CODE> or perhaps <CODE>values(%ENV)</CODE>!  Instead authors
-should restrict in-place array modification to <CODE>for(@array) { ... }</CODE>
-constructs instead, or use <CODE>List::MoreUtils::apply()</CODE>.
+<P><CODE>map</CODE>, <CODE>grep</CODE> and other list operators are intended to transform
+arrays into other arrays by applying code to the array elements one by
+one.  For speed, the elements are referenced via a <CODE>$_</CODE> alias rather
+than copying them.  As a consequence, if the code block of the <CODE>map</CODE>
+or <CODE>grep</CODE> modify <CODE>$_</CODE> in any way, then it is actually modifying the
+source array.  This IS technically allowed, but those side effects can
+be quite surprising, especially when the array being passed is <CODE>@_</CODE>
+or perhaps <CODE>values(%ENV)</CODE>!  Instead authors should restrict in-place
+array modification to <CODE>for(@array) { ... }</CODE> constructs instead, or
+use <CODE>List::MoreUtils::apply()</CODE>.
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -47,22 +59,23 @@ constructs instead, or use <CODE>List::MoreUtils::apply()</CODE>.
 <P>By default, this policy applies to the following list functions:
 
 </P>
-<PRE>  map grep
-  List::Util qw(first)
-  List::MoreUtils qw(any all none notall true false firstidx first_index
-                     lastidx last_index insert_after insert_after_string)</PRE>
+<PRE>    map grep
+    List::Util qw(first)
+    List::MoreUtils qw(any all none notall true false firstidx
+                       first_index lastidx last_index insert_after
+                       insert_after_string)</PRE>
 
 <P>This list can be overridden the <I>.perlcriticrc</I> file like this:
 
 </P>
-<PRE> [ControlStructures::ProhibitMutatingListFunctions]
- list_funcs = map grep List::Util::first</PRE>
+<PRE>    [ControlStructures::ProhibitMutatingListFunctions]
+    list_funcs = map grep List::Util::first</PRE>
 
 <P>Or, one can just append to the list like so:
 
 </P>
-<PRE> [ControlStructures::ProhibitMutatingListFunctions]
- add_list_funcs = Foo::Bar::listmunge</PRE>
+<PRE>    [ControlStructures::ProhibitMutatingListFunctions]
+    add_list_funcs = Foo::Bar::listmunge</PRE>
 <HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 
@@ -72,20 +85,21 @@ constructs instead, or use <CODE>List::MoreUtils::apply()</CODE>.
 <CODE>List::MoreUtils::apply()</CODE>.
 
 </P>
-<P>Currently, the policy only detects explicit external module usage like this:
+<P>Currently, the policy only detects explicit external module usage like
+this:
 
 </P>
-<PRE>  my @out = List::MoreUtils::any {s/^foo//} @in;</PRE>
+<PRE>    my @out = List::MoreUtils::any {s/^foo//} @in;</PRE>
 
 <P>and not like this:
 
 </P>
-<PRE>  use List::MoreUtils qw(any);
-  my @out = any {s/^foo//} @in;</PRE>
+<PRE>    use List::MoreUtils qw(any);
+    my @out = any {s/^foo//} @in;</PRE>
 
-<P>This policy looks only for modifications of <CODE>$_</CODE>.  Other naughtiness could
-include modifying <CODE>$a</CODE> and <CODE>$b</CODE> in <CODE>sort</CODE> and the like.  That's beyond the
-scope of this policy.
+<P>This policy looks only for modifications of <CODE>$_</CODE>.  Other naughtiness
+could include modifying <CODE>$a</CODE> and <CODE>$b</CODE> in <CODE>sort</CODE> and the like.
+That's beyond the scope of this policy.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

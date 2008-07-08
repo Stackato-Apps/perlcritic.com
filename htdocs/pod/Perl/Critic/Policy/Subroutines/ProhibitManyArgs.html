@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -24,7 +26,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProhibitManyArgs
+<P>Perl::Critic::Policy::Subroutines::ProhibitManyArgs - Too many arguments.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -54,19 +65,20 @@ this:
 
 </A></H1>
 
-<P>PPI doesn't currently detect anonymous subroutines, so we don't check those.
-This should just work when PPI gains that feature.
+<P>PPI doesn't currently detect anonymous subroutines, so we don't check
+those.  This should just work when PPI gains that feature.
 
 </P>
-<P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.  That's
-deprecated anyway.
+<P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.
+That's deprecated anyway.
 
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

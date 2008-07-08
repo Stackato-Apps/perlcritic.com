@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ErrorHandling::RequireCarping
+<P>Perl::Critic::Policy::ErrorHandling::RequireCarping - Use functions from <A HREF="../../../../Carp.html">Carp</A> instead of <CODE>warn</CODE> or <CODE>die</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -57,6 +70,10 @@ none of the <A HREF="../../../../Carp.html">Carp</A> functions are necessary.
     my $message = &quot;$clock not set.\n&quot;;
     die $message if $no_time;             #not ok, not obvious
 </PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
 
 <P>If you give this policy an <CODE>allow_messages_ending_with_newlines</CODE>
 option in your <I>.perlcriticrc</I> with a false value, then this policy
@@ -64,7 +81,8 @@ will disallow all uses of <CODE>die</CODE> and <CODE>warn</CODE>.
 
 </P>
 <PRE>    [ErrorHandling::RequireCarping]
-    allow_messages_ending_with_newlines = 0</PRE>
+    allow_messages_ending_with_newlines = 0
+</PRE>
 <HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 

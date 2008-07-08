@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#DEFAULTS">DEFAULTS
@@ -24,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Documentation::RequirePodSections
+<P>Perl::Critic::Policy::Documentation::RequirePodSections - Organize your POD into the customary sections.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,9 +45,10 @@
 
 <P>This Policy requires your POD to contain certain <CODE>=head1</CODE> sections.
 If the file doesn't contain any POD at all, then this Policy does not
-apply.  Tools like <A HREF="Module/Starter.html">Module::Starter</A> make it really easy to ensure
-that every module has the same documentation framework, and they can
-save you lots of keystrokes.
+apply.  Tools like <A HREF="Module/Starter.html">Module::Starter</A> make it really
+easy to ensure that every module has the same documentation framework,
+and they can save you lots of keystrokes.
+
 
 </P><HR>
 <H1><A NAME="DEFAULTS">DEFAULTS
@@ -47,24 +60,25 @@ a library or program (which is determined by the presence or absence
 of a perl shebang line).
 
 </P>
-<PRE>             Default Required POD Sections
+<PRE>                Default Required POD Sections
 
-   Perl Libraries                     Perl Programs
-   ------------------------------------------------------
-   NAME                               NAME
-   VERSION
-   SYNOPSIS                           USAGE
-   DESCRIPTION                        DESCRIPTION
-   SUBROUTINES/METHODS                REQUIRED ARGUMENTS
-                                      OPTIONS
-   DIAGNOSTICS                        DIAGNOSTICS
-                                      EXIT STATUS
-   CONFIGURATION AND ENVIRONMENT      CONFIGURATION
-   DEPENDENCIES                       DEPENDENCIES
-   INCOMPATIBILITIES                  INCOMPATIBILITIES
-   BUGS AND LIMITATIONS               BUGS AND LIMITATIONS
-   AUTHOR                             AUTHOR
-   LICENSE AND COPYRIGHT              LICENSE AND COPYRIGHT</PRE>
+    Perl Libraries                     Perl Programs
+    ------------------------------------------------------
+    NAME                               NAME
+    VERSION
+    SYNOPSIS                           USAGE
+    DESCRIPTION                        DESCRIPTION
+    SUBROUTINES/METHODS                REQUIRED ARGUMENTS
+                                        OPTIONS
+    DIAGNOSTICS                        DIAGNOSTICS
+                                        EXIT STATUS
+    CONFIGURATION AND ENVIRONMENT      CONFIGURATION
+    DEPENDENCIES                       DEPENDENCIES
+    INCOMPATIBILITIES                  INCOMPATIBILITIES
+    BUGS AND LIMITATIONS               BUGS AND LIMITATIONS
+    AUTHOR                             AUTHOR
+    LICENSE AND COPYRIGHT              LICENSE AND COPYRIGHT
+</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -72,11 +86,12 @@ of a perl shebang line).
 
 <P>The default sections above are derived from Damian Conway's <I>Perl
 Best Practices</I> book.  Since the book has been published, Conway has
-released <A HREF="Module/Starter/PBP.html">Module::Starter::PBP</A>, which has different names for some
-of the sections, and adds some more.  Also, the book and module use
-Australian spelling, while the authors of this module have previously
-used American spelling.  To sort this all out, there are a couple of
-options that can be used: <CODE>source</CODE> and <CODE>language</CODE>.
+released <A HREF="Module/Starter/PBP.html">Module::Starter::PBP</A>, which has
+different names for some of the sections, and adds some more.  Also,
+the book and module use Australian spelling, while the authors of this
+module have previously used American spelling.  To sort this all out,
+there are a couple of options that can be used: <CODE>source</CODE> and
+<CODE>language</CODE>.
 
 </P>
 <P>The <CODE>source</CODE> option has two generic values, <CODE>book</CODE> and
@@ -98,16 +113,16 @@ specified in the book, put the following in your <I>.perlcriticrc</I>
 file:
 
 </P>
-<PRE>  [Documentation::RequirePodSections]
-  source   = book_first_edition
-  language = en_AU</PRE>
+<PRE>    [Documentation::RequirePodSections]
+    source   = book_first_edition
+    language = en_AU</PRE>
 
 <P>If you want to use
 
 </P>
-<PRE>  [Documentation::RequirePodSections]
-  source   = module_starter_pbp
-  language = en_US</PRE>
+<PRE>    [Documentation::RequirePodSections]
+    source   = module_starter_pbp
+    language = en_US</PRE>
 
 <P>you will need to modify your <I>~/.module-starter/PBP/Module.pm</I>
 template because it is generated using Australian spelling.
@@ -124,9 +139,10 @@ of pipe-delimited required POD section names.  An example of entries
 in a <I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [Documentation::RequirePodSections]
-  lib_sections    = NAME | SYNOPSIS | BUGS AND LIMITATIONS | AUTHOR
-  script_sections = NAME | USAGE | OPTIONS | EXIT STATUS | AUTHOR</PRE>
+<PRE>    [Documentation::RequirePodSections]
+    lib_sections    = NAME | SYNOPSIS | BUGS AND LIMITATIONS | AUTHOR
+    script_sections = NAME | USAGE | OPTIONS | EXIT STATUS | AUTHOR
+</PRE>
 <HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 
@@ -136,12 +152,14 @@ in a <I>.perlcriticrc</I> file:
 below the <CODE>=head1</CODE> level.  Also, it does not require the sections to
 appear in any particular order.
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

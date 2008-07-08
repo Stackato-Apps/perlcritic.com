@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::RequireNumberSeparators
+<P>Perl::Critic::Policy::ValuesAndExpressions::RequireNumberSeparators - Write <CODE> 141_234_397.0145 </CODE> instead of <CODE> 141234397.0145 </CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -31,15 +43,15 @@
 
 <P>Long numbers can be difficult to read.  To improve legibility, Perl
 allows numbers to be split into groups of digits separated by
-underscores.  This policy requires number sequences of more than
-three digits to be separated.
+underscores.  This policy requires number sequences of more than three
+digits to be separated.
 
 </P>
-<PRE> $long_int = 123456789;   #not ok
- $long_int = 123_456_789; #ok
+<PRE>    $long_int = 123456789;   #not ok
+    $long_int = 123_456_789; #ok
 
- $long_float = 12345678.001;   #not ok
- $long_float = 12_345_678.001; #ok</PRE>
+    $long_float = 12345678.001;   #not ok
+    $long_float = 12_345_678.001; #ok</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -51,8 +63,8 @@ thus, all numbers &gt;= 10,000 and &lt;= -10,000 must have separators.  For
 example:
 
 </P>
-<PRE>  [ValuesAndExpressions::RequireNumberSeparators]
-  min_value = 100000    # That's one-hundred-thousand!</PRE>
+<PRE>    [ValuesAndExpressions::RequireNumberSeparators]
+    min_value = 100000    # That's one-hundred-thousand!</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 

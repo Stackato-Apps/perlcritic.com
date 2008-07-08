@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::ThemeListing</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#OVERLOADS">OVERLOADS
+
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::ThemeListing - List the themes of the installed Policies.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This is a helper class that gathers the themes of the installed
+Policies.  There are no user-serviceable parts here.
+
+
+</P><HR>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+<DL><DT><A NAME="new(%20-policies%20%3d%3e%20%5c%40POLICY_OBJECTS%20)"><CODE>new( -policies =&gt; \@POLICY_OBJECTS )</CODE>
+
+</A></DT>
+<DD>
+Returns a reference to a new <CODE>Perl::Critic::ThemeListing</CODE> object.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="to_string()">to_string()
+
+</A></DT>
+<DD>
+Returns a string representation of this <CODE>ThemeListing</CODE>.  See
+<A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for more information.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="OVERLOADS">OVERLOADS
+
+
+</A></H1>
+
+<P>When a <A HREF="../../Perl/Critic/ThemeListing.html">Perl::Critic::ThemeListing</A> is
+evaluated in string context, it produces a one-line summary of the
+default severity, policy name, and default themes for each
+<A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> object that was given to
+the constructor of this <CODE>ThemeListing</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

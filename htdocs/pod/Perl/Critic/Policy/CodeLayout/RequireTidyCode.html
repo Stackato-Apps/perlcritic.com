@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -24,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::CodeLayout::RequireTidyCode
+<P>Perl::Critic::Policy::CodeLayout::RequireTidyCode - Must run code through <A HREF="../../../../perltidy.html">perltidy</A>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -34,8 +46,9 @@
 <P>Conway does make specific recommendations for whitespace and
 curly-braces in your code, but the most important thing is to adopt a
 consistent layout, regardless of the specifics.  And the easiest way
-to do that is to use <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>.  This policy will complain if
-you're code hasn't been run through Perl::Tidy.
+to do that is to use <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>.  This policy will
+complain if you're code hasn't been run through Perl::Tidy.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -43,30 +56,34 @@ you're code hasn't been run through Perl::Tidy.
 </A></H1>
 
 <P>This policy can be configured to tell Perl::Tidy to use a particular
-<I>perltidyrc</I> file or no configuration at all.  By default, Perl::Tidy is told
-to look in its default location for configuration.  Perl::Critic can be told to
-tell Perl::Tidy to use a specific configuration file by putting an entry in a
-<I>.perlcriticrc</I> file like this:
+<I>perltidyrc</I> file or no configuration at all.  By default, Perl::Tidy
+is told to look in its default location for configuration.
+Perl::Critic can be told to tell Perl::Tidy to use a specific
+configuration file by putting an entry in a <I>.perlcriticrc</I> file like
+this:
 
 </P>
-<PRE>  [CodeLayout::RequireTidyCode]
-  perltidyrc = /usr/share/perltidy.conf</PRE>
+<PRE>    [CodeLayout::RequireTidyCode]
+    perltidyrc = /usr/share/perltidy.conf</PRE>
 
 <P>As a special case, setting <CODE>perltidyrc</CODE> to the empty string tells
 Perl::Tidy not to load any configuration file at all and just use
 Perl::Tidy's own default style.
 
 </P>
-<PRE>  [CodeLayout::RequireTidyCode]
-  perltidyrc =</PRE>
+<PRE>    [CodeLayout::RequireTidyCode]
+    perltidyrc =
+</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A> is not included in the Perl::Critic distribution.  The
-latest version of Perl::Tidy can be downloaded from CPAN.  If
-Perl::Tidy is not installed, this policy is silently ignored.
+<P><A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A> is not included in the Perl::Critic
+distribution.  The latest version of Perl::Tidy can be downloaded from
+CPAN.  If Perl::Tidy is not installed, this policy is silently
+ignored.
+
 
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
@@ -75,12 +92,14 @@ Perl::Tidy is not installed, this policy is silently ignored.
 
 <P><A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

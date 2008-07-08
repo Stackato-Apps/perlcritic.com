@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Modules::RequireNoMatchVarsWithUseEnglish
+<P>Perl::Critic::Policy::Modules::RequireNoMatchVarsWithUseEnglish - <CODE>use English</CODE> must be passed a <CODE>-no_match_vars</CODE> argument.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
 
 
 </P><HR>
@@ -26,18 +39,27 @@
 
 </A></H1>
 
-<P>Due to unfortunate history, if you use the <A HREF="../../../../English.html">English</A> module but don't
-pass in a <CODE>-no_match_vars</CODE> argument, all regular expressions in the
-entire program, not merely the module in question, suffer a
-significant performance penalty.  See the <A HREF="../../../../English.html">English</A> documentation for
-details.
+<P>Due to unfortunate history, if you use the <A HREF="../../../../English.html">English</A> module
+but don't pass in a <CODE>-no_match_vars</CODE> argument, all regular
+expressions in the entire program, not merely the module in question,
+suffer a significant performance penalty.  See the <A HREF="../../../../English.html">English</A>
+documentation for details.
 
 </P>
-<PRE>  use English;                              # not ok
-  use English '-no_match_vars';             # ok
-  use English qw&lt; $ERRNO -no_match_vars&gt;;   # ok
+<PRE>    use English;                              # not ok
+    use English '-no_match_vars';             # ok
+    use English qw&lt; $ERRNO -no_match_vars&gt;;   # ok
+
 </PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

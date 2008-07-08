@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef
+<P>Perl::Critic::Policy::Subroutines::ProhibitExplicitReturnUndef - Return failure with bare <CODE>return</CODE> instead of <CODE>return undef</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -72,8 +85,17 @@ also false).
       -f $file || return;  #DWIM!
 
       #Continue reading file...
-  }</PRE>
+  }
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -81,8 +103,8 @@ also false).
 <P>You can fool this policy pretty easily by hiding <CODE>undef</CODE> in a boolean
 expression.  But don't bother trying.  In fact, using return values to
 indicate failure is pretty poor technique anyway.  Consider using
-<CODE>die</CODE> or <CODE>croak</CODE> with <CODE>eval</CODE>, or the <A HREF="../../../../Error.html">Error</A> module for a much
-more robust exception-handling model.  Conway has a real nice
+<CODE>die</CODE> or <CODE>croak</CODE> with <CODE>eval</CODE>, or the <A HREF="../../../../Error.html">Error</A> module for a
+much more robust exception-handling model.  Conway has a real nice
 discussion on error handling in chapter 13 of PBP.
 
 </P><HR>

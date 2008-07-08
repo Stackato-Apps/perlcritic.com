@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ErrorHandling::RequireCheckingReturnValueOfEval - You can't depend upon the value of <CODE>$@</CODE>/<CODE>$EVAL_ERROR</CODE> to tell whether an <CODE>eval</CODE> failed.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A common idiom in perl for dealing with possible errors is to use
+<CODE>eval</CODE> followed by a check of <CODE>$@</CODE>/<CODE>$EVAL_ERROR</CODE>:
+
+</P>
+<PRE>    eval {
+        ...
+    };
+    if ($EVAL_ERROR) {
+        ...
+    }</PRE>
+
+<P>There's a problem with this: the value of <CODE>$EVAL_ERROR</CODE> can change
+between the end of the <CODE>eval</CODE> and the <CODE>if</CODE> statement.  The issue is
+object destructors:
+
+</P>
+<PRE>    package Foo;
+
+    ...
+
+    sub DESTROY {
+        ...
+        eval { ... };
+        ...
+    }
+
+    package main;
+
+    eval {
+        my $foo = Foo-&gt;new();
+        ...
+    };
+    if ($EVAL_ERROR) {
+        ...
+    }</PRE>
+
+<P>Assuming there are no other references to <CODE>$foo</CODE> created, when the
+<CODE>eval</CODE> block in <CODE>main</CODE> is exited, <CODE>Foo::DESTROY()</CODE> will be invoked,
+regardless of whether the <CODE>eval</CODE> finished normally or not.  If the
+<CODE>eval</CODE> in <CODE>main</CODE> fails, but the <CODE>eval</CODE> in <CODE>Foo::DESTROY()</CODE>
+succeeds, then <CODE>$EVAL_ERROR</CODE> will be empty by the time that the <CODE>if</CODE>
+is executed.  Additional issues arise if you depend upon the exact
+contents of <CODE>$EVAL_ERROR</CODE> and both <CODE>eval</CODE>s fail, because the
+messages from both will be concatenated.
+
+</P>
+<P>Even if there isn't an <CODE>eval</CODE> directly in the <CODE>DESTROY()</CODE> method
+code, it may invoke code that does use <CODE>eval</CODE> or otherwise affects
+<CODE>$EVAL_ERROR</CODE>.
+
+</P>
+<P>The solution is to ensure that, upon normal exit, an <CODE>eval</CODE> returns a
+true value and to test that value:
+
+</P>
+<PRE>    # Constructors are no problem.
+    my $object = eval { Class-&gt;new() };
+
+    # To cover the possiblity that an operation may correctly return a
+    # false value, end the block with &quot;1&quot;:
+    if ( eval { something(); 1 } ) {
+        ...
+    }
+
+    eval {
+        ...
+        1;
+    }
+        or do {
+            # Error handling here
+        };</PRE>
+
+<P>Unfortunately, you can't use the <CODE>defined</CODE> function to test the
+result; <CODE>eval</CODE> returns an empty string on failure.
+
+</P>
+<P>&quot;But we don't use DESTROY() anywhere in our code!&quot; you say.  That may
+be the case, but do any of the third-party modules you use have them?
+What about any you may use in the future or updated versions of the
+ones you already use?
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P>See thread on perl5-porters starting here:
+<A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perl5-porters/2008-06/msg00537.html">http://www.xray.mpe.mpg.de/mailing-lists/perl5-porters/2008-06/msg00537.html</A>.
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

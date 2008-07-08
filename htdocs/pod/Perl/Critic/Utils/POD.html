@@ -1,0 +1,333 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#SYNOPSIS">SYNOPSIS
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#IMPORTABLE%20SUBROUTINES">IMPORTABLE SUBROUTINES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Utils::POD - Utility functions for dealing with POD.
+
+
+</P><HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+
+<PRE>    use Perl::Critic::Utils::POD qw&lt; get_pod_section_from_file &gt;;
+
+    my $synopsis =
+        get_pod_section_from_file('Perl/Critic/Utils/POD.pm', 'SYNOPSIS');
+
+    my $see_also =
+        get_pod_section_from_filehandle($file_handle, 'SEE ALSO');
+
+
+    my $see_also_content = trim_pod_section($see_also);
+
+
+    # &quot;Utility functions for dealing with POD.&quot;
+    my $module_abstract =
+        get_module_abstract_from_file('Perl/Critic/Utils/POD.pm');
+
+    my $module_abstract =
+        get_module_abstract_from_filehandle($file_handle);
+</PRE>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Provides means of accessing chunks of POD.
+
+
+</P><HR>
+<H1><A NAME="IMPORTABLE%20SUBROUTINES">IMPORTABLE SUBROUTINES
+
+</A></H1>
+<DL><DT><A NAME="get_pod_file_for_module(%20%24module_name%20)"><CODE>get_pod_file_for_module( $module_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Figure out where to find the POD for the parameter.
+
+</P>
+<P>This depends upon the module already being loaded; it will not find
+the path for arbitrary modules.
+
+</P>
+<P>If there is a file with a &quot;.pod&quot; extension next to the real module
+location, it will be returned in preference to the actual module.
+
+
+</P></DD>
+<DT><A NAME="get_raw_pod_section_from_file(%20%24file_name%2c%20%24section_name%20)"><CODE>get_raw_pod_section_from_file( $file_name, $section_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Retrieves the specified section of POD (i.e. something marked by
+<CODE>=head1</CODE>) from the file.  This is uninterpreted; escapes are not
+processed and any sub-sections will be present.  E.g. if the content
+contains &quot;C&lt;$x&gt;&quot;, the return value will contain &quot;C&lt;$x&gt;&quot;.
+
+</P>
+<P>Returns nothing if no such section is found.
+
+</P>
+<P>Throws a <A HREF="Perl/Critic/Exception/IO.html">Perl::Critic::Exception::IO</A> if
+there's a problem with the file.
+
+
+</P></DD>
+<DT><A NAME="get_raw_pod_section_from_filehandle(%20%24file_handle%2c%20%24section_name%20)"><CODE>get_raw_pod_section_from_filehandle( $file_handle, $section_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_pod_section_from_file()</CODE>, but with a file
+handle.
+
+
+</DD>
+<DT><A NAME="get_raw_pod_section_from_string(%20%24source%2c%20%24section_name%20)"><CODE>get_raw_pod_section_from_string( $source, $section_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_pod_section_from_file()</CODE>, but with a string
+that contains the raw POD.
+
+
+</DD>
+<DT><A NAME="get_raw_pod_section_for_module(%20%24module_name%2c%20%24section_name%20)"><CODE>get_raw_pod_section_for_module( $module_name, $section_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Does the same as <CODE>get_raw_pod_section_from_file()</CODE>, but with a module
+name.
+
+</P>
+<P>Throws a
+<A HREF="Perl/Critic/Exception/Generic.html">Perl::Critic::Exception::Generic</A>
+if a file containing POD for the module can't be found.
+
+
+</P></DD>
+<DT><A NAME="get_pod_section_from_file(%20%24file_name%2c%20%24section_name%20)"><CODE>get_pod_section_from_file( $file_name, $section_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Retrieves the specified section of POD (i.e. something marked by
+<CODE>=head1</CODE>) from the file.  This is interpreted into plain text.
+
+</P>
+<P>Returns nothing if no such section is found.
+
+</P>
+<P>Throws a <A HREF="Perl/Critic/Exception/IO.html">Perl::Critic::Exception::IO</A> if
+there's a problem with the file.
+
+
+</P></DD>
+<DT><A NAME="get_pod_section_from_filehandle(%20%24file_handle%2c%20%24section_name%20)"><CODE>get_pod_section_from_filehandle( $file_handle, $section_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_pod_section_from_file()</CODE>, but with a file
+handle.
+
+
+</DD>
+<DT><A NAME="get_pod_section_from_string(%20%24source%2c%20%24section_name%20)"><CODE>get_pod_section_from_string( $source, $section_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_pod_section_from_file()</CODE>, but with a string
+that contains the raw POD.
+
+
+</DD>
+<DT><A NAME="get_pod_section_for_module(%20%24module_name%2c%20%24section_name%20)"><CODE>get_pod_section_for_module( $module_name, $section_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Does the same as <CODE>get_pod_section_from_file()</CODE>, but with a module
+name.
+
+</P>
+<P>Throws a
+<A HREF="Perl/Critic/Exception/Generic.html">Perl::Critic::Exception::Generic</A>
+if a file containing POD for the module can't be found.
+
+
+</P></DD>
+<DT><A NAME="trim_raw_pod_section(%20%24pod_section%20)"><CODE>trim_raw_pod_section( $pod_section )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a copy of the parameter, with any starting <CODE>=item1 BLAH</CODE>
+removed and all leading and trailing whitespace (including newlines)
+removed after that.
+
+</P>
+<P>For example, using one of the <CODE>get_raw_pod_section_from_*</CODE> functions
+to get the &quot;NAME&quot; section of this module and then calling
+<CODE>trim_raw_pod_section()</CODE> on the result would give you
+&quot;Perl::Critic::Utils::POD - Utility functions for dealing with POD.&quot;.
+
+
+</P></DD>
+<DT><A NAME="trim_pod_section(%20%24pod_section%20)"><CODE>trim_pod_section( $pod_section )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a copy of the parameter, with any starting line removed and
+leading blank lines and trailing whitespace (including newlines)
+removed after that.  Note that only leading whitespace on the first
+real line of the section will remain.
+
+</P>
+<P>Since this cannot count upon a <CODE>=item1</CODE> marker, this is much less
+reliable than <CODE>trim_raw_pod_section()</CODE>.
+
+
+</P></DD>
+<DT><A NAME="get_raw_module_abstract_from_file(%20%24file_name%20)"><CODE>get_raw_module_abstract_from_file( $file_name )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Attempts to parse the &quot;NAME&quot; section of the specified file and get the
+abstract of the module from that.  If it succeeds, it returns the
+abstract.  If it fails, either because there is no &quot;NAME&quot; section or
+there is no abstract after the module name, returns nothing.  If it
+looks like there's a malformed abstract, throws a
+<A HREF="Perl/Critic/Exception/Fatal/Generic.html">Perl::Critic::Exception::Fatal::Generic</A>.
+
+</P>
+<P>Example &quot;well formed&quot; &quot;NAME&quot; sections without abstracts:
+
+</P>
+<PRE>    Some::Module
+
+    Some::Other::Module -</PRE>
+
+<P>Example &quot;NAME&quot; sections that will result in an exception:
+
+</P>
+<PRE>    Some::Bad::Module This has no hyphen.
+
+    Some::Mean::Module -- This has double hyphens.
+
+    Some::Nasty::Module - This one attempts to
+    span multiple lines.
+</PRE>
+</DD>
+<DT><A NAME="get_raw_module_abstract_from_filehandle(%20%24file_handle%20)"><CODE>get_raw_module_abstract_from_filehandle( $file_handle )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_module_abstract_from_file()</CODE>, but with a
+file handle.
+
+
+</DD>
+<DT><A NAME="get_raw_module_abstract_from_string(%20%24source%20)"><CODE>get_raw_module_abstract_from_string( $source )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_module_abstract_from_file()</CODE>, but with a
+string that contains the raw POD.
+
+
+</DD>
+<DT><A NAME="get_raw_module_abstract_for_module(%20%24module_name%20)"><CODE>get_raw_module_abstract_for_module( $module_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_module_abstract_from_file()</CODE>, but for a
+module name.
+
+
+</DD>
+<DT><A NAME="get_module_abstract_from_file(%20%24file_name%20)"><CODE>get_module_abstract_from_file( $file_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_raw_module_abstract_from_file()</CODE>, but with
+escapes interpreted.
+
+
+</DD>
+<DT><A NAME="get_module_abstract_from_filehandle(%20%24file_handle%20)"><CODE>get_module_abstract_from_filehandle( $file_handle )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_module_abstract_from_file()</CODE>, but with a file
+handle.
+
+
+</DD>
+<DT><A NAME="get_module_abstract_from_string(%20%24source%20)"><CODE>get_module_abstract_from_string( $source )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_module_abstract_from_file()</CODE>, but with a string
+that contains the raw POD.
+
+
+</DD>
+<DT><A NAME="get_module_abstract_for_module(%20%24module_name%20)"><CODE>get_module_abstract_for_module( $module_name )</CODE>
+
+</A></DT>
+<DD>
+Does the same as <CODE>get_module_abstract_from_file()</CODE>, but for a module
+name.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

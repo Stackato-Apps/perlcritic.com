@@ -26,13 +26,16 @@
 
 <P>Perl::Critic::PolicyFactory - Instantiates Policy objects.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>This is a helper class that instantiates <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects with
-the user's preferred parameters. There are no user-serviceable parts here.
+<P>This is a helper class that instantiates
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects with the user's
+preferred parameters. There are no user-serviceable parts here.
+
 
 </P><HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -46,13 +49,16 @@ the user's preferred parameters. There are no user-serviceable parts here.
 <P>Returns a reference to a new Perl::Critic::PolicyFactory object.
 
 </P>
-<P><B>-profile</B> is a reference to a <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.  This
+<P><B>-profile</B> is a reference to a
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.  This
 argument is required.
 
 </P>
-<P><B>-errors</B> is a reference to an instance of <A HREF="Perl/Critic/ConfigErrors.html">Perl::Critic::ConfigErrors</A>.
-This argument is optional.  If specified, than any problems found will be
+<P><B>-errors</B> is a reference to an instance of
+<A HREF="Perl/Critic/ConfigErrors.html">Perl::Critic::ConfigErrors</A>.  This
+argument is optional.  If specified, than any problems found will be
 added to the object.
+
 
 </P></DD>
 </DL>
@@ -65,24 +71,26 @@ added to the object.
 </A></DT>
 <DD>
 
-<P>Creates one Policy object.  If the object cannot be instantiated, it will
-throw a fatal exception.  Otherwise, it returns a reference to the new Policy
-object.
+<P>Creates one Policy object.  If the object cannot be instantiated, it
+will throw a fatal exception.  Otherwise, it returns a reference to
+the new Policy object.
 
 </P>
-<P><B>-name</B> is the name of a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.  The
-<CODE>'Perl::Critic::Policy'</CODE> portion of the name can be omitted for brevity.
-This argument is required.
+<P><B>-name</B> is the name of a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+subclass module.  The <CODE>'Perl::Critic::Policy'</CODE> portion of the name
+can be omitted for brevity.  This argument is required.
 
 </P>
-<P><B>-params</B> is an optional reference to hash of parameters that will be passed
-into the constructor of the Policy.  If <CODE>-params</CODE> is not defined, we will use
-the appropriate Policy parameters from the <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
+<P><B>-params</B> is an optional reference to hash of parameters that will be
+passed into the constructor of the Policy.  If <CODE>-params</CODE> is not
+defined, we will use the appropriate Policy parameters from the
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
 
 </P>
 <P>Note that the Policy will not have had
-<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on it, so it may not
-yet be usable.
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on it, so it
+may not yet be usable.
+
 
 </P></DD>
 <DT><A NAME="create_all_policies()"><CODE> create_all_policies() </CODE>
@@ -90,14 +98,16 @@ yet be usable.
 </A></DT>
 <DD>
 
-<P>Constructs and returns one instance of each <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass
-that is installed on the local system.  Each Policy will be created with the
+<P>Constructs and returns one instance of each
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass that is
+installed on the local system.  Each Policy will be created with the
 appropriate parameters from the user's configuration profile.
 
 </P>
 <P>Note that the Policies will not have had
-<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on them, so they may
-not yet be usable.
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on them, so
+they may not yet be usable.
+
 
 </P></DD>
 </DL>
@@ -113,10 +123,11 @@ internally, but may be useful to you in some way.
 
 </A></DT>
 <DD>
-Returns a list of all the Policy modules that are currently installed in the
-Perl::Critic:Policy namespace.  These will include modules that are
-distributed with Perl::Critic plus any third-party modules that have been
-installed.
+Returns a list of all the Policy modules that are currently installed
+in the Perl::Critic:Policy namespace.  These will include modules that
+are distributed with Perl::Critic plus any third-party modules that
+have been installed.
+
 
 </DD>
 </DL>
@@ -127,6 +138,7 @@ installed.
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
+
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT
 
@@ -135,9 +147,9 @@ installed.
 <P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
-<P>This program is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.  The full text of this license can be found in
-the LICENSE file included with this module.
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
 
 </P>
 </BODY>

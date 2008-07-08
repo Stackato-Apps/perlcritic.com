@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProhibitAmpersandSigils
+<P>Perl::Critic::Policy::Subroutines::ProhibitAmpersandSigils - Don't call functions with a leading ampersand sigil.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -26,12 +39,22 @@
 </A></H1>
 
 <P>Since Perl 5, the ampersand sigil is completely optional when invoking
-subroutines.  And it's easily confused with the bitwise 'and' operator.
+subroutines.  And it's easily confused with the bitwise 'and'
+operator.
 
 </P>
 <PRE>  @result = &amp;some_function(); #Not ok
-  @result = some_function();  #ok</PRE>
+  @result = some_function();  #ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

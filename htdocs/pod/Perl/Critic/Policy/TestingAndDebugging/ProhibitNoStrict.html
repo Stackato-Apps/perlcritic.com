@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict
+<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict - Prohibit various flavors of <CODE>no strict</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -37,6 +49,7 @@ configure this Policy to allow certain types of strictures to be
 disabled (See <A HREF="#CONFIGURATION">/CONFIGURATION</A>).  A bare <CODE>no strict</CODE> statement will
 always raise a violation.
 
+
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -48,8 +61,9 @@ want to permit.  These can be <CODE>vars</CODE>, <CODE>subs</CODE> and/or <CODE>
 example of this customization:
 
 </P>
-<PRE>  [TestingAndDebugging::ProhibitNoStrict]
-  allow = vars subs refs</PRE>
+<PRE>    [TestingAndDebugging::ProhibitNoStrict]
+    allow = vars subs refs
+</PRE>
 <HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
@@ -57,12 +71,14 @@ example of this customization:
 
 <P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseStrict.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

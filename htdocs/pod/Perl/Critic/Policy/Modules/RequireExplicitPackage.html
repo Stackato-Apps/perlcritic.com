@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
@@ -20,43 +24,65 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Modules::RequireExplicitPackage
+<P>Perl::Critic::Policy::Modules::RequireExplicitPackage - Always make the <CODE>package</CODE> explicit.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>In general, the first statement of any Perl module or
-library should be a <CODE>package</CODE> statement.  Otherwise, all the code
-that comes before the <CODE>package</CODE> statement is getting executed in the
-caller's package, and you have no idea who that is.  Good
-encapsulation and common decency require your module to keep its
-innards to itself.
+<P>In general, the first statement of any Perl module or library should
+be a <CODE>package</CODE> statement.  Otherwise, all the code that comes before
+the <CODE>package</CODE> statement is getting executed in the caller's package,
+and you have no idea who that is.  Good encapsulation and common
+decency require your module to keep its innards to itself.
 
 </P>
-<P>As for programs, most people understand that the default package is <CODE>main</CODE>, so
-this Policy doesn't apply to files that begin with a perl shebang.  If you want
-to require an explicit <CODE>package</CODE> declaration in all files, including programs,
-then add the following to your <I>.perlcriticrc</I> file
-
-</P>
-<PRE>  [Modules::RequireExplicitPackage]
-  exempt_scripts = 0</PRE>
-
 <P>There are some valid reasons for not having a <CODE>package</CODE> statement at
 all.  But make sure you understand them before assuming that you
 should do it too.
 
+</P>
+<P>The maximum number of violations per document for this policy defaults
+to 1.
+
+
+
 </P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>As for programs, most people understand that the default package is
+<CODE>main</CODE>, so this Policy doesn't apply to files that begin with a perl
+shebang.  If you want to require an explicit <CODE>package</CODE> declaration in
+all files, including programs, then add the following to your
+<I>.perlcriticrc</I> file
+
+</P>
+<PRE>    [Modules::RequireExplicitPackage]
+    exempt_scripts = 0
+</PRE>
+<HR>
 <H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
 </A></H1>
 
-<P>This policy was formerly called <CODE>ProhibitUnpackagedCode</CODE> which sounded
-a bit odd.  If you get lots of &quot;Cannot load policy module&quot; errors,
-then you probably need to change <CODE>ProhibitUnpackagedCode</CODE> to
+<P>This policy was formerly called <CODE>ProhibitUnpackagedCode</CODE> which
+sounded a bit odd.  If you get lots of &quot;Cannot load policy module&quot;
+errors, then you probably need to change <CODE>ProhibitUnpackagedCode</CODE> to
 <CODE>RequireExplicitPackage</CODE> in your <I>.perlcriticrc</I> file.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -64,6 +90,7 @@ then you probably need to change <CODE>ProhibitUnpackagedCode</CODE> to
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -22,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars
+<P>Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars - Warns that you might have used single quotes when you really wanted double-quotes.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -30,11 +44,20 @@
 </A></H1>
 
 <P>This policy warns you if you use single-quotes or <CODE>q//</CODE> with a string
-that has unescaped metacharacters that may need interpolation. Its hard
-to know for sure if a string really should be interpolated without
-looking into the symbol table.  This policy just makes an educated
-guess by looking for metacharacters and sigils which usually indicate that
-the string should be interpolated.
+that has unescaped metacharacters that may need interpolation. Its
+hard to know for sure if a string really should be interpolated
+without looking into the symbol table.  This policy just makes an
+educated guess by looking for metacharacters and sigils which usually
+indicate that the string should be interpolated.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="NOTES">NOTES
@@ -43,6 +66,7 @@ the string should be interpolated.
 
 <P>Perl's own <CODE>warnings</CODE> pragma also warns you about this.
 
+
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
@@ -50,12 +74,14 @@ the string should be interpolated.
 
 <P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitInterpolationOfLiterals.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

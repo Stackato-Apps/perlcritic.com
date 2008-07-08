@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,33 +24,46 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings
+<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings - Prohibit various flavors of <CODE>no warnings</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>There are good reasons for disabling certain kinds of warnings.  But if you
-were wise enough to <CODE>use warnings</CODE> in the first place, then it doesn't make
-sense to disable them completely.  By default, any <CODE>no warnings</CODE> statement
-will violate this policy.  However, you can configure this Policy to allow
-certain types of warnings to be disabled (See <A HREF="../../../../Configuration.html">Configuration</A>).  A bare <CODE>no
-warnings</CODE> statement will always raise a violation.
+<P>There are good reasons for disabling certain kinds of warnings.  But
+if you were wise enough to <CODE>use warnings</CODE> in the first place, then it
+doesn't make sense to disable them completely.  By default, any
+<CODE>no warnings</CODE> statement will violate this policy.  However, you can
+configure this Policy to allow certain types of warnings to be
+disabled (See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A>).  A bare <CODE>no warnings</CODE>
+statement will always raise a violation.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>The permitted warning types can be configured via the <CODE>allow</CODE> option.  The
-value is a list of whitespace-delimited warning types that you want to be able
-to disable.  See <A HREF="../../../../perllexwarn.html">perllexwarn</A> for a list of possible warning types.  An
-example of this customization:
+<P>The permitted warning types can be configured via the <CODE>allow</CODE> option.
+The value is a list of whitespace-delimited warning types that you
+want to be able to disable.  See <A HREF="../../../../perllexwarn.html">perllexwarn</A> for a list
+of possible warning types.  An example of this customization:
 
 </P>
-<PRE>  [TestingAndDebugging::ProhibitNoWarnings]
-  allow = uninitialized once</PRE>
+<PRE>    [TestingAndDebugging::ProhibitNoWarnings]
+    allow = uninitialized once
+</PRE>
 <HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
@@ -56,12 +71,14 @@ example of this customization:
 
 <P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

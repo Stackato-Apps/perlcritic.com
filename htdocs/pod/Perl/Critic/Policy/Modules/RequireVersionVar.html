@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Modules::RequireVersionVar
+<P>Perl::Critic::Policy::Modules::RequireVersionVar - Give every module a <CODE>$VERSION</CODE> number.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,23 +46,32 @@
 particular revision of your file like this:
 
 </P>
-<PRE>  use SomeModule 2.4;  #Only loads version 2.4</PRE>
+<PRE>    use SomeModule 2.4;  #Only loads version 2.4</PRE>
 
 <P>This Policy scans your file for any package variable named
 <CODE>$VERSION</CODE>.  I'm assuming that you are using <CODE>strict</CODE>, so you'll
 have to declare it like one of these:
 
 </P>
-<PRE>  our $VERSION = 1.0611;
-  $MyPackage::VERSION = 1.061;
-  use vars qw($VERSION);</PRE>
+<PRE>    our $VERSION = 1.0611;
+    $MyPackage::VERSION = 1.061;
+    use vars qw($VERSION);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 2163 $</CODE> keyword to automatically
-define the <CODE>$VERSION</CODE> variable like this:
+<P>A common practice is to use the <CODE>$Revision: 2537 $</CODE> keyword to
+automatically define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>  our ($VERSION) = '$Revision: 2163 $' =~ m{ \$Revision: \s+ (\S+) }x;</PRE>
+<PRE>    our ($VERSION) = '$Revision: 2537 $' =~ m{ \$Revision: \s+ (\S+) }x;
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -58,12 +81,14 @@ or 'v-strings.'  However, this Policy only insists that the
 <CODE>$VERSION</CODE> be defined somehow.  I may try to extend this in the
 future.
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

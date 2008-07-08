@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#HISTORY">HISTORY
 
@@ -22,7 +26,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProtectPrivateSubs
+<P>Perl::Critic::Policy::Subroutines::ProtectPrivateSubs - Prevent access to private subs in other packages.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,6 +46,15 @@
 indicate private methods and variables by inserting a leading
 underscore before the identifier.  This policy catches attempts to
 access private variables from outside the package itself.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="HISTORY">HISTORY

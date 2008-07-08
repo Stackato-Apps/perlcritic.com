@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest - Capture variable used outside conditional.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -30,13 +44,22 @@
 value of a match before using those variables.
 
 </P>
-<P>This policy checks that capture variables are inside a
-conditional and do not follow an regexps.
+<P>This policy checks that capture variables are inside a conditional and
+do not follow an regexps.
 
 </P>
 <P>This policy does not check whether that conditional is actually
 testing a regexp result, nor does it check whether a regexp actually
 has a capture in it.  Those checks are too hard.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -44,6 +67,7 @@ has a capture in it.  Those checks are too hard.
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

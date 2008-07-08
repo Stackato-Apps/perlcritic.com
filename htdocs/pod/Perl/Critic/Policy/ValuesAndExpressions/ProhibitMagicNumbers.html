@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><UL>
@@ -32,7 +34,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMagicNumbers - Don't use values that don't explain themselves.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
 
 
 </P><HR>
@@ -48,14 +59,18 @@ number, you don't understand the code.
 
 </P>
 <P>In general, numeric literals other than <CODE>0</CODE> or <CODE>1</CODE> in should not be
-used.  Use the <A HREF="constant.html">constant</A> pragma or the <A HREF="Readonly.html">Readonly</A> module to give a
-descriptive name to the number.
+used.  Use the <A HREF="constant.html">constant</A> pragma or the <A HREF="Readonly.html">Readonly</A>
+module to give a descriptive name to the number.
 
 </P>
 <P>There are, of course, exceptions to when this rule should be applied.
 One good example is positioning of objects in some container like
 shapes on a blueprint or widgets in a user interface.  In these cases,
 the significance of a number can readily be determined by context.
+
+</P>
+<P>The maximum number of violations per document for this policy defaults
+to 10.
 
 
 </P><H2><A NAME="Ways%20in%20which%20this%20module%20applies%20this%20rule.">Ways in which this module applies this rule.
@@ -67,12 +82,13 @@ for common things like alternation, the STDERR file handle, etc..
 
 </P>
 <P>Numeric literals are allowed in <CODE>use</CODE> and <CODE>require</CODE> statements to
-allow for things like Perl version restrictions and <A HREF="Test/More.html">Test::More</A>
-plans.  Declarations of <CODE>$VERSION</CODE> package variables are permitted.
-Use of <CODE>Readonly</CODE>, <CODE>Readonly::Scalar</CODE>, <CODE>Readonly::Array</CODE>, and
-<CODE>Readonly::Hash</CODE> from the <A HREF="Readonly.html">Readonly</A> module are obviously valid, but
-use of <CODE>Readonly::Scalar1</CODE>, <CODE>Readonly::Array1</CODE>, and
-<CODE>Readonly::Hash1</CODE> are specifically not supported.
+allow for things like Perl version restrictions and
+<A HREF="Test/More.html">Test::More</A> plans.  Declarations of <CODE>$VERSION</CODE> package
+variables are permitted.  Use of <CODE>Readonly</CODE>, <CODE>Readonly::Scalar</CODE>,
+<CODE>Readonly::Array</CODE>, and <CODE>Readonly::Hash</CODE> from the
+<A HREF="Readonly.html">Readonly</A> module are obviously valid, but use of
+<CODE>Readonly::Scalar1</CODE>, <CODE>Readonly::Array1</CODE>, and <CODE>Readonly::Hash1</CODE> are
+specifically not supported.
 
 </P>
 <P>Use of binary, exponential, hexadecimal, octal, and version numbers,
@@ -85,46 +101,47 @@ array, i.e. <CODE>$x[-1]</CODE>.
 
 
 </P>
-<PRE>  $x = 0;                                   #ok
-  $x = 0.0;                                 #ok
-  $x = 1;                                   #ok
-  $x = 1.0;                                 #ok
-  $x = 1.5;                                 #not ok
-  $x = 0b0                                  #not ok
-  $x = 0b1                                  #not ok
-  $x = 0x00                                 #not ok
-  $x = 0x01                                 #not ok
-  $x = 000                                  #not ok
-  $x = 001                                  #not ok
-  $x = 0e1                                  #not ok
-  $x = 1e1                                  #not ok
+<PRE>    $x = 0;                                   #ok
+    $x = 0.0;                                 #ok
+    $x = 1;                                   #ok
+    $x = 1.0;                                 #ok
+    $x = 1.5;                                 #not ok
+    $x = 0b0                                  #not ok
+    $x = 0b1                                  #not ok
+    $x = 0x00                                 #not ok
+    $x = 0x01                                 #not ok
+    $x = 000                                  #not ok
+    $x = 001                                  #not ok
+    $x = 0e1                                  #not ok
+    $x = 1e1                                  #not ok
 
-  $frobnication_factor = 42;                #not ok
-  use constant FROBNICATION_FACTOR =&gt; 42;   #ok
-
-
-  use 5.6.1;                                #ok
-  use Test::More plan =&gt; 57;                #ok
-  our $VERSION = 0.22;                      #ok
+    $frobnication_factor = 42;                #not ok
+    use constant FROBNICATION_FACTOR =&gt; 42;   #ok
 
 
-  $x = $y[-1]                               #ok
-  $x = $y[-2]                               #not ok
+    use 5.6.1;                                #ok
+    use Test::More plan =&gt; 57;                #ok
+    plan tests =&gt; 39;                         #ok
+    our $VERSION = 0.22;                      #ok
+
+
+    $x = $y[-1]                               #ok
+    $x = $y[-2]                               #not ok
 
 
 
-  foreach my $solid (1..5) {                #not ok
-      ...
-  }
+    foreach my $solid (1..5) {                #not ok
+        ...
+    }
 
 
-  use Readonly;
+    use Readonly;
 
-  Readonly my $REGULAR_GEOMETRIC_SOLIDS =&gt; 5;
+    Readonly my $REGULAR_GEOMETRIC_SOLIDS =&gt; 5;
 
-  foreach my $solid (1..$REGULAR_GEOMETRIC_SOLIDS) {  #ok
-      ...
-  }
+    foreach my $solid (1..$REGULAR_GEOMETRIC_SOLIDS) {  #ok
+        ...
+    }
 </PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -144,19 +161,19 @@ for numbers.  The defaults are equivalent to having the following in
 your <I>.perlcriticrc</I>:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
-  allowed_values = 0 1 2</PRE>
+<PRE>    [ValuesAndExpressions::ProhibitMagicNumbers]
+    allowed_values = 0 1 2</PRE>
 
 <P>Note that this policy forces the values <CODE>0</CODE> and <CODE>1</CODE> into the
 permitted values.  Thus, specifying no values,
 
 </P>
-<PRE>  allowed_values =</PRE>
+<PRE>    allowed_values =</PRE>
 
 <P>is the same as simply listing <CODE>0</CODE> and <CODE>1</CODE>:
 
 </P>
-<PRE>  allowed_values = 0 1</PRE>
+<PRE>    allowed_values = 0 1</PRE>
 
 <P>The special <CODE>all_integers</CODE> value, not surprisingly, allows all
 integral values to pass, subject to the restrictions on number types.
@@ -167,19 +184,19 @@ by two periods, optionally suffixed with an increment using the Perl 6
 <CODE>:by()</CODE> syntax.  E.g.
 
 </P>
-<PRE>  allowed_values = 7..10</PRE>
+<PRE>    allowed_values = 7..10</PRE>
 
 <P>will allow 0, 1, 7, 8, 9, and 10 as literal values.  Using fractional
 values like so
 
 </P>
-<PRE>  allowed_values = -3.5..-0.5:by(0.5)</PRE>
+<PRE>    allowed_values = -3.5..-0.5:by(0.5)</PRE>
 
 <P>will permit -3.5, -3, -2.5, -2, -2.5, -1, -0.5, 0, and 1.
 Unsurprisingly, the increment defaults to 1, which means that
 
 </P>
-<PRE>  allowed_values = -3.5..-0.5</PRE>
+<PRE>    allowed_values = -3.5..-0.5</PRE>
 
 <P>will make -3.5, -2.5, -2.5, -0.5, 0, and 1 valid.
 
@@ -202,8 +219,8 @@ are not permitted.
 to be used, <I>.perlcriticrc</I> entry:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
-  allowed_values = 3.1415269 82..103 -507.4..57.8:by(0.2) all_integers
+<PRE>    [ValuesAndExpressions::ProhibitMagicNumbers]
+    allowed_values = 3.1415269 82..103 -507.4..57.8:by(0.2) all_integers
 </PRE>
 <H2><A NAME="allowed_types"><CODE>allowed_types</CODE>
 
@@ -221,8 +238,8 @@ numbers are also allowed.
 policy like
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
-  allowed_types = Hex</PRE>
+<PRE>    [ValuesAndExpressions::ProhibitMagicNumbers]
+    allowed_types = Hex</PRE>
 
 <P>but without specifying anything for <CODE>allowed_values</CODE>, the allowed
 hexadecimal literals will be <CODE>0x00</CODE>, <CODE>0x01</CODE>, and <CODE>0x02</CODE>.  Note,
@@ -232,8 +249,8 @@ point literals.  This effect can be used to restrict literals to only
 decimal integers:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitMagicNumbers]
-  allowed_types =</PRE>
+<PRE>    [ValuesAndExpressions::ProhibitMagicNumbers]
+    allowed_types =</PRE>
 
 <P>If you permit exponential notation, you automatically also allow
 floating point values because an exponential is a subclass of

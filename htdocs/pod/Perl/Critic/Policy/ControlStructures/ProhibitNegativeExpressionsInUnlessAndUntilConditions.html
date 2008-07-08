@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,20 +24,29 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitNegativeExpressionsInUnlessAndUntilConditions
+<P>Perl::Critic::Policy::ControlStructures::ProhibitNegativeExpressionsInUnlessAndUntilConditions - Don't use operators like <CODE>not</CODE>, <CODE>!~</CODE>, and <CODE>le</CODE> within <CODE>until</CODE> and <CODE>unless</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<PRE>  until ($foo ne 'blah') {          #not ok
-      ...
-  }
+<PRE>    until ($foo ne 'blah') {          #not ok
+        ...
+    }
 
-  while ($foo eq 'blah') {          #ok
-      ...
-  }</PRE>
+    while ($foo eq 'blah') {          #ok
+        ...
+    }</PRE>
 
 <P>A number of people have problems figuring out the meaning of doubly
 negated expressions.  <CODE>unless</CODE> and <CODE>until</CODE> are both negative
@@ -47,8 +60,17 @@ within <CODE>unless</CODE> and <CODE>until</CODE>:
   !~ ne !=
   &lt;   &gt;   &lt;=  &gt;=  &lt;=&gt;
   lt  gt  le  ge  cmp
+
 </PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

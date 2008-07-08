@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -24,20 +26,29 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::RequireArgUnpacking
+<P>Perl::Critic::Policy::Subroutines::RequireArgUnpacking - Always unpack <CODE>@_</CODE> first.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Subroutines that use <CODE>@_</CODE> directly instead of unpacking the arguments to
-local variables first have two major problems.  First, they are very hard to
-read.  If you're going to refer to your variables by number instead of by
-name, you may as well be writing assembler code!  Second, <CODE>@_</CODE> contains
-aliases to the original variables!  If you modify the contents of a <CODE>@_</CODE>
-entry, then you are modifying the variable outside of your subroutine.  For
-example:
+<P>Subroutines that use <CODE>@_</CODE> directly instead of unpacking the arguments
+to local variables first have two major problems.  First, they are
+very hard to read.  If you're going to refer to your variables by
+number instead of by name, you may as well be writing assembler code!
+Second, <CODE>@_</CODE> contains aliases to the original variables!  If you
+modify the contents of a <CODE>@_</CODE> entry, then you are modifying the
+variable outside of your subroutine.  For example:
 
 </P>
 <PRE>   sub print_local_var_plus_one {
@@ -53,19 +64,20 @@ example:
    print_var_plus_one($x);       # prints &quot;3&quot;, $x is now 3 !
    print $x;                     # prints &quot;3&quot;</PRE>
 
-<P>This is spooky action-at-a-distance and is very hard to debug if it's not
-intentional and well-documented (like <CODE>chop</CODE> or <CODE>chomp</CODE>).
+<P>This is spooky action-at-a-distance and is very hard to debug if it's
+not intentional and well-documented (like <CODE>chop</CODE> or <CODE>chomp</CODE>).
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy is lenient for subroutines which have <CODE>N</CODE> or fewer top-level
-statements, where <CODE>N</CODE> defaults to ZERO.  You can override this to set it to a
-higher number with the <CODE>short_subroutine_statements</CODE> setting.  This is very
-much not recommended but perhaps you REALLY need high performance.  To do
-this, put entries in a <I>.perlcriticrc</I> file like this:
+<P>This policy is lenient for subroutines which have <CODE>N</CODE> or fewer
+top-level statements, where <CODE>N</CODE> defaults to ZERO.  You can override
+this to set it to a higher number with the
+<CODE>short_subroutine_statements</CODE> setting.  This is very much not
+recommended but perhaps you REALLY need high performance.  To do this,
+put entries in a <I>.perlcriticrc</I> file like this:
 
 </P>
 <PRE>  [Subroutines::RequireArgUnpacking]
@@ -75,8 +87,8 @@ this, put entries in a <I>.perlcriticrc</I> file like this:
 
 </A></H1>
 
-<P>PPI doesn't currently detect anonymous subroutines, so we don't check those.
-This should just work when PPI gains that feature.
+<P>PPI doesn't currently detect anonymous subroutines, so we don't check
+those.  This should just work when PPI gains that feature.
 
 </P>
 <P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.  That's
@@ -87,7 +99,8 @@ deprecated anyway.
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

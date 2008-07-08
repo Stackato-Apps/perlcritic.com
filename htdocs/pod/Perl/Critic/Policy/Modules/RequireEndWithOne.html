@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Modules::RequireEndWithOne
+<P>Perl::Critic::Policy::Modules::RequireEndWithOne - End each module with an explicitly <CODE>1;</CODE> instead of some funky expression.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -29,8 +43,17 @@
 to indicate to the caller that the include was successful.  The
 standard practice is to conclude your .pm files with <CODE>1;</CODE>, but some
 authors like to get clever and return some other true value like
-<CODE>return &quot;Club sandwich&quot;;</CODE>.  We cannot tolerate such frivolity!  OK, we
-can, but we don't recommend it since it confuses the newcomers.
+<CODE>return &quot;Club sandwich&quot;;</CODE>.  We cannot tolerate such frivolity!  OK,
+we can, but we don't recommend it since it confuses the newcomers.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -42,6 +65,7 @@ can, but we don't recommend it since it confuses the newcomers.
 </P>
 <P>Some portions cribbed from
 <A HREF="../../../../Perl/Critic/Policy/Modules/RequireExplicitPackage.html">Perl::Critic::Policy::Modules::RequireExplicitPackage</A>.
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

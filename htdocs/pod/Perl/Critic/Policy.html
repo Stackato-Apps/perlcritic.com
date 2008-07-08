@@ -26,6 +26,7 @@
 
 <P>Perl::Critic::Policy - Base class for all Policy modules.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
@@ -34,10 +35,12 @@
 <P>Perl::Critic::Policy is the abstract base class for all Policy
 objects.  If you're developing your own Policies, your job is to
 implement and override its methods in a subclass.  To work with the
-<A HREF="../../Perl/Critic.html">Perl::Critic</A> engine, your implementation must behave as described
-below.  For a detailed explanation on how to make new Policy modules,
-please see the <A HREF="../../Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> document included in this
-distribution.
+<A HREF="../../Perl/Critic.html">Perl::Critic</A> engine, your implementation must behave
+as described below.  For a detailed explanation on how to make new
+Policy modules, please see the
+<A HREF="../../Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> document included
+in this distribution.
+
 
 </P><HR>
 <H1><A NAME="METHODS">METHODS
@@ -50,15 +53,16 @@ distribution.
 
 <P>Returns a reference to a new subclass of Perl::Critic::Policy. If your
 Policy requires any special arguments, they will be passed in here as
-key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify these in their
-config file.  Unless you override the <CODE>new</CODE> method, the default
-method simply returns a reference to an empty hash that has been
-blessed into your subclass.  However, you really should not override
-this; override <CODE>initialize_if_enabled()</CODE> instead.
+key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify these
+in their config file.  Unless you override the <CODE>new</CODE> method, the
+default method simply returns a reference to an empty hash that has
+been blessed into your subclass.  However, you really should not
+override this; override <CODE>initialize_if_enabled()</CODE> instead.
 
 </P>
 <P>This constructor is always called regardless of whether the user has
 enabled this Policy or not.
+
 
 </P></DD>
 <DT><A NAME="initialize_if_enabled(%20%7b%20key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20%7d%20)"><CODE>initialize_if_enabled( { key1 =&gt; value1, key2 =&gt; value2 ... } )</CODE>
@@ -79,22 +83,26 @@ external modules or other system facilities that may or may not be
 available should test for the availability of these dependencies and
 return <CODE>$FALSE</CODE> if they are not.
 
+
 </P></DD>
 <DT><A NAME="violates(%20%24element%2c%20%24document%20)"><CODE> violates( $element, $document ) </CODE>
 
 </A></DT>
 <DD>
 
-<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A> and a <A HREF="../../PPI/Document.html">PPI::Document</A>, returns one or more
-<A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects if the <CODE>$element</CODE> violates this
-Policy.  If there are no violations, then it returns an empty list.
-If the Policy encounters an exception, then it should <CODE>croak</CODE> with an
-error message and let the caller decide how to handle it.
+<P>Given a <A HREF="../../PPI/Element.html">PPI::Element</A> and a
+<A HREF="../../PPI/Document.html">PPI::Document</A>, returns one or more
+<A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects if the
+<CODE>$element</CODE> violates this Policy.  If there are no violations, then it
+returns an empty list.  If the Policy encounters an exception, then it
+should <CODE>croak</CODE> with an error message and let the caller decide how to
+handle it.
 
 </P>
 <P><CODE>violates()</CODE> is an abstract method and it will abort if you attempt
 to invoke it directly.  It is the heart of all Policy modules, and
 your subclass <B>must</B> override this method.
+
 
 </P></DD>
 <DT><A NAME="violation(%20%24description%2c%20%24explanation%2c%20%24element%20)"><CODE> violation( $description, $explanation, $element ) </CODE>
@@ -105,14 +113,26 @@ your subclass <B>must</B> override this method.
 <P>Returns a reference to a new <CODE>Perl::Critic::Violation</CODE> object. The
 arguments are a description of the violation (as string), an
 explanation for the policy (as string) or a series of page numbers in
-PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> element that caused
-the violation.
+PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> element that
+caused the violation.
 
 </P>
-<P>These are the same as the constructor to <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>,
-but without the severity.  The Policy itself knows the severity.
+<P>These are the same as the constructor to
+<A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>, but without the
+severity.  The Policy itself knows the severity.
+
 
 </P></DD>
+<DT><A NAME="new_parameter_value_exception(%20%24option_name%2c%20%24option_value%2c%20%24source%2c%20%24message_suffix%20)"><CODE> new_parameter_value_exception( $option_name, $option_value, $source, $message_suffix ) </CODE>
+
+</A></DT>
+<DD>
+Create a
+<A HREF="../../Perl/Critic/Exception/Configuration/Option/Policy/ParameterValue.html">Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue</A>
+for this Policy.
+
+
+</DD>
 <DT><A NAME="throw_parameter_value_exception(%20%24option_name%2c%20%24option_value%2c%20%24source%2c%20%24message_suffix%20)"><CODE> throw_parameter_value_exception( $option_name, $option_value, $source, $message_suffix ) </CODE>
 
 </A></DT>
@@ -121,12 +141,14 @@ Create and throw a
 <A HREF="../../Perl/Critic/Exception/Configuration/Option/Policy/ParameterValue.html">Perl::Critic::Exception::Configuration::Option::Policy::ParameterValue</A>.
 Useful in parameter parser implementations.
 
+
 </DD>
 <DT><A NAME="get_long_name()"><CODE> get_long_name() </CODE>
 
 </A></DT>
 <DD>
 Return the full package name of this policy.
+
 
 </DD>
 <DT><A NAME="get_short_name()"><CODE> get_short_name() </CODE>
@@ -135,6 +157,7 @@ Return the full package name of this policy.
 <DD>
 Return the name of this policy without the &quot;Perl::Critic::Policy::&quot;
 prefix.
+
 
 </DD>
 <DT><A NAME="applies_to()"><CODE> applies_to() </CODE>
@@ -146,19 +169,51 @@ about.  By default, the result is <CODE>PPI::Element</CODE>.  Overriding this
 method in Policy subclasses should lead to significant performance
 increases.
 
+
+</DD>
+<DT><A NAME="default_maximum_violations_per_document()"><CODE> default_maximum_violations_per_document() </CODE>
+
+</A></DT>
+<DD>
+Returns the default maximum number of violations for this policy to
+report per document.  By default, this not defined, but subclasses may
+override this.
+
+
+</DD>
+<DT><A NAME="get_maximum_violations_per_document()"><CODE> get_maximum_violations_per_document() </CODE>
+
+</A></DT>
+<DD>
+Returns the maximum number of violations this policy will report for a
+single document.  If this is not defined, then there is no limit.  If
+<A HREF="#set_maximum_violations_per_document()">set_maximum_violations_per_document()</A> has not been invoked, then
+<A HREF="#default_maximum_violations_per_document()">default_maximum_violations_per_document()</A> is returned.
+
+
+</DD>
+<DT><A NAME="set_maximum_violations_per_document()"><CODE> set_maximum_violations_per_document() </CODE>
+
+</A></DT>
+<DD>
+Specify the maximum violations that this policy should report for a
+document.
+
+
 </DD>
 <DT><A NAME="default_severity()"><CODE> default_severity() </CODE>
 
 </A></DT>
 <DD>
 Returns the default severity for violating this Policy.  See the
-<CODE>$SEVERITY</CODE> constants in <A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of
-possible severity values.  By default, this method returns
-<CODE>$SEVERITY_LOWEST</CODE>.  Authors of Perl::Critic::Policy subclasses
-should override this method to return a value that they feel is
-appropriate for their Policy.  In general, Polices that are widely
-accepted or tend to prevent bugs should have a higher severity than
-those that are more subjective or cosmetic in nature.
+<CODE>$SEVERITY</CODE> constants in <A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A>
+for an enumeration of possible severity values.  By default, this
+method returns <CODE>$SEVERITY_LOWEST</CODE>.  Authors of Perl::Critic::Policy
+subclasses should override this method to return a value that they
+feel is appropriate for their Policy.  In general, Polices that are
+widely accepted or tend to prevent bugs should have a higher severity
+than those that are more subjective or cosmetic in nature.
+
 
 </DD>
 <DT><A NAME="get_severity()"><CODE> get_severity() </CODE>
@@ -168,7 +223,9 @@ those that are more subjective or cosmetic in nature.
 Returns the severity of violating this Policy.  If the severity has
 not been explicitly defined by calling <CODE>set_severity</CODE>, then the
 <CODE>default_severity</CODE> is returned.  See the <CODE>$SEVERITY</CODE> constants in
-<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of possible severity values.
+<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of
+possible severity values.
+
 
 </DD>
 <DT><A NAME="set_severity(%20%24N%20)"><CODE> set_severity( $N ) </CODE>
@@ -179,7 +236,9 @@ Sets the severity for violating this Policy.  Clients of
 Perl::Critic::Policy objects can call this method to assign a
 different severity to the Policy if they don't agree with the
 <CODE>default_severity</CODE>.  See the <CODE>$SEVERITY</CODE> constants in
-<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of possible values.
+<A HREF="../../Perl/Critic/Utils.html">Perl::Critic::Utils</A> for an enumeration of
+possible values.
+
 
 </DD>
 <DT><A NAME="default_themes()"><CODE> default_themes() </CODE>
@@ -191,6 +250,7 @@ Policy.  The default method returns an empty list.  Policy authors
 should override this method to return a list of themes that are
 appropriate for their policy.
 
+
 </DD>
 <DT><A NAME="get_themes()"><CODE> get_themes() </CODE>
 
@@ -200,6 +260,7 @@ Returns a sorted list of the themes associated with this Policy.  If
 you haven't added themes or set the themes explicitly, this method
 just returns the default themes.
 
+
 </DD>
 <DT><A NAME="set_themes(%20%40THEME_LIST%20)"><CODE> set_themes( @THEME_LIST ) </CODE>
 
@@ -207,6 +268,7 @@ just returns the default themes.
 <DD>
 Sets the themes associated with this Policy.  Any existing themes are
 overwritten.  Duplicate themes will be removed.
+
 
 </DD>
 <DT><A NAME="add_themes(%20%40THEME_LIST%20)"><CODE> add_themes( @THEME_LIST ) </CODE>
@@ -216,12 +278,33 @@ overwritten.  Duplicate themes will be removed.
 Appends additional themes to this Policy.  Any existing themes are
 preserved.  Duplicate themes will be removed.
 
+
+</DD>
+<DT><A NAME="get_abstract()"><CODE> get_abstract() </CODE>
+
+</A></DT>
+<DD>
+Retrieve the abstract for this policy (the part of the NAME section of
+the POD after the module name), if it is available.
+
+
+</DD>
+<DT><A NAME="get_raw_abstract()"><CODE> get_raw_abstract() </CODE>
+
+</A></DT>
+<DD>
+Retrieve the abstract for this policy (the part of the NAME section of
+the POD after the module name), if it is available, in the unparsed
+form.
+
+
 </DD>
 <DT><A NAME="parameter_metadata_available()"><CODE> parameter_metadata_available() </CODE>
 
 </A></DT>
 <DD>
 Returns whether information about the parameters is available.
+
 
 </DD>
 <DT><A NAME="get_parameters()"><CODE> get_parameters() </CODE>
@@ -238,12 +321,16 @@ policy are unknown.  In order to differentiate between this
 circumstance and the one where this policy does not take any
 parameters, it is necessary to call <CODE>parameter_metadata_available()</CODE>.
 
+
 </P></DD>
 <DT><A NAME="get_parameter(%20%24parameter_name%20)"><CODE> get_parameter( $parameter_name ) </CODE>
 
 </A></DT>
 <DD>
-Returns the <A HREF="../../Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> with the specified name.
+Returns the
+<A HREF="../../Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> with
+the specified name.
+
 
 </DD>
 <DT><A NAME="set_format(%20%24FORMAT%20)"><CODE>set_format( $FORMAT )</CODE>
@@ -254,6 +341,7 @@ Class method.  Sets the format for all Policy objects when they are
 evaluated in string context.  The default is <CODE>&quot;%p\n&quot;</CODE>.  See
 <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.
 
+
 </DD>
 <DT><A NAME="get_format()"><CODE>get_format()</CODE>
 
@@ -261,6 +349,7 @@ evaluated in string context.  The default is <CODE>&quot;%p\n&quot;</CODE>.  See
 <DD>
 Class method. Returns the current format for all Policy objects when
 they are evaluated in string context.
+
 
 </DD>
 <DT><A NAME="to_string()"><CODE>to_string()</CODE>
@@ -271,6 +360,7 @@ Returns a string representation of the policy.  The content of the
 string depends on the current value of the <CODE>$FORMAT</CODE> package
 variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
+
 </DD>
 </DL>
 <HR>
@@ -278,11 +368,13 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 </A></H1>
 
-<P>When your Policy module first <CODE>use</CODE>s <A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>, it
-will try and extract the DESCRIPTION section of your Policy module's
-POD.  This information is displayed by Perl::Critic if the verbosity
-level is set accordingly.  Therefore, please include a DESCRIPTION
-section in the POD for any Policy modules that you author.  Thanks.
+<P>When your Policy module first <CODE>use</CODE>s
+<A HREF="../../Perl/Critic/Violation.html">Perl::Critic::Violation</A>, it will try and
+extract the DESCRIPTION section of your Policy module's POD.  This
+information is displayed by Perl::Critic if the verbosity level is set
+accordingly.  Therefore, please include a DESCRIPTION section in the
+POD for any Policy modules that you author.  Thanks.
+
 
 </P><HR>
 <H1><A NAME="OVERLOADS">OVERLOADS
@@ -296,9 +388,35 @@ on the current value of the <CODE>$FORMAT</CODE> package variable.
 </P>
 <P>Formats are a combination of literal and escape characters similar to
 the way <CODE>sprintf</CODE> works.  If you want to know the specific formatting
-capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape characters are:
+capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape
+characters are:
 
-</P><DL><DT><A NAME="%25O"><CODE>%O</CODE>
+
+</P><DL><DT><A NAME="%25P"><CODE>%P</CODE>
+
+</A></DT>
+<DD>
+Name of the Policy module.
+
+
+</DD>
+<DT><A NAME="%25p"><CODE>%p</CODE>
+
+</A></DT>
+<DD>
+Name of the Policy without the <CODE>Perl::Critic::Policy::</CODE> prefix.
+
+
+</DD>
+<DT><A NAME="%25a"><CODE>%a</CODE>
+
+</A></DT>
+<DD>
+The policy abstract.
+
+
+</DD>
+<DT><A NAME="%25O"><CODE>%O</CODE>
 
 </A></DT>
 <DD>
@@ -306,6 +424,7 @@ List of supported policy parameters.  Takes an option of a format
 string for <A HREF="../../Perl/Critic/PolicyParameter.html#to_formatted_string">Perl::Critic::PolicyParameter/&quot;to_formatted_string&quot;</A>.
 For example, this can be used like <CODE>%{%n - %d\n}O</CODE> to get a list of
 parameter names followed by their descriptions.
+
 
 </DD>
 <DT><A NAME="%25U"><CODE>%U</CODE>
@@ -319,19 +438,6 @@ discover what parameters this policy takes.&quot;.  The value of this
 option is interpolated in order to expand the standard escape
 sequences (<CODE>\n</CODE>, <CODE>\t</CODE>, etc.).
 
-</DD>
-<DT><A NAME="%25P"><CODE>%P</CODE>
-
-</A></DT>
-<DD>
-Name of the Policy module.
-
-</DD>
-<DT><A NAME="%25p"><CODE>%p</CODE>
-
-</A></DT>
-<DD>
-Name of the Policy without the <CODE>Perl::Critic::Policy::</CODE> prefix.
 
 </DD>
 <DT><A NAME="%25S"><CODE>%S</CODE>
@@ -340,12 +446,14 @@ Name of the Policy without the <CODE>Perl::Critic::Policy::</CODE> prefix.
 <DD>
 The default severity level of the policy.
 
+
 </DD>
 <DT><A NAME="%25s"><CODE>%s</CODE>
 
 </A></DT>
 <DD>
 The current severity level of the policy.
+
 
 </DD>
 <DT><A NAME="%25T"><CODE>%T</CODE>
@@ -354,12 +462,30 @@ The current severity level of the policy.
 <DD>
 The default themes for the policy.
 
+
 </DD>
 <DT><A NAME="%25t"><CODE>%t</CODE>
 
 </A></DT>
 <DD>
 The current themes for the policy.
+
+
+</DD>
+<DT><A NAME="%25V"><CODE>%V</CODE>
+
+</A></DT>
+<DD>
+The default maximum number of violations per document of the policy.
+
+
+</DD>
+<DT><A NAME="%25v"><CODE>%v</CODE>
+
+</A></DT>
+<DD>
+The current maximum number of violations per document of the policy.
+
 
 </DD>
 </DL>
@@ -369,6 +495,7 @@ The current themes for the policy.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

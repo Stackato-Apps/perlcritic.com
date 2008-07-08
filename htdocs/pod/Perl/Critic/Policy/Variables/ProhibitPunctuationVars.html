@@ -6,9 +6,13 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#BUGS">BUGS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::ProhibitPunctuationVars
+<P>Perl::Critic::Policy::Variables::ProhibitPunctuationVars - Write <CODE>$EVAL_ERROR</CODE> instead of <CODE>$@</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -29,14 +43,15 @@
 
 <P>Perl's vocabulary of punctuation variables such as <CODE>$!</CODE>, <CODE>$.</CODE>, and
 <CODE>$^</CODE> are perhaps the leading cause of its reputation as inscrutable
-line noise.  The simple alternative is to use the <A HREF="../../../../English.html">English</A> module to
-give them clear names.
+line noise.  The simple alternative is to use the <A HREF="../../../../English.html">English</A>
+module to give them clear names.
 
 </P>
 <PRE>  $| = undef;                      #not ok
 
   use English qw(-no_match_vars);
-  local $OUTPUT_AUTOFLUSH = undef;        #ok</PRE>
+  local $OUTPUT_AUTOFLUSH = undef;        #ok
+</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -58,12 +73,22 @@ perlcriticrc file, add a block like this:
 <P>The <CODE>allow</CODE> property should be a whitespace-delimited list of
 punctuation variables.
 
+
+</P><HR>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>This doesn't find punctuation variables in strings.
+
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

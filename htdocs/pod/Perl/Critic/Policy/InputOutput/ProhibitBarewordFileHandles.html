@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles
+<P>Perl::Critic::Policy::InputOutput::ProhibitBarewordFileHandles - Write <CODE>open my $fh, q{&lt;}, $filename;</CODE> instead of <CODE>open FH, q{&lt;}, $filename;</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,8 +45,9 @@ because they are global, and you have no idea if that symbol already
 points to some other file handle.  You can mitigate some of that risk
 by <CODE>local</CODE>izing the symbol first, but that's pretty ugly.  Since Perl
 5.6, you can use an undefined scalar variable as a lexical reference
-to an anonymous filehandle.  Alternatively, see the <A HREF="../../../../IO/Handle.html">IO::Handle</A> or
-<A HREF="../../../../IO/File.html">IO::File</A> or <A HREF="../../../../FileHandle.html">FileHandle</A> modules for an object-oriented approach.
+to an anonymous filehandle.  Alternatively, see the
+<A HREF="../../../../IO/Handle.html">IO::Handle</A> or <A HREF="../../../../IO/File.html">IO::File</A> or
+<A HREF="../../../../FileHandle.html">FileHandle</A> modules for an object-oriented approach.
 
 </P>
 <PRE>    open FH, '&lt;', $some_file;           #not ok
@@ -42,6 +56,15 @@ to an anonymous filehandle.  Alternatively, see the <A HREF="../../../../IO/Hand
 
 <P>There are three exceptions: STDIN, STDOUT and STDERR.  These three
 standard filehandles are always package variables.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO

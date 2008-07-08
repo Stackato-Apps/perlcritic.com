@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::CodeLayout::ProhibitHardTabs
+<P>Perl::Critic::Policy::CodeLayout::ProhibitHardTabs - Use spaces instead of tabs.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -34,13 +46,14 @@ things you can do to your co-workers and colleagues, especially if
 those tabs are anywhere other than a leading position.  Because
 various applications and devices represent tabs differently, they can
 cause you code to look vastly different to other people.  Any decent
-editor can be configured to expand tabs into spaces.  <A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A>
-also does this for you.
+editor can be configured to expand tabs into spaces.
+<A HREF="../../../../Perl/Tidy.html">Perl::Tidy</A> also does this for you.
 
 </P>
 <P>This Policy catches all tabs in your source code, including POD,
 quotes, and HEREDOCs.  The contents of the <CODE>__DATA__</CODE> section are not
 examined.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -52,7 +65,8 @@ everywhere, put this to your <I>.perlcriticrc</I> file:
 
 </P>
 <PRE>    [CodeLayout::ProhibitHardTabs]
-    allow_leading_tabs = 0</PRE>
+    allow_leading_tabs = 0
+</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 
@@ -62,12 +76,14 @@ everywhere, put this to your <I>.perlcriticrc</I> file:
 contains the tab, not the actual location of the tab, so you may need
 to do some hunting.  I'll try and fix this in the future.
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

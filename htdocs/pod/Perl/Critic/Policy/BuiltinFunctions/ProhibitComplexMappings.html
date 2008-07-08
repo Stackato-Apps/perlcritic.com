@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
@@ -24,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitComplexMappings
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitComplexMappings - Map blocks should have a single statement.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -43,6 +55,7 @@ cram lots of functionality into a one-liner is a bad idea in general.
 that performs the manipulation and call that from map; 2) rewrite the
 map as a for loop.
 
+
 </P><HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
@@ -53,7 +66,8 @@ map.  For example, the following code incorrectly does not trigger a
 violation:
 
 </P>
-<PRE>  map { do { foo(); bar() } } @list</PRE>
+<PRE>    map { do { foo(); bar() } } @list
+</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -64,8 +78,9 @@ statement.  While we do not recommend it, you can increase this limit
 as follows in a <I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [BuiltinFunctions::ProhibitComplexMappings]
-  max_statements = 2</PRE>
+<PRE>    [BuiltinFunctions::ProhibitComplexMappings]
+    max_statements = 2
+</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
@@ -73,12 +88,15 @@ as follows in a <I>.perlcriticrc</I> file:
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
+
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

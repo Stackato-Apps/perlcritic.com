@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMixedBooleanOperators - Write <CODE> !$foo &amp;&amp; $bar || $baz </CODE> instead of <CODE> not $foo &amp;&amp; $bar or $baz</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -26,17 +39,26 @@
 </A></H1>
 
 <P>Conway advises against combining the low-precedence booleans ( <CODE>and
-or not</CODE> ) with the high-precedence boolean operators ( <CODE>&amp;&amp; || !</CODE> )
-in the same expression.  Unless you fully understand the differences
+or not</CODE> ) with the high-precedence boolean operators ( <CODE>&amp;&amp; || !</CODE> ) in
+the same expression.  Unless you fully understand the differences
 between the high and low-precedence operators, it is easy to
 misinterpret expressions that use both.  And even if you do understand
 them, it is not always clear if the author actually intended it.
 
 </P>
-<PRE>  next if not $foo || $bar;  #not ok
-  next if !$foo || $bar;     #ok
-  next if !( $foo || $bar ); #ok</PRE>
+<PRE>    next if not $foo || $bar;  #not ok
+    next if !$foo || $bar;     #ok
+    next if !( $foo || $bar ); #ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

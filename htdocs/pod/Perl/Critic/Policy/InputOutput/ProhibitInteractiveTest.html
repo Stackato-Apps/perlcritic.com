@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest
+<P>Perl::Critic::Policy::InputOutput::ProhibitInteractiveTest - Use prompt() instead of -t.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,6 +41,15 @@
 <P>The <CODE>-t</CODE> operator is fragile and complicated.  When you are testing
 whether <CODE>STDIN</CODE> is interactive, It's much more robust to use
 well-tested CPAN modules like <A HREF="../../../../IO/Interactive.html">IO::Interactive</A>.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

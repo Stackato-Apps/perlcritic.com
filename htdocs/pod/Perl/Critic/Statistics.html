@@ -22,6 +22,7 @@
 
 <P>Perl::Critic::Statistics - Compile stats on Perl::Critic violations.
 
+
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
@@ -29,6 +30,7 @@
 
 <P>This class accumulates statistics on Perl::Critic violations across one or
 more files.  NOTE: This class is experimental and subject to change.
+
 
 </P><HR>
 <H1><A NAME="METHODS">METHODS
@@ -41,6 +43,7 @@ more files.  NOTE: This class is experimental and subject to change.
 Create a new instance of Perl::Critic::Statistics.  No arguments are supported
 at this time.
 
+
 </DD>
 <DT><A NAME="accumulate(%20%24doc%2c%20%5c%40violations%20)"><CODE> accumulate( $doc, \@violations ) </CODE>
 
@@ -49,12 +52,14 @@ at this time.
 Accumulates statistics about the <CODE>$doc</CODE> and the <CODE>@violations</CODE> that were
 found.
 
+
 </DD>
 <DT><A NAME="modules()"><CODE>modules()</CODE>
 
 </A></DT>
 <DD>
 The number of chunks of code (usually files) that have been analyzed.
+
 
 </DD>
 <DT><A NAME="subs()"><CODE>subs()</CODE>
@@ -63,6 +68,7 @@ The number of chunks of code (usually files) that have been analyzed.
 <DD>
 The total number of subroutines analyzed by this Critic.
 
+
 </DD>
 <DT><A NAME="statements()"><CODE>statements()</CODE>
 
@@ -70,12 +76,14 @@ The total number of subroutines analyzed by this Critic.
 <DD>
 The total number of statements analyzed by this Critic.
 
+
 </DD>
-<DT><A NAME="lines_of_code()"><CODE>lines_of_code()</CODE>
+<DT><A NAME="lines()"><CODE>lines()</CODE>
 
 </A></DT>
 <DD>
 The total number of lines of code analyzed by this Critic.
+
 
 </DD>
 <DT><A NAME="violations_by_severity()"><CODE>violations_by_severity()</CODE>
@@ -85,6 +93,7 @@ The total number of lines of code analyzed by this Critic.
 The number of violations of each severity found by this Critic as a
 reference to a hash keyed by severity.
 
+
 </DD>
 <DT><A NAME="violations_by_policy()"><CODE>violations_by_policy()</CODE>
 
@@ -93,12 +102,23 @@ reference to a hash keyed by severity.
 The number of violations of each policy found by this Critic as a
 reference to a hash keyed by full policy name.
 
+
 </DD>
 <DT><A NAME="total_violations()"><CODE>total_violations()</CODE>
 
 </A></DT>
 <DD>
 The the total number of violations found by this Critic.
+
+
+</DD>
+<DT><A NAME="statements_other_than_subs()"><CODE>statements_other_than_subs()</CODE>
+
+</A></DT>
+<DD>
+The total number of statements minus the number of subroutines.
+Useful because a subroutine is considered a statement by PPI.
+
 
 </DD>
 <DT><A NAME="average_sub_mccabe()"><CODE>average_sub_mccabe()</CODE>
@@ -107,12 +127,31 @@ The the total number of violations found by this Critic.
 <DD>
 The average McCabe score of all scanned subroutines.
 
+
+</DD>
+<DT><A NAME="violations_per_file()"><CODE>violations_per_file()</CODE>
+
+</A></DT>
+<DD>
+The total violations divided by the number of modules.
+
+
+</DD>
+<DT><A NAME="violations_per_statement()"><CODE>violations_per_statement()</CODE>
+
+</A></DT>
+<DD>
+The total violations divided by the number statements minus
+subroutines.
+
+
 </DD>
 <DT><A NAME="violations_per_line_of_code()"><CODE>violations_per_line_of_code()</CODE>
 
 </A></DT>
 <DD>
 The total violations divided by the lines of code.
+
 
 </DD>
 </DL>
@@ -122,6 +161,7 @@ The total violations divided by the lines of code.
 </A></H1>
 
 <P>Elliot Shank <CODE>&lt;perl@galumph.com&gt;</CODE>
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

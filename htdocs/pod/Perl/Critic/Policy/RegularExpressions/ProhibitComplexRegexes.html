@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CASE%20STUDY">CASE STUDY
@@ -24,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::RegularExpressions::ProhibitComplexRegexes
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitComplexRegexes - Split long regexps into smaller <CODE>qr//</CODE> chunks.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -38,13 +50,15 @@ characters, where <CODE>N</CODE> is a configurable value that defaults to 60.
 If the regexp uses the <CODE>x</CODE> flag, then the length is computed after
 parsing out any comments or whitespace.
 
+
 </P><HR>
 <H1><A NAME="CASE%20STUDY">CASE STUDY
 
 </A></H1>
 
-<P>As an example, look at the regexp used to match email
-addresses in <A HREF="Email/Valid/Loose.html">Email::Valid::Loose</A> (tweaked lightly to wrap for POD)
+<P>As an example, look at the regexp used to match email addresses in
+<A HREF="Email/Valid/Loose.html">Email::Valid::Loose</A> (tweaked lightly to wrap
+for POD)
 
 </P>
 <PRE>    (?x-ism:(?:[^(\040)&lt;&gt;@,;:&quot;.\\\[\]\000-\037\x80-\xff]+(?![^(\040)&lt;&gt;@,;:&quot;.\\\[\]
@@ -94,6 +108,7 @@ times.  Furthermore, it's much easier to compare the second version
 against the source BNF grammar in RFC 822 to judge whether the
 implementation is sound even before running tests.
 
+
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -105,14 +120,17 @@ with the <CODE>max_characters</CODE> setting.  To do this, put entries in a
 <I>.perlcriticrc</I> file like this:
 
 </P>
-<PRE>  [RegularExpressions::ProhibitComplexRegexes]
-  max_characters = 40</PRE>
+<PRE>    [RegularExpressions::ProhibitComplexRegexes]
+    max_characters = 40
+</PRE>
 <HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -120,6 +138,7 @@ with the <CODE>max_characters</CODE> setting.  To do this, put entries in a
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

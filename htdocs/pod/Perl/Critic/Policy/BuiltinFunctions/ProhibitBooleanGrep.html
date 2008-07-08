@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
@@ -22,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitBooleanGrep
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitBooleanGrep - Use <CODE>List::MoreUtils::any</CODE> instead of <CODE>grep</CODE> in boolean context.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -30,25 +44,36 @@
 </A></H1>
 
 <P>Using <CODE>grep</CODE> in boolean context is a common idiom for checking if any
-elements in a list match a condition.  This works because boolean context is a
-subset of scalar context, and grep returns the number of matches in scalar
-context.  A non-zero number of matches means a match.
+elements in a list match a condition.  This works because boolean
+context is a subset of scalar context, and grep returns the number of
+matches in scalar context.  A non-zero number of matches means a
+match.
 
 </P>
-<P>But consider the case of a long array where the first element is a match.
-Boolean <CODE>grep</CODE> still checks all of the rest of the elements needlessly.
-Instead, a better solution is to use the <CODE>any</CODE> function from
-<A HREF="../../../../List/MoreUtils.html">List::MoreUtils</A>, which short-circuits after the first successful match to
-save time.
+<P>But consider the case of a long array where the first element is a
+match.  Boolean <CODE>grep</CODE> still checks all of the rest of the elements
+needlessly.  Instead, a better solution is to use the <CODE>any</CODE> function
+from <A HREF="../../../../List/MoreUtils.html">List::MoreUtils</A>, which short-circuits after
+the first successful match to save time.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
 
-<P>The algorithm for detecting boolean context takes a LOT of shortcuts.  There
-are lots of known false negatives.  But, I was conservative in writing this,
-so I hope there are no false positives.
+<P>The algorithm for detecting boolean context takes a LOT of shortcuts.
+There are lots of known false negatives.  But, I was conservative in
+writing this, so I hope there are no false positives.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -57,13 +82,15 @@ so I hope there are no false positives.
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
+
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl
-Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

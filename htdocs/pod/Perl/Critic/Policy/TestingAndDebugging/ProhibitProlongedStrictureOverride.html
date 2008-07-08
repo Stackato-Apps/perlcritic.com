@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,38 +22,52 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitProlongedStrictureOverride
+<P>Perl::Critic::Policy::TestingAndDebugging::ProhibitProlongedStrictureOverride - Don't turn off strict for large blocks of code.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Every agrees that <CODE>use strict</CODE> is the first step to writing maintainable code
-in Perl.  However, sometimes <CODE>strict</CODE> is a little too strict.  In those
-cases, you can turn it off briefly with a <CODE>no strict</CODE> directive.
+<P>Every agrees that <CODE>use strict</CODE> is the first step to writing
+maintainable code in Perl.  However, sometimes <CODE>strict</CODE> is a little
+too strict.  In those cases, you can turn it off briefly with a <CODE>no
+strict</CODE> directive.
 
 </P>
-<P>This policy checks that <CODE>no strict</CODE> is only in effect for a small number of
-statements.
+<P>This policy checks that <CODE>no strict</CODE> is only in effect for a small
+number of statements.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>The default number of statements allowed per <CODE>no strict</CODE> is three.  To
-override this number, put the following in your <I>.perlcriticrc</I>:
+<P>The default number of statements allowed per <CODE>no strict</CODE> is three.
+To override this number, put the following in your <I>.perlcriticrc</I>:
 
 </P>
-<PRE> [TestingAndDebugging::ProhibitProlongedStrictureOverride]
- statements = 5</PRE>
+<PRE>    [TestingAndDebugging::ProhibitProlongedStrictureOverride]
+    statements = 5
+</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

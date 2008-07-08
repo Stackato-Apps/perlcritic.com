@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect - Use <A HREF="../../../../Time/HiRes.html">Time::HiRes</A> instead of something like <CODE>select(undef, undef, undef, .05)</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,22 +42,32 @@
 </A></H1>
 
 <P>Conway discourages the use of <CODE>select()</CODE> for performing non-integer
-sleeps.  Although documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, it's something that
-generally requires the reader to read <CODE>perldoc -f select</CODE> to figure
-out what it should be doing.  Instead, Conway recommends that you use
-the <CODE>Time::HiRes</CODE> module when you want to sleep.
+sleeps.  Although documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, it's something
+that generally requires the reader to read <CODE>perldoc -f select</CODE> to
+figure out what it should be doing.  Instead, Conway recommends that
+you use the <CODE>Time::HiRes</CODE> module when you want to sleep.
 
 </P>
-<PRE>  select undef, undef, undef, 0.25;         # not ok
+<PRE>    select undef, undef, undef, 0.25;         # not ok
 
-  use Time::HiRes;
-  sleep( 0.25 );                            # ok</PRE>
+    use Time::HiRes;
+    sleep( 0.25 );                            # ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Time/HiRes.html">Time::HiRes</A>.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -51,6 +75,7 @@ the <CODE>Time::HiRes</CODE> module when you want to sleep.
 </A></H1>
 
 <P>Graham TerMarsch &lt;graham@howlingfrog.com&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

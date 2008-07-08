@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Modules::ProhibitEvilModules
+<P>Perl::Critic::Policy::Modules::ProhibitEvilModules - Ban modules that aren't blessed by your shop.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,36 +45,40 @@
 These may be modules that you feel are deprecated, buggy, unsupported,
 insecure, or just don't like.
 
+
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>The set of prohibited modules is configurable via the <CODE>modules</CODE> option.  The
-value of <CODE>modules</CODE> should be a string of space-delimited, fully qualified
-module names and/or regular expressions.  An example of prohibiting two
-specific modules in a <I>.perlcriticrc</I> file:
+<P>The set of prohibited modules is configurable via the <CODE>modules</CODE>
+option.  The value of <CODE>modules</CODE> should be a string of
+space-delimited, fully qualified module names and/or regular
+expressions.  An example of prohibiting two specific modules in a
+<I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [Modules::ProhibitEvilModules]
-  modules = Getopt::Std Autoload</PRE>
+<PRE>    [Modules::ProhibitEvilModules]
+    modules = Getopt::Std Autoload</PRE>
 
-<P>Regular expressions are identified by values beginning and ending with slashes.
-Any module with a name that matches <CODE>m/pattern/</CODE> will be forbidden.  For
-example:
-
-</P>
-<PRE>  [Modules::ProhibitEvilModules]
-  modules = /Acme::/</PRE>
-
-<P>would cause all modules that match <CODE>m/Acme::/</CODE> to be forbidden.  You can add
-any of the <CODE>imxs</CODE> switches to the end of a pattern, but be aware that patterns
-cannot contain whitespace because the configuration file parser uses it to
-delimit the module names and patterns.
+<P>Regular expressions are identified by values beginning and ending with
+slashes.  Any module with a name that matches <CODE>m/pattern/</CODE> will be
+forbidden.  For example:
 
 </P>
-<P>By default, there are no prohibited modules (although I can think of a few that
-should be).
+<PRE>    [Modules::ProhibitEvilModules]
+    modules = /Acme::/</PRE>
+
+<P>would cause all modules that match <CODE>m/Acme::/</CODE> to be forbidden.  You
+can add any of the <CODE>imxs</CODE> switches to the end of a pattern, but be
+aware that patterns cannot contain whitespace because the
+configuration file parser uses it to delimit the module names and
+patterns.
+
+</P>
+<P>By default, there are no prohibited modules (although I can think of a
+few that should be).
+
 
 </P><HR>
 <H1><A NAME="NOTES">NOTES
@@ -73,12 +89,14 @@ should be).
 allow you to specify an alternative for each prohibited module, which
 can be suggested by <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>.
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

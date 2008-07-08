@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -22,7 +26,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::ProhibitLocalVars
+<P>Perl::Critic::Policy::Variables::ProhibitLocalVars - Use <CODE>my</CODE> instead of <CODE>local</CODE>, except when you have to.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,18 +46,28 @@
 <P>Since Perl 5, there are very few reasons to declare <CODE>local</CODE>
 variables.  The most common exceptions are Perl's magical global
 variables.  If you do need to modify one of those global variables,
-you should localize it first.  You should also use the <A HREF="../../../../English.html">English</A>
-module to give those variables more meaningful names.
+you should localize it first.  You should also use the
+<A HREF="../../../../English.html">English</A> module to give those variables more meaningful
+names.
 
 </P>
-<PRE>  local $foo;   #not ok
-  my $foo;      #ok
+<PRE>    local $foo;   #not ok
+    my $foo;      #ok
 
-  use English qw(-no_match_vars);
-  local $INPUT_RECORD_SEPARATOR    #ok
-  local $RS                        #ok
-  local $/;                        #not ok</PRE>
+    use English qw(-no_match_vars);
+    local $INPUT_RECORD_SEPARATOR    #ok
+    local $RS                        #ok
+    local $/;                        #not ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>

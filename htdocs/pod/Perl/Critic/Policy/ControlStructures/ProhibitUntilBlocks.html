@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitUntilBlocks
+<P>Perl::Critic::Policy::ControlStructures::ProhibitUntilBlocks - Write <CODE>while(! $condition)</CODE> instead of <CODE>until($condition)</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,15 +41,25 @@
 </A></H1>
 
 <P>Conway discourages using <CODE>until</CODE> because it leads to double-negatives
-that are hard to understand.  Instead, reverse the logic and use <CODE>while</CODE>.
+that are hard to understand.  Instead, reverse the logic and use
+<CODE>while</CODE>.
 
 </P>
-<PRE>  until($condition)     { do_something() } #not ok
-  until(! $no_flag)     { do_something() } #really bad
-  while( ! $condition)  { do_something() } #ok</PRE>
+<PRE>    until($condition)     { do_something() } #not ok
+    until(! $no_flag)     { do_something() } #really bad
+    while( ! $condition)  { do_something() } #ok</PRE>
 
 <P>This Policy only covers the block-form of <CODE>until</CODE>.  For the postfix
 variety, see <CODE>ProhibitPostfixControls</CODE>.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO

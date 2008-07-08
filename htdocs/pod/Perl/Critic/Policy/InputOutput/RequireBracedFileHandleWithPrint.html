@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint
+<P>Perl::Critic::Policy::InputOutput::RequireBracedFileHandleWithPrint - Write <CODE>print {$FH} $foo, $bar;</CODE> instead of <CODE>print $FH $foo, $bar;</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -38,8 +51,17 @@ else it won't compile under <CODE>use strict 'subs'</CODE>.
 
   print   STDERR   $foo, $bar, $baz;  #not ok
   print  {STDERR}  $foo, $bar, $baz;  #won't compile under 'strict'
-  print {*STDERR}  $foo, $bar, $baz;  #perfect!</PRE>
+  print {*STDERR}  $foo, $bar, $baz;  #perfect!
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

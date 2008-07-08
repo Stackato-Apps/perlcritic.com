@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,24 +24,35 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::RequireFinalReturn
+<P>Perl::Critic::Policy::Subroutines::RequireFinalReturn - End every path through a subroutine with an explicit <CODE>return</CODE> statement.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>Require all subroutines to terminate explicitly with one of the following:
-<CODE>return</CODE>, <CODE>goto</CODE>, <CODE>die</CODE>, <CODE>exit</CODE>, <CODE>throw</CODE>, <CODE>carp</CODE> or <CODE>croak</CODE>.
+<P>Require all subroutines to terminate explicitly with one of the
+following: <CODE>return</CODE>, <CODE>goto</CODE>, <CODE>die</CODE>, <CODE>exit</CODE>, <CODE>throw</CODE>, <CODE>carp</CODE> or
+<CODE>croak</CODE>.
 
 </P>
-<P>Subroutines without explicit return statements at their ends can be confusing.
-It can be challenging to deduce what the return value will be.
+<P>Subroutines without explicit return statements at their ends can be
+confusing.  It can be challenging to deduce what the return value will
+be.
 
 </P>
-<P>Furthermore, if the programmer did not mean for there to be a significant
-return value, and omits a return statement, some of the subroutine's inner
-data can leak to the outside.  Consider this case:
+<P>Furthermore, if the programmer did not mean for there to be a
+significant return value, and omits a return statement, some of the
+subroutine's inner data can leak to the outside.  Consider this case:
 
 </P>
 <PRE>   package Password;
@@ -59,26 +72,27 @@ data can leak to the outside.  Consider this case:
    }
    1;</PRE>
 
-<P>In this case, the last statement in check_password() is the assignment.  The
-result of that assignment is the implicit return value, so a wrong guess
-returns the right password!  Adding a <CODE>return;</CODE> at the end of that subroutine
-solves the problem.
+<P>In this case, the last statement in check_password() is the
+assignment.  The result of that assignment is the implicit return
+value, so a wrong guess returns the right password!  Adding a
+<CODE>return;</CODE> at the end of that subroutine solves the problem.
 
 </P>
 <P>The only exception allowed is an empty subroutine.
 
 </P>
-<P>Be careful when fixing problems identified by this Policy; don't blindly put
-a <CODE>return;</CODE> statement at the end of every subroutine.
+<P>Be careful when fixing problems identified by this Policy; don't
+blindly put a <CODE>return;</CODE> statement at the end of every subroutine.
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>If you've created your own terminal functions that behave like <CODE>die</CODE> or
-<CODE>exit</CODE>, then you can configure Perl::Critic to recognize those functions as
-well.  Just put something like this in your <I>.perlcriticrc</I>:
+<P>If you've created your own terminal functions that behave like <CODE>die</CODE>
+or <CODE>exit</CODE>, then you can configure Perl::Critic to recognize those
+functions as well.  Just put something like this in your
+<I>.perlcriticrc</I>:
 
 </P>
 <PRE>  [Subroutines::RequireFinalReturns]

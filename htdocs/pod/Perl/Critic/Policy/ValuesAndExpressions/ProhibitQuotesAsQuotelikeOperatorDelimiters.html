@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters - Don't use quotes (<CODE>'</CODE>, <CODE>&quot;</CODE>, <CODE>`</CODE>) as delimiters for the quote-like operators.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
 
 
 </P><HR>
@@ -36,25 +47,25 @@ defeats the purpose of them and produces obfuscated code, causing
 problems for future maintainers and their editors/IDEs.
 
 </P>
-<PRE>  $x = q&quot;q&quot;;                #not ok
-  $x = q'q';                #not ok
-  $x = q`q`;                #not ok
+<PRE>    $x = q&quot;q&quot;;                #not ok
+    $x = q'q';                #not ok
+    $x = q`q`;                #not ok
 
-  $x = qq&quot;q&quot;;               #not ok
-  $x = qr&quot;r&quot;;               #not ok
-  $x = qw&quot;w&quot;;               #not ok
+    $x = qq&quot;q&quot;;               #not ok
+    $x = qr&quot;r&quot;;               #not ok
+    $x = qw&quot;w&quot;;               #not ok
 
-  $x = qx`date`;            #not ok
+    $x = qx`date`;            #not ok
 
-  $x =~ m&quot;m&quot;;               #not ok
-  $x =~ s&quot;s&quot;x&quot;;             #not ok
-  $x =~ tr&quot;t&quot;r&quot;;            #not ok
-  $x =~ y&quot;x&quot;y&quot;;             #not ok
+    $x =~ m&quot;m&quot;;               #not ok
+    $x =~ s&quot;s&quot;x&quot;;             #not ok
+    $x =~ tr&quot;t&quot;r&quot;;            #not ok
+    $x =~ y&quot;x&quot;y&quot;;             #not ok
 
-  $x =~ m'$x';              #ok
-  $x =~ s'$x'y';            #ok
-  $x = qr'$x'm;             #ok
-  $x = qx'finger foo@bar';  #ok
+    $x =~ m'$x';              #ok
+    $x =~ s'$x'y';            #ok
+    $x = qr'$x'm;             #ok
+    $x = qx'finger foo@bar';  #ok
 </PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -79,17 +90,17 @@ defaults are equivalent to having the following in your
 <I>.perlcriticrc</I>:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters]
-  single_quote_allowed_operators = m s qr qx
-  double_quote_allowed_operators =
-  back_quote_allowed_operators =
+<PRE>    [ValuesAndExpressions::ProhibitQuotesAsQuotelikeOperatorDelimiters]
+    single_quote_allowed_operators = m s qr qx
+    double_quote_allowed_operators =
+    back_quote_allowed_operators =
 </PRE>
 <HR>
 <H1><A NAME="SUGGESTED%20BY">SUGGESTED BY
 
 </A></H1>
 
-<P>MSCHWERN
+<P>Michael Schwern
 
 
 </P><HR>

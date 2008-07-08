@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -30,7 +32,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::RequireBriefOpen
+<P>Perl::Critic::Policy::InputOutput::RequireBriefOpen - Close filehandles as soon as possible after opening them.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -38,23 +50,24 @@
 </A></H1>
 
 <P>One way that production systems fail unexpectedly is by running out of
-filehandles.  Filehandles are a finite resource on every operating system that
-I'm aware of, and running out of them is virtually impossible to recover from.
-The solution is to not run out in the first place.  What causes programs to
-run out of filehandles?  Usually, it's leaks: you open a filehandle and forget
-to close it, or just wait a really long time before closing it.
+filehandles.  Filehandles are a finite resource on every operating
+system that I'm aware of, and running out of them is virtually
+impossible to recover from.  The solution is to not run out in the
+first place.  What causes programs to run out of filehandles?
+Usually, it's leaks: you open a filehandle and forget to close it, or
+just wait a really long time before closing it.
 
 </P>
-<P>This problem is rarely exposed by test systems, because the tests rarely run
-long enough or have enough load to hit the filehandle limit.  So, the best way
-to avoid the problem is 1) always close all filehandles that you open and 2)
-close them as soon as is practical.
+<P>This problem is rarely exposed by test systems, because the tests
+rarely run long enough or have enough load to hit the filehandle
+limit.  So, the best way to avoid the problem is 1) always close all
+filehandles that you open and 2) close them as soon as is practical.
 
 </P>
-<P>This policy takes note of calls to <CODE>open()</CODE> where there is no matching
-<CODE>close()</CODE> call within <CODE>N</CODE> lines of code.  If you really need to do a lot of
-processing on an open filehandle, then you can move that processing to another
-method like this:
+<P>This policy takes note of calls to <CODE>open()</CODE> where there is no
+matching <CODE>close()</CODE> call within <CODE>N</CODE> lines of code.  If you really
+need to do a lot of processing on an open filehandle, then you can
+move that processing to another method like this:
 
 </P>
 <PRE>    sub process_data_file {
@@ -73,24 +86,31 @@ method like this:
         return;
     }</PRE>
 
-<P>As a special case, this policy also allows code to return the filehandle after
-the <CODE>open</CODE> instead of closing it.  Just like the close, however, that
-<CODE>return</CODE> has to be within the right number of lines.  From there, you're on
-your own to figure out whether the code is promptly closing the filehandle.
+<P>As a special case, this policy also allows code to return the
+filehandle after the <CODE>open</CODE> instead of closing it.  Just like the
+close, however, that <CODE>return</CODE> has to be within the right number of
+lines.  From there, you're on your own to figure out whether the code
+is promptly closing the filehandle.
+
+</P>
+<P>The STDIN, STDOUT, and STDERR handles are exempt from this policy.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This policy allows <CODE>close()</CODE> invocations to be up to <CODE>N</CODE> lines after their
-corresponding <CODE>open()</CODE> calls, where <CODE>N</CODE> defaults to 9.  You can override
-this to set it to a different number with the <CODE>lines</CODE> setting.  To do this,
-put entries in a <I>.perlcriticrc</I> file like this:
+<P>This policy allows <CODE>close()</CODE> invocations to be up to <CODE>N</CODE> lines after
+their corresponding <CODE>open()</CODE> calls, where <CODE>N</CODE> defaults to 9.  You
+can override this to set it to a different number with the <CODE>lines</CODE>
+setting.  To do this, put entries in a <I>.perlcriticrc</I> file like
+this:
 
 </P>
 <PRE>  [InputOutput::RequireBriefOpen]
-  lines = 5</PRE>
+  lines = 5
+</PRE>
 <HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
@@ -99,15 +119,17 @@ put entries in a <I>.perlcriticrc</I> file like this:
 
 </A></H2>
 
-<P>This policy only looks for explicit <CODE>open</CODE> calls.  It does not detect calls
-to <CODE>CORE::open</CODE> or <CODE>IO::File-&gt;new</CODE> or the like.
+<P>This policy only looks for explicit <CODE>open</CODE> calls.  It does not detect
+calls to <CODE>CORE::open</CODE> or <CODE>IO::File-&gt;new</CODE> or the like.
+
 
 </P><H2><A NAME="Is%20it%20the%20right%20lexical%3f">Is it the right lexical?
 
 </A></H2>
 
-<P>We don't currently check for redeclared filehandles.  So the following code
-is false negative, for example, because the outer scoped filehandle is not closed:
+<P>We don't currently check for redeclared filehandles.  So the following
+code is false negative, for example, because the outer scoped
+filehandle is not closed:
 
 </P>
 <PRE>    open my $fh, '&lt;', $file1 or croak;
@@ -116,16 +138,19 @@ is false negative, for example, because the outer scoped filehandle is not close
         close $fh;
     }</PRE>
 
-<P>This is a contrived example, but it isn't uncommon for people to use <CODE>$fh</CODE>
-for the name of the filehandle every time.  Perhaps it's time to think of
-better variable names...
+<P>This is a contrived example, but it isn't uncommon for people to use
+<CODE>$fh</CODE> for the name of the filehandle every time.  Perhaps it's time
+to think of better variable names...
+
 
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -133,6 +158,7 @@ better variable names...
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

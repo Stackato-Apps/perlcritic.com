@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators
+<P>Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators - Discourage stuff like <CODE>@files = `ls $directory`</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -41,7 +54,12 @@ output and let the application decide what to do with it.
   my ($writer, $reader, $err);
   open3($writer, $reader, $err, 'some_command'); #ok;
   @output = &lt;$reader&gt;;  #Output here
-  @errors = &lt;$err&gt;;     #Errors here, instead of the console</PRE>
+  @errors = &lt;$err&gt;;     #Errors here, instead of the console
+</PRE>
+<HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
 
 <P>Alternatively, if you do want to use backticks, you can restrict
 checks to void contexts by adding the following to your
@@ -59,7 +77,8 @@ assign the result to a variable.
 </P>
 <PRE>  `some_command`;                      #not ok
   $output = `some_command`;            #ok
-  @output = `some_command`;            #ok</PRE>
+  @output = `some_command`;            #ok
+</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 
@@ -69,8 +88,8 @@ assign the result to a variable.
 <CODE>qx{}</CODE>.
 
 </P>
-<P>See <A HREF="../../../../perlipc.html">perlipc</A> for more discussion on using <CODE>wait()</CODE> instead of
-<CODE>$SIG{CHLD} = 'IGNORE'</CODE>.
+<P>See <A HREF="../../../../perlipc.html">perlipc</A> for more discussion on using <CODE>wait()</CODE> instead
+of <CODE>$SIG{CHLD} = 'IGNORE'</CODE>.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

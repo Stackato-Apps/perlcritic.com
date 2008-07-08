@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls
+<P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls - Write <CODE>if($condition){ do_something() }</CODE> instead of <CODE>do_something() if $condition</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -30,47 +41,47 @@
 </A></H1>
 
 <P>Conway discourages using postfix control structures (<CODE>if</CODE>, <CODE>for</CODE>,
-<CODE>unless</CODE>, <CODE>until</CODE>, <CODE>while</CODE>).  The <CODE>unless</CODE> and <CODE>until</CODE> controls
-are particularly evil because they lead to double-negatives that are
-hard to comprehend.  The only tolerable usage of a postfix <CODE>if</CODE> is
-when it follows a loop break such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or
-<CODE>continue</CODE>.
+<CODE>unless</CODE>, <CODE>until</CODE>, <CODE>while</CODE>) because they hide control flow.  The
+<CODE>unless</CODE> and <CODE>until</CODE> controls are particularly evil because they
+lead to double-negatives that are hard to comprehend.  The only
+tolerable usage of a postfix <CODE>if</CODE> is when it follows a loop break
+such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or <CODE>continue</CODE>.
 
 </P>
-<PRE>  do_something() if $condition;         #not ok
-  if($condition){ do_something() }      #ok
+<PRE>    do_something() if $condition;         #not ok
+    if($condition){ do_something() }      #ok
 
-  do_something() while $condition;      #not ok
-  while($condition){ do_something() }   #ok
+    do_something() while $condition;      #not ok
+    while($condition){ do_something() }   #ok
 
-  do_something() unless $condition;     #not ok
-  do_something() unless ! $condition;   #really bad
-  if(! $condition){ do_something() }    #ok
+    do_something() unless $condition;     #not ok
+    do_something() unless ! $condition;   #really bad
+    if(! $condition){ do_something() }    #ok
 
-  do_something() until $condition;      #not ok
-  do_something() until ! $condition;    #really bad
-  while(! $condition){ do_something() } #ok
+    do_something() until $condition;      #not ok
+    do_something() until ! $condition;    #really bad
+    while(! $condition){ do_something() } #ok
 
-  do_something($_) for @list;           #not ok
+    do_something($_) for @list;           #not ok
 
- LOOP:
-  for my $n (0..100){
-      next if $condition;               #ok
-      last LOOP if $other_condition;    #also ok
-  }</PRE>
+    LOOP:
+    for my $n (0..100){
+        next if $condition;               #ok
+        last LOOP if $other_condition;    #also ok
+    }</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>A set of constructs to be ignored by this policy can specified by giving a
-value for 'allow' of a string of space-delimited keywords: <CODE>if</CODE>, <CODE>for</CODE>,
-<CODE>unless</CODE>, <CODE>until</CODE>, and/or <CODE>while</CODE>.  An example of specifying allowed
-flow-control structures in a <I>.perlcriticrc</I> file:
+<P>A set of constructs to be ignored by this policy can specified by
+giving a value for 'allow' of a string of space-delimited keywords:
+<CODE>if</CODE>, <CODE>for</CODE>, <CODE>unless</CODE>, <CODE>until</CODE>, and/or <CODE>while</CODE>.  An example of
+specifying allowed flow-control structures in a <I>.perlcriticrc</I> file:
 
 </P>
-<PRE> [ControlStructures::ProhibitPostfixControls]
- allow = for if until</PRE>
+<PRE>    [ControlStructures::ProhibitPostfixControls]
+    allow = for if until</PRE>
 
 <P>By default, all postfix control keywords are prohibited.
 
@@ -80,8 +91,8 @@ can also be configured with the 'flowcontrol' directive in your
 <I>.perlcriticrc</I> file:
 
 </P>
-<PRE> [ControlStructures::ProhibitPostfixControls]
- flowcontrol = warn die carp croak cluck confess goto exit</PRE>
+<PRE>    [ControlStructures::ProhibitPostfixControls]
+    flowcontrol = warn die carp croak cluck confess goto exit</PRE>
 <HR>
 <H1><A NAME="NOTES">NOTES
 

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::RequireNegativeIndices
+<P>Perl::Critic::Policy::Variables::RequireNegativeIndices - Negative array index should be used.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,18 +42,18 @@
 <P>Conway points out that
 
 </P>
-<PRE>  $arr[$#arr];
-  $arr[$#arr-1];
-  $arr[@arr-1];
-  $arr[@arr-2];</PRE>
+<PRE>    $arr[$#arr];
+    $arr[$#arr-1];
+    $arr[@arr-1];
+    $arr[@arr-2];</PRE>
 
 <P>are equivalent to
 
 </P>
-<PRE>  $arr[-1];
-  $arr[-2];
-  $arr[-1];
-  $arr[-2];</PRE>
+<PRE>    $arr[-1];
+    $arr[-2];
+    $arr[-1];
+    $arr[-2];</PRE>
 
 <P>and the latter are more readable, performant and maintainable.  The
 latter is because the programmer no longer needs to keep two variable
@@ -50,15 +64,25 @@ names matched.
 does not recognize any of these more complex examples:
 
 </P>
-<PRE>   $some-&gt;[$data_structure]-&gt;[$#{$some-&gt;[$data_structure]} -1];
-   my $ref = \@arr;
-   $ref-&gt;[$#arr];</PRE>
+<PRE>    $some-&gt;[$data_structure]-&gt;[$#{$some-&gt;[$data_structure]} -1];
+    my $ref = \@arr;
+    $ref-&gt;[$#arr];
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

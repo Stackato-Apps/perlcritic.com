@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitMismatchedOperators - Don't mix numeric operators with string operands, or vice-versa.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,19 +46,29 @@ and possibly lead to subtle errors.  An example of this is mixing a
 string equality operator with a numeric value, or vice-versa.
 
 </P>
-<PRE>  if ($foo == 'bar') {}     #not ok
-  if ($foo eq 'bar') {}     #ok
-  if ($foo eq 123) {}       #not ok
-  if ($foo == 123) {}       #ok</PRE>
+<PRE>    if ($foo == 'bar') {}     #not ok
+    if ($foo eq 'bar') {}     #ok
+    if ($foo eq 123) {}       #not ok
+    if ($foo == 123) {}       #ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
-<P>If <A HREF="../../../../warnings.html">warnings</A> are enabled, the Perl interpreter usually warns you
-about using mismatched operators at run-time.  This Policy does
-essentially the same thing, but at author-time.  That way, you can
-find our about them sooner.
+<P>If <A HREF="../../../../warnings.html">warnings</A> are enabled, the Perl interpreter usually
+warns you about using mismatched operators at run-time.  This Policy
+does essentially the same thing, but at author-time.  That way, you
+can find our about them sooner.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -52,6 +76,7 @@ find our about them sooner.
 </A></H1>
 
 <P>Peter Guzis &lt;pguzis@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

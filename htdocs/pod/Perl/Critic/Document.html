@@ -12,6 +12,8 @@
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
 </A><LI><A HREF="#METHODS">METHODS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -26,6 +28,7 @@
 
 <P>Perl::Critic::Document - Caching wrapper around a PPI::Document.
 
+
 </P><HR>
 <H1><A NAME="SYNOPSIS">SYNOPSIS
 
@@ -35,7 +38,8 @@
     use Perl::Critic::Document;
     my $doc = PPI::Document-&gt;new('Foo.pm');
     $doc = Perl::Critic::Document-&gt;new($doc);
-    ## Then use the instance just like a PPI::Document</PRE>
+    ## Then use the instance just like a PPI::Document
+</PRE>
 <HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
@@ -50,52 +54,70 @@ Then, on subsequent requests we return the cached data.
 <P>This is implemented as a facade, where method calls are handed to the
 stored <CODE>PPI::Document</CODE> instance.
 
+
 </P><HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
 
 <P>This facade does not implement the overloaded operators from
-<A HREF="PPI/Document.html">PPI::Document</A> (that is, the <CODE>use overload ...</CODE> work). Therefore,
-users of this facade must not rely on that syntactic sugar.  So, for
-example, instead of <CODE>my $source = &quot;$doc&quot;;</CODE> you should write <CODE>my
-$source = $doc-</CODE>content();&gt;
+<A HREF="PPI/Document.html">PPI::Document</A> (that is, the <CODE>use overload ...</CODE>
+work). Therefore, users of this facade must not rely on that syntactic
+sugar.  So, for example, instead of <CODE>my $source = &quot;$doc&quot;;</CODE> you should
+write <CODE>my $source = $doc-</CODE>content();&gt;
 
 </P>
 <P>Perhaps there is a CPAN module out there which implements a facade
 better than we do here?
 
+
 </P><HR>
-<H1><A NAME="METHODS">METHODS
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="%24pkg-%3enew(%24doc)">$pkg-&gt;new($doc)
+<DL><DT><A NAME="new(%24doc)"><CODE>new($doc)</CODE>
 
 </A></DT>
 <DD>
 Create a new instance referencing a PPI::Document instance.
 
+
 </DD>
-<DT><A NAME="%24self-%3eppi_document()">$self-&gt;ppi_document()
+</DL>
+<HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="new(%24doc)"><CODE>new($doc)</CODE>
 
 </A></DT>
 <DD>
-Accessor for the wrapped PPI::Document instance.  Note that altering this
-instance in any way can cause unpredictable failures in Perl::Critic's
-subsequent analysis because some caches may fall out of date.
+Create a new instance referencing a PPI::Document instance.
+
 
 </DD>
-<DT><A NAME="%24self-%3efind(%24wanted)">$self-&gt;find($wanted)
+<DT><A NAME="ppi_document()"><CODE>ppi_document()</CODE>
+
+</A></DT>
+<DD>
+Accessor for the wrapped PPI::Document instance.  Note that altering
+this instance in any way can cause unpredictable failures in
+Perl::Critic's subsequent analysis because some caches may fall out of
+date.
+
+
+</DD>
+<DT><A NAME="find(%24wanted)"><CODE>find($wanted)</CODE>
 
 </A></DT>
 <DD>
 </DD>
-<DT><A NAME="%24self-%3efind_first(%24wanted)">$self-&gt;find_first($wanted)
+<DT><A NAME="find_first(%24wanted)"><CODE>find_first($wanted)</CODE>
 
 </A></DT>
 <DD>
 </DD>
-<DT><A NAME="%24self-%3efind_any(%24wanted)">$self-&gt;find_any($wanted)
+<DT><A NAME="find_any(%24wanted)"><CODE>find_any($wanted)</CODE>
 
 </A></DT>
 <DD>
@@ -103,21 +125,35 @@ If <CODE>$wanted</CODE> is a simple PPI class name, then the cache is employed.
 Otherwise we forward the call to the corresponding method of the
 <CODE>PPI::Document</CODE> instance.
 
+
 </DD>
-<DT><A NAME="%24self-%3efilename()">$self-&gt;filename()
+<DT><A NAME="filename()"><CODE>filename()</CODE>
 
 </A></DT>
 <DD>
 Returns the filename for the source code if applicable
 (PPI::Document::File) or <CODE>undef</CODE> otherwise (PPI::Document).
 
+
 </DD>
-<DT><A NAME="%24self-%3eisa(%20%24classname%20)">$self-&gt;isa( $classname )
+<DT><A NAME="isa(%20%24classname%20)"><CODE>isa( $classname )</CODE>
 
 </A></DT>
 <DD>
-To be compatible with other modules that expect to get a PPI::Document, the
-Perl::Critic::Document class masquerades as the PPI::Document class.
+To be compatible with other modules that expect to get a
+PPI::Document, the Perl::Critic::Document class masquerades as the
+PPI::Document class.
+
+
+</DD>
+<DT><A NAME="highest_explicit_perl_version()"><CODE>highest_explicit_perl_version()</CODE>
+
+</A></DT>
+<DD>
+Returns a <A HREF="version.html">version</A> object for the highest Perl version
+requirement declared in the document via a <CODE>use</CODE> or <CODE>require</CODE>
+statement.  Returns nothing if there is no version statement.
+
 
 </DD>
 </DL>
@@ -127,6 +163,7 @@ Perl::Critic::Document class masquerades as the PPI::Document class.
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

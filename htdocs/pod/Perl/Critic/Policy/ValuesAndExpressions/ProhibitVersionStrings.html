@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitVersionStrings - Don't use strings like <CODE>v1.4</CODE> or <CODE>1.4.5</CODE> when including other modules.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -28,14 +42,24 @@
 <P>Whenever you <CODE>use</CODE> or <CODE>require</CODE> a module, you can specify a minimum
 version requirement.  To ensure compatibility with older Perls, this
 version number should be expressed as a floating-point number.  Do not
-use v-strings or three-part numbers.  The Perl convention for expressing
-version numbers as floats is: version + (patch level / 1000).
+use v-strings or three-part numbers.  The Perl convention for
+expressing version numbers as floats is: version + (patch level /
+1000).
 
 </P>
-<PRE>  use Foo v1.2    qw(foo bar);  # not ok
-  use Foo 1.2.03  qw(foo bar);  # not ok
-  use Foo 1.00203 qw(foo bar);  # ok</PRE>
+<PRE>    use Foo v1.2    qw(foo bar);  # not ok
+    use Foo 1.2.03  qw(foo bar);  # not ok
+    use Foo 1.00203 qw(foo bar);  # ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

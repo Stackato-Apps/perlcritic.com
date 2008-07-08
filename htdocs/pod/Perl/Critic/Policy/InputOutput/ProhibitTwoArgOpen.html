@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
 
@@ -22,7 +26,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen
+<P>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen - Write <CODE>open $fh, q{&lt;}, $filename;</CODE> instead of <CODE>open $fh, &quot;&lt;$filename&quot;;</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -42,13 +55,27 @@ elegant anyway.
   use IO::File;
   my $fh = IO::File-&gt;new( 'output.txt', q{&gt;} ); # even better!</PRE>
 
-<P>It's also more explicitly clear to define the input mode of the
-file, as in the difference between these two:
+<P>It's also more explicitly clear to define the input mode of the file,
+as in the difference between these two:
 
 </P>
 <PRE>  open( $fh, 'foo.txt' );       # BAD: Reader must think what default mode is
   open( $fh, '&lt;', 'foo.txt' );  # GOOD: Reader can see open mode</PRE>
-<HR>
+
+<P>This policy will not complain if the file explicitly states that it is
+compatible with a version of perl prior to 5.6 via an include
+statement, e.g. by having <CODE>require 5.005</CODE> in it.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>

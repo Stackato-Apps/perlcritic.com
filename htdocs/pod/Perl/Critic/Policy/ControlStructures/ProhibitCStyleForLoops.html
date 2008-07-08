@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,26 +22,44 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitCStyleForLoops
+<P>Perl::Critic::Policy::ControlStructures::ProhibitCStyleForLoops - Write <CODE>for(0..20)</CODE> instead of <CODE>for($i=0; $i&lt;=20; $i++)</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>The 3-part <CODE>for</CODE> loop that Perl inherits from C is butt-ugly, and only
-really necessary if you need irregular counting.  The very Perlish
-<CODE>..</CODE> operator is much more elegant and readable.
+<P>The 3-part <CODE>for</CODE> loop that Perl inherits from C is butt-ugly, and
+only really necessary if you need irregular counting.  The very
+Perlish <CODE>..</CODE> operator is much more elegant and readable.
 
 </P>
-<PRE>  for($i=0; $i&lt;=$max; $i++){      #ick!
-      do_something($i);
-  }
+<PRE>    for($i=0; $i&lt;=$max; $i++){      #ick!
+        do_something($i);
+    }
 
-  for(0..$max){                   #very nice
-    do_something($_);
-  }</PRE>
+    for(0..$max){                   #very nice
+        do_something($_);
+    }
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

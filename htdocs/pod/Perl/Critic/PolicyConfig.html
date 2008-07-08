@@ -1,0 +1,156 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::PolicyConfig - Configuration data for a Policy.
+
+
+</P><HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>A container for the configuration of a Policy.
+
+
+</P><HR>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="get_policy_short_name()"><CODE>get_policy_short_name()</CODE>
+
+</A></DT>
+<DD>
+The name of the policy this configuration is for.  Primarily here for
+the sake of debugging.
+
+
+</DD>
+<DT><A NAME="get_set_themes()"><CODE> get_set_themes() </CODE>
+
+</A></DT>
+<DD>
+The value of <CODE>set_themes</CODE> in the user's <I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="get_add_themes()"><CODE> get_add_themes() </CODE>
+
+</A></DT>
+<DD>
+The value of <CODE>add_themes</CODE> in the user's <I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="get_severity()"><CODE> get_severity() </CODE>
+
+</A></DT>
+<DD>
+The value of <CODE>severity</CODE> in the user's <I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="is_maximum_violations_per_document_unlimited()"><CODE> is_maximum_violations_per_document_unlimited() </CODE>
+
+</A></DT>
+<DD>
+Answer whether the value of <CODE>maximum_violations_per_document</CODE> should
+be considered to be unlimited.
+
+
+</DD>
+<DT><A NAME="get_maximum_violations_per_document()"><CODE> get_maximum_violations_per_document() </CODE>
+
+</A></DT>
+<DD>
+The value of <CODE>maximum_violations_per_document</CODE> in the user's
+<I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="get(%24parameter)"><CODE> get($parameter) </CODE>
+
+</A></DT>
+<DD>
+Retrieve the value of the specified parameter in the user's
+<I>.perlcriticrc</I>.
+
+
+</DD>
+<DT><A NAME="remove(%24parameter)"><CODE> remove($parameter) </CODE>
+
+</A></DT>
+<DD>
+Delete the value of the specified parameter.
+
+
+</DD>
+<DT><A NAME="is_empty()"><CODE> is_empty() </CODE>
+
+</A></DT>
+<DD>
+Answer whether there is any non-standard configuration information
+left.
+
+
+</DD>
+<DT><A NAME="get_parameter_names()"><CODE> get_parameter_names() </CODE>
+
+</A></DT>
+<DD>
+Retrieve the names of the parameters in this object.
+
+
+</DD>
+</DL>
+<HR>
+<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="Perl/Critic/DEVELOPER.html#MAKING%20YOUR%20POLICY%20CONFIGURABLE">Perl::Critic::DEVELOPER/&quot;MAKING YOUR POLICY CONFIGURABLE&quot;</A>
+
+
+</P><HR>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+
+</P><HR>
+<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2008 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

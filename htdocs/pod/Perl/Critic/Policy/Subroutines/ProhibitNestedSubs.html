@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTE">NOTE
 
@@ -20,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Subroutines::ProhibitNestedSubs
+<P>Perl::Critic::Policy::Subroutines::ProhibitNestedSubs - <CODE>sub never { sub correct {} }</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -41,9 +54,17 @@
       ...
   }</PRE>
 
-<P><CODE>do_subprocess()</CODE> is global, despite where it is declared.
-Either write your subs without nesting or use anonymous code
-references.
+<P><CODE>do_subprocess()</CODE> is global, despite where it is declared.  Either
+write your subs without nesting or use anonymous code references.
+
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
 
 
 </P><HR>
@@ -69,8 +90,8 @@ references.
 <P>Copyright (c) 2007-2008 Ricardo SIGNES.
 
 </P>
-<P>This program is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 </P>
 </BODY>

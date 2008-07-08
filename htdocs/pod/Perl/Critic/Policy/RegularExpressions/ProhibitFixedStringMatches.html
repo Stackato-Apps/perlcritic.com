@@ -6,13 +6,17 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><UL>
 <LI><A HREF="#VARIANTS">VARIANTS
 
 </A></UL>
-<LI><A HREF="#CREDITS">CREDITS
+<LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -24,16 +28,27 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches
+<P>Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches - Use <CODE>eq</CODE> or hash instead of fixed-pattern regexps.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>A regular expression that matches just a fixed set of constant strings is wasteful
-of performance and is hard on maintainers.  It is much more readable and
-often faster to use <CODE>eq</CODE> or a hash to match such strings.
+<P>A regular expression that matches just a fixed set of constant strings
+is wasteful of performance and is hard on maintainers.  It is much
+more readable and often faster to use <CODE>eq</CODE> or a hash to match such
+strings.
 
 </P>
 <PRE>    # Bad
@@ -56,16 +71,17 @@ often faster to use <CODE>eq</CODE> or a hash to match such strings.
     Readonly::Hash my %PERL_KEYWORDS =&gt; map {$_ =&gt; 1} qw(
         chomp chop chr crypt hex index lc lcfirst length oct ord ...
     );
-    my $is_perl_keyword = $PERL_KEYWORD{$token};</PRE>
+    my $is_perl_keyword = $PERL_KEYWORD{$token};
+</PRE>
 <H2><A NAME="VARIANTS">VARIANTS
 
 </A></H2>
 
-<P>This policy detects both grouped and non-grouped strings.  The grouping may or
-may not be capturing.  The grouped body may or may not be alternating.  <CODE>\A</CODE>
-and <CODE>\z</CODE> are always considered anchoring which <CODE>^</CODE> and <CODE>$</CODE> are considered
-anchoring is the <CODE>m</CODE> regexp option is not in use.  Thus, all of these are
-violations:
+<P>This policy detects both grouped and non-grouped strings.  The
+grouping may or may not be capturing.  The grouped body may or may not
+be alternating.  <CODE>\A</CODE> and <CODE>\z</CODE> are always considered anchoring which
+<CODE>^</CODE> and <CODE>$</CODE> are considered anchoring is the <CODE>m</CODE> regexp option is
+not in use.  Thus, all of these are violations:
 
 </P>
 <PRE>    m/^foo$/;
@@ -76,15 +92,26 @@ violations:
     m/\A(foo|bar)\z/;
     m/\A(?:foo|bar)\z/;</PRE>
 
-<P>Furthermore, this policy detects violations in <CODE>m//</CODE>, <CODE>s///</CODE> and <CODE>qr//</CODE>
-constructs, as you would expect.
+<P>Furthermore, this policy detects violations in <CODE>m//</CODE>, <CODE>s///</CODE> and
+<CODE>qr//</CODE> constructs, as you would expect.
+
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
 
 </P><HR>
 <H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
+
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
@@ -92,6 +119,7 @@ constructs, as you would expect.
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

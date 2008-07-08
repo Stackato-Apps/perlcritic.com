@@ -51,10 +51,10 @@
 
 <P>Perl::Critic::Violation is the generic representation of an individual
 Policy violation.  Its primary purpose is to provide an abstraction
-layer so that clients of <A HREF="../../Perl/Critic.html">Perl::Critic</A> don't have to know anything
-about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</CODE> method of all <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>
-subclasses must return a list of these Perl::Critic::Violation
-objects.
+layer so that clients of <A HREF="../../Perl/Critic.html">Perl::Critic</A> don't have to
+know anything about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</CODE> method of all
+<A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses must return a
+list of these Perl::Critic::Violation objects.
 
 </P><HR>
 <H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -67,8 +67,9 @@ objects.
 Returns a reference to a new <CODE>Perl::Critic::Violation</CODE> object. The
 arguments are a description of the violation (as string), an
 explanation for the policy (as string) or a series of page numbers in
-PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> element that caused
-the violation, and the severity of the violation (as an integer).
+PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> element that
+caused the violation, and the severity of the violation (as an
+integer).
 
 </DD>
 </DL>
@@ -88,8 +89,8 @@ words, this value may change on a per violation basis.
 
 </A></DT>
 <DD>
-Returns an explanation of the policy as a string or as reference to
-an array of page numbers in PBP.  This value will generally not change
+Returns an explanation of the policy as a string or as reference to an
+array of page numbers in PBP.  This value will generally not change
 based upon the specific code violating the policy.
 
 </DD>
@@ -97,8 +98,8 @@ based upon the specific code violating the policy.
 
 </A></DT>
 <DD>
-Returns a three-element array reference containing the line and real
-&amp; virtual column numbers where this Violation occurred, as in
+Returns a three-element array reference containing the line and real &amp;
+virtual column numbers where this Violation occurred, as in
 <A HREF="../../PPI/Element.html">PPI::Element</A>.
 
 </DD>
@@ -153,8 +154,8 @@ Violation.  This information is automatically extracted from the
 
 </A></DT>
 <DD>
-Returns the name of the <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> that created this
-Violation.
+Returns the name of the <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+that created this Violation.
 
 </DD>
 <DT><A NAME="source()"><CODE>source()</CODE>
@@ -202,13 +203,14 @@ variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 </A></DT>
 <DD>
 
-<P><B>DEPRECATED:</B> Use the <CODE>set_format</CODE> and <CODE>get_format</CODE> methods instead.
+<P><B>DEPRECATED:</B> Use the <CODE>set_format</CODE> and <CODE>get_format</CODE> methods
+instead.
 
 </P>
-<P>Sets the format for all Violation objects when they are evaluated in string
-context.  The default is <CODE>'%d at line %l, column %c. %e'</CODE>.  See
-<A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.  If you want to change <CODE>$FORMAT</CODE>, you
-should probably localize it first.
+<P>Sets the format for all Violation objects when they are evaluated in
+string context.  The default is <CODE>'%d at line %l, column %c. %e'</CODE>.
+See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.  If you want to change
+<CODE>$FORMAT</CODE>, you should probably localize it first.
 
 </P></DD>
 </DL>
@@ -224,11 +226,12 @@ on the current value of the <CODE>$FORMAT</CODE> package variable.
 </P>
 <P>Formats are a combination of literal and escape characters similar to
 the way <CODE>sprintf</CODE> works.  If you want to know the specific formatting
-capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape characters are:
+capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Valid escape
+characters are:
 
 </P>
 <PRE>    Escape    Meaning
-    -------   ----------------------------------------------------------------
+    -------   ------------------------------------------------------------
     %c        Column number where the violation occurred
     %d        Full diagnostic discussion of the violation
     %e        Explanation of violation or page numbers in PBP
@@ -255,10 +258,10 @@ capabilities, look at <A HREF="../../String/Format.html">String::Format</A>. Val
 
   $Perl::Critic::Violation::FORMAT = &quot;%m at line %l. %e. \n%d\n&quot;;
   #looks like &quot;Mixed case variable name at line 6.  See page 44 of PBP.
-                    Conway's recommended naming convention is to use lower-case words
-                    separated by underscores.  Well-recognized acronyms can be in ALL
-                    CAPS, but must be separated by underscores from other parts of the
-                    name.&quot;</PRE>
+    Conway's recommended naming convention is to use lower-case words
+    separated by underscores.  Well-recognized acronyms can be in ALL
+    CAPS, but must be separated by underscores from other parts of the
+    name.&quot;</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -21,7 +25,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEscapedCharacters
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitEscapedCharacters - Write <CODE>&quot;\N{DELETE}&quot;</CODE> instead of <CODE>&quot;\x7F&quot;</CODE>, etc.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -32,11 +45,20 @@
 values.  The syntax is less compact, but dramatically more readable.
 
 </P>
-<PRE>  $str = &quot;\x7F\x06\x22Z&quot;;                         # not ok
+<PRE>    $str = &quot;\x7F\x06\x22Z&quot;;                         # not ok
 
-  use charnames ':full';
-  $str = &quot;\N{DELETE}\N{ACKNOWLEDGE}\N{CANCEL}Z&quot;;  # ok</PRE>
+    use charnames ':full';
+    $str = &quot;\N{DELETE}\N{ACKNOWLEDGE}\N{CANCEL}Z&quot;;  # ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 

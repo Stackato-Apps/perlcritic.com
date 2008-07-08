@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitCommaSeparatedStatements - Don't use the comma operator as a statement separator.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -41,13 +52,13 @@ the assignment operators having higher precedence.
 work:
 
 </P>
-<PRE>  @x = @y, @z;</PRE>
+<PRE>    @x = @y, @z;</PRE>
 
 <P>because it is equivalent to
 
 </P>
-<PRE>  @x = @y;
-  @z;</PRE>
+<PRE>    @x = @y;
+    @z;</PRE>
 
 <P>Conversely, there are the built-in functions, like <CODE>print</CODE>, that
 normally force the rest of the statement into list context, but don't
@@ -57,23 +68,23 @@ when called like a subroutine.
 <P>This is not likely to produce what is intended:
 
 </P>
-<PRE>  print join q{, }, 2, 3, 5, 7, &quot;: the single-digit primes.\n&quot;;</PRE>
+<PRE>    print join q{, }, 2, 3, 5, 7, &quot;: the single-digit primes.\n&quot;;</PRE>
 
 <P>The obvious fix is to add parentheses.  Placing them like
 
 </P>
-<PRE>  print join( q{, }, 2, 3, 5, 7 ), &quot;: the single-digit primes.\n&quot;;</PRE>
+<PRE>    print join( q{, }, 2, 3, 5, 7 ), &quot;: the single-digit primes.\n&quot;;</PRE>
 
 <P>will work, but
 
 </P>
-<PRE>  print ( join q{, }, 2, 3, 5, 7 ), &quot;: the single-digit primes.\n&quot;;</PRE>
+<PRE>    print ( join q{, }, 2, 3, 5, 7 ), &quot;: the single-digit primes.\n&quot;;</PRE>
 
 <P>will not, because it is equivalent to
 
 </P>
-<PRE>  print( join q{, }, 2, 3, 5, 7 );
-  &quot;: the single-digit primes.\n&quot;;
+<PRE>    print( join q{, }, 2, 3, 5, 7 );
+    &quot;: the single-digit primes.\n&quot;;
 </PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -86,14 +97,14 @@ or <CODE>grep</CODE> block to be comma separated.  This is done via the
 like so:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitCommaSeparatedStatements]
-  allow_last_statement_to_be_comma_separated_in_map_and_grep = 1</PRE>
+<PRE>    [ValuesAndExpressions::ProhibitCommaSeparatedStatements]
+    allow_last_statement_to_be_comma_separated_in_map_and_grep = 1</PRE>
 
 <P>With this option off (the default), the following code violates this
 policy.
 
 </P>
-<PRE>  %hash = map {$_, 1} @list;</PRE>
+<PRE>    %hash = map {$_, 1} @list;</PRE>
 
 <P>With this option on, this statement is allowed.  Even if this option
 is off, using a fat comma <CODE>=&gt;</CODE> works, but that forces

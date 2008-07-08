@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -18,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitReadlineInForLoop
+<P>Perl::Critic::Policy::InputOutput::ProhibitReadlineInForLoop - Write <CODE>while( $line = &lt;&gt; ){...}</CODE> instead of <CODE>for(&lt;&gt;){...}</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -26,15 +39,24 @@
 </A></H1>
 
 <P>Using the readline operator in a <CODE>for</CODE> or <CODE>foreach</CODE> loop is very
-slow.  The iteration list of the loop creates a list context,
-which causes the readline operator to read the entire input stream
-before iteration even starts.  Instead, just use a <CODE>while</CODE> loop,
-which only reads one line at a time.
+slow.  The iteration list of the loop creates a list context, which
+causes the readline operator to read the entire input stream before
+iteration even starts.  Instead, just use a <CODE>while</CODE> loop, which only
+reads one line at a time.
 
 </P>
 <PRE>  for my $line ( &lt;$file_handle&gt; ){ do_something($line) }      #not ok
-  while ( my $line = &lt;$file_handle&gt; ){ do_something($line) }  #ok</PRE>
+  while ( my $line = &lt;$file_handle&gt; ){ do_something($line) }  #ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
@@ -22,7 +26,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::InputOutput::ProhibitExplicitStdin
+<P>Perl::Critic::Policy::InputOutput::ProhibitExplicitStdin - Use &quot;&lt;&gt;&quot; or &quot;&lt;ARGV&gt;&quot; or a prompting module instead of &quot;&lt;STDIN&gt;&quot;.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -48,6 +61,15 @@ one of the following two equivalent forms:
 <P>If you want to prompt for user input, try special purpose modules like
 <A HREF="../../../../IO/Prompt.html">IO::Prompt</A>.
 
+
+</P><HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
 </P><HR>
 <H1><A NAME="CAVEATS">CAVEATS
 
@@ -55,7 +77,8 @@ one of the following two equivalent forms:
 
 <P>Due to a bug in the current version of PPI (v1.119_03) and earlier,
 the readline operator is often misinterpreted as less-than and
-greater-than operators after a comma.  Therefore, this policy misses important cases like
+greater-than operators after a comma.  Therefore, this policy misses
+important cases like
 
 </P>
 <PRE>  my $content = join '', &lt;STDIN&gt;;</PRE>
@@ -73,7 +96,8 @@ violations automatically.
 
 </A></H1>
 
-<P>Initial development of this policy was supported by a grant from the Perl Foundation.
+<P>Initial development of this policy was supported by a grant from the
+Perl Foundation.
 
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR

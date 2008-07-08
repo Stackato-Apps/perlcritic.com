@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals - Always use single quotes for literal strings.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -34,18 +45,18 @@ interpolation.  This saves the interpreter a bit of work and it lets
 the reader know that you really did intend the string to be literal.
 
 </P>
-<PRE>  print &quot;foobar&quot;;     #not ok
-  print 'foobar';     #ok
-  print qq/foobar/;   #not ok
-  print q/foobar/;    #ok
+<PRE>    print &quot;foobar&quot;;     #not ok
+    print 'foobar';     #ok
+    print qq/foobar/;   #not ok
+    print q/foobar/;    #ok
 
-  print &quot;$foobar&quot;;    #ok
-  print &quot;foobar\n&quot;;   #ok
-  print qq/$foobar/;  #ok
-  print qq/foobar\n/; #ok
+    print &quot;$foobar&quot;;    #ok
+    print &quot;foobar\n&quot;;   #ok
+    print qq/$foobar/;  #ok
+    print qq/foobar\n/; #ok
 
-  print qq{$foobar};  #preferred
-  print qq{foobar\n}; #preferred</PRE>
+    print qq{$foobar};  #preferred
+    print qq{foobar\n}; #preferred</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -65,8 +76,8 @@ those strings are literal, Perl::Critic will complain.  To prevent
 this, put the following in your <I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
-  allow = qq{} qq[]</PRE>
+<PRE>    [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+    allow = qq{} qq[]</PRE>
 <HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 

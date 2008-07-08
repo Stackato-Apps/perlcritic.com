@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -20,7 +22,16 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::ControlStructures::ProhibitDeepNests
+<P>Perl::Critic::Policy::ControlStructures::ProhibitDeepNests - Don't write deeply nested loops and conditionals.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -38,15 +49,15 @@ Design of Existing Code&quot;.
 
 </A></H1>
 
-<P>The maximum number of nested control structures can be configured via a value
-for <CODE>max_nests</CODE> in a <I>.perlcriticrc</I> file.  Each for-loop, if-else, while,
-and until block is counted as one nest.  Postfix forms of these constructs are
-not counted.  The default maximum is 5.  Customization in a <I>.perlcriticrc</I>
-file looks like this:
+<P>The maximum number of nested control structures can be configured via
+a value for <CODE>max_nests</CODE> in a <I>.perlcriticrc</I> file.  Each for-loop,
+if-else, while, and until block is counted as one nest.  Postfix forms
+of these constructs are not counted.  The default maximum is 5.
+Customization in a <I>.perlcriticrc</I> file looks like this:
 
 </P>
-<PRE> [ControlStructures::ProhibitDeepNests]
- max_nests = 3</PRE>
+<PRE>    [ControlStructures::ProhibitDeepNests]
+    max_nests = 3</PRE>
 <HR>
 <H1><A NAME="AUTHOR">AUTHOR
 

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,24 +24,42 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep
+<P>Perl::Critic::Policy::BuiltinFunctions::RequireBlockGrep - Write <CODE>grep { $_ =~ /$pattern/ } @list</CODE> instead of <CODE>grep /$pattern/, @list</CODE>.
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P>The expression forms of <CODE>grep</CODE> and <CODE>map</CODE> are awkward and hard to read.
-Use the block forms instead.
+<P>The expression forms of <CODE>grep</CODE> and <CODE>map</CODE> are awkward and hard to
+read.  Use the block forms instead.
 
 </P>
-<PRE>  @matches = grep  /pattern/,    @list;        #not ok
-  @matches = grep { /pattern/ }  @list;        #ok
+<PRE>    @matches = grep  /pattern/,    @list;        #not ok
+    @matches = grep { /pattern/ }  @list;        #ok
 
-  @mapped = map  transform($_),    @list;      #not ok
-  @mapped = map { transform($_) }  @list;      #ok
+    @mapped = map  transform($_),    @list;      #not ok
+    @mapped = map { transform($_) }  @list;      #ok
+
 </PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>

@@ -6,6 +6,8 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
@@ -22,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::Variables::ProhibitPackageVars
+<P>Perl::Critic::Policy::Variables::ProhibitPackageVars - Eliminate globals declared with <CODE>our</CODE> or <CODE>use vars</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -42,20 +54,21 @@ complains you declare a variable with <CODE>our</CODE> or <CODE>use vars</CODE>,
 make reference to variable with a fully-qualified package name.
 
 </P>
-<PRE>  $Some::Package::foo = 1;    #not ok
-  our $foo            = 1;    #not ok
-  use vars '$foo';            #not ok
-  $foo = 1;                   #not allowed by 'strict'
-  local $foo = 1;             #bad taste, but technically ok.
-  use vars '$FOO';            #ok, because it's ALL CAPS
-  my $foo = 1;                #ok</PRE>
+<PRE>    $Some::Package::foo = 1;    #not ok
+    our $foo            = 1;    #not ok
+    use vars '$foo';            #not ok
+    $foo = 1;                   #not allowed by 'strict'
+    local $foo = 1;             #bad taste, but technically ok.
+    use vars '$FOO';            #ok, because it's ALL CAPS
+    my $foo = 1;                #ok</PRE>
 
 <P>In practice though, its not really practical to prohibit all package
 variables.  Common variables like <CODE>$VERSION</CODE> and <CODE>@EXPORT</CODE> need to
 be global, as do any variables that you want to Export.  To work
 around this, the Policy overlooks any variables that are in ALL_CAPS.
-This forces you to put all your exported variables in ALL_CAPS too, which
-seems to be the usual practice anyway.
+This forces you to put all your exported variables in ALL_CAPS too,
+which seems to be the usual practice anyway.
+
 
 </P><HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -63,17 +76,17 @@ seems to be the usual practice anyway.
 </A></H1>
 
 <P>There is room for exceptions.  Some modules, like the core File::Find
-module, use package variables as their only interface, and others
-like Data::Dumper use package variables as their most common
-interface.  These module can be specified from your <I>.perlcriticrc</I>
-file, and the policy will ignore them.
+module, use package variables as their only interface, and others like
+Data::Dumper use package variables as their most common interface.
+These module can be specified from your <I>.perlcriticrc</I> file, and the
+policy will ignore them.
 
 </P>
 <PRE>    [Variables::ProhibitPackageVars]
     packages = File::Find Data::Dumper</PRE>
 
-<P>This is the default setting.  Using <CODE>packages =</CODE>  will override
-these defaults.
+<P>This is the default setting.  Using <CODE>packages =</CODE>  will override these
+defaults.
 
 </P>
 <P>You can also add packages to the defaults like so:
@@ -85,6 +98,7 @@ these defaults.
 <P>You can add package <CODE>main</CODE> to the list of packages, but that will
 only OK variables explicitly in the <CODE>main</CODE> package.
 
+
 </P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
@@ -95,12 +109,14 @@ only OK variables explicitly in the <CODE>main</CODE> package.
 </P>
 <P><A HREF="../../../../Perl/Critic/Policy/Variables/ProhibitLocalVars.html">Perl::Critic::Policy::Variables::ProhibitLocalVars</A>
 
+
 </P><HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><HR>
 <H1><A NAME="COPYRIGHT">COPYRIGHT

@@ -6,7 +6,11 @@
 <UL>
 <LI><A HREF="#NAME">NAME
 
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -20,7 +24,17 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseSubs
+<P>Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseSubs - Write <CODE>sub my_function{}</CODE> instead of <CODE>sub MyFunction{}</CODE>.
+
+
+</P><HR>
+<H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
 
 </P><HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -33,18 +47,27 @@ CAPS, but must be separated by underscores from other parts of the
 name.
 
 </P>
-<PRE>  sub foo_bar{}   #ok
-  sub foo_BAR{}   #ok
-  sub FOO_bar{}   #ok
-  sub FOO_BAR{}   #ok
+<PRE>    sub foo_bar{}   #ok
+    sub foo_BAR{}   #ok
+    sub FOO_bar{}   #ok
+    sub FOO_BAR{}   #ok
 
-  sub Some::Class::foo{}   #ok, grudgingly
+    sub Some::Class::foo{}   #ok, grudgingly
 
-  sub FooBar {}   #not ok
-  sub FOObar {}   #not ok
-  sub fooBAR {}   #not ok
-  sub fooBar {}   #not ok</PRE>
+    sub FooBar {}   #not ok
+    sub FOObar {}   #not ok
+    sub fooBAR {}   #not ok
+    sub fooBar {}   #not ok
+</PRE>
 <HR>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
