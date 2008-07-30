@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -24,7 +24,7 @@
 
 </A></H1>
 
-<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect - Use <A HREF="../../../../Time/HiRes.html">Time::HiRes</A> instead of something like <CODE>select(undef, undef, undef, .05)</CODE>.
+<P>Perl::Critic::Policy::BuiltinFunctions::ProhibitSleepViaSelect - Use <A HREF="Time/HiRes.html">Time::HiRes</A> instead of something like <CODE>select(undef, undef, undef, .05)</CODE>.
 
 
 </P><HR>
@@ -32,7 +32,7 @@
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
@@ -42,7 +42,7 @@ distribution.
 </A></H1>
 
 <P>Conway discourages the use of <CODE>select()</CODE> for performing non-integer
-sleeps.  Although documented in <A HREF="../../../../perlfunc.html">perlfunc</A>, it's something
+sleeps.  Although documented in <A HREF="perlfunc.html">perlfunc</A>, it's something
 that generally requires the reader to read <CODE>perldoc -f select</CODE> to
 figure out what it should be doing.  Instead, Conway recommends that
 you use the <CODE>Time::HiRes</CODE> module when you want to sleep.
@@ -66,7 +66,7 @@ you use the <CODE>Time::HiRes</CODE> module when you want to sleep.
 
 </A></H1>
 
-<P><A HREF="../../../../Time/HiRes.html">Time::HiRes</A>.
+<P><A HREF="Time/HiRes.html">Time::HiRes</A>.
 
 
 </P><HR>

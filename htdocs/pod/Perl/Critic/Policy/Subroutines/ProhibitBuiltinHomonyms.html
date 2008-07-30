@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::Subroutines::ProhibitBuiltinHomonyms</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -31,7 +31,7 @@
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
@@ -40,14 +40,17 @@ distribution.
 
 </A></H1>
 
-<P>Common sense dictates that you shouldn't declare subroutines with the
-same name as one of Perl's built-in functions. See <CODE>`perldoc
-perlfunc`</CODE> for a list of built-ins.
+<P>Common sense dictates that you shouldn't declare subroutines with the same
+name as one of Perl's built-in functions or keywords.  See
+<A HREF="perlfunc.html">perlfunc</A> for a list of built-in functions; see <A HREF="perlsyn.html">perlsyn</A>
+for keywords.
 
 </P>
-<PRE>  sub open {}  #not ok
-  sub exit {}  #not ok
-  sub print {} #not ok
+<PRE>  sub open {}    #not ok
+  sub exit {}    #not ok
+  sub print {}   #not ok
+  sub foreach {} #not ok
+  sub if {}      #not ok
 
   #You get the idea...</PRE>
 

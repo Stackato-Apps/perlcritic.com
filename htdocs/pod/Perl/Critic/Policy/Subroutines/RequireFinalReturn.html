@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Subroutines::RequireFinalReturn</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -41,8 +41,8 @@ distribution.
 </A></H1>
 
 <P>Require all subroutines to terminate explicitly with one of the
-following: <CODE>return</CODE>, <CODE>goto</CODE>, <CODE>die</CODE>, <CODE>exit</CODE>, <CODE>throw</CODE>, <CODE>carp</CODE> or
-<CODE>croak</CODE>.
+following: <CODE>return</CODE>, <CODE>carp</CODE>, <CODE>croak</CODE>, <CODE>die</CODE>, <CODE>exec</CODE>, <CODE>exit</CODE>,
+<CODE>goto</CODE>, or <CODE>throw</CODE>.
 
 </P>
 <P>Subroutines without explicit return statements at their ends can be
@@ -55,22 +55,22 @@ significant return value, and omits a return statement, some of the
 subroutine's inner data can leak to the outside.  Consider this case:
 
 </P>
-<PRE>   package Password;
-   # every time the user guesses the password wrong, its value
-   # is rotated by one character
-   my $password;
-   sub set_password {
-      $password = shift;
-   }
-   sub check_password {
-      my $guess = shift;
-      if ($guess eq $password) {
-         unlock_secrets();
-      } else {
-         $password = (substr $password, 1).(substr $password, 0, 1);
-      }
-   }
-   1;</PRE>
+<PRE>    package Password;
+    # every time the user guesses the password wrong, its value
+    # is rotated by one character
+    my $password;
+    sub set_password {
+        $password = shift;
+    }
+    sub check_password {
+        my $guess = shift;
+        if ($guess eq $password) {
+            unlock_secrets();
+        } else {
+            $password = (substr $password, 1).(substr $password, 0, 1);
+        }
+    }
+    1;</PRE>
 
 <P>In this case, the last statement in check_password() is the
 assignment.  The result of that assignment is the implicit return
@@ -95,8 +95,8 @@ functions as well.  Just put something like this in your
 <I>.perlcriticrc</I>:
 
 </P>
-<PRE>  [Subroutines::RequireFinalReturns]
-  terminal_funcs = quit abort bailout</PRE>
+<PRE>    [Subroutines::RequireFinalReturns]
+    terminal_funcs = quit abort bailout</PRE>
 <HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 

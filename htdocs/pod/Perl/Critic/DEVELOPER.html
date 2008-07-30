@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -254,7 +254,7 @@ element will be a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A> because tha
 what we declared back in the <CODE>applies_to()</CODE> method.  However, we
 didn't specify exactly which &quot;word&quot; we were looking for.  Evaluating a
 PPI element in a string context returns the literal form of the code.
-(You can also use the c&lt;content()&gt; method.)  So we make sure that this
+(You can also use the <CODE>content()</CODE> method.)  So we make sure that this
 PPI::Token::Word is, in fact, &quot;grep&quot;.  If it's not, then we don't'
 need to bother examining it.
 
@@ -263,7 +263,7 @@ need to bother examining it.
 
 <P>The <CODE>PPI::Token::Word</CODE> class is also used for barewords and methods
 called on object references.  It is possible for someone to declare a
-bareword hash key as <CODE>&lt;%hash = ( grep =</CODE> 'foo' )&gt;&gt;.  We don't want to
+bareword hash key as <CODE>%hash = ( grep =&gt; 'foo' )</CODE>.  We don't want to
 test those types of elements because they don't represent function
 calls to <CODE>grep</CODE>.  So we use one of handy utility functions from
 <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this
@@ -361,8 +361,8 @@ bad code.  Here's an example:
 
 <P>When your policy has a section like this, users can invoke
 <A HREF="perlcritic.html">perlcritic</A> with a <CODE>--verbose</CODE> parameter of <CODE>10</CODE> or
-<CODE>11</CODE> to see it along with the rest of the output for violations of
-your policy.
+<CODE>11</CODE> or with a &quot;%d&quot; escape to see it along with the rest of the
+output for violations of your policy.
 
 
 </P><HR>
@@ -535,7 +535,7 @@ above, this would be
 <P>Given this information, <CODE>Perl::Critic</CODE> can tell the user when they
 have specified a parameter for a Policy which isn't valid, e.g. when
 they've misspelled the name of the parameter, and can emit the
-parameter as part of a <I>.perlcritic</I> prototype.
+parameter as part of a <I>.perlcriticrc</I> prototype.
 
 </P>
 <P>You can provide even more information about your Policy's
@@ -600,7 +600,7 @@ user-specified and default values is done for you and your
 <CODE>violates()</CODE> method can retrieve the value under the key of the
 parameter name prefixed with an underscore, e.g., for the above
 declaration, the parsed and validated value can be accessed via
-<CODE>&lt;$self-</CODE>{_allowed_types}&gt;&gt;.
+<CODE>$self-&gt;{_allowed_types}</CODE>.
 
 </P>
 <P>The behaviors provide additional functionality to <CODE>Perl::Critic</CODE>; for
@@ -663,8 +663,9 @@ in the Policy as a string.
 <A HREF="Perl/Critic/PolicyParameter/Behavior/Boolean.html">Perl::Critic::PolicyParameter::Behavior::Boolean</A>.
 
 </P>
-<P>The value of the parameter will be either <A HREF="Perl/Critic/Utils.html#%24TRUE">Perl::Critic::Utils/$TRUE</A>
-or <A HREF="Perl/Critic/Utils.html#%24FALSE">Perl::Critic::Utils/$FALSE</A>.
+<P>The value of the parameter will be either
+<A HREF="Perl/Critic/Utils.html#%24TRUE">$TRUE</A> or
+<A HREF="Perl/Critic/Utils.html#%24FALSE">$FALSE</A>.
 
 </P>
 <P>This behavior is not configurable.
@@ -1154,8 +1155,8 @@ descriptions of each.
 
     =head1 SYNOPSIS
 
-    Some L&lt;Perl::Critic|Perl::Critic&gt; policies that will help you keep your code
-    nice and compliant.
+    Some L&lt;Perl::Critic|Perl::Critic&gt; policies that will help you keep your
+    code nice and compliant.
 
 
     =head1 DESCRIPTION
@@ -1195,7 +1196,7 @@ in the <CODE>CONFIGURATION AND ENVIRONMENT</CODE> POD section as shown above.
 </P>
 <PRE>    default_themes { return qw&lt; example math &gt; }</PRE>
 
-<P>If you're looking for ideas of what themes to do, have a look at the
+<P>If you're looking for ideas of what themes to use, have a look at the
 output of <CODE>perlcritic --list-themes</CODE>.
 
 
@@ -1258,7 +1259,7 @@ want to try
 
 </A></H1>
 
-<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.088.
+<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.090.
 
 
 </P><HR>

@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -115,11 +115,6 @@ URL and interface to the service are subject to change.
 
 </A></H1>
 <DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -criticism-fatal =&gt; $B)</CODE>
-
-</A></DT>
-<DD>
-</DD>
-<DT><A NAME="new(%20-config%20%3d%3e%20Perl%3a%3aCritic%3a%3aConfig-%3enew()%20)"><CODE>new( -config =&gt; Perl::Critic::Config-&gt;new() )</CODE>
 
 </A></DT>
 <DD>
@@ -275,13 +270,6 @@ of <A HREF="perlcritic.html">perlcritic</A>.
 </P>
 <P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for
 the benefit of <A HREF="criticism.html">criticism</A>.
-
-</P>
-<P><B>-config</B> is a reference to a
-<A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> object.  If you have
-created your own Config object for some reason, you can pass it in
-here instead of having Perl::Critic create one for you.  Using the
-<CODE>-config</CODE> option causes all the other options to be silently ignored.
 
 </P></DD>
 </DL>

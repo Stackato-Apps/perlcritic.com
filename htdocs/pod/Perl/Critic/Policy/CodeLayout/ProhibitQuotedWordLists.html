@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -51,7 +51,9 @@ easy to add to the list in the future.
 </P>
 <PRE>    @list = ('foo', 'bar', 'baz');  #not ok
     @list = qw(foo bar baz);        #ok
-</PRE>
+
+    use Foo ('foo', 'bar', 'baz');  #not ok
+    use Foo qw(foo bar baz);        #ok</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 

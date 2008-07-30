@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Modules::RequireVersionVar</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -57,11 +57,11 @@ have to declare it like one of these:
     $MyPackage::VERSION = 1.061;
     use vars qw($VERSION);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 2537 $</CODE> keyword to
+<P>A common practice is to use the <CODE>$Revision: 2609 $</CODE> keyword to
 automatically define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>    our ($VERSION) = '$Revision: 2537 $' =~ m{ \$Revision: \s+ (\S+) }x;
+<PRE>    our ($VERSION) = '$Revision: 2609 $' =~ m{ \$Revision: \s+ (\S+) }x;
 </PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION

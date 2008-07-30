@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</TITLE>
-<LINK href="styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -25,6 +25,7 @@
 </A></H1>
 
 <P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals - Always use single quotes for literal strings.
+
 
 </P><HR>
 <H1><A NAME="AFFILIATION">AFFILIATION
@@ -57,6 +58,13 @@ the reader know that you really did intend the string to be literal.
 
     print qq{$foobar};  #preferred
     print qq{foobar\n}; #preferred</PRE>
+
+<P>Use of double-quotes might be reasonable if the string contains single
+quote (') characters:
+
+</P>
+<PRE>    print &quot;it's me&quot;;    # ok, if configuration flag set
+</PRE>
 <HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -78,6 +86,16 @@ this, put the following in your <I>.perlcriticrc</I> file:
 </P>
 <PRE>    [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
     allow = qq{} qq[]</PRE>
+
+<P>The flag <CODE>allow_if_string_contains_single_quote</CODE> permits
+double-quoted strings if the string contains a single quote (')
+character.  It defaults to off; to turn it on put the following in
+your <I>.perlcriticrc</I> file:
+
+</P>
+<PRE>    [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+    allow_double_quote_if_string_contains_single = 1
+</PRE>
 <HR>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
