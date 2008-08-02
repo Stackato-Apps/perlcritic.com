@@ -11,7 +11,8 @@ my ($server_seconds, $server_microseconds) = gettimeofday();
 my $server_miliseconds = int ($server_microseconds / 1000);
 my $server_time = $server_seconds * 1000 + $server_miliseconds;
 my $miliseconds_until_next_game = $server_time  % 30000;
-my $game_time = $server_time - $client_time + $miliseconds_until_next_game;
+my $delta = $server_time - $client_time;
+my $game_time = $client_time + $delta + $miliseconds_until_next_game;
 
 my $html = <<"END_HTML";
 <p>Server Time: $server_time</p>
