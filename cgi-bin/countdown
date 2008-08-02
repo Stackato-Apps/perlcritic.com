@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use CGI qw(:standard);
+use Time::HiRes qw(gettimeofday);
+
+my $client_time = param('client_time');
+my $time_until_next_game = (localtime)[0] % 30;
+my ($server_seconds, $server_microseconds) = gettimeofday();
+my $server_time = $server_seconds * 1000 + $server_microseconds / 10;
+my $client_game_time = $server_time - $client_time + $time_until_next_game;
+print header(), start_html(), $client_game_time, end_html();
