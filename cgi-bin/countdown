@@ -13,11 +13,4 @@ my $server_time = $server_seconds * 1000 + $server_miliseconds;
 my $miliseconds_until_next_game = $server_time  % 30000;
 my $delta = $server_time - $client_time;
 my $game_time = $client_time + $delta + $miliseconds_until_next_game;
-
-my $html = <<"END_HTML";
-<p>Server Time: $server_time</p>
-<p>Client Time: $client_time</p>
-<p>Game Time:   $game_time</p>
-END_HTML
-
-print header(), start_html(), $html, end_html();
+print header(), start_html(), $game_time, end_html();
