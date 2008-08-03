@@ -18,5 +18,6 @@ warn "Server time: $server_time";
 warn "Client time: $client_time";
 warn "Game time:   $game_time";
 warn "Delta:       $delta";
+warn "Modulo:      $miliseconds_until_next_game";
 
 print header(), $game_time;
