@@ -12,6 +12,8 @@
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
+</A><LI><A HREF="#PREREQUISITES">PREREQUISITES
+
 </A><LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -27,8 +29,7 @@
 <P>Perl::Critic::Policy::RegularExpressions::ProhibitEnumeratedClasses - Use named character classes instead of explicit character lists.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +37,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -82,16 +82,22 @@ incorrect character class usage.
 <P><B><CODE>[^\s]</CODE></B> vs. <B><CODE>\S</CODE></B>
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="CREDITS">CREDITS
+</P><H1><A NAME="PREREQUISITES">PREREQUISITES
+
+</A></H1>
+
+<P>This policy will disable itself if <A HREF="../../../../Regexp/Parser.html">Regexp::Parser</A> is not
+installed.
+
+
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -99,20 +105,18 @@ incorrect character class usage.
 Perl Foundation.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

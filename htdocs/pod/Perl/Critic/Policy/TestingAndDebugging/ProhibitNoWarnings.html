@@ -27,8 +27,7 @@
 <P>Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings - Prohibit various flavors of <CODE>no warnings</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +35,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -50,8 +48,7 @@ disabled (See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A>).  A bare <
 statement will always raise a violation.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -62,9 +59,15 @@ of possible warning types.  An example of this customization:
 
 </P>
 <PRE>    [TestingAndDebugging::ProhibitNoWarnings]
-    allow = uninitialized once
-</PRE>
-<HR>
+    allow = uninitialized once</PRE>
+
+<P>If a true value is specified for the
+<CODE>allow_with_category_restriction</CODE> option, then any <CODE>no warnings</CODE>
+that restricts the set of warnings that are turned off will pass.
+
+</P>
+<PRE>    [TestingAndDebugging::ProhibitNoWarnings]
+    allow_with_category_restriction = 1</PRE>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
@@ -72,20 +75,18 @@ of possible warning types.  An example of this customization:
 <P><A HREF="Perl/Critic/Policy/TestingAndDebugging/RequireUseWarnings.html">Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify it under

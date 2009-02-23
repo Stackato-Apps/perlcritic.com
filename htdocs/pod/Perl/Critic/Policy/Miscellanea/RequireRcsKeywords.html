@@ -25,8 +25,7 @@
 <P>Perl::Critic::Policy::Miscellanea::RequireRcsKeywords - Put source-control keywords in every file.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -34,8 +33,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,16 +44,15 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>    # $Revision: 2609 $
+<PRE>    # $Revision: 3096 $
     # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>    our ($VERSION) = '$Revision: 2609 $' =~ m{ \$Revision: \s+ (\S+) }x;
+<PRE>    our ($VERSION) = '$Revision: 3096 $' =~ m{ \$Revision: \s+ (\S+) }x;
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -75,20 +72,18 @@ source control systems are descended from RCS, so the keywords
 supported by CVS and Subversion are probably the same.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

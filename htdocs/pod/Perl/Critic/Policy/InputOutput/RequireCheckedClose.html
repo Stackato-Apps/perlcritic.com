@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::InputOutput::RequireCheckedClose - Write <CODE>my $error = close $fh;</CODE> instead of <CODE>close $fh;</CODE>.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +34,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,39 +44,43 @@ successful.
 
 
 </P>
-<PRE>  my $error = close $filehandle;                   # ok
-  close $filehandle or die &quot;unable to close: $!&quot;;  # ok
-  close $filehandle;                               # not ok
-</PRE>
-<HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+<PRE>    my $error = close $filehandle;                   # ok
+    close $filehandle or die &quot;unable to close: $!&quot;;  # ok
+    close $filehandle;                               # not ok
+
+    use autodie qw&lt; :io &gt;;
+    close $filehandle;                               # ok</PRE>
+
+<P>You can use <A HREF="../../../../autodie.html">autodie</A>, <A HREF="../../../../Fatal.html">Fatal</A>, or <A HREF="../../../../Fatal/Exception.html">Fatal::Exception</A> to get around
+this.  Currently, <A HREF="../../../../autodie.html">autodie</A> is not properly treated as a pragma; its
+lexical effects aren't taken into account.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Andrew Moore &lt;amoore@mooresystems.com&gt;
 
-</P><HR>
-<H1><A NAME="ACKNOWLEDGMENTS">ACKNOWLEDGMENTS
+</P><H1><A NAME="ACKNOWLEDGMENTS">ACKNOWLEDGMENTS
 
 </A></H1>
 
 <P>This policy module is based heavily on policies written by Jeffrey
 Ryan Thalhammer &lt;thaljef@cpan.org&gt;.
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2008 Andrew Moore.  All rights reserved.
+<P>Copyright (c) 2007-2009 Andrew Moore.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -27,8 +27,7 @@
 <P>Perl::Critic::Policy - Base class for all Policy modules.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -42,8 +41,7 @@ Policy modules, please see the
 in this distribution.
 
 
-</P><HR>
-<H1><A NAME="METHODS">METHODS
+</P><H1><A NAME="METHODS">METHODS
 
 </A></H1>
 <DL><DT><A NAME="new(key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20)"><CODE>new(key1 =&gt; value1, key2 =&gt; value2 ... )</CODE>
@@ -65,13 +63,14 @@ enabled this Policy or not.
 
 
 </P></DD>
-<DT><A NAME="initialize_if_enabled(%20%7b%20key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20%7d%20)"><CODE>initialize_if_enabled( { key1 =&gt; value1, key2 =&gt; value2 ... } )</CODE>
+<DT><A NAME="initialize_if_enabled(%20%24config%20)"><CODE>initialize_if_enabled( $config )</CODE>
 
 </A></DT>
 <DD>
 
-<P>This receives the same parameters as <CODE>new()</CODE>, but as a reference to a
-hash, and is only invoked if this Policy is enabled by the user.
+<P>This receives an instance of
+<A HREF="../../Perl/Critic/PolicyConfig.html">Perl::Critic::PolicyConfig</A> as a
+parameter, and is only invoked if this Policy is enabled by the user.
 Thus, this is the preferred place for subclasses to do any
 initialization.
 
@@ -85,6 +84,18 @@ return <CODE>$FALSE</CODE> if they are not.
 
 
 </P></DD>
+<DT><A NAME="prepare_to_scan_document(%20%24document%20)"><CODE>prepare_to_scan_document( $document )</CODE>
+
+</A></DT>
+<DD>
+The parameter is about to be scanned by this Policy.  Whatever this
+Policy wants to do in terms of preparation should happen here.
+Returns a boolean value indicating whether the document should be
+scanned at all; if this is a false value, this Policy won't be applied
+to the document.  By default, does nothing but return <CODE>$TRUE</CODE>.
+
+
+</DD>
 <DT><A NAME="violates(%20%24element%2c%20%24document%20)"><CODE> violates( $element, $document ) </CODE>
 
 </A></DT>
@@ -333,7 +344,7 @@ the specified name.
 
 
 </DD>
-<DT><A NAME="set_format(%20%24FORMAT%20)"><CODE>set_format( $FORMAT )</CODE>
+<DT><A NAME="set_format(%20%24format%20)"><CODE>set_format( $format )</CODE>
 
 </A></DT>
 <DD>
@@ -357,13 +368,12 @@ they are evaluated in string context.
 </A></DT>
 <DD>
 Returns a string representation of the policy.  The content of the
-string depends on the current value of the <CODE>$FORMAT</CODE> package
-variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
+string depends on the current value returned by <CODE>get_format()</CODE>.
+See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="DOCUMENTATION">DOCUMENTATION
 
 </A></H1>
@@ -376,14 +386,12 @@ accordingly.  Therefore, please include a DESCRIPTION section in the
 POD for any Policy modules that you author.  Thanks.
 
 
-</P><HR>
-<H1><A NAME="OVERLOADS">OVERLOADS
+</P><H1><A NAME="OVERLOADS">OVERLOADS
 
 </A></H1>
 
 <P>Perl::Critic::Violation overloads the <CODE>&quot;&quot;</CODE> operator to produce neat
-little messages when evaluated in string context.  The format depends
-on the current value of the <CODE>$FORMAT</CODE> package variable.
+little messages when evaluated in string context.
 
 </P>
 <P>Formats are a combination of literal and escape characters similar to
@@ -489,7 +497,6 @@ The current maximum number of violations per document of the policy.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -497,12 +504,11 @@ The current maximum number of violations per document of the policy.
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

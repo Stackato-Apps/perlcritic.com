@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Miscellanea::ProhibitUselessNoCritic</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#EXAMPLE">EXAMPLE
+
+</A><LI><A HREF="#NOTE">NOTE
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#ACKNOWLEDGMENT">ACKNOWLEDGMENT
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Miscellanea::ProhibitUselessNoCritic - Remove ineffective &quot;## no critic&quot; annotations.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A> distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Sometimes, you may need to use a <CODE>&quot;## no critic&quot;</CODE> annotation to work around
+a false-positive bug in <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>.  But eventually, that bug might get
+fixed, leaving your code with extra <CODE>&quot;## no critic&quot;</CODE> annotations lying about.
+Or you may use them to locally disable a Policy, but then later decide to
+permanently remove that Policy entirely from your profile, making some of
+those <CODE>&quot;## no critic&quot;</CODE> annotations pointless.  Or, you may accidentally
+disable too many Policies at once, creating an opportunity for new
+violations to slip in unnoticed.
+
+</P>
+<P>This Policy will emit violations if you have a <CODE>&quot;## no critic&quot;</CODE> annotation in
+your source code that does not actually suppress any violations given your
+current profile.  To resolve this, you should either remove the annotation
+entirely, or adjust the Policy name patterns in the annotation to match only
+the Policies that are actually being violated in your code.
+
+
+</P><H1><A NAME="EXAMPLE">EXAMPLE
+
+</A></H1>
+
+<P>For example, let's say I have a regex, but I don't want to use the <CODE>/x</CODE> flag,
+which violates the <CODE>RegularExpressions::RequireExtendedFormatting</CODE> policy.
+In the following code, the <CODE>&quot;## no critic&quot;</CODE> annotation will suppress
+violations of that Policy and ALL Policies that match
+<CODE>m/RegularExpressions/imx</CODE>
+
+</P>
+<PRE>  my $re = qr/foo bar baz/ms;  ## no critic (RegularExpressions)</PRE>
+
+<P>However, this creates a potential loop-hole for someone to introduce
+additional violations in the future, without explicitly acknowledging them.
+This Policy is designed to catch these situations by warning you that you've
+disabled more Policies than the situation really requires.  The above code
+should be remedied like this:
+
+</P>
+<PRE>  my $re = qr/foo bar baz/ms;  ## no critic (RequireExtendedFormatting)</PRE>
+
+<P>Notice how the <CODE>RequireExtendedFormatting</CODE> pattern more precisely matches
+the name of the Policy that I'm trying to suppress.
+
+
+</P><H1><A NAME="NOTE">NOTE
+
+</A></H1>
+
+<P>Changing your <I>.perlcriticrc</I> file and disabling policies globally or running
+at a higher (i.e. less restrictive) severity level may cause this Policy to
+emit additional violations.  So you might want to defer using this Policy
+until you have a fairly stable profile.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><H1><A NAME="ACKNOWLEDGMENT">ACKNOWLEDGMENT
+
+</A></H1>
+
+<P>This Policy was inspired by Adam Kennedy's article at
+<A HREF="http://use.perl.org/article.pl?sid=08/09/24/1957256">http://use.perl.org/article.pl?sid=08/09/24/1957256</A>.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

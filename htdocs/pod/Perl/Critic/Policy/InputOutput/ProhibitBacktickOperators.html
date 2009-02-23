@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::InputOutput::ProhibitBacktickOperators - Discourage stuff like <CODE>@files = `ls $directory`</CODE>.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +34,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,17 +44,16 @@ when they fail.  I think its better to use IPC::Open3 to trap all the
 output and let the application decide what to do with it.
 
 </P>
-<PRE>  use IPC::Open3 'open3';
-  $SIG{CHLD} = 'IGNORE';
+<PRE>    use IPC::Open3 'open3';
+    $SIG{CHLD} = 'IGNORE';
 
-  @output = `some_command`;                      #not ok
+    @output = `some_command`;                      #not ok
 
-  my ($writer, $reader, $err);
-  open3($writer, $reader, $err, 'some_command'); #ok;
-  @output = &lt;$reader&gt;;  #Output here
-  @errors = &lt;$err&gt;;     #Errors here, instead of the console
+    my ($writer, $reader, $err);
+    open3($writer, $reader, $err, 'some_command'); #ok;
+    @output = &lt;$reader&gt;;  #Output here
+    @errors = &lt;$err&gt;;     #Errors here, instead of the console
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -66,8 +63,8 @@ checks to void contexts by adding the following to your
 <I>.perlcriticrc</I> file:
 
 </P>
-<PRE>  [InputOutput::ProhibitBacktickOperators]
-  only_in_void_context = 1</PRE>
+<PRE>    [InputOutput::ProhibitBacktickOperators]
+    only_in_void_context = 1</PRE>
 
 <P>The purpose of backticks is to capture the output of an external
 command.  Use of them in a void context is likely a bug.  If the
@@ -75,11 +72,10 @@ output isn't actually required, <CODE>system()</CODE> should be used.  Otherwise
 assign the result to a variable.
 
 </P>
-<PRE>  `some_command`;                      #not ok
-  $output = `some_command`;            #ok
-  @output = `some_command`;            #ok
+<PRE>    `some_command`;                      #not ok
+    $output = `some_command`;            #ok
+    @output = `some_command`;            #ok
 </PRE>
-<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -91,21 +87,25 @@ assign the result to a variable.
 <P>See <A HREF="perlipc.html">perlipc</A> for more discussion on using <CODE>wait()</CODE> instead
 of <CODE>$SIG{CHLD} = 'IGNORE'</CODE>.
 
+</P>
+<P>You might consider using the <CODE>capture()</CODE> function from the
+<A HREF="IPC/System/Simple.html">IPC::System::Simple</A> module for a safer way of
+doing what backticks do, especially on Windows.  The module also has a
+safe wrapper around <CODE>system()</CODE>.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

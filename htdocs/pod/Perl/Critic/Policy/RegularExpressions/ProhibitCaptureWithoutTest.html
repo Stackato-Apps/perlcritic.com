@@ -12,6 +12,8 @@
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
+</A><LI><A HREF="#BUGS">BUGS
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -25,8 +27,7 @@
 <P>Perl::Critic::Policy::RegularExpressions::ProhibitCaptureWithoutTest - Capture variable used outside conditional.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -34,8 +35,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -53,15 +53,34 @@ testing a regexp result, nor does it check whether a regexp actually
 has a capture in it.  Those checks are too hard.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
+</P><H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Needs to allow this construct:
+
+</P>
+<PRE>    for ( ... ) {
+        next unless /(....)/;
+        if ( $1 ) {
+            ....
+        }
+    }</PRE>
+
+<P>Right now, Perl::Critic thinks that the <CODE>$1</CODE> isn't legal to use
+because it's &quot;outside&quot; of the match.  The thing is, we can only get to
+the <CODE>if</CODE> if the regex matched.
+
+</P>
+<PRE>    while ( $str =~ /(expression)/ )
+</PRE>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -69,12 +88,11 @@ has a capture in it.  Those checks are too hard.
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (C) 2006 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

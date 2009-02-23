@@ -51,18 +51,16 @@
 <P>Perl::Critic - Critique Perl source code for best-practices.
 
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
-<PRE>  use Perl::Critic;
-  my $file = shift;
-  my $critic = Perl::Critic-&gt;new();
-  my @violations = $critic-&gt;critique($file);
-  print @violations;
+<PRE>    use Perl::Critic;
+    my $file = shift;
+    my $critic = Perl::Critic-&gt;new();
+    my @violations = $critic-&gt;critique($file);
+    print @violations;
 </PRE>
-<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -102,19 +100,18 @@ You can also invoke the perlcritic web-service from the command-line
 by doing an HTTP-post, such as one of these:
 
 </P>
-<PRE>   $&gt; POST http://perlcritic.com/perl/critic.pl &lt; MyModule.pm
-   $&gt; lwp-request -m POST http://perlcritic.com/perl/critic.pl &lt; MyModule.pm
-   $&gt; wget -q -O - --post-file=MyModule.pm http://perlcritic.com/perl/critic.pl</PRE>
+<PRE>    $&gt; POST http://perlcritic.com/perl/critic.pl &lt; MyModule.pm
+    $&gt; lwp-request -m POST http://perlcritic.com/perl/critic.pl &lt; MyModule.pm
+    $&gt; wget -q -O - --post-file=MyModule.pm http://perlcritic.com/perl/critic.pl</PRE>
 
 <P>Please note that the perlcritic web-service is still alpha code.  The
 URL and interface to the service are subject to change.
 
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -criticism-fatal =&gt; $B)</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-pager%20%3d%3e%20%24string%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -pager =&gt; $string, -criticism-fatal =&gt; $B)</CODE>
 
 </A></DT>
 <DD>
@@ -145,12 +142,12 @@ Policies will be loaded with their default configuration.  See
 </P>
 <P><B>-severity</B> is the minimum severity level.  Only Policy modules that
 have a severity greater than <CODE>$N</CODE> will be applied.  Severity values
-are integers ranging from 1 (least severe) to 5 (most severe).  The
-default is 5.  For a given <CODE>-profile</CODE>, decreasing the <CODE>-severity</CODE>
-will usually reveal more Policy violations.  You can set the default
-value for this option in your <I>.perlcriticrc</I> file.  Users can
-redefine the severity level for any Policy in their <I>.perlcriticrc</I>
-file.  See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> for more information.
+are integers ranging from 1 (least severe violations) to 5 (most
+severe violations).  The default is 5.  For a given <CODE>-profile</CODE>,
+decreasing the <CODE>-severity</CODE> will usually reveal more Policy violations.
+You can set the default value for this option in your <I>.perlcriticrc</I>
+file.  Users can redefine the severity level for any Policy in their
+<I>.perlcriticrc</I> file.  See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> for more information.
 
 </P>
 <P>If it is difficult for you to remember whether severity &quot;5&quot; is the
@@ -181,11 +178,11 @@ default value for this option in your <I>.perlcriticrc</I> file.  See the
 
 </P>
 <P><B>-include</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Policy
-modules that match at least one <CODE>m/$PATTERN/imx</CODE> will always be
+modules that match at least one <CODE>m/$PATTERN/ixms</CODE> will always be
 loaded, irrespective of all other settings.  For example:
 
 </P>
-<PRE>  my $critic = Perl::Critic-&gt;new(-include =&gt; ['layout'] -severity =&gt; 4);</PRE>
+<PRE>    my $critic = Perl::Critic-&gt;new(-include =&gt; ['layout'] -severity =&gt; 4);</PRE>
 
 <P>This would cause Perl::Critic to apply all the <CODE>CodeLayout::*</CODE> Policy
 modules even though they have a severity level that is less than 4.
@@ -196,11 +193,11 @@ file.  You can also use <CODE>-include</CODE> in conjunction with the
 
 </P>
 <P><B>-exclude</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Policy
-modules that match at least one <CODE>m/$PATTERN/imx</CODE> will not be loaded,
+modules that match at least one <CODE>m/$PATTERN/ixms</CODE> will not be loaded,
 irrespective of all other settings.  For example:
 
 </P>
-<PRE>  my $critic = Perl::Critic-&gt;new(-exclude =&gt; ['strict'] -severity =&gt; 1);</PRE>
+<PRE>    my $critic = Perl::Critic-&gt;new(-exclude =&gt; ['strict'] -severity =&gt; 1);</PRE>
 
 <P>This would cause Perl::Critic to not apply the <CODE>RequireUseStrict</CODE> and
 <CODE>ProhibitNoStrict</CODE> Policy modules even though they have a severity
@@ -211,7 +208,7 @@ precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
 </P>
 <P><B>-single-policy</B> is a string <CODE>PATTERN</CODE>.  Only one policy that
-matches <CODE>m/$PATTERN/imx</CODE> will be used.  Policies that do not match
+matches <CODE>m/$PATTERN/ixms</CODE> will be used.  Policies that do not match
 will be excluded.  This option has precedence over the <CODE>-severity</CODE>,
 <CODE>-theme</CODE>, <CODE>-include</CODE>, <CODE>-exclude</CODE>, and <CODE>-only</CODE> options.  You can
 set the default value for this option in your <I>.perlcriticrc</I> file.
@@ -249,10 +246,10 @@ Perl::Critic shut up about these things.
 
 </P>
 <P><B>-force</B> is a boolean value that controls whether Perl::Critic
-observes the magical <CODE>&quot;## no critic&quot;</CODE> pseudo-pragmas in your code.
+observes the magical <CODE>&quot;## no critic&quot;</CODE> annotations in your code.
 If set to a true value, Perl::Critic will analyze all code.  If set to
 a false value (which is the default) Perl::Critic will ignore code
-that is tagged with these comments.  See <A HREF="#BENDING%20THE%20RULES">&quot;BENDING THE RULES&quot;</A> for
+that is tagged with these annotations.  See <A HREF="#BENDING%20THE%20RULES">&quot;BENDING THE RULES&quot;</A> for
 more information.  You can set the default value for this option in
 your <I>.perlcriticrc</I> file.
 
@@ -264,7 +261,7 @@ of format specifications.  You can set the default value for this
 option in your <I>.perlcriticrc</I> file.
 
 </P>
-<P><B>-color</B> is not used by Perl::Critic but is provided for the benefit
+<P><B>-color</B> and <B>-pager</B> are not used by Perl::Critic but is provided for the benefit
 of <A HREF="perlcritic.html">perlcritic</A>.
 
 </P>
@@ -273,7 +270,6 @@ the benefit of <A HREF="criticism.html">criticism</A>.
 
 </P></DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -343,7 +339,6 @@ accumulates data for all files that are analyzed by this Critic.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="FUNCTIONAL%20INTERFACE">FUNCTIONAL INTERFACE
 
 </A></H1>
@@ -356,23 +351,22 @@ hash should be the same as those supported by the <CODE>Perl::Critic::new</CODE>
 method.  Here are some examples:
 
 </P>
-<PRE>  use Perl::Critic qw(critique);
+<PRE>    use Perl::Critic qw(critique);
 
-  # Use default parameters...
-  @violations = critique( $some_file );
+    # Use default parameters...
+    @violations = critique( $some_file );
 
-  # Use custom parameters...
-  @violations = critique( {-severity =&gt; 2}, $some_file );
+    # Use custom parameters...
+    @violations = critique( {-severity =&gt; 2}, $some_file );
 
-  # As a one-liner
-  %&gt; perl -MPerl::Critic=critique -e 'print critique(shift)' some_file.pm</PRE>
+    # As a one-liner
+    %&gt; perl -MPerl::Critic=critique -e 'print critique(shift)' some_file.pm</PRE>
 
 <P>None of the other object-methods are currently supported as static
 functions.  Sorry.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -409,7 +403,8 @@ corresponding constructor argument.
     include   = NamingConventions ClassHierarchies    #Space-delimited list
     exclude   = Variables  Modules::RequirePackage    #Space-delimited list
     criticism-fatal = 1                               #Zero or One
-    color     = 1                                     #Zero or One</PRE>
+    color     = 1                                     #Zero or One
+    pager     = less                                  #pager to pipe output to</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like
 this:
@@ -516,8 +511,8 @@ Perl::Critic constructor.
     #--------------------------------------------------------------
     # I do not agree with these at all, so never load them
 
-    [-NamingConventions::ProhibitMixedCaseVars]
-    [-NamingConventions::ProhibitMixedCaseSubs]
+    [-NamingConventions::Capitalization]
+    [-ValuesAndExpressions::ProhibitMagicNumbers]
 
     #--------------------------------------------------------------
     # For all other Policies, I accept the default severity,
@@ -531,8 +526,7 @@ that is included in this <I>examples</I> directory of this distribution.
 this distribution as <I>examples/perlcriticrc-conway</I>.
 
 
-</P><HR>
-<H1><A NAME="THE%20POLICIES">THE POLICIES
+</P><H1><A NAME="THE%20POLICIES">THE POLICIES
 
 </A></H1>
 
@@ -541,7 +535,7 @@ They are described briefly in the companion document
 <A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
 detail in the individual modules themselves.  Say <CODE>&quot;perlcritic -doc
 PATTERN&quot;</CODE> to see the perldoc for all Policy modules that match the
-regex <CODE>m/PATTERN/imx</CODE>
+regex <CODE>m/PATTERN/ixms</CODE>
 
 </P>
 <P>There are a number of distributions of additional policies on CPAN.
@@ -550,8 +544,7 @@ want, some one may have already written it.  See the <A HREF="#SEE%20ALSO">/&quo
 section below for a list of some of these distributions.
 
 
-</P><HR>
-<H1><A NAME="POLICY%20THEMES">POLICY THEMES
+</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
 
 </A></H1>
 
@@ -563,7 +556,7 @@ analyzing test scripts.  Conversely, you may wish to enable only a
 specific subset of Policies when analyzing modules.
 
 </P>
-<P>The Policies that ship with Perl::Critic are have been broken into the
+<P>The Policies that ship with Perl::Critic have been broken into the
 following themes.  This is just our attempt to provide some basic
 logical groupings.  You are free to invent new themes that suit your
 needs.
@@ -594,18 +587,17 @@ as regular Perl code, and you can use parentheses to enforce
 precedence as well.  Supported operators are:
 
 </P>
-<PRE>   Operator    Altertative    Example
-   ----------------------------------------------------------------------------
-   &amp;&amp;          and            'pbp &amp;&amp; core'
-   ||          or             'pbp || (bugs &amp;&amp; security)'
-   !           not            'pbp &amp;&amp; ! (portability || complexity)'</PRE>
+<PRE>    Operator    Altertative    Example
+    -----------------------------------------------------------------
+    &amp;&amp;          and            'pbp &amp;&amp; core'
+    ||          or             'pbp || (bugs &amp;&amp; security)'
+    !           not            'pbp &amp;&amp; ! (portability || complexity)'</PRE>
 
 <P>Theme names are case-insensitive.  If the <CODE>-theme</CODE> is set to an empty
 string, then it evaluates as true all Policies.
 
 
-</P><HR>
-<H1><A NAME="BENDING%20THE%20RULES">BENDING THE RULES
+</P><H1><A NAME="BENDING%20THE%20RULES">BENDING THE RULES
 
 </A></H1>
 
@@ -617,7 +609,7 @@ standards and that you have a Damn Good Reason (DGR) for doing so.
 
 </P>
 <P>To help with those situations, you can direct Perl::Critic to ignore
-certain lines or blocks of code by using pseudo-pragmas:
+certain lines or blocks of code by using annotations:
 
 </P>
 <PRE>    require 'LegacyLibaray1.pl';  ## no critic
@@ -637,52 +629,52 @@ certain lines or blocks of code by using pseudo-pragmas:
         do_something($_);
     }</PRE>
 
-<P>The <CODE>&quot;## no critic&quot;</CODE> comments direct Perl::Critic to ignore the
+<P>The <CODE>&quot;## no critic&quot;</CODE> annotations direct Perl::Critic to ignore the
 remaining lines of code until the end of the current block, or until a
-<CODE>&quot;## use critic&quot;</CODE> comment is found (whichever comes first).  If the
-<CODE>&quot;## no critic&quot;</CODE> comment is on the same line as a code statement,
-then only that line of code is overlooked.  To direct perlcritic to
-ignore the <CODE>&quot;## no critic&quot;</CODE> comments, use the <CODE>-force</CODE> option.
+<CODE>&quot;## use critic&quot;</CODE> annotation is found (whichever comes first).  If the
+<CODE>&quot;## no critic&quot;</CODE> annotation is on the same line as a code statement,
+then only that line of code is overlooked.  To direct this Critic to
+ignore the <CODE>&quot;## no critic&quot;</CODE> annotations, use the <CODE>-force</CODE> option.
 
 </P>
-<P>A bare <CODE>&quot;## no critic&quot;</CODE> comment disables all the active Policies.  If
+<P>A bare <CODE>&quot;## no critic&quot;</CODE> annotation disables all the active Policies.  If
 you wish to disable only specific Policies, add a list of Policy names
 as arguments, just as you would for the <CODE>&quot;no strict&quot;</CODE> or <CODE>&quot;no
 warnings&quot;</CODE> pragmas.  For example, this would disable the
 <CODE>ProhibitEmptyQuotes</CODE> and <CODE>ProhibitPostfixControls</CODE> policies until
-the end of the block or until the next <CODE>&quot;## use critic&quot;</CODE> comment
+the end of the block or until the next <CODE>&quot;## use critic&quot;</CODE> annotation
 (whichever comes first):
 
 </P>
-<PRE>  ## no critic (EmptyQuotes, PostfixControls)
+<PRE>    ## no critic (EmptyQuotes, PostfixControls)
 
-  # Now exempt from ValuesAndExpressions::ProhibitEmptyQuotes
-  $foo = &quot;&quot;;
+    # Now exempt from ValuesAndExpressions::ProhibitEmptyQuotes
+    $foo = &quot;&quot;;
 
-  # Now exempt ControlStructures::ProhibitPostfixControls
-  $barf = bar() if $foo;
+    # Now exempt ControlStructures::ProhibitPostfixControls
+    $barf = bar() if $foo;
 
-  # Still subjected to ValuesAndExpression::RequireNumberSeparators
-  $long_int = 10000000000;</PRE>
+    # Still subjected to ValuesAndExpression::RequireNumberSeparators
+    $long_int = 10000000000;</PRE>
 
 <P>Since the Policy names are matched against the <CODE>&quot;## no critic&quot;</CODE>
 arguments as regular expressions, you can abbreviate the Policy names
 or disable an entire family of Policies in one shot like this:
 
 </P>
-<PRE>  ## no critic (NamingConventions)
+<PRE>    ## no critic (NamingConventions)
 
-  # Now exempt from NamingConventions::ProhibitMixedCaseVars
-  my $camelHumpVar = 'foo';
+    # Now exempt from NamingConventions::Capitalization
+    my $camelHumpVar = 'foo';
 
-  # Now exempt from NamingConventions::ProhibitMixedCaseSubs
-  sub camelHumpSub {}</PRE>
+    # Now exempt from NamingConventions::Capitalization
+    sub camelHumpSub {}</PRE>
 
 <P>The argument list must be enclosed in parentheses and must contain one
 or more comma-separated barewords (e.g. don't use quotes).  The
-<CODE>&quot;## no critic&quot;</CODE> pragmas can be nested, and Policies named by an
-inner pragma will be disabled along with those already disabled an
-outer pragma.
+<CODE>&quot;## no critic&quot;</CODE> annotations can be nested, and Policies named by an
+inner annotation will be disabled along with those already disabled an
+outer annotation.
 
 </P>
 <P>Some Policies like <CODE>Subroutines::ProhibitExcessComplexity</CODE> apply to
@@ -690,24 +682,23 @@ an entire block of code.  In those cases, <CODE>&quot;## no critic&quot;</CODE> 
 appear on the line where the violation is reported.  For example:
 
 </P>
-<PRE>  sub complicated_function {  ## no critic (ProhibitExcessComplexity)
-      # Your code here...
-  }</PRE>
+<PRE>    sub complicated_function {  ## no critic (ProhibitExcessComplexity)
+        # Your code here...
+    }</PRE>
 
 <P>Policies such as <CODE>Documentation::RequirePodSections</CODE> apply to the
 entire document, in which case violations are reported at line 1.
 
 </P>
-<P>Use this feature wisely.  <CODE>&quot;## no critic&quot;</CODE> should be used in the
+<P>Use this feature wisely.  <CODE>&quot;## no critic&quot;</CODE> annotations should be used in the
 smallest possible scope, or only on individual lines of code. And you
-should always be as specific as possible about which policies you want
+should always be as specific as possible about which Policies you want
 to disable (i.e. never use a bare <CODE>&quot;## no critic&quot;</CODE>).  If Perl::Critic
 complains about your code, try and find a compliant solution before
 resorting to this feature.
 
 
-</P><HR>
-<H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
+</P><H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
 
 </A></H1>
 
@@ -722,8 +713,7 @@ contributions, or you can simply load your own private set of policies
 into Perl::Critic.
 
 
-</P><HR>
-<H1><A NAME="EXTENDING%20THE%20CRITIC">EXTENDING THE CRITIC
+</P><H1><A NAME="EXTENDING%20THE%20CRITIC">EXTENDING THE CRITIC
 
 </A></H1>
 
@@ -751,8 +741,7 @@ help you catch those costly defects <B>before</B> they go into production.
 To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
 
 
-</P><HR>
-<H1><A NAME="PREREQUISITES">PREREQUISITES
+</P><H1><A NAME="PREREQUISITES">PREREQUISITES
 
 </A></H1>
 
@@ -839,8 +828,7 @@ testing:
 <P><A HREF="Text/ParseWords.html">Text::ParseWords</A>
 
 
-</P><HR>
-<H1><A NAME="CONTACTING%20THE%20DEVELOPMENT%20TEAM">CONTACTING THE DEVELOPMENT TEAM
+</P><H1><A NAME="CONTACTING%20THE%20DEVELOPMENT%20TEAM">CONTACTING THE DEVELOPMENT TEAM
 
 </A></H1>
 
@@ -854,8 +842,7 @@ You can also contact the author at <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
 in <A HREF="irc://irc.perl.org/#perlcritic">irc://irc.perl.org/#perlcritic</A>.
 
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
@@ -910,8 +897,7 @@ these:
 <P><A HREF="Task/Perl/Critic/IncludingOptionalDependencies.html">Task::Perl::Critic::IncludingOptionalDependencies</A>
 
 
-</P><HR>
-<H1><A NAME="BUGS">BUGS
+</P><H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
@@ -925,8 +911,7 @@ Perl::Critic::Policy, please submit them to
 particular block of code.
 
 
-</P><HR>
-<H1><A NAME="CREDITS">CREDITS
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -957,20 +942,18 @@ Chris Dolan's project to implement twenty PBP policies.
 <A HREF="http://www.perlfoundation.org/april_1_2007_new_grant_awards">http://www.perlfoundation.org/april_1_2007_new_grant_awards</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

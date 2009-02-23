@@ -12,8 +12,6 @@
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
-</A><LI><A HREF="#METHODS">METHODS
-
 </A><LI><A HREF="#BUGS">BUGS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -29,8 +27,7 @@
 <P>Perl::Critic::Policy::NamingConventions::ProhibitAmbiguousNames - Don't use vague variable or subroutine names like 'last' or 'record'.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -38,8 +35,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -52,8 +48,7 @@ previous or final.
 names.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -74,21 +69,6 @@ of forbidden words separated by spaces.
 <PRE>    [NamingConventions::ProhibitAmbiguousNames]
     forbid = last set left right no abstract contract record second close
 </PRE>
-<HR>
-<H1><A NAME="METHODS">METHODS
-
-</A></H1>
-<DL><DT><A NAME="default_forbidden_words()">default_forbidden_words()
-
-</A></DT>
-<DD>
-This can be called as a class or instance method.  It returns the list
-of words that are forbidden by default.
-
-
-</DD>
-</DL>
-<HR>
 <H1><A NAME="BUGS">BUGS
 
 </A></H1>
@@ -105,7 +85,6 @@ example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
 </P>
 <PRE>    my $previous_record = $Foo::last;
 </PRE>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
@@ -113,12 +92,11 @@ example, in this case the <CODE>last</CODE> incorrectly triggers a violation.
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2005-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

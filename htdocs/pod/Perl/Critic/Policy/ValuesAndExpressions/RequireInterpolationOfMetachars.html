@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -29,17 +29,15 @@
 <P>Perl::Critic::Policy::ValuesAndExpressions::RequireInterpolationOfMetachars - Warns that you might have used single quotes when you really wanted double-quotes.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -51,44 +49,55 @@ educated guess by looking for metacharacters and sigils which usually
 indicate that the string should be interpolated.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>The <CODE>rcs_keywords</CODE> option allows you to stop this policy from complaining
+about things that look like RCS variables, for example, in deriving values for
+<CODE>$VERSION</CODE> variables.
+
+</P>
+<P>For example, if you've got code like
+
+</P>
+<PRE>    our ($VERSION) = (q&lt;$Revision: 3096 $&gt; =~ m/(\d+)/mx);</PRE>
+
+<P>You can specify
+
+</P>
+<PRE>    [ValuesAndExpressions::RequireInterpolationOfMetachars]
+    rcs_keywords = Revision</PRE>
+
+<P>in your <I>.perlcriticrc</I> to provide an exemption.
 
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
 <P>Perl's own <CODE>warnings</CODE> pragma also warns you about this.
 
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/ProhibitInterpolationOfLiterals.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</A>
+<P><A HREF="Perl/Critic/Policy/ValuesAndExpressions/ProhibitInterpolationOfLiterals.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitInterpolationOfLiterals</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

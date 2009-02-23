@@ -27,8 +27,7 @@
 <P>Perl::Critic::Policy::TestingAndDebugging::RequireUseStrict - Always <CODE>use strict</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +35,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -48,24 +46,31 @@ strict'</CODE> statement must come before any other statements except
 code in the entire package will be affected.
 
 </P>
-<P>There are special exemptions for <A HREF="../../../../Moose.html">Moose</A> and
-<A HREF="../../../../Moose/Role.html">Moose::Role</A> because they enforces strictness; e.g.
-<CODE>'use Moose'</CODE> is treated as equivalent to <CODE>'use strict'</CODE>.
+<P>There are special exemptions for <A HREF="../../../../Moose.html">Moose</A>,
+<A HREF="../../../../Moose/Role.html">Moose::Role</A>, and
+<A HREF="../../../../Moose/Util/TypeConstraints.html">Moose::Util::TypeConstraints</A> because
+they enforces strictness; e.g.  <CODE>'use Moose'</CODE> is treated as
+equivalent to <CODE>'use strict'</CODE>.
 
 </P>
 <P>The maximum number of violations per document for this policy defaults
 to 1.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>If you take make use of things like
+<A HREF="../../../../Moose/Exporter.html">Moose::Exporter</A>, you can create your own modules
+that import the <A HREF="../../../../strict.html">strict</A> pragma into the code that is
+<CODE>use</CODE>ing them.  There is an option to add to the default set of
+pragmata and modules in your <I>.perlcriticrc</I>: <CODE>equivalent_modules</CODE>.
 
-
-</P><HR>
+</P>
+<PRE>    [TestingAndDebugging::RequireUseStrict]
+    equivalent_modules = MooseX::My::Sugar
+</PRE>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
@@ -73,20 +78,18 @@ to 1.
 <P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/ProhibitNoStrict.html">Perl::Critic::Policy::TestingAndDebugging::ProhibitNoStrict</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify it under

@@ -29,8 +29,7 @@
 <P>Perl::Critic::Policy::CodeLayout::ProhibitQuotedWordLists - Write <CODE>qw(foo bar baz)</CODE> instead of <CODE>('foo', 'bar', 'baz')</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -38,8 +37,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -54,7 +52,6 @@ easy to add to the list in the future.
 
     use Foo ('foo', 'bar', 'baz');  #not ok
     use Foo qw(foo bar baz);        #ok</PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -72,8 +69,15 @@ value for <CODE>min_elements</CODE> in <I>.perlcriticrc</I> like this:
 <P>This would cause this policy to only complain about lists containing
 four or more words.
 
+</P>
+<P>By default, this policy won't complain if any of the values in the list
+contain non-word characters.  If you want it to, set the <CODE>strict</CODE>
+option to a true value.
 
-</P><HR>
+</P>
+<PRE>    [CodeLayout::ProhibitQuotedWordLists]
+    strict = 1
+</PRE>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -84,8 +88,7 @@ could be sensibly expressed with <CODE>qw()</CODE>.  However, there may be some
 edge cases that I haven't covered.  If you find one, send me a note.
 
 
-</P><HR>
-<H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
+</P><H1><A NAME="IMPORTANT%20CHANGES">IMPORTANT CHANGES
 
 </A></H1>
 
@@ -95,20 +98,18 @@ module&quot; errors, then you probably need to change <CODE>RequireQuotedWords</
 to <CODE>ProhibitQuotedWordLists</CODE> in your <I>.perlcriticrc</I> file.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

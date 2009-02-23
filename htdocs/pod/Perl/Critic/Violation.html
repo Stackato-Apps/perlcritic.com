@@ -14,8 +14,6 @@
 
 </A><LI><A HREF="#METHODS">METHODS
 
-</A><LI><A HREF="#FIELDS">FIELDS
-
 </A><LI><A HREF="#OVERLOADS">OVERLOADS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -30,8 +28,8 @@
 
 <P>Perl::Critic::Violation - A violation of a Policy found in some source code.
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -43,8 +41,8 @@
   my $expl = [1,45,67];           #Page numbers from PBP
   my $sev  = 5;                   #Severity level of this violation
 
-  my $vio  = Perl::Critic::Violation-&gt;new($desc, $expl, $node, $sev);</PRE>
-<HR>
+  my $vio  = Perl::Critic::Violation-&gt;new($desc, $expl, $node, $sev);
+</PRE>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -56,8 +54,8 @@ know anything about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</COD
 <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses must return a
 list of these Perl::Critic::Violation objects.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%24description%2c%20%24explanation%2c%20%24element%2c%20%24severity%20)"><CODE>new( $description, $explanation, $element, $severity )</CODE>
@@ -71,9 +69,9 @@ PBP (as an ARRAY ref), a reference to the <A HREF="../../PPI.html">PPI</A> eleme
 caused the violation, and the severity of the violation (as an
 integer).
 
+
 </DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -84,6 +82,7 @@ integer).
 Returns a brief description of the specific violation.  In other
 words, this value may change on a per violation basis.
 
+
 </DD>
 <DT><A NAME="explanation()"><CODE>explanation()</CODE>
 
@@ -92,6 +91,7 @@ words, this value may change on a per violation basis.
 Returns an explanation of the policy as a string or as reference to an
 array of page numbers in PBP.  This value will generally not change
 based upon the specific code violating the policy.
+
 
 </DD>
 <DT><A NAME="location()"><CODE>location()</CODE>
@@ -102,6 +102,7 @@ Returns a three-element array reference containing the line and real &amp;
 virtual column numbers where this Violation occurred, as in
 <A HREF="../../PPI/Element.html">PPI::Element</A>.
 
+
 </DD>
 <DT><A NAME="filename()"><CODE>filename()</CODE>
 
@@ -111,6 +112,7 @@ Returns the path to the file where this Violation occurred.  In some
 cases, the path may be undefined because the source code was not read
 directly from a file.
 
+
 </DD>
 <DT><A NAME="severity()"><CODE>severity()</CODE>
 
@@ -118,6 +120,7 @@ directly from a file.
 <DD>
 Returns the severity of this Violation as an integer ranging from 1 to
 5, where 5 is the &quot;most&quot; severe.
+
 
 </DD>
 <DT><A NAME="sort_by_severity(%20%40violation_objects%20)"><CODE>sort_by_severity( @violation_objects )</CODE>
@@ -128,7 +131,8 @@ Returns the severity of this Violation as an integer ranging from 1 to
 <P>If you need to sort Violations by severity, use this handy routine:
 
 </P>
-<PRE>   @sorted = Perl::Critic::Violation::sort_by_severity(@violations);</PRE>
+<PRE>    @sorted = Perl::Critic::Violation::sort_by_severity(@violations);
+</PRE>
 </DD>
 <DT><A NAME="sort_by_location(%20%40violation_objects%20)"><CODE>sort_by_location( @violation_objects )</CODE>
 
@@ -138,7 +142,8 @@ Returns the severity of this Violation as an integer ranging from 1 to
 <P>If you need to sort Violations by location, use this handy routine:
 
 </P>
-<PRE>   @sorted = Perl::Critic::Violation::sort_by_location(@violations);</PRE>
+<PRE>    @sorted = Perl::Critic::Violation::sort_by_location(@violations);
+</PRE>
 </DD>
 <DT><A NAME="diagnostics()"><CODE>diagnostics()</CODE>
 
@@ -149,6 +154,7 @@ motivation for and details of the Policy module that created this
 Violation.  This information is automatically extracted from the
 <CODE>DESCRIPTION</CODE> section of the Policy module's POD.
 
+
 </DD>
 <DT><A NAME="policy()"><CODE>policy()</CODE>
 
@@ -156,6 +162,7 @@ Violation.  This information is automatically extracted from the
 <DD>
 Returns the name of the <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>
 that created this Violation.
+
 
 </DD>
 <DT><A NAME="source()"><CODE>source()</CODE>
@@ -166,14 +173,16 @@ Returns the string of source code that caused this exception.  If the
 code spans multiple lines (e.g. multi-line statements, subroutines or
 other blocks), then only the first line will be returned.
 
+
 </DD>
-<DT><A NAME="set_format(%20%24FORMAT%20)"><CODE>set_format( $FORMAT )</CODE>
+<DT><A NAME="set_format(%20%24format%20)"><CODE>set_format( $format )</CODE>
 
 </A></DT>
 <DD>
 Class method.  Sets the format for all Violation objects when they are
 evaluated in string context.  The default is <CODE>'%d at line %l, column
 %c. %e'</CODE>.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.
+
 
 </DD>
 <DT><A NAME="get_format()"><CODE>get_format()</CODE>
@@ -183,45 +192,25 @@ evaluated in string context.  The default is <CODE>'%d at line %l, column
 Class method. Returns the current format for all Violation objects
 when they are evaluated in string context.
 
+
 </DD>
 <DT><A NAME="to_string()"><CODE>to_string()</CODE>
 
 </A></DT>
 <DD>
 Returns a string representation of this violation.  The content of the
-string depends on the current value of the <CODE>$FORMAT</CODE> package
+string depends on the current value of the <CODE>$format</CODE> package
 variable.  See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
+
 
 </DD>
 </DL>
-<HR>
-<H1><A NAME="FIELDS">FIELDS
-
-</A></H1>
-<DL><DT><A NAME="%24Perl%3a%3aCritic%3a%3aViolation%3a%3aFORMAT"><CODE>$Perl::Critic::Violation::FORMAT</CODE>
-
-</A></DT>
-<DD>
-
-<P><B>DEPRECATED:</B> Use the <CODE>set_format</CODE> and <CODE>get_format</CODE> methods
-instead.
-
-</P>
-<P>Sets the format for all Violation objects when they are evaluated in
-string context.  The default is <CODE>'%d at line %l, column %c. %e'</CODE>.
-See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for formatting options.  If you want to change
-<CODE>$FORMAT</CODE>, you should probably localize it first.
-
-</P></DD>
-</DL>
-<HR>
 <H1><A NAME="OVERLOADS">OVERLOADS
 
 </A></H1>
 
 <P>Perl::Critic::Violation overloads the <CODE>&quot;&quot;</CODE> operator to produce neat
-little messages when evaluated in string context.  The format depends
-on the current value of the <CODE>$FORMAT</CODE> package variable.
+little messages when evaluated in string context.
 
 </P>
 <P>Formats are a combination of literal and escape characters similar to
@@ -247,34 +236,34 @@ characters are:
 <P>Here are some examples:
 
 </P>
-<PRE>  $Perl::Critic::Violation::FORMAT = &quot;%m at line %l, column %c.\n&quot;;
-  #looks like &quot;Mixed case variable name at line 6, column 23.&quot;
+<PRE>    Perl::Critic::Violation::set_format(&quot;%m at line %l, column %c.\n&quot;);
+    # looks like &quot;Mixed case variable name at line 6, column 23.&quot;
 
-  $Perl::Critic::Violation::FORMAT = &quot;%m near '%r'\n&quot;;
-  #looks like &quot;Mixed case variable name near 'my $theGreatAnswer = 42;'&quot;
+    Perl::Critic::Violation::set_format(&quot;%m near '%r'\n&quot;);
+    # looks like &quot;Mixed case variable name near 'my $theGreatAnswer = 42;'&quot;
 
-  $Perl::Critic::Violation::FORMAT = &quot;%l:%c:%p\n&quot;;
-  #looks like &quot;6:23:NamingConventions::ProhibitMixedCaseVars&quot;
+    Perl::Critic::Violation::set_format(&quot;%l:%c:%p\n&quot;);
+    # looks like &quot;6:23:NamingConventions::Capitalization&quot;
 
-  $Perl::Critic::Violation::FORMAT = &quot;%m at line %l. %e. \n%d\n&quot;;
-  #looks like &quot;Mixed case variable name at line 6.  See page 44 of PBP.
-    Conway's recommended naming convention is to use lower-case words
-    separated by underscores.  Well-recognized acronyms can be in ALL
-    CAPS, but must be separated by underscores from other parts of the
-    name.&quot;</PRE>
-<HR>
+    Perl::Critic::Violation::set_format(&quot;%m at line %l. %e. \n%d\n&quot;);
+    # looks like &quot;Mixed case variable name at line 6.  See page 44 of PBP.
+      Conway's recommended naming convention is to use lower-case words
+      separated by underscores.  Well-recognized acronyms can be in ALL
+      CAPS, but must be separated by underscores from other parts of the
+      name.&quot;
+</PRE>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

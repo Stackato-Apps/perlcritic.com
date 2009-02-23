@@ -29,8 +29,7 @@
 <P>Perl::Critic::Document - Caching wrapper around a PPI::Document.
 
 
-</P><HR>
-<H1><A NAME="SYNOPSIS">SYNOPSIS
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
 
@@ -40,7 +39,6 @@
     $doc = Perl::Critic::Document-&gt;new($doc);
     ## Then use the instance just like a PPI::Document
 </PRE>
-<HR>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
@@ -55,8 +53,7 @@ Then, on subsequent requests we return the cached data.
 stored <CODE>PPI::Document</CODE> instance.
 
 
-</P><HR>
-<H1><A NAME="CAVEATS">CAVEATS
+</P><H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
 
@@ -71,32 +68,24 @@ write <CODE>my $source = $doc-</CODE>content();&gt;
 better than we do here?
 
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%24doc)"><CODE>new($doc)</CODE>
+<DL><DT><A NAME="new(%24source_code)"><CODE>new($source_code)</CODE>
 
 </A></DT>
 <DD>
-Create a new instance referencing a PPI::Document instance.
-
+Create a new instance referencing a PPI::Document instance.  The
+<CODE>$source_code</CODE> can be the name of a file, a reference to a scalar
+containing actual source code, or a <A HREF="PPI/Document.html">PPI::Document</A> or
+<A HREF="PPI/Document/File.html">PPI::Document::File</A>.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
-<DL><DT><A NAME="new(%24doc)"><CODE>new($doc)</CODE>
-
-</A></DT>
-<DD>
-Create a new instance referencing a PPI::Document instance.
-
-
-</DD>
-<DT><A NAME="ppi_document()"><CODE>ppi_document()</CODE>
+<DL><DT><A NAME="ppi_document()"><CODE>ppi_document()</CODE>
 
 </A></DT>
 <DD>
@@ -154,23 +143,67 @@ Returns a <A HREF="version.html">version</A> object for the highest Perl version
 requirement declared in the document via a <CODE>use</CODE> or <CODE>require</CODE>
 statement.  Returns nothing if there is no version statement.
 
+</DD>
+<DT><A NAME="process_annotations()"><CODE>process_annotations()</CODE>
+
+</A></DT>
+<DD>
+Causes this Document to scan itself and mark which lines &amp;
+policies are disabled by the <CODE>&quot;## no critic&quot;</CODE> annotations.
+
+</DD>
+<DT><A NAME="line_is_disabled_for_policy(%24line%2c%20%24policy_object)"><CODE>line_is_disabled_for_policy($line, $policy_object)</CODE>
+
+</A></DT>
+<DD>
+Returns true if the given <CODE>$policy_object</CODE> or <CODE>$policy_name</CODE> has
+been disabled for at <CODE>$line</CODE> in this Document.  Otherwise, returns false.
+
+</DD>
+<DT><A NAME="add_annotation(%20%24annotation%20)"><CODE>add_annotation( $annotation )</CODE>
+
+</A></DT>
+<DD>
+Adds an <CODE>$annotation</CODE> object to this Document.
+
+</DD>
+<DT><A NAME="annotations()"><CODE>annotations()</CODE>
+
+</A></DT>
+<DD>
+Returns a list containing all the <A HREF="Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> that
+were found in this Document.
+
+</DD>
+<DT><A NAME="add_suppressed_violation(%24violation)"><CODE>add_suppressed_violation($violation)</CODE>
+
+</A></DT>
+<DD>
+Informs this Document that a <CODE>$violation</CODE> was found but not reported
+because it fell on a line that had been suppressed by a <CODE>&quot;## no critic&quot;</CODE>
+annotation. Returns <CODE>$self</CODE>.
+
+</DD>
+<DT><A NAME="suppressed_violations()"><CODE>suppressed_violations()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of references to all the <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>s
+that were found in this Document but were suppressed.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2006-2008 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

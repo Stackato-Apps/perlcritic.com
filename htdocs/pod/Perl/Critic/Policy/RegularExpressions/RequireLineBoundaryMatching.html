@@ -27,8 +27,7 @@
 <P>Perl::Critic::Policy::RegularExpressions::RequireLineBoundaryMatching - Always use the <CODE>/m</CODE> modifier with regular expressions.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,21 +35,19 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>Folks coming from a <CODE>sed</CODE> or <CODE>awk</CODE> background tend to assume that
-<CODE>'$'</CODE> and <CODE>'^'</CODE> match the beginning and and of the line, rather than
-then beginning and ed of the string.  Adding the '/m' flag to your
+<CODE>'$'</CODE> and <CODE>'^'</CODE> match the beginning and end of the line, rather than
+then beginning and end of the string.  Adding the '/m' flag to your
 regex makes it behave as most people expect it should.
 
 </P>
 <PRE>    my $match = m{ ^ $pattern $ }x;  #not ok
     my $match = m{ ^ $pattern $ }xm; #ok
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -58,13 +55,12 @@ regex makes it behave as most people expect it should.
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
 <P>For common regular expressions like e-mail addresses, phone numbers,
-dates, etc., have a look at the <A HREF="../../../../Regex/Common.html">Regex::Common</A> module.
+dates, etc., have a look at the <A HREF="../../../../Regexp/Common.html">Regexp::Common</A> module.
 Also, be cautions about slapping modifier flags onto existing regular
 expressions, as they can drastically alter their meaning.  See
 <A HREF="http://www.perlmonks.org/?node_id=484238">http://www.perlmonks.org/?node_id=484238</A> for an interesting
@@ -72,20 +68,18 @@ discussion on the effects of blindly modifying regular expression
 flags.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer  &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer. All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer. All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

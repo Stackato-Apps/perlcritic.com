@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
+</A><LI><A HREF="#PREREQUISITES">PREREQUISITES
+
 </A><LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -29,8 +31,7 @@
 <P>Perl::Critic::Policy::RegularExpressions::ProhibitComplexRegexes - Split long regexps into smaller <CODE>qr//</CODE> chunks.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -38,8 +39,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -51,8 +51,7 @@ If the regexp uses the <CODE>x</CODE> flag, then the length is computed after
 parsing out any comments or whitespace.
 
 
-</P><HR>
-<H1><A NAME="CASE%20STUDY">CASE STUDY
+</P><H1><A NAME="CASE%20STUDY">CASE STUDY
 
 </A></H1>
 
@@ -109,8 +108,7 @@ against the source BNF grammar in RFC 822 to judge whether the
 implementation is sound even before running tests.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -123,8 +121,15 @@ with the <CODE>max_characters</CODE> setting.  To do this, put entries in a
 <PRE>    [RegularExpressions::ProhibitComplexRegexes]
     max_characters = 40
 </PRE>
-<HR>
-<H1><A NAME="CREDITS">CREDITS
+<H1><A NAME="PREREQUISITES">PREREQUISITES
+
+</A></H1>
+
+<P>This policy will disable itself if <A HREF="Regexp/Parser.html">Regexp::Parser</A> is not
+installed.
+
+
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -132,20 +137,18 @@ with the <CODE>max_characters</CODE> setting.  To do this, put entries in a
 Perl Foundation.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

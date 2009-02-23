@@ -27,8 +27,7 @@
 <P>Perl::Critic::Policy::CodeLayout::ProhibitHardTabs - Use spaces instead of tabs.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +35,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -55,19 +53,20 @@ quotes, and HEREDOCs.  The contents of the <CODE>__DATA__</CODE> section are not
 examined.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>Tabs in a leading position are allowed, but if you want to forbid all tabs
-everywhere, put this to your <I>.perlcriticrc</I> file:
+<P>Hard tabs in a string are always forbidden (use &quot;\t&quot; instead).  But
+hard tabs in a leading position are allowed when they are used to indent
+code statements, <CODE>qw()</CODE> word lists, and regular expressions with the <CODE>/x</CODE>
+modifier.  However, if you want to forbid all tabs everywhere, then add
+this to your <I>.perlcriticrc</I> file:
 
 </P>
 <PRE>    [CodeLayout::ProhibitHardTabs]
     allow_leading_tabs = 0
 </PRE>
-<HR>
 <H1><A NAME="NOTES">NOTES
 
 </A></H1>
@@ -77,20 +76,18 @@ contains the tab, not the actual location of the tab, so you may need
 to do some hunting.  I'll try and fix this in the future.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

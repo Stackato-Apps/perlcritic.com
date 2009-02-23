@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -28,23 +28,21 @@
 
 <P>Perl::Critic::Policy::InputOutput::ProhibitTwoArgOpen - Write <CODE>open $fh, q{&lt;}, $filename;</CODE> instead of <CODE>open $fh, &quot;&lt;$filename&quot;;</CODE>.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>The three-argument form of <CODE>open</CODE> (introduced in Perl 5.6) prevents
 subtle bugs that occur when the filename starts with funny characters
-like '&gt;' or '&lt;'.  The <A HREF="../../../../IO/File.html">IO::File</A> module provides a nice
+like '&gt;' or '&lt;'.  The <A HREF="IO/File.html">IO::File</A> module provides a nice
 object-oriented interface to filehandles, which I think is more
 elegant anyway.
 
@@ -67,46 +65,41 @@ compatible with a version of perl prior to 5.6 via an include
 statement, e.g. by having <CODE>require 5.005</CODE> in it.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
-<P>The only time you should use the two-argument form is when you re-open
-STDIN, STDOUT, or STDERR.  But for now, this Policy doesn't provide
-that loophole.
+<P>There are two cases in which you are forced to use the two-argument form of
+open. When re-opening STDIN, STDOUT, or STDERR, and when doing a safe pipe
+open, as described in <A HREF="perlipc.html">perlipc</A>.
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../IO/Handle.html">IO::Handle</A>
+<P><A HREF="IO/Handle.html">IO::Handle</A>
 
 </P>
-<P><A HREF="../../../../IO/File.html">IO::File</A>
+<P><A HREF="IO/File.html">IO::File</A>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (C) 2005-2007 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::InputOutput::RequireCheckedSyscalls - Return value of flagged function ignored.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +34,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -45,44 +43,62 @@ except that this is configurable to apply to any function, whether
 core or user-defined.
 
 </P>
-<P>If your module uses <A HREF="Fatal.html">Fatal</A> or <CODE>Fatal::Exception</CODE>, then any
-functions wrapped by those modules will not trigger this policy.  For
-example:
+<P>If your module uses <A HREF="Fatal.html">Fatal</A>,
+<CODE>Fatal::Exception|Fatal::Exception</CODE>, or <A HREF="autodie.html">autodie</A> then any functions
+wrapped by those modules will not trigger this policy.  For example:
 
 </P>
-<PRE>   use Fatal qw(open);
-   open my $fh, $filename;  # no violation
-   close $fh;               # yes violation</PRE>
-<HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+<PRE>    use Fatal qw(open);
+    open my $fh, $filename;  # no violation
+    close $fh;               # yes violation
+
+    use autodie;
+    open $filehandle, $mode, $filename;   # no violation</PRE>
+
+<P>Currently, <A HREF="autodie.html">autodie</A> is not properly treated as a pragma; its
+lexical effects aren't taken into account.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This policy watches for a configurable list of function names.  By
 default, it applies to <CODE>open</CODE>, <CODE>print</CODE> and <CODE>close</CODE>.  You can
 override this to set it to a different list of functions with the
-<CODE>functions</CODE> setting.  To do this, put entries in a <I>.perlcriticrc</I>
-file like this:
+<CODE>functions</CODE> and <CODE>exclude_functions</CODE> settings.  To do this, put
+entries in a <I>.perlcriticrc</I> file like this:
 
 </P>
-<PRE>  [InputOutput::RequireCheckedSyscalls]
-  functions = open opendir read readline readdir close closedir</PRE>
+<PRE>    [InputOutput::RequireCheckedSyscalls]
+    functions = open opendir read readline readdir close closedir</PRE>
 
 <P>We have defined a few shortcuts for creating this list
 
 </P>
-<PRE>  [InputOutput::RequireCheckedSyscalls]
-  functions = :defaults opendir readdir closedir
+<PRE>    [InputOutput::RequireCheckedSyscalls]
+    functions = :defaults opendir readdir closedir
 
-  [InputOutput::RequireCheckedSyscalls]
-  functions = :builtins
+    [InputOutput::RequireCheckedSyscalls]
+    functions = :builtins
 
-  [InputOutput::RequireCheckedSyscalls]
-  functions = :all</PRE>
+    [InputOutput::RequireCheckedSyscalls]
+    functions = :all</PRE>
 
 <P>The <CODE>:builtins</CODE> shortcut above represents all of the builtin
 functions that have error conditions (about 65 of them, many of them
 rather obscure).
+
+</P>
+<P>You can require checking all builtins except <CODE>print</CODE> by combining
+the <CODE>functions</CODE> and <CODE>exclude_functions</CODE>:
+
+</P>
+<PRE>    [InputOutput::RequireCheckedSyscalls]
+    functions = :builtins
+    exclude_functions = print</PRE>
+
+<P>This is a lot easier to read than the alternative.
 
 </P>
 <P>The <CODE>:all</CODE> is the insane case: you must check the return value of
@@ -90,8 +106,8 @@ EVERY function call, even <CODE>return</CODE> and <CODE>exit</CODE>.  Yes, this 
 is overkill and is wasting CPU cycles on your computer by just
 existing.  Nyah nyah.  I shouldn't code after midnight.
 
-</P><HR>
-<H1><A NAME="CREDITS">CREDITS
+
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -102,19 +118,19 @@ Perl Foundation.
 <P>This policy module is based heavily on policies written by Andrew
 Moore &lt;amoore@mooresystems.com&gt;.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#NOTES">NOTES
 
+</A><LI><A HREF="#BUGS">BUGS
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -27,8 +29,7 @@
 <P>Perl::Critic::Policy::CodeLayout::ProhibitParensWithBuiltins - Write <CODE>open $handle, $path</CODE> instead of <CODE>open($handle, $path)</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +37,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -54,7 +54,6 @@ called with multiple arguments.
     split(/$pattern/, @list); #not ok
     split /$pattern/, @list;  #ok
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -62,8 +61,7 @@ called with multiple arguments.
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -77,20 +75,28 @@ those cases, consider using the '## no critic' comments to silence
 Perl::Critic.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Some builtin functions (particularly those that take a variable number
+of scalar arguments) should probably get parentheses.  This policy
+should be enhanced to allow the user to specify a list of builtins
+that are exempt from the policy.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

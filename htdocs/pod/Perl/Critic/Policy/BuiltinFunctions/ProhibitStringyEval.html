@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -27,17 +27,15 @@
 <P>Perl::Critic::Policy::BuiltinFunctions::ProhibitStringyEval - Write <CODE>eval { my $foo; bar($foo) }</CODE> instead of <CODE>eval &quot;my $foo; bar($foo);&quot;</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,42 +44,61 @@ whereas the block form is only compiled once.  Also, the string form
 doesn't give compile-time warnings.
 
 </P>
-<PRE>  eval &quot;print $foo&quot;;        #not ok
-  eval {print $foo};        #ok
+<PRE>    eval &quot;print $foo&quot;;        # not ok
+    eval {print $foo};        # ok
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>There is an <CODE>allow_includes</CODE> boolean option for this Policy.  If set, then
+strings that look like they only include a single &quot;use&quot; or &quot;require&quot; statement
+(with the possible following statement that consists of a single number) are
+allowed.  With this option set, the following are flagged as indicated:
+
+</P>
+<PRE>    eval 'use Foo';             # ok
+    eval 'require Foo';         # ok
+    eval &quot;use $thingy;&quot;;        # ok
+    eval &quot;require $thingy;&quot;;    # ok
+    eval &quot;use $thingy; 1;&quot;;     # ok
+    eval &quot;require $thingy; 1;&quot;; # ok
+
+    eval 'use Foo; blah;';      # still not ok
+    eval 'require Foo; 2; 1;';  # still not ok
+    eval 'use $thingy;';        # still not ok
+    eval 'no Foo';              # still not ok</PRE>
+
+<P>If you don't understand why the number is allowed, see
+<A HREF="Perl/Critic/Policy/ErrorHandling/RequireCheckingReturnValueOfEval.html">Perl::Critic::Policy::ErrorHandling::RequireCheckingReturnValueOfEval</A>.
+
+</P>
+<P>This option inspired by Ricardo SIGNES'
+<A HREF="Perl/Critic/Policy/Lax/ProhibitStringyEval/ExceptForRequire.html">Perl::Critic::Policy::Lax::ProhibitStringyEval::ExceptForRequire</A>.
 
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/ControlStrucutres/RequireBlockGrep.html">Perl::Critic::Policy::ControlStrucutres::RequireBlockGrep</A>
+<P><A HREF="Perl/Critic/Policy/ControlStrucutres/RequireBlockGrep.html">Perl::Critic::Policy::ControlStrucutres::RequireBlockGrep</A>
 
 </P>
-<P><A HREF="../../../../Perl/Critic/Policy/ControlStrucutres/RequireBlockMap.html">Perl::Critic::Policy::ControlStrucutres::RequireBlockMap</A>
+<P><A HREF="Perl/Critic/Policy/ControlStrucutres/RequireBlockMap.html">Perl::Critic::Policy::ControlStrucutres::RequireBlockMap</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

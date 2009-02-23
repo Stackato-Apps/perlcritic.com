@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#NOTES">NOTES
 
+</A><LI><A HREF="#BUGS">BUGS
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -26,8 +28,8 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitPostfixControls - Write <CODE>if($condition){ do_something() }</CODE> instead of <CODE>do_something() if $condition</CODE>.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +37,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -68,8 +69,8 @@ such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or <CODE>contin
     for my $n (0..100){
         next if $condition;               #ok
         last LOOP if $other_condition;    #also ok
-    }</PRE>
-<HR>
+    }
+</PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -93,8 +94,12 @@ can also be configured with the 'flowcontrol' directive in your
 </P>
 <PRE>    [ControlStructures::ProhibitPostfixControls]
     flowcontrol = warn die carp croak cluck confess goto exit</PRE>
-<HR>
-<H1><A NAME="NOTES">NOTES
+
+<P>This is useful if you're using additional modules that add things like
+<CODE>assert</CODE> or <CODE>throw</CODE>.
+
+
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -105,19 +110,26 @@ of those functions.  It is also pretty common to use <CODE>warn</CODE>, <CODE>ca
 and <CODE>cluck</CODE> with a postfix <CODE>if</CODE>, so those are allowed too.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Look for the <CODE>do {} while</CODE> case and change the explanation to point
+to page 123 when it is found.  RT #37905.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

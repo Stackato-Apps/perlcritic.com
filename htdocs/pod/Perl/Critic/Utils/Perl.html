@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#SYNOPSIS">SYNOPSIS
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#IMPORTABLE%20SUBROUTINES">IMPORTABLE SUBROUTINES
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Utils::Perl - Utility functions for dealing with Perl language issues.
+
+
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+
+<PRE>    use Perl::Critic::Utils::Perl qw&lt; :all &gt;;
+
+    my $name = symbol_without_sigil('$foo');    # $name is &quot;foo&quot;.
+</PRE>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This handles various issues with Perl, the language, that aren't necessarily
+<A HREF="PPI.html">PPI</A> related.
+
+
+</P><H1><A NAME="IMPORTABLE%20SUBROUTINES">IMPORTABLE SUBROUTINES
+
+</A></H1>
+<DL><DT><A NAME="symbol_without_sigil(%20%24symbol%20)"><CODE>symbol_without_sigil( $symbol )</CODE>
+
+</A></DT>
+<DD>
+Returns the name of the specified symbol with any sigil at the front.
+The parameter can be a vanilla Perl string or a <A HREF="PPI/Element.html">PPI::Element</A>.
+
+
+</DD>
+</DL>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Elliot Shank &lt;perl@galumph.com&gt;
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2007-2009 Elliot Shank.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

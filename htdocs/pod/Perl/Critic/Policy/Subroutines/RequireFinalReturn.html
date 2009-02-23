@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::Subroutines::RequireFinalReturn - End every path through a subroutine with an explicit <CODE>return</CODE> statement.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +34,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -84,8 +82,7 @@ value, so a wrong guess returns the right password!  Adding a
 <P>Be careful when fixing problems identified by this Policy; don't
 blindly put a <CODE>return;</CODE> statement at the end of every subroutine.
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -97,7 +94,6 @@ functions as well.  Just put something like this in your
 </P>
 <PRE>    [Subroutines::RequireFinalReturns]
     terminal_funcs = quit abort bailout</PRE>
-<HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 
 </A></H1>
@@ -107,19 +103,17 @@ construction is too complicated to analyze right now.  Besides, a
 better form is the return outside of the ternary like this: <CODE>return
 foo ? 1 : bar ? 2 : 3</CODE>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2005-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

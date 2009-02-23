@@ -12,6 +12,8 @@
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
 
+</A><LI><A HREF="#BUGS">BUGS
+
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -27,8 +29,7 @@
 <P>Perl::Critic::Policy::TestingAndDebugging::RequireUseWarnings - Always <CODE>use warnings</CODE>.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -36,8 +37,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -49,9 +49,11 @@ statements.  Thus, all the code in the entire package will be
 affected.
 
 </P>
-<P>There are special exemptions for <A HREF="../../../../Moose.html">Moose</A> and
-<A HREF="../../../../Moose/Role.html">Moose::Role</A> because they enforces strictness; e.g.
-<CODE>'use Moose'</CODE> is treated as equivalent to <CODE>'use warnings'</CODE>.
+<P>There are special exemptions for <A HREF="../../../../Moose.html">Moose</A>,
+<A HREF="../../../../Moose/Role.html">Moose::Role</A>, and
+<A HREF="../../../../Moose/Util/TypeConstraints.html">Moose::Util::TypeConstraints</A> because
+they enforces warnings; e.g.  <CODE>'use Moose'</CODE> is treated as
+equivalent to <CODE>'use warnings'</CODE>.
 
 </P>
 <P>This policy will not complain if the file explicitly states that it is
@@ -63,36 +65,46 @@ statement, e.g. by having <CODE>require 5.005</CODE> in it.
 to 1.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>If you take make use of things like
+<A HREF="../../../../Moose/Exporter.html">Moose::Exporter</A>, you can create your own modules
+that import the <A HREF="../../../../warnings.html">warnings</A> pragma into the code that is
+<CODE>use</CODE>ing them.  There is an option to add to the default set of
+pragmata and modules in your <I>.perlcriticrc</I>: <CODE>equivalent_modules</CODE>.
+
+</P>
+<PRE>    [TestingAndDebugging::RequireUseWarnings]
+    equivalent_modules = MooseX::My::Sugar
+</PRE>
+<H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Needs to check for -w on the shebang line.
 
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
 <P><A HREF="../../../../Perl/Critic/Policy/TestingAndDebugging/ProhibitNoWarnings.html">Perl::Critic::Policy::TestingAndDebugging::ProhibitNoWarnings</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

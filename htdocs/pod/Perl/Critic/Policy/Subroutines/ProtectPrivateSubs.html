@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#HISTORY">HISTORY
 
+</A><LI><A HREF="#BUGS">BUGS
+
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -28,8 +30,7 @@
 
 <P>Perl::Critic::Policy::Subroutines::ProtectPrivateSubs - Prevent access to private subs in other packages.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -37,8 +38,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -48,41 +48,46 @@ underscore before the identifier.  This policy catches attempts to
 access private variables from outside the package itself.
 
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
 <P>This Policy is not configurable except for the standard options.
 
 
-</P><HR>
-<H1><A NAME="HISTORY">HISTORY
+</P><H1><A NAME="HISTORY">HISTORY
 
 </A></H1>
 
 <P>This policy is inspired by a similar test in <A HREF="../../../../B/Lint.html">B::Lint</A>
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</P><H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
-<P><A HREF="../../../../Perl/Critic/Policy/Subroutines/ProtectPrivateSubs.html">Perl::Critic::Policy::Subroutines::ProtectPrivateSubs</A>
+<P>Doesn't forbid <CODE>$pkg-&gt;_foo()</CODE> because it can't tell the
+difference between that and <CODE>$self-&gt;_foo()</CODE>
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/Variables/ProtectPrivateVars.html">Perl::Critic::Policy::Variables::ProtectPrivateVars</A>
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2006-2008 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

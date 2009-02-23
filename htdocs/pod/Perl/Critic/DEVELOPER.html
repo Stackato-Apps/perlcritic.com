@@ -64,8 +64,7 @@
 <P>Perl::Critic::DEVELOPER - How to make new Perl::Critic::Policy modules.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -82,8 +81,7 @@ guidelines.  All you need to do is write a corresponding
 require as little as 10 lines of code.
 
 
-</P><HR>
-<H1><A NAME="BACKGROUND">BACKGROUND
+</P><H1><A NAME="BACKGROUND">BACKGROUND
 
 </A></H1>
 
@@ -116,8 +114,7 @@ block for the first argument and not an expression.  The reasons for
 this Policy are discussed in detail in <I>PBP</I>.
 
 
-</P><HR>
-<H1><A NAME="EXAMPLE%20POLICY">EXAMPLE POLICY
+</P><H1><A NAME="EXAMPLE%20POLICY">EXAMPLE POLICY
 
 </A></H1>
 
@@ -215,7 +212,7 @@ like statements or variables or conditionals or POD.  These elements
 are specified as PPI classes such as <A HREF="PPI/Statement.html">PPI::Statement</A>,
 <A HREF="PPI/Token/Symbol.html">PPI::Token::Symbol</A>,
 <A HREF="PPI/Structure/Conditional.html">PPI::Structure::Conditional</A> or
-<A HREF="PPI/Token/Pod.html">PPI::Token::Pod</A> respectively.  The applies_to()
+<A HREF="PPI/Token/Pod.html">PPI::Token::Pod</A> respectively.  The <CODE>applies_to()</CODE>
 method returns a list of PPI package names.  (You can get that list of
 available package names via <CODE>perldoc PPI</CODE>.)  As Perl::Critic
 traverses the document, it will call the <CODE>violates()</CODE> method from
@@ -248,27 +245,28 @@ by assigning to <CODE>undef</CODE>.
 <PRE>    sub violates {
         my ( $self, $elem, undef ) = @_;</PRE>
 
-<P>The violates() method then often performs some tests to make sure we
-have the right &quot;type&quot; of element.  In our example, we know that the
+<P>The <CODE>violates()</CODE> method then often performs some tests to make sure
+we have the right &quot;type&quot; of element.  In our example, we know that the
 element will be a <A HREF="PPI/Token/Word.html">PPI::Token::Word</A> because that's
 what we declared back in the <CODE>applies_to()</CODE> method.  However, we
 didn't specify exactly which &quot;word&quot; we were looking for.  Evaluating a
 PPI element in a string context returns the literal form of the code.
 (You can also use the <CODE>content()</CODE> method.)  So we make sure that this
-PPI::Token::Word is, in fact, &quot;grep&quot;.  If it's not, then we don't'
-need to bother examining it.
+<CODE>PPI::Token::Word|PPI::Token::Word</CODE> is, in fact, &quot;grep&quot;.  If it's
+not, then we don't need to bother examining it.
 
 </P>
 <PRE>        return if $elem ne 'grep';</PRE>
 
-<P>The <CODE>PPI::Token::Word</CODE> class is also used for barewords and methods
-called on object references.  It is possible for someone to declare a
-bareword hash key as <CODE>%hash = ( grep =&gt; 'foo' )</CODE>.  We don't want to
-test those types of elements because they don't represent function
-calls to <CODE>grep</CODE>.  So we use one of handy utility functions from
-<A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to make sure that this
-&quot;grep&quot; is actually in the right context.  (The <CODE>is_function_call()</CODE>
-subroutine is brought in via the <CODE>:classification</CODE> tag.)
+<P>The <CODE>PPI::Token::Word|PPI::Token::Word</CODE> class is also used for
+barewords and methods called on object references.  It is possible for
+someone to declare a bareword hash key as <CODE>%hash = ( grep =&gt; 'foo'
+)</CODE>.  We don't want to test those types of elements because they
+don't represent function calls to <CODE>grep</CODE>.  So we use one of handy
+utility functions from <A HREF="Perl/Critic/Utils.html">Perl::Critic::Utils</A> to
+make sure that this &quot;grep&quot; is actually in the right context.  (The
+<CODE>is_function_call()</CODE> subroutine is brought in via the
+<CODE>:classification</CODE> tag.)
 
 </P>
 <PRE>        return if ! is_function_call($elem);</PRE>
@@ -292,10 +290,11 @@ the <CODE>snext_sibling()</CODE> to get the next code-sibling (the &quot;s&quot;
 <P>In Perl, the parenthesis around argument lists are usually optional,
 and PPI packs the elements into a
 <A HREF="PPI/Structure/List.html">PPI::Structure::List</A> object when parentheses
-are used.  So if the sibling is a PPI::Structure::List, we pull out
-the first (significant) child of that list.  This child will be the
-first argument to <CODE>grep</CODE>.  If parentheses were not used, then the
-sibling itself is the first argument.
+are used.  So if the sibling is a
+<CODE>PPI::Structure::List|PPI::Structure::List</CODE>, we pull out the first
+(significant) child of that list.  This child will be the first
+argument to <CODE>grep</CODE>.  If parentheses were not used, then the sibling
+itself is the first argument.
 
 </P>
 <PRE>        my $arg = $sib-&gt;isa('PPI::Structure::List') ? $sib-&gt;schild(0) : $sib;</PRE>
@@ -365,8 +364,7 @@ bad code.  Here's an example:
 output for violations of your policy.
 
 
-</P><HR>
-<H1><A NAME="MAKING%20YOUR%20POLICY%20CONFIGURABLE">MAKING YOUR POLICY CONFIGURABLE
+</P><H1><A NAME="MAKING%20YOUR%20POLICY%20CONFIGURABLE">MAKING YOUR POLICY CONFIGURABLE
 
 </A></H1>
 
@@ -1078,7 +1076,6 @@ the value of the parameter.
 
 </DD>
 </DL>
-<HR>
 <H1><A NAME="ADDITIONAL%20FEATURES">ADDITIONAL FEATURES
 
 </A></H1>
@@ -1106,8 +1103,7 @@ and
 for examples.
 
 
-</P><HR>
-<H1><A NAME="DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
+</P><H1><A NAME="DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
 
 </A></H1>
 <H2><A NAME="Create%20a%20Distribution">Create a Distribution
@@ -1232,7 +1228,6 @@ only to say:
 
     This Policy is not configurable except for the standard options.
 </PRE>
-<HR>
 <H1><A NAME="HINT">HINT
 
 </A></H1>
@@ -1253,29 +1248,32 @@ want to try
 
 <P>to see the differences between the two cases.
 
+</P>
+<P>Alternatively, see
+<A HREF="http://search.cpan.org/dist/App-PPI-Dumper/script/ppi_dumper">ppi_dumper</A>
+and
+<A HREF="http://search.cpan.org/dist/PPI-Tester/lib/PPI/Tester.pm">PPI::Tester</A>.
 
-</P><HR>
-<H1><A NAME="VERSION">VERSION
+
+</P><H1><A NAME="VERSION">VERSION
 
 </A></H1>
 
-<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.090.
+<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.096.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -26,8 +26,7 @@
 
 <P>Perl::Critic::Policy::ControlStructures::ProhibitMutatingListFunctions - Don't modify <CODE>$_</CODE> in list functions.
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -35,8 +34,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -51,8 +49,7 @@ or perhaps <CODE>values(%ENV)</CODE>!  Instead authors should restrict in-place
 array modification to <CODE>for(@array) { ... }</CODE> constructs instead, or
 use <CODE>List::MoreUtils::apply()</CODE>.
 
-</P><HR>
-<H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -76,7 +73,6 @@ use <CODE>List::MoreUtils::apply()</CODE>.
 </P>
 <PRE>    [ControlStructures::ProhibitMutatingListFunctions]
     add_list_funcs = Foo::Bar::listmunge</PRE>
-<HR>
 <H1><A NAME="LIMITATIONS">LIMITATIONS
 
 </A></H1>
@@ -101,8 +97,7 @@ this:
 could include modifying <CODE>$a</CODE> and <CODE>$b</CODE> in <CODE>sort</CODE> and the like.
 That's beyond the scope of this policy.
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
@@ -111,12 +106,11 @@ That's beyond the scope of this policy.
 </P>
 <P>Michael Wolf &lt;MichaelRWolf@att.net&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (C) 2006 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2009 Chris Dolan.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

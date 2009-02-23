@@ -34,8 +34,8 @@
 
 <P>Perl::Critic::Config - The final derived Perl::Critic configuration, combined from any profile file and command-line parameters.
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -46,8 +46,8 @@ engine and how they should be configured.  You should never really
 need to instantiate Perl::Critic::Config directly because the
 Perl::Critic constructor will do it for you.
 
-</P><HR>
-<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
 <DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-single-policy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -single-policy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N, -color =&gt; $B, -criticism-fatal =&gt; $B] )</CODE>
@@ -94,21 +94,21 @@ to be set to 1.
 
 </P>
 <P><B>-include</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Policies
-that match at least one <CODE>m/$PATTERN/imx</CODE> will be loaded into this
+that match at least one <CODE>m/$PATTERN/ixms</CODE> will be loaded into this
 Config, irrespective of the severity settings.  You can use it in
 conjunction with the <CODE>-exclude</CODE> option.  Note that <CODE>-exclude</CODE> takes
 precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
 </P>
 <P><B>-exclude</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Polices
-that match at least one <CODE>m/$PATTERN/imx</CODE> will not be loaded into this
+that match at least one <CODE>m/$PATTERN/ixms</CODE> will not be loaded into this
 Config, irrespective of the severity settings.  You can use it in
 conjunction with the <CODE>-include</CODE> option.  Note that <CODE>-exclude</CODE> takes
 precedence over <CODE>-include</CODE> when a Policy matches both patterns.
 
 </P>
 <P><B>-single-policy</B> is a string <CODE>PATTERN</CODE>.  Only the policy that
-matches <CODE>m/$PATTERN/imx</CODE> will be used.  This value overrides the
+matches <CODE>m/$PATTERN/ixms</CODE> will be used.  This value overrides the
 <CODE>-severity</CODE>, <CODE>-theme</CODE>, <CODE>-include</CODE>, <CODE>-exclude</CODE>, and <CODE>-only</CODE>
 options.
 
@@ -142,7 +142,7 @@ Perl::Critic shut up about these things.
 
 </P>
 <P><B>-force</B> controls whether Perl::Critic observes the magical <CODE>&quot;## no
-critic&quot;</CODE> pseudo-pragmas in your code.  If set to a true value,
+critic&quot;</CODE> annotations in your code.  If set to a true value,
 Perl::Critic will analyze all code.  If set to a false value (which is
 the default) Perl::Critic will ignore code that is tagged with these
 comments.  See <A HREF="Perl/Critic.html#BENDING%20THE%20RULES">Perl::Critic/&quot;BENDING THE RULES&quot;</A> for more
@@ -155,8 +155,8 @@ format specification.  See
 explanation of format specifications.
 
 </P>
-<P><B>-color</B> is not used by Perl::Critic but is provided for the benefit
-of <A HREF="perlcritic.html">perlcritic</A>.
+<P><B>-color</B> and <B>-pager</B> are not used by Perl::Critic but is provided
+for the benefit of <A HREF="perlcritic.html">perlcritic</A>.
 
 </P>
 <P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for
@@ -166,7 +166,6 @@ the benefit of <A HREF="criticism.html">criticism</A>.
 
 </P></DD>
 </DL>
-<HR>
 <H1><A NAME="METHODS">METHODS
 
 </A></H1>
@@ -191,14 +190,26 @@ The contents of this hash reference will be passed into to the
 constructor of the Policy module.  See the documentation in the
 relevant Policy module for a description of the arguments it supports.
 
+
 </P></DD>
+<DT><A NAME="all_policies_enabled_or_not()"><CODE> all_policies_enabled_or_not() </CODE>
+
+</A></DT>
+<DD>
+Returns a list containing references to all the Policy objects that
+have been seen.  Note that the state of these objects is not
+trustworthy.  In particular, it is likely that some of them are not
+prepared to examine any documents.
+
+
+</DD>
 <DT><A NAME="policies()"><CODE> policies() </CODE>
 
 </A></DT>
 <DD>
 Returns a list containing references to all the Policy objects that
-have been loaded into this Config.  Objects will be in the order that
-they were loaded.
+have been enabled and loaded into this Config.
+
 
 </DD>
 <DT><A NAME="exclude()"><CODE> exclude() </CODE>
@@ -207,12 +218,14 @@ they were loaded.
 <DD>
 Returns the value of the <CODE>-exclude</CODE> attribute for this Config.
 
+
 </DD>
 <DT><A NAME="include()"><CODE> include() </CODE>
 
 </A></DT>
 <DD>
 Returns the value of the <CODE>-include</CODE> attribute for this Config.
+
 
 </DD>
 <DT><A NAME="force()"><CODE> force() </CODE>
@@ -221,12 +234,14 @@ Returns the value of the <CODE>-include</CODE> attribute for this Config.
 <DD>
 Returns the value of the <CODE>-force</CODE> attribute for this Config.
 
+
 </DD>
 <DT><A NAME="only()"><CODE> only() </CODE>
 
 </A></DT>
 <DD>
 Returns the value of the <CODE>-only</CODE> attribute for this Config.
+
 
 </DD>
 <DT><A NAME="profile_strictness()"><CODE> profile_strictness() </CODE>
@@ -236,6 +251,7 @@ Returns the value of the <CODE>-only</CODE> attribute for this Config.
 Returns the value of the <CODE>-profile-strictness</CODE> attribute for this
 Config.
 
+
 </DD>
 <DT><A NAME="severity()"><CODE> severity() </CODE>
 
@@ -243,12 +259,14 @@ Config.
 <DD>
 Returns the value of the <CODE>-severity</CODE> attribute for this Config.
 
+
 </DD>
 <DT><A NAME="single_policy()"><CODE> single_policy() </CODE>
 
 </A></DT>
 <DD>
 Returns the value of the <CODE>-single-policy</CODE> attribute for this Config.
+
 
 </DD>
 <DT><A NAME="theme()"><CODE> theme() </CODE>
@@ -258,12 +276,14 @@ Returns the value of the <CODE>-single-policy</CODE> attribute for this Config.
 Returns the <A HREF="Perl/Critic/Theme.html">Perl::Critic::Theme</A> object that was
 created for this Config.
 
+
 </DD>
 <DT><A NAME="top()"><CODE> top() </CODE>
 
 </A></DT>
 <DD>
 Returns the value of the <CODE>-top</CODE> attribute for this Config.
+
 
 </DD>
 <DT><A NAME="verbose()"><CODE> verbose() </CODE>
@@ -272,12 +292,22 @@ Returns the value of the <CODE>-top</CODE> attribute for this Config.
 <DD>
 Returns the value of the <CODE>-verbose</CODE> attribute for this Config.
 
+
 </DD>
 <DT><A NAME="color()"><CODE> color() </CODE>
 
 </A></DT>
 <DD>
 Returns the value of the <CODE>-color</CODE> attribute for this Config.
+
+
+</DD>
+<DT><A NAME="pager()"><CODE> pager() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-pager</CODE> attribute for this Config.
+
 
 </DD>
 <DT><A NAME="criticism_fatal()"><CODE> criticism_fatal() </CODE>
@@ -286,15 +316,16 @@ Returns the value of the <CODE>-color</CODE> attribute for this Config.
 <DD>
 Returns the value of the <CODE>-criticsm-fatal</CODE> attribute for this Config.
 
+
 </DD>
 </DL>
-<HR>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
 </A></H1>
 
 <P>Perl::Critic::Config has a few static subroutines that are used
 internally, but may be useful to you in some way.
+
 
 </P><DL><DT><A NAME="site_policy_names()"><CODE>site_policy_names()</CODE>
 
@@ -305,9 +336,9 @@ in the Perl::Critic:Policy namespace.  These will include modules that
 are distributed with Perl::Critic plus any third-party modules that
 have been installed.
 
+
 </DD>
 </DL>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -421,8 +452,8 @@ Perl::Critic::Config constructor.
     #--------------------------------------------------------------
     # I do not agree with these at all, so never load them
 
-    [-NamingConventions::ProhibitMixedCaseVars]
-    [-NamingConventions::ProhibitMixedCaseSubs]
+    [-NamingConventions::Capitalization]
+    [-ValuesAndExpressions::ProhibitMagicNumbers]
 
     #--------------------------------------------------------------
     # For all other Policies, I accept the default severity, theme
@@ -432,8 +463,8 @@ Perl::Critic::Config constructor.
 <P>For additional configuration examples, see the <I>perlcriticrc</I> file
 that is included in this <I>t/examples</I> directory of this distribution.
 
-</P><HR>
-<H1><A NAME="THE%20POLICIES">THE POLICIES
+
+</P><H1><A NAME="THE%20POLICIES">THE POLICIES
 
 </A></H1>
 
@@ -442,8 +473,8 @@ They are described briefly in the companion document
 <A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
 detail in the individual modules themselves.
 
-</P><HR>
-<H1><A NAME="POLICY%20THEMES">POLICY THEMES
+
+</P><H1><A NAME="POLICY%20THEMES">POLICY THEMES
 
 </A></H1>
 
@@ -470,8 +501,7 @@ needs.
     cosmetic          Policies that only have a superficial effect
     complexity        Policies that specificaly relate to code complexity
     security          Policies that relate to security issues
-    tests             Policies that are specific to test scripts
-</PRE>
+    tests             Policies that are specific to test scripts</PRE>
 
 <P>Say <CODE>`perlcritic -list`</CODE> to get a listing of all available policies
 and the themes that are associated with each one.  You can also change
@@ -519,8 +549,8 @@ string, then it is equivalent to the set of all Policies.  A theme
 name that doesn't exist is equivalent to an empty set.  Please See
 <A HREF="http://en.wikipedia.org/wiki/Set">http://en.wikipedia.org/wiki/Set</A> for a discussion on set theory.
 
-</P><HR>
-<H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
 
@@ -528,19 +558,18 @@ name that doesn't exist is equivalent to an empty set.  Please See
 <A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2008 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

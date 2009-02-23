@@ -1,0 +1,158 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Annotation</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#SYNOPSIS">SYNOPSIS
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CLASS%20METHODS">CLASS METHODS
+
+</A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
+
+</A><LI><A HREF="#METHODS">METHODS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Annotation - A &quot;## no critic&quot; annotation in a document.
+
+</P><H1><A NAME="SYNOPSIS">SYNOPSIS
+
+</A></H1>
+
+<PRE>  use Perl::Critic::Annotation;
+  $annotation = Perl::Critic::Annotation-&gt;new( -element =&gt; $no_critic_ppi_element );
+
+  $bool = $annotation-&gt;disables_line( $number );
+  $bool = $annotation-&gt;disables_policy( $policy_object );
+  $bool = $annotation-&gt;disables_all_policies();
+
+  ($start, $end) = $annotation-&gt;effective_range();
+  @disabled_policy_names = $annotation-&gt;disabled_policies();</PRE>
+<H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P><A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> represents a single <CODE>&quot;## no critic&quot;</CODE> annotation in a
+<A HREF="PPI:Document">PPI:Document</A>.  The Annotation takes care of parsing the annotation and
+keeps track of which lines and Policies it affects. It is intended to
+encapsulate the details of the no-critic annotations, and to provide a way for
+Policy objects to interact with the annotations (via a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>).
+
+</P><H1><A NAME="CLASS%20METHODS">CLASS METHODS
+
+</A></H1>
+<DL><DT><A NAME="create_annotations(%20-doc%20%3d%3e%20%24doc%20)">create_annotations( -doc =&gt; $doc )
+
+</A></DT>
+<DD>
+Given a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>, finds all the <CODE>&quot;## no critic&quot;</CODE> annotations
+and constructs a new <A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> for each one and returns
+them.  The order of the returned objects is not defined.  It is generally
+expected that clients will use this interface rather than calling the
+<A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> constructor directly.
+
+</DD>
+</DL>
+<H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
+
+</A></H1>
+<DL><DT><A NAME="new(%20-element%20%3d%3e%20%24ppi_annotation_element%20)"><CODE>new( -element =&gt; $ppi_annotation_element )</CODE>
+
+</A></DT>
+<DD>
+Returns a reference to a new Annotation object.  The <B>-element</B> argument
+is required and should be a <CODE>PPI::Token::Comment</CODE> that conforms to the
+<CODE>&quot;## no critic&quot;</CODE> syntax.
+
+</DD>
+</DL>
+<H1><A NAME="METHODS">METHODS
+
+</A></H1>
+<DL><DT><A NAME="disables_line(%20%24line%20)"><CODE>disables_line( $line )</CODE>
+
+</A></DT>
+<DD>
+Returns true if this Annotation disables <CODE>$line</CODE> for any (or all) Policies.
+
+</DD>
+<DT><A NAME="disables_policy(%20%24policy_object%20)"><CODE>disables_policy( $policy_object )</CODE>
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="disables_policy(%20%24policy_name%20)"><CODE>disables_policy( $policy_name )</CODE>
+
+</A></DT>
+<DD>
+Returns true if this Annotation disables <CODE>$polciy_object</CODE> or <CODE>$policy_name</CODE>
+at any (or all) lines.
+
+</DD>
+<DT><A NAME="disables_all_policies()"><CODE>disables_all_policies()</CODE>
+
+</A></DT>
+<DD>
+Returns true if this Annotation disables all Policies at any (or all) lines.
+If this method returns true, <CODE>disabled_policies</CODE> will return an empty list.
+
+</DD>
+<DT><A NAME="effective_range()"><CODE>effective_range()</CODE>
+
+</A></DT>
+<DD>
+Returns a two-element list, representing the first and last line numbers where
+this Annotation has effect.
+
+</DD>
+<DT><A NAME="disabled_policies()"><CODE>disabled_policies()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of the names of the Policies that are affected by this Annotation.
+If this list is empty, then it means that all Policies are affected by this
+Annotation, and <CODE>disables_all_policies()</CODE> should return true.
+
+</DD>
+<DT><A NAME="element()"><CODE>element()</CODE>
+
+</A></DT>
+<DD>
+Returns the <A HREF="../../PPI/Element.html">PPI::Element</A> where this annotation started.  This is typically
+an instance of <A HREF="../../PPI/Token/Comment.html">PPI::Token::Comment</A>.
+
+</DD>
+</DL>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

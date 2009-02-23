@@ -15,6 +15,8 @@
 
 </A><LI><A HREF="#NOTES">NOTES
 
+</A><LI><A HREF="#PREREQUISITES">PREREQUISITES
+
 </A><LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -26,7 +28,6 @@
 <H1><A NAME="Test%20The%20Spell%20Command">Test The Spell Command
 
 </A></H1>
-<HR>
 <H1><A NAME="NAME">NAME
 
 </A></H1>
@@ -34,8 +35,7 @@
 <P>Perl::Critic::Policy::Documentation::PodSpelling - Check your spelling.
 
 
-</P><HR>
-<H1><A NAME="AFFILIATION">AFFILIATION
+</P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
 
@@ -43,8 +43,7 @@
 distribution.
 
 
-</P><HR>
-<H1><A NAME="DESCRIPTION">DESCRIPTION
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
@@ -81,7 +80,6 @@ described in <A HREF="Pod/Spell.html">Pod::Spell</A>.  For example:
 
     =cut
 </PRE>
-<HR>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -93,7 +91,8 @@ a <I>.perlcriticrc</I> file like this:
 </P>
 <PRE>    [Documentation::PodSpelling]
     spell_command = aspell list
-    stop_words = gibbles foobar</PRE>
+    stop_words = gibbles foobar
+    stop_words_file = some/path/with/stop/words.txt</PRE>
 
 <P>The default spell command is <CODE>aspell list</CODE> and it is interpreted as a
 shell command.  We parse the individual arguments via
@@ -105,9 +104,25 @@ is used as-is.  If it is a relative file name, we employ
 Test::Spelling, the spell checker must accept text on STDIN and print
 misspelled words one per line on STDOUT.
 
+</P>
+<P>You can specify global stop words via the <CODE>stop_words</CODE> and
+<CODE>stop_words_file</CODE> options.  The former is simply split up on
+whitespace.  The latter is looked at line by line, with anything after
+an octothorp (&quot;#&quot;) removed and then leading and trailing whitespace
+removed.  Silly example valid file contents:
 
-</P><HR>
-<H1><A NAME="NOTES">NOTES
+</P>
+<PRE>    # It's a comment!
+
+    foo
+    arglbargl    # Some other comment.
+    bar</PRE>
+
+<P>The values from <CODE>stop_words</CODE> and <CODE>stop_words_file</CODE> are merged
+together into a single list of exemptions.
+
+
+</P><H1><A NAME="NOTES">NOTES
 
 </A></H1>
 
@@ -115,8 +130,16 @@ misspelled words one per line on STDOUT.
 spell checking program.
 
 
-</P><HR>
-<H1><A NAME="CREDITS">CREDITS
+</P><H1><A NAME="PREREQUISITES">PREREQUISITES
+
+</A></H1>
+
+<P>This policy will disable itself if any of the following are
+unavailable: <A HREF="File/Which.html">File::Which</A>, <A HREF="IO/String.html">IO::String</A>,
+<A HREF="Pod/Spell.html">Pod::Spell</A>, or <A HREF="Text/ParseWords.html">Text::ParseWords</A>.
+
+
+</P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
 
@@ -124,20 +147,18 @@ spell checking program.
 Perl Foundation.
 
 
-</P><HR>
-<H1><A NAME="AUTHOR">AUTHOR
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
 
 
-</P><HR>
-<H1><A NAME="COPYRIGHT">COPYRIGHT
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2008 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Variables::ProhibitReusedNames</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><UL>
+<LI><A HREF="#Crossing%20subroutines">Crossing subroutines
+
+</A><LI><A HREF="#Performance">Performance
+
+</A></UL>
+<LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Variables::ProhibitReusedNames - Do not reuse a variable name in a lexical scope
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>It's really hard on future maintenance programmers if you reuse a
+variable name in a lexical scope. The programmer is at risk of
+confusing which variable is which. And, worse, the programmer could
+accidentally remove the inner declaration, thus silently changing the
+meaning of the inner code to use the outer variable.
+
+</P>
+<PRE>   my $x = 1;
+   for my $i (0 .. 10) {
+      my $x = $i+1;  # not OK, &quot;$x&quot; reused
+   }</PRE>
+
+<P>With <CODE>use warnings</CODE> in effect, Perl will warn you if you reuse a
+variable name at the same scope level but not within nested scopes.  Like so:
+
+</P>
+<PRE>    % perl -we 'my $x; my $x'
+    &quot;my&quot; variable $x masks earlier declaration in same scope at -e line 1.</PRE>
+
+<P>This policy takes that warning to a stricter level.
+
+
+</P><H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+<H2><A NAME="Crossing%20subroutines">Crossing subroutines
+
+</A></H2>
+
+<P>This policy looks across subroutine boundaries.  So, the following may
+be a false positive for you:
+
+</P>
+<PRE>    sub make_accessor {
+        my ($self, $fieldname) = @_;
+        return sub {
+            my ($self) = @_;  # false positive, $self declared as reused
+            return $self-&gt;{$fieldname};
+        }
+    }</PRE>
+
+<P>This is intentional, though, because it catches bugs like this:
+
+</P>
+<PRE>    my $debug_mode = 0;
+    sub set_debug {
+       my $debug_mode = 1;  # accidental redeclaration
+    }</PRE>
+
+<P>I've done this myself several times -- it's a strong habit to put that
+&quot;my&quot; in front of variables at the start of subroutines.
+
+</P>
+<P>If you have opinions on this caveat/feature please post to the
+<A HREF="../../../../Perl/Critic.html">Perl::Critic</A> mailing list.  Perhaps we'll add some specific
+exemptions?
+
+
+</P><H2><A NAME="Performance">Performance
+
+</A></H2>
+
+<P>The current implementation walks the tree over and over.  For a big
+file, this can be a huge time sink.  I'm considering rewriting to
+search the document just once for variable declarations and cache the
+tree walking on that single analysis.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P>
+<P>This policy is inspired by
+<A HREF="http://use.perl.org/~jdavidb/journal/37548">http://use.perl.org/~jdavidb/journal/37548</A>.  Java does not allow
+you to reuse variable names declared in outer scopes, which I think is
+a nice feature.
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2008-2009 Chris Dolan
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

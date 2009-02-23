@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitSpecialLiteralHeredocTerminator - Don't write <CODE> print &lt;&lt;'__END__' </CODE>.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Using one of Perl's special literals as a HEREDOC terminator could be
+confusing to tools that try to parse perl.
+
+</P>
+<PRE>    print &lt;&lt;'__END__';           #not ok
+    Hello world
+    __END__
+
+    print &lt;&lt;'__END_OF_WORLD__';  #ok
+    Goodbye world!
+    __END_OF_WORLD__</PRE>
+
+<P>The special literals that this policy prohibits are:
+
+</P><DL><DT><A NAME="__END__">__END__
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="__DATA__">__DATA__
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="__PACKAGE__">__PACKAGE__
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="__FILE__">__FILE__
+
+</A></DT>
+<DD>
+</DD>
+<DT><A NAME="__LINE__">__LINE__
+
+</A></DT>
+<DD>
+</DD>
+</DL>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/RequireUpperCaseHeredocTerminator.html">Perl::Critic::Policy::ValuesAndExpressions::RequireUpperCaseHeredocTerminator</A>
+
+</P>
+<P><A HREF="../../../../Perl/Critic/Policy/ValuesAndExpressions/RequireQuotedHeredocTerminator.html">Perl::Critic::Policy::ValuesAndExpressions::RequireQuotedHeredocTerminator</A>
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Kyle Hasselbacher &lt;kyle@cpan.org&gt;
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2009 Kyle Hasselbacher.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>
