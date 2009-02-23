@@ -9,8 +9,6 @@
 
 use strict;
 use warnings;
-
-use FindBin qw($Bin);
 use CGI qw(:standard);
 use English qw(-no_match_vars);
 use File::Temp qw(tempfile);
@@ -68,8 +66,7 @@ sub render_page {
 
 sub critique_source_code {
     my ($severity, $source_ref) = @_;
-    my %critic_args = (-severity => $severity,  -profile => "$Bin/perlcriticrc");
-    my $critic = Perl::Critic->new( %critic_args );
+    my $critic = Perl::Critic->new( -severity => $severity );
     my @viols = $critic->critique( $source_ref );
     return @viols;
 }
