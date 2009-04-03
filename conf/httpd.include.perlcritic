@@ -5,15 +5,15 @@
 # $Revision$
 ########################################################################
 
-<VirtualHost 72.167.115.82:80>
+<VirtualHost *:80>
 
     ServerName perlcritic.com
     ServerAlias www.perlcritic.com www.perlcritic.org perlcritic.org
-    DocumentRoot /var/www/vhosts/perlcritic/htdocs
+    DocumentRoot /var/www/vhosts/perlcritic.com/htdocs
     UseCanonicalName Off
 
-    ScriptAlias /cgi-bin/ "/var/www/vhosts/perlcritic/cgi-bin/"
-    <Directory "/var/www/vhosts/perlcritic/cgi-bin/">
+    ScriptAlias /cgi-bin/ "/var/www/vhosts/perlcritic.com/cgi-bin/"
+    <Directory "/var/www/vhosts/perlcritic.com/cgi-bin/">
         AllowOverride None
         Options None
         Order allow,deny
@@ -28,7 +28,7 @@
         Allow from all
     </Directory>
 
-    Alias /perl/ /var/www/vhosts/perlcritic/perl/
+    Alias /perl/ "/var/www/vhosts/perlcritic.com/perl/"
     <Location /perl/>
         SetHandler perl-script
         PerlResponseHandler ModPerl::Registry
