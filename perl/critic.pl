@@ -66,7 +66,7 @@ sub render_page {
 
 sub critique_source_code {
     my ($severity, $source_ref) = @_;
-    my $critic = Perl::Critic->new( -severity => $severity );
+    my $critic = Perl::Critic->new( -severity => $severity, -theme => 'core' );
     my @viols = $critic->critique( $source_ref );
     return @viols;
 }
