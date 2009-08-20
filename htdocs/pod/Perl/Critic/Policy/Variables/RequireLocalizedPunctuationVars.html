@@ -73,12 +73,22 @@ names declared by <A HREF="../../../../English.html">English</A>, etc.  This is 
 practice, however it is not the concern of this specific policy to
 complain about that.
 
+</P>
+<P>There are exemptions for <CODE>$_</CODE> and <CODE>@_</CODE>, and the English equivalent
+<CODE>$ARG</CODE>.
+
 
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>You can configure your own exemptions using the <CODE>allow</CODE> option:
+
+</P>
+<PRE>    [Variables::RequireLocalizedPunctuationVars]
+    allow = @ARGV $ARGV</PRE>
+
+<P>These are added to the default exemptions.
 
 
 </P><H1><A NAME="CAVEATS">CAVEATS

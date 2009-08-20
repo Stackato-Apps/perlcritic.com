@@ -10,6 +10,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#CLASS%20METHODS">CLASS METHODS
 
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
@@ -28,6 +30,7 @@
 
 <P>Perl::Critic::Annotation - A &quot;## no critic&quot; annotation in a document.
 
+
 </P><H1><A NAME="SYNOPSIS">SYNOPSIS
 
 </A></H1>
@@ -40,16 +43,27 @@
   $bool = $annotation-&gt;disables_all_policies();
 
   ($start, $end) = $annotation-&gt;effective_range();
-  @disabled_policy_names = $annotation-&gt;disabled_policies();</PRE>
+  @disabled_policy_names = $annotation-&gt;disabled_policies();
+</PRE>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
-<P><A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> represents a single <CODE>&quot;## no critic&quot;</CODE> annotation in a
-<A HREF="PPI:Document">PPI:Document</A>.  The Annotation takes care of parsing the annotation and
-keeps track of which lines and Policies it affects. It is intended to
-encapsulate the details of the no-critic annotations, and to provide a way for
-Policy objects to interact with the annotations (via a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>).
+<P><A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> represents a single <CODE>&quot;## no critic&quot;</CODE>
+annotation in a <A HREF="PPI:Document">PPI:Document</A>.  The Annotation takes care of parsing
+the annotation and keeps track of which lines and Policies it affects.
+It is intended to encapsulate the details of the no-critic
+annotations, and to provide a way for Policy objects to interact with
+the annotations (via a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>).
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a non-public class.  Its interface is subject
+to change without notice.
+
 
 </P><H1><A NAME="CLASS%20METHODS">CLASS METHODS
 
@@ -58,11 +72,13 @@ Policy objects to interact with the annotations (via a <A HREF="../../Perl/Criti
 
 </A></DT>
 <DD>
-Given a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>, finds all the <CODE>&quot;## no critic&quot;</CODE> annotations
-and constructs a new <A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> for each one and returns
-them.  The order of the returned objects is not defined.  It is generally
-expected that clients will use this interface rather than calling the
-<A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> constructor directly.
+Given a <A HREF="../../Perl/Critic/Document.html">Perl::Critic::Document</A>, finds all the <CODE>&quot;## no critic&quot;</CODE>
+annotations and constructs a new <A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> for each
+one and returns them.  The order of the returned objects is not
+defined.  It is generally expected that clients will use this
+interface rather than calling the <A HREF="../../Perl/Critic/Annotation.html">Perl::Critic::Annotation</A>
+constructor directly.
+
 
 </DD>
 </DL>
@@ -73,9 +89,10 @@ expected that clients will use this interface rather than calling the
 
 </A></DT>
 <DD>
-Returns a reference to a new Annotation object.  The <B>-element</B> argument
-is required and should be a <CODE>PPI::Token::Comment</CODE> that conforms to the
-<CODE>&quot;## no critic&quot;</CODE> syntax.
+Returns a reference to a new Annotation object.  The <B>-element</B>
+argument is required and should be a <CODE>PPI::Token::Comment</CODE> that
+conforms to the <CODE>&quot;## no critic&quot;</CODE> syntax.
+
 
 </DD>
 </DL>
@@ -86,7 +103,9 @@ is required and should be a <CODE>PPI::Token::Comment</CODE> that conforms to th
 
 </A></DT>
 <DD>
-Returns true if this Annotation disables <CODE>$line</CODE> for any (or all) Policies.
+Returns true if this Annotation disables <CODE>$line</CODE> for any (or all)
+Policies.
+
 
 </DD>
 <DT><A NAME="disables_policy(%20%24policy_object%20)"><CODE>disables_policy( $policy_object )</CODE>
@@ -98,41 +117,48 @@ Returns true if this Annotation disables <CODE>$line</CODE> for any (or all) Pol
 
 </A></DT>
 <DD>
-Returns true if this Annotation disables <CODE>$polciy_object</CODE> or <CODE>$policy_name</CODE>
-at any (or all) lines.
+Returns true if this Annotation disables <CODE>$polciy_object</CODE> or
+<CODE>$policy_name</CODE> at any (or all) lines.
+
 
 </DD>
 <DT><A NAME="disables_all_policies()"><CODE>disables_all_policies()</CODE>
 
 </A></DT>
 <DD>
-Returns true if this Annotation disables all Policies at any (or all) lines.
-If this method returns true, <CODE>disabled_policies</CODE> will return an empty list.
+Returns true if this Annotation disables all Policies at any (or all)
+lines.  If this method returns true, <CODE>disabled_policies</CODE> will return
+an empty list.
+
 
 </DD>
 <DT><A NAME="effective_range()"><CODE>effective_range()</CODE>
 
 </A></DT>
 <DD>
-Returns a two-element list, representing the first and last line numbers where
-this Annotation has effect.
+Returns a two-element list, representing the first and last line
+numbers where this Annotation has effect.
+
 
 </DD>
 <DT><A NAME="disabled_policies()"><CODE>disabled_policies()</CODE>
 
 </A></DT>
 <DD>
-Returns a list of the names of the Policies that are affected by this Annotation.
-If this list is empty, then it means that all Policies are affected by this
-Annotation, and <CODE>disables_all_policies()</CODE> should return true.
+Returns a list of the names of the Policies that are affected by this
+Annotation.  If this list is empty, then it means that all Policies
+are affected by this Annotation, and <CODE>disables_all_policies()</CODE> should
+return true.
+
 
 </DD>
 <DT><A NAME="element()"><CODE>element()</CODE>
 
 </A></DT>
 <DD>
-Returns the <A HREF="../../PPI/Element.html">PPI::Element</A> where this annotation started.  This is typically
-an instance of <A HREF="../../PPI/Token/Comment.html">PPI::Token::Comment</A>.
+Returns the <A HREF="../../PPI/Element.html">PPI::Element</A> where this annotation started.  This is
+typically an instance of <A HREF="../../PPI/Token/Comment.html">PPI::Token::Comment</A>.
+
 
 </DD>
 </DL>
@@ -141,6 +167,7 @@ an instance of <A HREF="../../PPI/Token/Comment.html">PPI::Token::Comment</A>.
 </A></H1>
 
 <P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 

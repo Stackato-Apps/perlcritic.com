@@ -10,6 +10,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#METHODS">METHODS
@@ -106,6 +108,19 @@ by doing an HTTP-post, such as one of these:
 
 <P>Please note that the perlcritic web-service is still alpha code.  The
 URL and interface to the service are subject to change.
+
+</P>
+<P>Also, the Perl Development Kit (PDK 8.0) from ActiveState includes a very
+slick graphical interface to Perl-Critic.  For details, go to
+<A HREF="http://www.activestate.com/perl_dev_kit">http://www.activestate.com/perl_dev_kit</A>
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a public class.  Any changes to its interface
+will go through a deprecation cycle.
 
 
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -267,6 +282,14 @@ of <A HREF="perlcritic.html">perlcritic</A>.
 </P>
 <P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for
 the benefit of <A HREF="criticism.html">criticism</A>.
+
+</P>
+<P><B>-color-severity-highest</B>, <B>-color-severity-high</B>,
+<B>-color-severity-medium</B>, <B>-color-severity-low</B>, and
+<B>-color-severity-lowest</B> are not used by Perl::Critic, but are provided for
+the benefit of <A HREF="perlcritic.html">perlcritic</A>. Each is set to the Term::ANSIColor
+color specification to be used to display violations of the corresponding
+severity.
 
 </P></DD>
 </DL>
@@ -730,7 +753,7 @@ new Policy modules.
 Perl::Critic distribution.  Or if you would like to work on the
 Perl::Critic project directly, check out our repository at
 <A HREF="http://perlcritic.tigris.org">http://perlcritic.tigris.org</A>.  To subscribe to our mailing list,
-send a message to <CODE>&lt;dev-subscribe@perlcritic.tigris.org&gt;</CODE>.
+send a message to <A HREF="mailto:dev-subscribe@perlcritic.tigris.org">mailto:dev-subscribe@perlcritic.tigris.org</A>.
 
 </P>
 <P>The Perl::Critic team is also available for hire.  If your
@@ -833,13 +856,17 @@ testing:
 </A></H1>
 
 <P>You are encouraged to subscribe to the mailing list; send a message to
-<CODE>&lt;users-subscribe@perlcritic.tigris.org&gt;</CODE>.  See also
-<A HREF="http://perlcritic.tigris.org/servlets/SummarizeList?listName=users">the archives</A>.
+<A HREF="mailto:users-subscribe@perlcritic.tigris.org">mailto:users-subscribe@perlcritic.tigris.org</A>.  See also the archives at
+<A HREF="http://perlcritic.tigris.org/servlets/SummarizeList?listName=users">http://perlcritic.tigris.org/servlets/SummarizeList?listName=users</A>.
 You can also contact the author at <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
 
 </P>
 <P>At least one member of the development team has started hanging around
 in <A HREF="irc://irc.perl.org/#perlcritic">irc://irc.perl.org/#perlcritic</A>.
+
+</P>
+<P>You can also follow Perl::Critic on Twitter, at
+<A HREF="https://twitter.com/perlcritic">https://twitter.com/perlcritic</A>.
 
 
 </P><H1><A NAME="SEE%20ALSO">SEE ALSO
@@ -877,21 +904,14 @@ A few are listed here:
 <P><A HREF="Test/Perl/Critic/Progressive.html">Test::Perl::Critic::Progressive</A>
 
 </P>
-<P>There are also a couple of distributions that will install all the
-Perl::Critic related modules known to the development team:
-
-</P>
-<P><A HREF="Bundle/Perl/Critic.html">Bundle::Perl::Critic</A>
+<P>There is also a distribution that will install all the Perl::Critic related
+modules known to the development team:
 
 </P>
 <P><A HREF="Task/Perl/Critic.html">Task::Perl::Critic</A>
 
 </P>
-<P>If you want to make sure you have absolutely everything, you can use
-these:
-
-</P>
-<P><A HREF="Bundle/Perl/Critic/IncludingOptionalDependencies.html">Bundle::Perl::Critic::IncludingOptionalDependencies</A>
+<P>If you want to make sure you have absolutely everything, you can use this:
 
 </P>
 <P><A HREF="Task/Perl/Critic/IncludingOptionalDependencies.html">Task::Perl::Critic::IncludingOptionalDependencies</A>

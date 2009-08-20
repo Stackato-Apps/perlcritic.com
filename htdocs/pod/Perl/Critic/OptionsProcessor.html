@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#METHODS">METHODS
@@ -34,6 +36,14 @@
 <P>This is a helper class that encapsulates the default parameters for
 constructing a <A HREF="../../Perl/Critic/Config.html">Perl::Critic::Config</A> object.
 There are no user-serviceable parts here.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a non-public class.  Its interface is subject
+to change without notice.
 
 
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -167,6 +177,41 @@ command string).
 </A></DT>
 <DD>
 Returns the default <CODE>criticism-fatal</CODE> setting (Either 1 or 0).
+
+</DD>
+<DT><A NAME="color_severity_highest()"><CODE> color_severity_highest() </CODE>
+
+</A></DT>
+<DD>
+Returns the color to be used for coloring highest severity violations.
+
+</DD>
+<DT><A NAME="color_severity_high()"><CODE> color_severity_high() </CODE>
+
+</A></DT>
+<DD>
+Returns the color to be used for coloring high severity violations.
+
+</DD>
+<DT><A NAME="color_severity_medium()"><CODE> color_severity_medium() </CODE>
+
+</A></DT>
+<DD>
+Returns the color to be used for coloring medium severity violations.
+
+</DD>
+<DT><A NAME="color_severity_low()"><CODE> color_severity_low() </CODE>
+
+</A></DT>
+<DD>
+Returns the color to be used for coloring low severity violations.
+
+</DD>
+<DT><A NAME="color_severity_lowest()"><CODE> color_severity_lowest() </CODE>
+
+</A></DT>
+<DD>
+Returns the color to be used for coloring lowest severity violations.
 
 </DD>
 </DL>

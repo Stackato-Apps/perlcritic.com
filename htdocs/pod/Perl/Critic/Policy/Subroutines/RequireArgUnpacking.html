@@ -65,6 +65,11 @@ variable outside of your subroutine.  For example:
 <P>This is spooky action-at-a-distance and is very hard to debug if it's
 not intentional and well-documented (like <CODE>chop</CODE> or <CODE>chomp</CODE>).
 
+</P>
+<P>An exception is made for the usual delegation idiom <CODE>$object-&gt;SUPER::something( @_ )</CODE>. Only <CODE>SUPER::</CODE> and <CODE>NEXT::</CODE> are
+recognized (though this is configurable) and the argument list for the
+delegate must consist only of <CODE>( @_ )</CODE>.
+
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -79,6 +84,29 @@ put entries in a <I>.perlcriticrc</I> file like this:
 </P>
 <PRE>  [Subroutines::RequireArgUnpacking]
   short_subroutine_statements = 2</PRE>
+
+<P>By default this policy does not allow you to specify array subscripts
+when you unpack arguments (i.e. by an array slice or by referencing
+individual elements).  Should you wish to permit this, you can do so
+using the <CODE>allow_subscripts</CODE> setting. This defaults to false.  You can
+set it true like this:
+
+</P>
+<PRE>  [Subroutines::RequireArgUnpacking]
+  allow_subscripts = 1</PRE>
+
+<P>The delegation logic can be configured to allow delegation other than to
+<CODE>SUPER::</CODE> or <CODE>NEXT::</CODE>. The configuration item is
+<CODE>allow_delegation_to</CODE>, and it takes a space-delimited list of allowed
+delegates. If a given delegate ends in a double colon, anything in the
+given namespace is allowed. If it does not, only that subroutine is
+allowed. For example, to allow <CODE>next::method</CODE> from <CODE>Class::C3</CODE> and
+_delegate from the current namespace in addition to SUPER and NEXT, the
+following configuration could be used:
+
+</P>
+<PRE>  [Subroutines::RequireArgUnpacking]
+  allow_delegation_to = next::method _delegate</PRE>
 <H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>

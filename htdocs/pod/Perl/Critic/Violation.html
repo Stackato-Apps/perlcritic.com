@@ -10,6 +10,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#METHODS">METHODS
@@ -36,10 +38,10 @@
 <PRE>  use PPI;
   use Perl::Critic::Violation;
 
-  my $elem = $doc-&gt;child(0);      #$doc is a PPI::Document object
-  my $desc = 'Offending code';    #Describe the violation
-  my $expl = [1,45,67];           #Page numbers from PBP
-  my $sev  = 5;                   #Severity level of this violation
+  my $elem = $doc-&gt;child(0);      # $doc is a PPI::Document object
+  my $desc = 'Offending code';    # Describe the violation
+  my $expl = [1,45,67];           # Page numbers from PBP
+  my $sev  = 5;                   # Severity level of this violation
 
   my $vio  = Perl::Critic::Violation-&gt;new($desc, $expl, $node, $sev);
 </PRE>
@@ -53,6 +55,14 @@ layer so that clients of <A HREF="../../Perl/Critic.html">Perl::Critic</A> don't
 know anything about <A HREF="../../PPI.html">PPI</A>.  The <CODE>violations</CODE> method of all
 <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclasses must return a
 list of these Perl::Critic::Violation objects.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a public class.  Any changes to its interface
+will go through a deprecation cycle.
 
 
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -98,9 +108,52 @@ based upon the specific code violating the policy.
 
 </A></DT>
 <DD>
-Returns a three-element array reference containing the line and real &amp;
-virtual column numbers where this Violation occurred, as in
-<A HREF="../../PPI/Element.html">PPI::Element</A>.
+
+<P>Don't use this method.  Use the <CODE>line_number()</CODE>,
+<CODE>logical_line_number()</CODE>, <CODE>column_number()</CODE>,
+<CODE>visual_column_number()</CODE>, and <CODE>logical_filename()</CODE> methods instead.
+
+</P>
+<P>Returns a five-element array reference containing the line and real &amp;
+virtual column and logical numbers and logical file name where this
+Violation occurred, as in <A HREF="../../PPI/Element.html">PPI::Element</A>.
+
+
+</P></DD>
+<DT><A NAME="line_number()"><CODE>line_number()</CODE>
+
+</A></DT>
+<DD>
+Returns the physical line number that the violation was found on.
+
+
+</DD>
+<DT><A NAME="logical_line_number()"><CODE>logical_line_number()</CODE>
+
+</A></DT>
+<DD>
+Returns the logical line number that the violation was found on.  This
+can differ from the physical line number when there were <CODE>#line</CODE>
+directives in the code.
+
+
+</DD>
+<DT><A NAME="column_number()"><CODE>column_number()</CODE>
+
+</A></DT>
+<DD>
+Returns the physical column that the violation was found at.  This
+means that hard tab characters count as a single character.
+
+
+</DD>
+<DT><A NAME="visual_column_number()"><CODE>visual_column_number()</CODE>
+
+</A></DT>
+<DD>
+Returns the column that the violation was found at, as it would appear
+if hard tab characters were expanded, based upon the value of
+<A HREF="../../PPI/Document.html#tab_width%20%5b%20%24width%20%5d">PPI::Document/&quot;tab_width [ $width ]&quot;</A>.
 
 
 </DD>
@@ -111,6 +164,16 @@ virtual column numbers where this Violation occurred, as in
 Returns the path to the file where this Violation occurred.  In some
 cases, the path may be undefined because the source code was not read
 directly from a file.
+
+
+</DD>
+<DT><A NAME="logical_filename()"><CODE>logical_filename()</CODE>
+
+</A></DT>
+<DD>
+Returns the logical path to the file where the Violation occurred.
+This can differ from <CODE>filename()</CODE> when there was a <CODE>#line</CODE> directive
+in the code.
 
 
 </DD>
@@ -175,6 +238,15 @@ other blocks), then only the first line will be returned.
 
 
 </DD>
+<DT><A NAME="element_class()"><CODE>element_class()</CODE>
+
+</A></DT>
+<DD>
+Returns the <A HREF="../../PPI/Element.html">PPI::Element</A> subclass of the code that caused this
+exception.
+
+
+</DD>
 <DT><A NAME="set_format(%20%24format%20)"><CODE>set_format( $format )</CODE>
 
 </A></DT>
@@ -231,6 +303,7 @@ characters are:
     %P        Full name of the Policy module that created the violation
     %p        Name of the Policy without the Perl::Critic::Policy:: prefix
     %r        The string of source code that caused the violation
+    %C        The class of the PPI::Element that caused the violation
     %s        The severity level of the violation</PRE>
 
 <P>Here are some examples:

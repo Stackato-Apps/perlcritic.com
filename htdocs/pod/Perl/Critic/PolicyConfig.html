@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#METHODS">METHODS
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
@@ -25,11 +27,20 @@
 <P>Perl::Critic::PolicyConfig - Configuration data for a Policy.
 
 
+
 </P><H1><A NAME="DESCRIPTION">DESCRIPTION
 
 </A></H1>
 
 <P>A container for the configuration of a Policy.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a non-public class.  Its interface is subject
+to change without notice.
 
 
 </P><H1><A NAME="METHODS">METHODS
@@ -120,6 +131,41 @@ Retrieve the names of the parameters in this object.
 
 
 </DD>
+<DT><A NAME="set_profile_strictness(%24profile_strictness)"><CODE> set_profile_strictness($profile_strictness) </CODE>
+
+</A></DT>
+<DD>
+Sets the profile strictness associated with the configuration.
+
+
+</DD>
+<DT><A NAME="handle_extra_parameters(%24policy%2c%24errors)"><CODE> handle_extra_parameters($policy,$errors) </CODE>
+
+</A></DT>
+<DD>
+
+<P>Deals with any extra parameters according to the profile_strictness
+setting.  To be called by Perl::Critic::Policy-&gt;new() once all valid
+policies have been processed and removed from the configuration.
+
+</P>
+<P>If profile_strictness is $PROFILE_STRICTNESS_QUIET, extra policy
+parameters are ignored.
+
+</P>
+<P>If profile_strictness is $PROFILE_STRICTNESS_WARN, extra policy
+parameters generate a warning.
+
+</P>
+<P>If profile_strictness is $PROFILE_STRICTNESS_FATAL, extra policy
+parameters generate a fatal error.
+
+</P>
+<P>If no profile_strictness was set, the behavior is that specified by
+$PROFILE_STRICTNESS_DEFAULT.
+
+
+</P></DD>
 </DL>
 <H1><A NAME="SEE%20ALSO">SEE ALSO
 

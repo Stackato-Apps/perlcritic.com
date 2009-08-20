@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#NOTES">NOTES
 
+</A><LI><A HREF="#TO%20DO">TO DO
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -56,11 +58,11 @@ have to declare it like one of these:
     use vars qw($VERSION);
     use version; our $VERSION = qv(1.0611);</PRE>
 
-<P>A common practice is to use the <CODE>$Revision: 3096 $</CODE> keyword to
+<P>A common practice is to use the <CODE>$Revision: 3482 $</CODE> keyword to
 automatically define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>    our ($VERSION) = '$Revision: 3096 $' =~ m{ \$Revision: \s+ (\S+) }x;
+<PRE>    our ($VERSION) = '$Revision: 3482 $' =~ m{ \$Revision: \s+ (\S+) }x;
 </PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -77,6 +79,22 @@ automatically define the <CODE>$VERSION</CODE> variable like this:
 or 'v-strings.'  However, this Policy only insists that the
 <CODE>$VERSION</CODE> be defined somehow.  I may try to extend this in the
 future.
+
+
+</P><H1><A NAME="TO%20DO">TO DO
+
+</A></H1>
+
+<P>Add check that <CODE>$VERSION</CODE> is independently evaluatable.  In
+particular, prohibit this:
+
+</P>
+<PRE>    our $VERSION = $Other::Module::VERSION;</PRE>
+
+<P>This doesn't work because PAUSE and other tools literally copy your
+version declaration out of your module and evaluates it in isolation,
+at which point there's nothing in <CODE>Other::Module</CODE>, and so the
+<CODE>$VERSION</CODE> is undefined.
 
 
 </P><H1><A NAME="AUTHOR">AUTHOR

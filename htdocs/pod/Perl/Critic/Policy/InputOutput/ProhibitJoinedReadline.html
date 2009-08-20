@@ -53,8 +53,17 @@ like so:
 
 <P>or use <A HREF="../../../../File/Slurp.html">File::Slurp</A>, which is even faster.
 
+</P>
+<P><B>Note</B> that if the <CODE>ProhibitPunctuationVars</CODE> policy is also in effect,
+it will complain about the use of <CODE>$/</CODE> in the line above.  In that
+case, write this instead:
 
-</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+</P>
+<PRE>  use English '-no_match_vars';
+
+  do { local $INPUT_RECORD_SEPARATOR = undef; &lt;$fh&gt; };
+</PRE>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 

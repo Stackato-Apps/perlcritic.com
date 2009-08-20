@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#METHODS">METHODS
 
 </A><LI><A HREF="#DOCUMENTATION">DOCUMENTATION
@@ -39,6 +41,14 @@ as described below.  For a detailed explanation on how to make new
 Policy modules, please see the
 <A HREF="../../Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> document included
 in this distribution.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a public class.  Any changes to its interface
+will go through a deprecation cycle.
 
 
 </P><H1><A NAME="METHODS">METHODS
@@ -168,6 +178,16 @@ Return the full package name of this policy.
 <DD>
 Return the name of this policy without the &quot;Perl::Critic::Policy::&quot;
 prefix.
+
+
+</DD>
+<DT><A NAME="is_enabled()"><CODE> is_enabled() </CODE>
+
+</A></DT>
+<DD>
+Answer whether this policy is really active or not.  Returns a true
+value if it is, a false, yet defined, value if it isn't, and an
+undefined value if it hasn't yet been decided whether it will be.
 
 
 </DD>

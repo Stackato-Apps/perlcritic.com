@@ -44,14 +44,14 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>    # $Revision: 3096 $
+<PRE>    # $Revision: 3482 $
     # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>    our ($VERSION) = '$Revision: 3096 $' =~ m{ \$Revision: \s+ (\S+) }x;
+<PRE>    our ($VERSION) = '$Revision: 3482 $' =~ m{ \$Revision: \s+ (\S+) }x;
 </PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 

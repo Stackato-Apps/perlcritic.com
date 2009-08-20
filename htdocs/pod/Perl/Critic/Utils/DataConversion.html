@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -29,6 +31,14 @@
 <P>Provides data conversion functions.
 
 
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a public module.  Any changes to its
+interface will go through a deprecation cycle.
+
+
 </P><H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A></H1>
@@ -46,6 +56,15 @@ Return 0 or 1 based upon the value of parameter in a boolean context.
 <DD>
 Return either the value or the default based upon whether the value is
 defined or not.
+
+</DD>
+<DT><A NAME="dor_n(%20%24value0%2c%20%24value1%2c%20...%20)"><CODE>dor_n( $value0, $value1, ... )</CODE>
+
+</A></DT>
+<DD>
+Returns the first defined value among its arguments. If none is defined,
+simply returns.
+
 
 
 </DD>

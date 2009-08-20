@@ -52,13 +52,13 @@ complains you declare a variable with <CODE>our</CODE> or <CODE>use vars</CODE>,
 make reference to variable with a fully-qualified package name.
 
 </P>
-<PRE>    $Some::Package::foo = 1;    #not ok
-    our $foo            = 1;    #not ok
-    use vars '$foo';            #not ok
-    $foo = 1;                   #not allowed by 'strict'
-    local $foo = 1;             #bad taste, but technically ok.
-    use vars '$FOO';            #ok, because it's ALL CAPS
-    my $foo = 1;                #ok</PRE>
+<PRE>    $Some::Package::foo = 1;    # not ok
+    our $foo            = 1;    # not ok
+    use vars '$foo';            # not ok
+    $foo = 1;                   # not allowed by 'strict'
+    local $foo = 1;             # bad taste, but technically ok.
+    use vars '$FOO';            # ok, because it's ALL CAPS
+    my $foo = 1;                # ok</PRE>
 
 <P>In practice though, its not really practical to prohibit all package
 variables.  Common variables like <CODE>$VERSION</CODE> and <CODE>@EXPORT</CODE> need to
@@ -80,7 +80,7 @@ policy will ignore them.
 
 </P>
 <PRE>    [Variables::ProhibitPackageVars]
-    packages = File::Find Data::Dumper</PRE>
+    packages = Data::Dumper File::Find FindBin Log::Log4perl</PRE>
 
 <P>This is the default setting.  Using <CODE>packages =</CODE>  will override these
 defaults.

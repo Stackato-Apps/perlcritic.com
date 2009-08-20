@@ -21,6 +21,8 @@
 
 </A><LI><A HREF="#allowed_types"><CODE>allowed_types</CODE>
 
+</A><LI><A HREF="#allow_to_the_right_of_a_fat_comma"><CODE>allow_to_the_right_of_a_fat_comma</CODE>
+
 </A></UL>
 <LI><A HREF="#BUGS">BUGS
 
@@ -145,7 +147,8 @@ array, i.e. <CODE>$x[-1]</CODE>.
 
 </A></H1>
 
-<P>This policy has two options: <CODE>allowed_values</CODE> and <CODE>allowed_types</CODE>.
+<P>This policy has three options: <CODE>allowed_values</CODE>, <CODE>allowed_types</CODE>, and
+<CODE>allow_to_the_right_of_a_fat_comma</CODE>.
 
 
 </P><H2><A NAME="allowed_values"><CODE>allowed_values</CODE>
@@ -252,6 +255,21 @@ decimal integers:
 <P>If you permit exponential notation, you automatically also allow
 floating point values because an exponential is a subclass of
 floating-point in <A HREF="PPI.html">PPI</A>.
+
+
+</P><H2><A NAME="allow_to_the_right_of_a_fat_comma"><CODE>allow_to_the_right_of_a_fat_comma</CODE>
+
+</A></H2>
+
+<P>If this is set, you can put any number to the right of a fat comma.
+
+</P>
+<PRE>    my %hash =     ( a =&gt; 4512, b =&gt; 293 );         # ok
+    my $hash_ref = { a =&gt; 4512, b =&gt; 293 };         # ok
+    some_subroutine( a =&gt; 4512, b =&gt; 293 );         # ok</PRE>
+
+<P>Currently, this only means <I>directly</I> to the right of the fat comma.  By
+default, this value is <I>true</I>.
 
 
 </P><H1><A NAME="BUGS">BUGS

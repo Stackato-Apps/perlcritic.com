@@ -30,6 +30,7 @@
 
 <P>Perl::Critic::Policy::Subroutines::ProtectPrivateSubs - Prevent access to private subs in other packages.
 
+
 </P><H1><A NAME="AFFILIATION">AFFILIATION
 
 </A></H1>
@@ -47,19 +48,50 @@ indicate private methods and variables by inserting a leading
 underscore before the identifier.  This policy catches attempts to
 access private variables from outside the package itself.
 
+</P>
+<P>The subroutines in the <A HREF="../../../../POSIX.html">POSIX</A> package which begin with an underscore
+(e.g. <CODE>POSIX::_POSIX_ARG_MAX</CODE>) are not flagged as errors by this
+policy.
+
 
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>You can define what a private subroutine name looks like by specifying
+a regular expression for the <CODE>private_name_regex</CODE> option in your
+<I>.perlcriticrc</I>:
+
+</P>
+<PRE>    [Subroutines::ProtectPrivateSubs]
+    private_name_regex = _(?!_)\w+</PRE>
+
+<P>The above example is a way of saying that subroutines that start with
+a double underscore are not considered to be private.  (Perl::Critic,
+in its implementation, uses leading double underscores to indicate a
+distribution-private subroutine-- one that is allowed to be invoked by
+other Perl::Critic modules, but not by anything outside of
+Perl::Critic.)
+
+</P>
+<P>You can configure additional subroutines to accept by specifying them
+in a space-delimited list to the <CODE>allow</CODE> option:
+
+</P>
+<PRE>    [Subroutines::ProtectPrivateSubs]
+    allow = FOO::_bar FOO::_baz</PRE>
+
+<P>These are added to the default list of exemptions from this policy.
+Allowing a subroutine also allows the corresponding method call. So
+<CODE>FOO::_bar</CODE> in the above example allows both <CODE>FOO::_bar()</CODE>
+and <CODE>FOO-&gt;_bar()</CODE>.
 
 
 </P><H1><A NAME="HISTORY">HISTORY
 
 </A></H1>
 
-<P>This policy is inspired by a similar test in <A HREF="../../../../B/Lint.html">B::Lint</A>
+<P>This policy is inspired by a similar test in <A HREF="../../../../B/Lint.html">B::Lint</A>.
 
 
 </P><H1><A NAME="BUGS">BUGS
@@ -67,7 +99,7 @@ access private variables from outside the package itself.
 </A></H1>
 
 <P>Doesn't forbid <CODE>$pkg-&gt;_foo()</CODE> because it can't tell the
-difference between that and <CODE>$self-&gt;_foo()</CODE>
+difference between that and <CODE>$self-&gt;_foo()</CODE>.
 
 
 </P><H1><A NAME="SEE%20ALSO">SEE ALSO
@@ -87,7 +119,7 @@ difference between that and <CODE>$self-&gt;_foo()</CODE>
 
 </A></H1>
 
-<P>Copyright (c) 2006-2009 Chris Dolan.  All rights reserved.
+<P>Copyright (c) 2006-2009 Chris Dolan.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

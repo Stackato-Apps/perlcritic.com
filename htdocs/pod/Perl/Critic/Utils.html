@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#IMPORTABLE%20SUBS">IMPORTABLE SUBS
 
 </A><LI><A HREF="#IMPORTABLE%20VARIABLES">IMPORTABLE VARIABLES
@@ -37,6 +39,14 @@
 for developing <A HREF="../../Perl/Critic/Policy.html">Perl::Critic::Policy</A>
 subclasses.  Unless you are writing Policy modules, you probably don't
 care about this package.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a public module.  Any changes to its
+interface will go through a deprecation cycle.
 
 
 </P><H1><A NAME="IMPORTABLE%20SUBS">IMPORTABLE SUBS
@@ -319,7 +329,7 @@ declarations.
 Given a <A HREF="../../PPI/Token/Word.html">PPI::Token::Word</A> returns true if the
 element appears to be call to a static function.  Specifically, this
 function returns true if <CODE>is_hash_key</CODE>, <CODE>is_method_call</CODE>,
-<CODE>is_subroutine_name</CODE>, <CODE>is_included_module_anme</CODE>,
+<CODE>is_subroutine_name</CODE>, <CODE>is_included_module_name</CODE>,
 <CODE>is_package_declaration</CODE>, <CODE>is_perl_bareword</CODE>, <CODE>is_perl_filehandle</CODE>,
 <CODE>is_label_pointer</CODE> and <CODE>is_subroutine_name</CODE> all return false for the
 given element.

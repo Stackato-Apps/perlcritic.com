@@ -8,6 +8,8 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
+</A><LI><A HREF="#INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
 </A><LI><A HREF="#CONSTRUCTOR">CONSTRUCTOR
 
 </A><LI><A HREF="#METHODS">METHODS
@@ -45,6 +47,14 @@ defines which Policy modules will be loaded into the Perl::Critic
 engine and how they should be configured.  You should never really
 need to instantiate Perl::Critic::Config directly because the
 Perl::Critic constructor will do it for you.
+
+
+</P><H1><A NAME="INTERFACE%20SUPPORT">INTERFACE SUPPORT
+
+</A></H1>
+
+<P>This is considered to be a non-public class.  Its interface is subject
+to change without notice.
 
 
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
@@ -162,7 +172,45 @@ for the benefit of <A HREF="perlcritic.html">perlcritic</A>.
 <P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for
 the benefit of <A HREF="criticism.html">criticism</A>.
 
+</P>
+<P><B>-color-severity-highest</B> is a string representing the highest
+severity violation color, as expected by Term::ANSIColor. It is not
+used by Perl::Critic, but is provided for the benefit of
+<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
+<B>-colour-severity-highest</B>, <B>-color-severity-5</B>, or
+<B>-colour-severity-5</B>.
 
+</P>
+<P><B>-color-severity-high</B> is a string representing the high severity
+violation color, as expected by Term::ANSIColor. It is not used by
+Perl::Critic, but is provided for the benefit of
+<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
+<B>-colour-severity-high</B>, <B>-color-severity-4</B>, or
+<B>-colour-severity-4</B>.
+
+</P>
+<P><B>-color-severity-medium</B> is a string representing the medium
+severity violation color, as expected by Term::ANSIColor. It is not
+used by Perl::Critic, but is provided for the benefit of
+<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
+<B>-colour-severity-medium</B>, <B>-color-severity-3</B>, or
+<B>-colour-severity-3</B>.
+
+</P>
+<P><B>-color-severity-low</B> is a string representing the low severity
+violation color, as expected by Term::ANSIColor. It is not used by
+Perl::Critic, but is provided for the benefit of
+<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
+<B>-colour-severity-low</B>, <B>-color-severity-2</B>, or
+<B>-colour-severity-2</B>.
+
+</P>
+<P><B>-color-severity-lowest</B> is a string representing the lowest
+severity violation color, as expected by Term::ANSIColor. It is not
+used by Perl::Critic, but is provided for the benefit of
+<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
+<B>-colour-severity-lowest</B>, <B>-color-severity-1</B>, or
+<B>-colour-severity-1</B>.
 
 </P></DD>
 </DL>
@@ -318,6 +366,51 @@ Returns the value of the <CODE>-criticsm-fatal</CODE> attribute for this Config.
 
 
 </DD>
+<DT><A NAME="color_severity_highest()"><CODE> color_severity_highest() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color-severity-highest</CODE> attribute for this
+Config.
+
+
+</DD>
+<DT><A NAME="color_severity_high()"><CODE> color_severity_high() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color-severity-high</CODE> attribute for this
+Config.
+
+
+</DD>
+<DT><A NAME="color_severity_medium()"><CODE> color_severity_medium() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color-severity-medium</CODE> attribute for this
+Config.
+
+
+</DD>
+<DT><A NAME="color_severity_low()"><CODE> color_severity_low() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color-severity-low</CODE> attribute for this
+Config.
+
+
+</DD>
+<DT><A NAME="color_severity_lowest()"><CODE> color_severity_lowest() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-color-severity-lowest</CODE> attribute for this
+Config.
+
+
+</DD>
 </DL>
 <H1><A NAME="SUBROUTINES">SUBROUTINES
 
@@ -375,7 +468,12 @@ corresponding Perl::Critic constructor argument.
     theme     = risky + (pbp * security) - cosmetic   #A theme expression
     include   = NamingConventions ClassHierarchies    #Space-delimited list
     exclude   = Variables  Modules::RequirePackage    #Space-delimited list
-    color     = 1                                     #Zero or One</PRE>
+    color     = 1                                     #Zero or One
+    color-severity-highest = bold red                 #Term::ANSIColor
+    color-severity-high = magenta                     #Term::ANSIColor
+    color-severity-medium =                           #no coloring
+    color-severity-low =                              #no coloring
+    color-severity-lowest =                           #no coloring</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like
 this:

@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
+</A><LI><A HREF="#TO%20DO">TO DO
+
 </A><LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -27,6 +29,7 @@
 </A></H1>
 
 <P>Perl::Critic::Policy::Subroutines::ProhibitManyArgs - Too many arguments.
+
 
 </P><H1><A NAME="AFFILIATION">AFFILIATION
 
@@ -46,6 +49,7 @@ remember the order of those arguments.  Many arguments is often a sign
 that a subroutine should be refactored or that an object should be
 passed to the routine.
 
+
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -56,7 +60,8 @@ this:
 
 </P>
 <PRE>  [Subroutines::ProhibitManyArgs]
-  max_arguments = 6</PRE>
+  max_arguments = 6
+</PRE>
 <H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
@@ -68,6 +73,14 @@ those.  This should just work when PPI gains that feature.
 <P>We don't check for <CODE>@ARG</CODE>, the alias for <CODE>@_</CODE> from English.pm.
 That's deprecated anyway.
 
+
+</P><H1><A NAME="TO%20DO">TO DO
+
+</A></H1>
+
+<P>Don't include <CODE>$self</CODE> and <CODE>$class</CODE> in the count.
+
+
 </P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
@@ -75,11 +88,13 @@ That's deprecated anyway.
 <P>Initial development of this policy was supported by a grant from the
 Perl Foundation.
 
+
 </P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
 <P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 

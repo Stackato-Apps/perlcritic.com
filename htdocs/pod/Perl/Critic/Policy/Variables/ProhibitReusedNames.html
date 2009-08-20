@@ -52,10 +52,10 @@ accidentally remove the inner declaration, thus silently changing the
 meaning of the inner code to use the outer variable.
 
 </P>
-<PRE>   my $x = 1;
-   for my $i (0 .. 10) {
-      my $x = $i+1;  # not OK, &quot;$x&quot; reused
-   }</PRE>
+<PRE>    my $x = 1;
+    for my $i (0 .. 10) {
+        my $x = $i+1;  # not OK, &quot;$x&quot; reused
+    }</PRE>
 
 <P>With <CODE>use warnings</CODE> in effect, Perl will warn you if you reuse a
 variable name at the same scope level but not within nested scopes.  Like so:
@@ -91,16 +91,11 @@ be a false positive for you:
 </P>
 <PRE>    my $debug_mode = 0;
     sub set_debug {
-       my $debug_mode = 1;  # accidental redeclaration
+        my $debug_mode = 1;  # accidental redeclaration
     }</PRE>
 
 <P>I've done this myself several times -- it's a strong habit to put that
 &quot;my&quot; in front of variables at the start of subroutines.
-
-</P>
-<P>If you have opinions on this caveat/feature please post to the
-<A HREF="../../../../Perl/Critic.html">Perl::Critic</A> mailing list.  Perhaps we'll add some specific
-exemptions?
 
 
 </P><H2><A NAME="Performance">Performance
@@ -117,10 +112,16 @@ tree walking on that single analysis.
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>This policy has a single option, <CODE>allow</CODE>, which is a list of names to
+never count as duplicates.  It defaults to containing <CODE>$self</CODE> and
+<CODE>$class</CODE>.  You add to this by adding something like this to your
+<I>.perlcriticrc</I>:
 
-
-</P><H1><A NAME="AUTHOR">AUTHOR
+</P>
+<PRE>    [Variables::ProhibitReusedNames]
+    allow = $self $class @blah
+</PRE>
+<H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
