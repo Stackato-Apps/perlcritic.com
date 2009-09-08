@@ -54,25 +54,16 @@ will go through a deprecation cycle.
 </P><H1><A NAME="METHODS">METHODS
 
 </A></H1>
-<DL><DT><A NAME="new(key1%20%3d%3e%20value1%2c%20key2%20%3d%3e%20value2%20...%20)"><CODE>new(key1 =&gt; value1, key2 =&gt; value2 ... )</CODE>
+<DL><DT><A NAME="new(%20...%20)"><CODE>new( ... )</CODE>
 
 </A></DT>
 <DD>
-
-<P>Returns a reference to a new subclass of Perl::Critic::Policy. If your
-Policy requires any special arguments, they will be passed in here as
-key-value pairs.  Users of <A HREF="../../perlcritic.html">perlcritic</A> can specify these
-in their config file.  Unless you override the <CODE>new</CODE> method, the
-default method simply returns a reference to an empty hash that has
-been blessed into your subclass.  However, you really should not
-override this; override <CODE>initialize_if_enabled()</CODE> instead.
-
-</P>
-<P>This constructor is always called regardless of whether the user has
-enabled this Policy or not.
+Don't call this.  As a Policy author, do not implement this.  Use the
+<CODE>initialize_if_enabled()</CODE> method for your Policy setup.  See the
+<A HREF="../../Perl/Critic/DEVELOPER.html">developer</A> documentation for more.
 
 
-</P></DD>
+</DD>
 <DT><A NAME="initialize_if_enabled(%20%24config%20)"><CODE>initialize_if_enabled( $config )</CODE>
 
 </A></DT>

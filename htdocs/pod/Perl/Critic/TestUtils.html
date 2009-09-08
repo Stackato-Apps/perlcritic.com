@@ -306,6 +306,15 @@ you can indicate that <CODE>fcritique</CODE> should be used like so (see
 so be careful.
 
 </P>
+<P>In general, a subtest document runs from the <CODE>## cut</CODE> that starts it to
+either the next <CODE>## name</CODE> or the end of the file. In very rare circumstances
+you may need to end the test document earlier. A second <CODE>## cut</CODE> will do
+this. The only known need for this is in
+<I>t/Miscellanea/RequireRcsKeywords.run</I>, where it is used to prevent the RCS
+keywords in the file footer from producing false positives or negatives in the
+last test.
+
+</P>
 <P>Note that nowhere within the <I>.run</I> file itself do you specify the
 policy that you're testing.  That's implicit within the filename.
 

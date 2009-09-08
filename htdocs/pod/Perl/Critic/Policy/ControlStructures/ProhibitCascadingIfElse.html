@@ -38,7 +38,8 @@ distribution.
 
 <P>Long <CODE>if-elsif</CODE> chains are hard to digest, especially if they are
 longer than a single page or screen.  If testing for equality, use a
-hash lookup instead.  See <A HREF="Switch.html">Switch</A> for another approach.
+hash lookup instead.  If you're using perl 5.10 or later, use
+<CODE>given</CODE>/<CODE>when</CODE>.
 
 </P>
 <PRE>    if ($condition1) {         #ok

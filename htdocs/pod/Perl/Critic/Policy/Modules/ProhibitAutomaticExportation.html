@@ -48,9 +48,9 @@ and let the caller choose exactly which symbols to export.
 <PRE>    package Foo;
 
     use base qw(Exporter);
-    our @EXPORT      = qw(&amp;foo &amp;bar);                  # not ok
-    our @EXPORT_OK   = qw(&amp;foo &amp;bar);                  # ok
-    our %EXPORT_TAGS = ( all =&gt; [ qw(&amp;foo &amp;bar) ] );   # ok
+    our @EXPORT      = qw(foo $bar @baz);                  # not ok
+    our @EXPORT_OK   = qw(foo $bar @baz);                  # ok
+    our %EXPORT_TAGS = ( all =&gt; [ qw(foo $bar @baz) ] );   # ok
 </PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 

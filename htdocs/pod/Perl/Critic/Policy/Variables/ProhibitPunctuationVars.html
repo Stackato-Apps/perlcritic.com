@@ -14,6 +14,8 @@
 
 </A><LI><A HREF="#BUGS">BUGS
 
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
 </A><LI><A HREF="#COPYRIGHT">COPYRIGHT
@@ -48,8 +50,7 @@ module to give them clear names.
 <PRE>  $| = undef;                      #not ok
 
   use English qw(-no_match_vars);
-  local $OUTPUT_AUTOFLUSH = undef;        #ok
-</PRE>
+  local $OUTPUT_AUTOFLUSH = undef; #ok</PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
@@ -58,6 +59,8 @@ module to give them clear names.
 well understood, so they are exempt from this policy.  The same goes
 for the less-frequently-used default filehandle <CODE>_</CODE> used by stat().
 All the regexp capture variables (<CODE>$1</CODE>, <CODE>$2</CODE>, ...) are exempt too.
+<CODE>$]</CODE> is exempt because there is no <A HREF="../../../../English.html">English</A> equivalent and
+<A HREF="../../../../Module/CoreList.html">Module::CoreList</A> is based upon it.
 
 </P>
 <P>You can add more exceptions to your configuration.  In your
@@ -67,15 +70,61 @@ perlcriticrc file, add a block like this:
 <PRE>  [Variables::ProhibitPunctuationVars]
   allow = $@ $!</PRE>
 
-<P>The <CODE>allow</CODE> property should be a whitespace-delimited list of
+<P>The <CODE>allow</CODE> property  should  be  a  whitespace-delimited  list  of
 punctuation variables.
+
+</P>
+<P>Other configuration options  control  the  parsing  of  interpolated
+strings in the search for forbidden variables. They have  no  effect
+on detecting punctuation variables outside of interpolated  strings.
+
+</P>
+<PRE>  [Variables::ProhibitPunctuationVars]
+  string_mode = thorough</PRE>
+
+<P>The option <CODE>string_mode</CODE>  controls  whether  and  how  interpolated
+strings are searched for punctuation variables. Setting
+<CODE>string_mode = thorough</CODE>, the default,  checks  for  special  cases
+that may look like punctuation variables  but  aren't,  for  example
+<CODE>$#foo</CODE>, an array index count; <CODE>$$bar</CODE>, a scalar  dereference;  or
+<CODE>$::baz</CODE>, a global symbol.
+
+</P>
+<P>Setting <CODE>string_mode = disable</CODE> causes all interpolated strings  to
+be ignored entirely.
+
+</P>
+<P>Setting <CODE>string_mode = simple</CODE> uses a simple regular expression  to
+find matches. In this mode, the magic variables <CODE>$$</CODE>, <CODE>$'</CODE>,  <CODE>$#</CODE>
+and <CODE>$:</CODE> are ignored within interpolated strings due  to  the  high
+risk of false positives. Simple mode is  retained  from  an  earlier
+draft of the interpolated- strings code. Its use is only recommended
+as a workaround if bugs appear in thorough mode.
+
+</P>
+<P>The  <CODE>string_mode</CODE>  option  will  go  away  when  the  parsing   of
+interpolated strings is implemented in PPI. See  <A HREF="#CAVEATS">/CAVEATS</A>  below.
 
 
 </P><H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
-<P>This doesn't find punctuation variables in strings.  RT #35970.
+<P>Punctuation variables that confuse PPI's document parsing may not be
+detected  correctly  or  at  all,  and  may  prevent  detection   of
+subsequent ones. In particular, <CODE>$&quot;</CODE> is known to cause difficulties
+in interpolated strings.
+
+
+</P><H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>ProhibitPunctuationVars  relies   exclusively   on   PPI   to   find
+punctuation variables in code, but does all the parsing  itself  for
+interpolated strings. When, at some  point,  this  functionality  is
+transferred to PPI, ProhibitPunctuationVars  will  cease  doing  the
+interpolating  and  the  <CODE>string_mode</CODE>   option   will   go   away.
 
 
 </P><H1><A NAME="AUTHOR">AUTHOR

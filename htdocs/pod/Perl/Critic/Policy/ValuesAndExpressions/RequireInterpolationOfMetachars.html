@@ -10,9 +10,15 @@
 
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
-</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+</A><UL>
+<LI><A HREF="#Exceptions">Exceptions
+
+</A></UL>
+<LI><A HREF="#CONFIGURATION">CONFIGURATION
 
 </A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#TODO">TODO
 
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
@@ -49,7 +55,32 @@ educated guess by looking for metacharacters and sigils which usually
 indicate that the string should be interpolated.
 
 
-</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+</P><H2><A NAME="Exceptions">Exceptions
+
+</A></H2>
+<UL>
+<LI>
+<P><CODE>${}</CODE> and <CODE>@{}</CODE> in a <CODE>use overload</CODE>,
+
+</P>
+<PRE>    use overload '${}' =&gt; \&amp;deref,     # ok
+                 '@{}' =&gt; \&amp;arrayize;  # ok</PRE>
+</LI>
+<LI>
+<P>Variable names to <CODE>use vars</CODE>.
+
+</P>
+<PRE>    use vars '$x';          # ok
+    use vars ('$y', '$z');  # ok
+    use vars qw&lt; $a $b &gt;;   # ok
+</PRE>
+</LI>
+<LI>Email addresses, if you have <A HREF="Email/Address.html">Email::Address</A> installed.
+
+
+</LI>
+</UL>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
 
 </A></H1>
 
@@ -61,7 +92,7 @@ about things that look like RCS variables, for example, in deriving values for
 <P>For example, if you've got code like
 
 </P>
-<PRE>    our ($VERSION) = (q&lt;$Revision: 3482 $&gt; =~ m/(\d+)/mx);</PRE>
+<PRE>    our ($VERSION) = (q&lt;$Revision: 3629 $&gt; =~ m/(\d+)/mx);</PRE>
 
 <P>You can specify
 
@@ -77,6 +108,13 @@ about things that look like RCS variables, for example, in deriving values for
 </A></H1>
 
 <P>Perl's own <CODE>warnings</CODE> pragma also warns you about this.
+
+
+</P><H1><A NAME="TODO">TODO
+
+</A></H1>
+
+<P>Handle email addresses.
 
 
 </P><H1><A NAME="SEE%20ALSO">SEE ALSO

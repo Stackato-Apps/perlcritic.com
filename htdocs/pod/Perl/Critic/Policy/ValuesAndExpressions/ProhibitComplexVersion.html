@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::ValuesAndExpressions::ProhibitComplexVersion</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::ValuesAndExpressions::ProhibitComplexVersion - Prohibit version values from outside the module.
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>One tempting way to keep a group of related modules at the same version number
+is to have all of them import the version number from a designated module. For
+example, module <CODE>Foo::Master</CODE> could be the version master for the <CODE>Foo</CODE>
+package, and all other modules could use its <CODE>$VERSION</CODE> by
+
+</P>
+<PRE>    use Foo::Master; our $VERSION = $Foo::Master::VERSION;</PRE>
+
+<P>This turns out not to be a good idea, because all sorts of unintended things
+can happen - anything from unintended version number changes to
+denial-of-service attacks (since <CODE>Foo::Master</CODE> is executed by the 'use').
+
+</P>
+<P>This policy examines statements that assign to <CODE>$VERSION</CODE>, and declares a
+violation under two circumstances: first, if that statement uses a
+fully-qualified symbol that did not originate in a package declared in the
+file; second if there is a <CODE>use</CODE> statement on the same line that makes the
+assignment.
+
+</P>
+<P>By default, an exception is made for <CODE>use version;</CODE> because of its
+recommendation by Perl Best Practices. See the <CODE>forbid_use_version</CODE>
+configuration variable if you do not want an exception made for <CODE>use
+version;</CODE>.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>The construction
+
+</P>
+<PRE>    use version; our $VERSION = qv('1.2.3');</PRE>
+
+<P>is exempt from this policy by default, because it is recommended by Perl Best
+Practices. Should you wish to identify <CODE>use version;</CODE> as a violation, add the
+following to your perlcriticrc file:
+
+</P>
+<PRE>    [ValuesAndExpressions::ProhibitComplexVersion]
+    forbid_use_version = 1
+</PRE>
+<H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>This code assumes that the hallmark of a violation is a 'use' on the same line
+as the <CODE>$VERSION</CODE> assignment, because that is the way to have it seen by
+<A HREF="../../../../ExtUtils/MakeMaker.html">ExtUtils::MakeMaker</A>-&gt;parse_version(). Other ways to get a version value
+from outside the module can be imagined, and this policy is currently
+oblivious to them.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Thomas R. Wyant, III <I>wyant at cpan dot org</I>
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2009 Tom Wyant.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

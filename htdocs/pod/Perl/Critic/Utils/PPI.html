@@ -75,6 +75,48 @@ parameter is not <A HREF="PPI/Statement.html">PPI::Statement</A>.
 
 
 </DD>
+<DT><A NAME="is_ppi_simple_statement(%20%24element%20)"><CODE>is_ppi_simple_statement( $element )</CODE>
+
+</A></DT>
+<DD>
+Answers whether the parameter represents a simple statement, i.e. whether the
+parameter is a <A HREF="PPI/Statement.html">PPI::Statement</A>,
+<A HREF="PPI/Statement/Break.html">PPI::Statement::Break</A>,
+<A HREF="PPI/Statement/Include.html">PPI::Statement::Include</A>,
+<A HREF="PPI/Statement/Null.html">PPI::Statement::Null</A>,
+<A HREF="PPI/Statement/Package.html">PPI::Statement::Package</A>, or
+<A HREF="PPI/Statement/Variable.html">PPI::Statement::Variable</A>.
+
+
+</DD>
+<DT><A NAME="is_ppi_constant_element(%20%24element%20)"><CODE>is_ppi_constant_element( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Answers whether the parameter represents a constant value, i.e. whether the
+parameter is a <A HREF="PPI/Token/Number.html">PPI::Token::Number</A>,
+<A HREF="PPI/Token/Quote/Literal.html">PPI::Token::Quote::Literal</A>,
+<A HREF="PPI/Token/Quote/Single.html">PPI::Token::Quote::Single</A>, or
+<A HREF="PPI/Token/QuoteLike/Words.html">PPI::Token::QuoteLike::Words</A>, or is a
+<A HREF="PPI/Token/Quote/Double.html">PPI::Token::Quote::Double</A> or
+<A HREF="PPI/Token/Quote/Interpolate.html">PPI::Token::Quote::Interpolate</A> which does
+not in fact contain any interpolated variables.
+
+</P>
+<P>This subroutine does <B>not</B> interpret any form of here document as a constant
+value, and may not until <A HREF="PPI/Token/HereDoc.html">PPI::Token::HereDoc</A> acquires
+the relevant portions of the <A HREF="PPI/Token/Quote.html">PPI::Token::Quote</A> interface.
+
+</P>
+<P>This subroutine also does <B>not</B> interpret entities created by the
+<A HREF="Readonly.html">Readonly</A> module or the <A HREF="constant.html">constant</A> pragma as constants,
+because the infrastructure to detect these appears not to be present, and the
+author of this subroutine (<B>not</B> Mr. Shank or Mr. Thalhammer) lacks the
+knowledge/expertise/gumption to put it in place.
+
+
+</P></DD>
 <DT><A NAME="is_subroutine_declaration(%20%24element%20)"><CODE>is_subroutine_declaration( $element )</CODE>
 
 </A></DT>
@@ -112,6 +154,65 @@ the thing being defined.
 <PRE>    Readonly::Hash my %FOO =&gt; ( bar =&gt; 'baz' );</PRE>
 
 <P>this will return &quot;%FOO&quot;.
+
+</P>
+<P><B>Caveat:</B> in the case where multiple constants are declared using the same
+<CODE>use constant</CODE> statement (e.g. <CODE>use constant { FOO =&gt; 1, BAR =&gt; 2 };</CODE>,
+this subroutine will return the declaring
+<A HREF="PPI/Structure/Constructor.html">PPI::Structure::Constructor</A>. In the case of
+<CODE>use constant 1.16 { FOO =&gt; 1, BAR =&gt; 2 };</CODE> it may return a
+<A HREF="PPI/Structure/Block.html">PPI::Structure::Block</A> instead of a
+<A HREF="PPI/Structure/Constructor.html">PPI::Structure::Constructor</A>, due to a parse
+error in <A HREF="PPI.html">PPI</A>.
+
+
+</P></DD>
+<DT><A NAME="get_next_element_in_same_simple_statement(%20%24element%20)"><CODE>get_next_element_in_same_simple_statement( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <CODE>PPI::Element|PPI::Element</CODE>, this subroutine returns the next element
+in the same simple statement as defined by is_ppi_simple_statement(). If no
+next element can be found, this subroutine simply returns.
+
+</P>
+<P>If the $element is undefined or unblessed, we simply return.
+
+</P>
+<P>If the $element satisfies <CODE>is_ppi_simple_statement()</CODE>, we return, <B>unless</B>
+it has a parent which is a <A HREF="PPI/Structure/List.html">PPI::Structure::List</A>.
+
+</P>
+<P>If the $element is the last significant element in its <A HREF="PPI/Node.html">PPI::Node</A>,
+we replace it with its parent and iterate again.
+
+</P>
+<P>Otherwise, we return <CODE>$element-&gt;snext_sibling()</CODE>.
+
+
+</P></DD>
+<DT><A NAME="get_previous_module_used_on_same_line(%20%24element%20)"><CODE>get_previous_module_used_on_same_line( $element )</CODE>
+
+</A></DT>
+<DD>
+
+<P>Given a <A HREF="PPI/Element.html">PPI::Element</A>, returns the <A HREF="PPI/Element.html">PPI::Element</A>
+representing the name of the module included by the previous <CODE>use</CODE> or
+<CODE>require</CODE> on the same line as the $element. If none is found, simply returns.
+
+</P>
+<P>For example, with the line
+
+</P>
+<PRE>    use version; our $VERSION = ...;</PRE>
+
+<P>given the <A HREF="PPI/Token/Symbol.html">PPI::Token::Symbol</A> instance for <CODE>$VERSION</CODE>, this will return
+&quot;version&quot;.
+
+</P>
+<P>If the given element is in a <CODE>use</CODE> or &lt;require&gt;, the return is from the
+previous <CODE>use</CODE> or <CODE>require</CODE> on the line, if any.
 
 
 </P></DD>

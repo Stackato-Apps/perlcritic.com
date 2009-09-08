@@ -44,8 +44,8 @@ distribution.
 value of a match before using those variables.
 
 </P>
-<P>This policy checks that capture variables are inside a conditional and
-do not follow an regexps.
+<P>This policy checks that the previous regexp for which the capture variable is
+in-scope is either in a conditional or causes an exception if the match fails.
 
 </P>
 <P>This policy does not check whether that conditional is actually
@@ -57,10 +57,15 @@ has a capture in it.  Those checks are too hard.
 
 </A></H1>
 
-<P>This Policy is not configurable except for the standard options.
+<P>By default, this policy considers <CODE>die</CODE>, <CODE>croak</CODE>, and <CODE>confess</CODE> to
+throw exceptions. If you have additional routines that may be used in
+lieu of one of these, you can configure them in your perlcriticrc as
+follows:
 
-
-</P><H1><A NAME="BUGS">BUGS
+</P>
+<PRE> [RegularExpressions::ProhibitCaptureWithoutTest]
+ exception_source = my_exception_generator</PRE>
+<H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
@@ -79,9 +84,11 @@ because it's &quot;outside&quot; of the match.  The thing is, we can only get to
 the <CODE>if</CODE> if the regex matched.
 
 </P>
-<PRE>    while ( $str =~ /(expression)/ )
-</PRE>
-<H1><A NAME="AUTHOR">AUTHOR
+<PRE>    while ( $str =~ /(expression)/ )</PRE>
+
+<P>This policy does not recognize named capture variables. Yet.
+
+</P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 

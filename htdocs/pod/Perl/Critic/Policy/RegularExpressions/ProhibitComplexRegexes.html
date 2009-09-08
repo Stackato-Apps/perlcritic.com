@@ -50,6 +50,12 @@ characters, where <CODE>N</CODE> is a configurable value that defaults to 60.
 If the regexp uses the <CODE>x</CODE> flag, then the length is computed after
 parsing out any comments or whitespace.
 
+</P>
+<P>Unfortunately the use of descriptive (and therefore longish) variable
+names can cause regexps to be in violation of this policy, so
+interpolated variables are counted as 4 characters no matter how long
+their names actually are.
+
 
 </P><H1><A NAME="CASE%20STUDY">CASE STUDY
 

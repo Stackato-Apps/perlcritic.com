@@ -37,10 +37,33 @@ distribution.
 
 </A></H1>
 
-<P>The package declaration should always match the name of the file that
-contains it.  For example, <CODE>package Foo::Bar;</CODE> should be in a file
-called <CODE>Bar.pm</CODE>.
+<P>The package declaration should always match the name of the file that contains
+it.  For example, <CODE>package Foo::Bar;</CODE> should be in a file called <CODE>Bar.pm</CODE>.
+This makes it easier for developers to figure out which file a symbol comes
+from when they see it in your code.  For instance, when you see <CODE>Foo::Bar-&gt;new()</CODE>, you should be able to find the class definition for a
+<CODE>Foo::Bar</CODE> in a file called <I>Bar.pm</I>
 
+</P>
+<P>Therefore, this Policy requires the last component of the first package name
+declared in the file to match the physical filename.  Or if <CODE>#line</CODE>
+directives are used, then it must match the logical filename defined by the
+prevailing <CODE>#line</CODE> directive at the point of the package declaration.  Here
+are some examples:
+
+</P>
+<PRE>  # Any of the following in file &quot;Foo/Bar/Baz.pm&quot;:
+  package Foo::Bar::Baz;     # ok
+  package Baz;               # ok
+  package Nuts;              # not ok (doesn't match physical filename)
+
+  # using #line directives in file &quot;Foo/Bar/Baz.pm&quot;:
+  #line 1 Nuts.pm
+  package Nuts;             # ok
+  package Baz;              # not ok (contradicts #line directive)</PRE>
+
+<P>If the file is not deemed to be a module, then this Policy does not apply.
+Also, if the first package namespace found in the file is &quot;main&quot; then this
+Policy does not apply.
 
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
 

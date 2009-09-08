@@ -94,6 +94,52 @@ The total number of lines of code analyzed by this Critic.
 
 
 </DD>
+<DT><A NAME="lines_of_blank()"><CODE>lines_of_blank()</CODE>
+
+</A></DT>
+<DD>
+The total number of blank lines analyzed by this Critic. This includes only
+blank lines in code, not POD or data.
+
+
+</DD>
+<DT><A NAME="lines_of_comment()"><CODE>lines_of_comment()</CODE>
+
+</A></DT>
+<DD>
+The total number of comment lines analyzed by this Critic. This includes only
+lines whose first non-whitespace character is <CODE>#</CODE>.
+
+
+</DD>
+<DT><A NAME="lines_of_data()"><CODE>lines_of_data()</CODE>
+
+</A></DT>
+<DD>
+The total number of lines of data section analyzed by this Critic, not
+counting the <CODE>__END__</CODE> or <CODE>__DATA__</CODE> line. POD in a data section is counted
+as POD, not data.
+
+
+</DD>
+<DT><A NAME="lines_of_perl()"><CODE>lines_of_perl()</CODE>
+
+</A></DT>
+<DD>
+The total number of lines of Perl code analyzed by this Critic. Perl appearing
+in the data section is not counted.
+
+
+</DD>
+<DT><A NAME="lines_of_pod()"><CODE>lines_of_pod()</CODE>
+
+</A></DT>
+<DD>
+The total number of lines of POD analyzed by this Critic. Pod occurring in a
+data section is counted as POD, not as data.
+
+
+</DD>
 <DT><A NAME="violations_by_severity()"><CODE>violations_by_severity()</CODE>
 
 </A></DT>

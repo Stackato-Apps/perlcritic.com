@@ -296,9 +296,12 @@ characters are:
     %c        Column number where the violation occurred
     %d        Full diagnostic discussion of the violation (DESCRIPTION in POD)
     %e        Explanation of violation or page numbers in PBP
-    %F        Just the name of the file where the violation occurred.
-    %f        Path to the file where the violation occurred.
-    %l        Line number where the violation occurred
+    %F        Just the name of the logical file where the violation occurred.
+    %f        Path to the logical file where the violation occurred.
+    %G        Just the name of the physical file where the violation occurred.
+    %g        Path to the physical file where the violation occurred.
+    %l        Logical line number where the violation occurred
+    %L        Physical line number where the violation occurred
     %m        Brief description of the violation
     %P        Full name of the Policy module that created the violation
     %p        Name of the Policy without the Perl::Critic::Policy:: prefix
@@ -306,6 +309,16 @@ characters are:
     %C        The class of the PPI::Element that caused the violation
     %s        The severity level of the violation</PRE>
 
+<P>Explanation of the <CODE>%F</CODE>, <CODE>%f</CODE>, <CODE>%G</CODE>, <CODE>%G</CODE>, <CODE>%l</CODE>, and <CODE>%L</CODE> formats:
+Using <CODE>#line</CODE> directives, you can affect what perl thinks the current line
+number and file name are; see <A HREF="../../perlsyn.html#Plain%20Old%20Comments%20(Not!)">perlsyn/Plain Old Comments (Not!)</A> for
+the details.  Under normal circumstances, the values of <CODE>%F</CODE>, <CODE>%f</CODE>, and
+<CODE>%l</CODE> will match the values of <CODE>%G</CODE>, <CODE>%g</CODE>, and <CODE>%L</CODE>, respectively.  In the
+presence of a <CODE>#line</CODE> directive, the values of <CODE>%F</CODE>, <CODE>%f</CODE>, and <CODE>%l</CODE> will
+change to take that directive into account.  The values of <CODE>%G</CODE>, <CODE>%g</CODE>, and
+<CODE>%L</CODE> are unaffected by those directives.
+
+</P>
 <P>Here are some examples:
 
 </P>

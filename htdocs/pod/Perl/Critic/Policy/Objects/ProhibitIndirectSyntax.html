@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Objects::ProhibitIndirectSyntax</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#CAVEATS">CAVEATS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Objects::ProhibitIndirectSyntax - Prohibit indirect object call syntax.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Indirect object syntax is commonly used in other object-oriented languages for
+instantiating objects. Perl allows this, but to say that it supports it may be
+going too far. Instead of writing
+
+</P>
+<PRE>    my $foo = new Foo;</PRE>
+
+<P>it is preferable to write
+
+</P>
+<PRE>    my $foo = Foo-&gt;new;</PRE>
+
+<P>The problem is that Perl needs to make a number of assumptions at compile time
+to disambiguate the first form, so it tends to be fragile and to produce
+hard-to-track-down bugs.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>Indirect object syntax is also hard for Perl::Critic to disambiguate, so this
+policy only checks certain subroutine calls. The names of the subroutines can
+be configured using the <CODE>forbid</CODE> configuration option:
+
+</P>
+<PRE>    [Objects::ProhibitIndirectSyntax]
+    forbid = create destroy</PRE>
+
+<P>The <CODE>new</CODE> subroutine is configured by default; any additional <CODE>forbid</CODE>
+values are in addition to <CODE>new</CODE>.
+
+
+</P><H1><A NAME="CAVEATS">CAVEATS
+
+</A></H1>
+
+<P>The general situation can not be handled via static analysis.
+
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/Dynamic/NoIndirect.html">Perl::Critic::Policy::Dynamic::NoIndirect</A> and <A HREF="../../../../indirect.html">indirect</A> both do a better
+job with this, but they require that you compile/execute your code.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Thomas R. Wyant, III <I>wyant at cpan dot org</I>
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2009 Tom Wyant.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>
