@@ -15,14 +15,14 @@
 </A><LI><A HREF="#CAVEATS">CAVEATS
 
 </A><UL>
-<LI><A HREF="#Regexp%3a%3aParser">Regexp::Parser
+<LI><A HREF="#qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
 
-</A><LI><A HREF="#qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
+</A><LI><A HREF="#%40-%2c%20%40%2b%2c%20%24LAST_MATCH_START%20and%20%24LAST_MATCH_END"><CODE>@-</CODE>, <CODE>@+</CODE>, <CODE>$LAST_MATCH_START</CODE> and <CODE>$LAST_MATCH_END</CODE>
+
+</A><LI><A HREF="#%24%5eN%20and%20%24LAST_SUBMATCH_RESULT"><CODE>$^N</CODE> and <CODE>$LAST_SUBMATCH_RESULT</CODE>
 
 </A></UL>
-<LI><A HREF="#PREREQUISITES">PREREQUISITES
-
-</A><LI><A HREF="#CREDITS">CREDITS
+<LI><A HREF="#CREDITS">CREDITS
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -72,17 +72,7 @@ surrounding code which may use the captured values.
 </P><H1><A NAME="CAVEATS">CAVEATS
 
 </A></H1>
-<H2><A NAME="Regexp%3a%3aParser">Regexp::Parser
-
-</A></H2>
-
-<P>We use <A HREF="Regexp/Parser.html">Regexp::Parser</A> to analyze the regular
-expression syntax.  This is an optional module for Perl::Critic, so it
-will not be automatically installed by CPAN for you.  If you wish to
-use this policy, you must install that module first.
-
-
-</P><H2><A NAME="qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
+<H2><A NAME="qr%2f%2f%20interpolation"><CODE>qr//</CODE> interpolation
 
 </A></H2>
 
@@ -98,13 +88,26 @@ captures but only the first capture is used, not the second.  The
 policy only notices that there is one capture in the regexp and
 remains happy.
 
+</P><H2><A NAME="%40-%2c%20%40%2b%2c%20%24LAST_MATCH_START%20and%20%24LAST_MATCH_END"><CODE>@-</CODE>, <CODE>@+</CODE>, <CODE>$LAST_MATCH_START</CODE> and <CODE>$LAST_MATCH_END</CODE>
 
-</P><H1><A NAME="PREREQUISITES">PREREQUISITES
+</A></H2>
 
-</A></H1>
+<P>This policy will only recognize capture groups referred to by these
+variables if the use is subscripted by a literal integer.
 
-<P>This policy will disable itself if <A HREF="Regexp/Parser.html">Regexp::Parser</A> is not
-installed.
+</P><H2><A NAME="%24%5eN%20and%20%24LAST_SUBMATCH_RESULT"><CODE>$^N</CODE> and <CODE>$LAST_SUBMATCH_RESULT</CODE>
+
+</A></H2>
+
+<P>This policy will not recognize capture groups referred to only by these
+variables, because there is in general no way by static analysis to
+determine which capture group is referred to.  For example,
+
+</P>
+<PRE>    m/ (?: (A[[:alpha:]]+) | (N\d+) ) (?{$foo=$^N}) /smx</PRE>
+
+<P>makes use of the first capture group if it matches, or the second
+capture group if the first does not match but the second does.
 
 
 </P><H1><A NAME="CREDITS">CREDITS
@@ -126,7 +129,7 @@ Perl Foundation.
 
 </A></H1>
 
-<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2010 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

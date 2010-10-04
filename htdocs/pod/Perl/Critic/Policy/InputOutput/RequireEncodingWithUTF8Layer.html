@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#NOTES">NOTES
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::InputOutput::RequireEncodingWithUTF8Layer - Write <CODE>open $fh, q{&lt;:encoding(UTF-8)}, $filename;</CODE> instead of <CODE>open $fh, q{{&lt;:utf8}, $filename;</CODE>.
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Use of the <CODE>:utf8</CODE> I/O layer (as opposed to <CODE>:encoding(UTF8)</CODE> or
+<CODE>:encoding(UTF-8)</CODE>) was suggested in the Perl documentation up to
+version 5.8.8. This may be OK for output, but on input <CODE>:utf8</CODE> does not
+validate the input, leading to unexpected results.
+
+</P>
+<P>An exploit based on this behavior of <CODE>:utf8</CODE> is exhibited on PerlMonks
+at <A HREF="http://www.perlmonks.org/?node_id=644786">http://www.perlmonks.org/?node_id=644786</A>. The exploit involves a
+string read from an external file and sanitized with <CODE>m/^(\w+)$/</CODE>,
+where <CODE>$1</CODE> nonetheless ends up containing shell meta-characters.
+
+</P>
+<P>To summarize:
+
+</P>
+<PRE> open $fh, '&lt;:utf8', 'foo.txt';             # BAD
+ open $fh, '&lt;:encoding(UTF8)', 'foo.txt';   # GOOD
+ open $fh, '&lt;:encoding(UTF-8)', 'foo.txt';  # BETTER</PRE>
+
+<P>See the <A HREF="Encode.html">Encode</A> documentation for the difference between
+<CODE>UTF8</CODE> and <CODE>UTF-8</CODE>. The short version is that <CODE>UTF-8</CODE> implements the
+Unicode standard, and <CODE>UTF8</CODE> is liberalized.
+
+</P>
+<P>For consistency's sake, this policy checks files opened for output as
+well as input, For complete coverage it also checks <CODE>binmode()</CODE> calls,
+where the direction the operation can not be determined.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><H1><A NAME="NOTES">NOTES
+
+</A></H1>
+
+<P>Because <CODE>Perl::Critic</CODE> does a static analysis, this policy can not
+detect cases like
+
+</P>
+<PRE> my $encoding = ':utf8';
+ binmode $fh, $encoding;</PRE>
+
+<P>where the encoding is computed.
+
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="PerlIO.html">PerlIO</A>
+
+</P>
+<P><A HREF="Encode.html">Encode</A>
+
+</P>
+<P><CODE>perldoc -f binmode</CODE>
+
+</P>
+<P><A HREF="http://www.socialtext.net/perl5/index.cgi?the_utf8_perlio_layer">http://www.socialtext.net/perl5/index.cgi?the_utf8_perlio_layer</A>
+
+</P>
+<P><A HREF="http://www.perlmonks.org/?node_id=644786">http://www.perlmonks.org/?node_id=644786</A>
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Thomas R. Wyant, III <I>wyant at cpan dot org</I>
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2010 Thomas R. Wyant, III
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+</P>
+</BODY>
+</HTML>

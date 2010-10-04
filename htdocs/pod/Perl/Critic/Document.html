@@ -38,7 +38,7 @@
 <PRE>    use PPI::Document;
     use Perl::Critic::Document;
     my $doc = PPI::Document-&gt;new('Foo.pm');
-    $doc = Perl::Critic::Document-&gt;new($doc);
+    $doc = Perl::Critic::Document-&gt;new(-source =&gt; $doc);
     ## Then use the instance just like a PPI::Document
 </PRE>
 <H1><A NAME="DESCRIPTION">DESCRIPTION
@@ -81,16 +81,28 @@ will go through a deprecation cycle.
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%24source_code)"><CODE>new($source_code)</CODE>
+<DL><DT><A NAME="new(-source%20%3d%3e%20%24source_code%2c%20'-program-extensions'%20%3d%3e%20%5bprogram_extensions%5d)"><CODE>new(-source =&gt; $source_code, '-program-extensions' =&gt; [program_extensions])</CODE>
 
 </A></DT>
 <DD>
-Create a new instance referencing a PPI::Document instance.  The
+
+<P>Create a new instance referencing a PPI::Document instance.  The
 <CODE>$source_code</CODE> can be the name of a file, a reference to a scalar
 containing actual source code, or a <A HREF="PPI/Document.html">PPI::Document</A> or
 <A HREF="PPI/Document/File.html">PPI::Document::File</A>.
 
-</DD>
+</P>
+<P>The '-program-extensions' argument is optional, and is a reference to a list
+of strings and/or regular expressions. The strings will be made into regular
+expressions matching the end of a file name, and any document whose file name
+matches one of the regular expressions will be considered a program.
+
+</P>
+<P>If -program-extensions is not specified, or if it does not determine the
+document type, the document will be considered to be a program if the source
+has a shebang line or its file name (if any) matches <CODE>m/ [.] PL \z /smx</CODE>.
+
+</P></DD>
 </DL>
 <H1><A NAME="METHODS">METHODS
 
@@ -120,9 +132,49 @@ date.
 
 </A></DT>
 <DD>
-If <CODE>$wanted</CODE> is a simple PPI class name, then the cache is employed.
-Otherwise we forward the call to the corresponding method of the
-<CODE>PPI::Document</CODE> instance.
+Caching wrappers around the PPI methods.  If <CODE>$wanted</CODE> is a simple PPI class
+name, then the cache is employed. Otherwise we forward the call to the
+corresponding method of the <CODE>PPI::Document</CODE> instance.
+
+
+</DD>
+<DT><A NAME="namespaces()"><CODE>namespaces()</CODE>
+
+</A></DT>
+<DD>
+Returns a list of the namespaces (package names) in the document.
+
+
+</DD>
+<DT><A NAME="subdocuments_for_namespace(%24namespace)"><CODE>subdocuments_for_namespace($namespace)</CODE>
+
+</A></DT>
+<DD>
+
+<P>Returns a list of sub-documents containing the elements in the given
+namespace.  For example, given that the current document is for the source
+
+</P>
+<PRE>    foo();
+    package Foo;
+    package Bar;
+    package Foo;</PRE>
+
+<P>this method will return two <A HREF="Perl/Critic/Document.html">Perl::Critic::Document</A>s
+for a parameter of <CODE>&quot;Foo&quot;</CODE>.  For more, see
+<A HREF="PPIx/Utilities/Node.html#split_ppi_node_by_namespace">PPIx::Utilities::Node/split_ppi_node_by_namespace</A>.
+
+
+</P></DD>
+<DT><A NAME="ppix_regexp_from_element(%24element)"><CODE>ppix_regexp_from_element($element)</CODE>
+
+</A></DT>
+<DD>
+Caching wrapper around <CODE>PPIx::Regexp-&gt;new($element)</CODE>.  If
+<CODE>$element</CODE> is a <CODE>PPI::Element</CODE> the cache is employed, otherwise it
+just returns the results of <CODE>PPIx::Regexp-&gt;new()</CODE>.  In either case,
+it returns <CODE>undef</CODE> unless the argument is something that
+<A HREF="PPIx/Regexp.html">PPIx::Regexp</A> actually understands.
 
 
 </DD>
@@ -153,6 +205,17 @@ Returns a <A HREF="version.html">version</A> object for the highest Perl version
 requirement declared in the document via a <CODE>use</CODE> or <CODE>require</CODE>
 statement.  Returns nothing if there is no version statement.
 
+
+</DD>
+<DT><A NAME="uses_module(%24module_or_pragma_name)"><CODE>uses_module($module_or_pragma_name)</CODE>
+
+</A></DT>
+<DD>
+Answers whether there is a <CODE>use</CODE>, <CODE>require</CODE>, or <CODE>no</CODE> of the given name in
+this document.  Note that there is no differentiation of modules vs. pragmata
+here.
+
+
 </DD>
 <DT><A NAME="process_annotations()"><CODE>process_annotations()</CODE>
 
@@ -160,6 +223,7 @@ statement.  Returns nothing if there is no version statement.
 <DD>
 Causes this Document to scan itself and mark which lines &amp;
 policies are disabled by the <CODE>&quot;## no critic&quot;</CODE> annotations.
+
 
 </DD>
 <DT><A NAME="line_is_disabled_for_policy(%24line%2c%20%24policy_object)"><CODE>line_is_disabled_for_policy($line, $policy_object)</CODE>
@@ -169,6 +233,7 @@ policies are disabled by the <CODE>&quot;## no critic&quot;</CODE> annotations.
 Returns true if the given <CODE>$policy_object</CODE> or <CODE>$policy_name</CODE> has
 been disabled for at <CODE>$line</CODE> in this Document.  Otherwise, returns false.
 
+
 </DD>
 <DT><A NAME="add_annotation(%20%24annotation%20)"><CODE>add_annotation( $annotation )</CODE>
 
@@ -176,13 +241,16 @@ been disabled for at <CODE>$line</CODE> in this Document.  Otherwise, returns fa
 <DD>
 Adds an <CODE>$annotation</CODE> object to this Document.
 
+
 </DD>
 <DT><A NAME="annotations()"><CODE>annotations()</CODE>
 
 </A></DT>
 <DD>
-Returns a list containing all the <A HREF="Perl/Critic/Annotation.html">Perl::Critic::Annotation</A> that
+Returns a list containing all the
+<A HREF="Perl/Critic/Annotation.html">Perl::Critic::Annotation</A>s that
 were found in this Document.
+
 
 </DD>
 <DT><A NAME="add_suppressed_violation(%24violation)"><CODE>add_suppressed_violation($violation)</CODE>
@@ -193,13 +261,31 @@ Informs this Document that a <CODE>$violation</CODE> was found but not reported
 because it fell on a line that had been suppressed by a <CODE>&quot;## no critic&quot;</CODE>
 annotation. Returns <CODE>$self</CODE>.
 
+
 </DD>
 <DT><A NAME="suppressed_violations()"><CODE>suppressed_violations()</CODE>
 
 </A></DT>
 <DD>
-Returns a list of references to all the <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>s
+Returns a list of references to all the
+<A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A>s
 that were found in this Document but were suppressed.
+
+
+</DD>
+<DT><A NAME="is_program()"><CODE>is_program()</CODE>
+
+</A></DT>
+<DD>
+Returns whether this document is considered to be a program.
+
+
+</DD>
+<DT><A NAME="is_module()"><CODE>is_module()</CODE>
+
+</A></DT>
+<DD>
+Returns whether this document is considered to be a Perl module.
 
 </DD>
 </DL>
@@ -213,7 +299,7 @@ that were found in this Document but were suppressed.
 
 </A></H1>
 
-<P>Copyright (c) 2006-2009 Chris Dolan.
+<P>Copyright (c) 2006-2010 Chris Dolan.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

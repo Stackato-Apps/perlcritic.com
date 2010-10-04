@@ -18,8 +18,6 @@
 
 </A><LI><A HREF="#NOTES">NOTES
 
-</A><LI><A HREF="#TODO">TODO
-
 </A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
@@ -60,14 +58,7 @@ indicate that the string should be interpolated.
 </A></H2>
 <UL>
 <LI>
-<P><CODE>${}</CODE> and <CODE>@{}</CODE> in a <CODE>use overload</CODE>,
-
-</P>
-<PRE>    use overload '${}' =&gt; \&amp;deref,     # ok
-                 '@{}' =&gt; \&amp;arrayize;  # ok</PRE>
-</LI>
-<LI>
-<P>Variable names to <CODE>use vars</CODE>.
+<P>Variable names to <CODE>use vars</CODE>:
 
 </P>
 <PRE>    use vars '$x';          # ok
@@ -75,9 +66,12 @@ indicate that the string should be interpolated.
     use vars qw&lt; $a $b &gt;;   # ok
 </PRE>
 </LI>
-<LI>Email addresses, if you have <A HREF="Email/Address.html">Email::Address</A> installed.
+<LI>
+<P>Things that look like e-mail addresses:
 
-
+</P>
+<PRE>    print 'john@foo.com';           # ok
+    $address = 'suzy.bar@baz.net';  # ok</PRE>
 </LI>
 </UL>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -92,7 +86,7 @@ about things that look like RCS variables, for example, in deriving values for
 <P>For example, if you've got code like
 
 </P>
-<PRE>    our ($VERSION) = (q&lt;$Revision: 3629 $&gt; =~ m/(\d+)/mx);</PRE>
+<PRE>    our ($VERSION) = (q&lt;$Revision: 3914 $&gt; =~ m/(\d+)/mx);</PRE>
 
 <P>You can specify
 
@@ -110,13 +104,6 @@ about things that look like RCS variables, for example, in deriving values for
 <P>Perl's own <CODE>warnings</CODE> pragma also warns you about this.
 
 
-</P><H1><A NAME="TODO">TODO
-
-</A></H1>
-
-<P>Handle email addresses.
-
-
 </P><H1><A NAME="SEE%20ALSO">SEE ALSO
 
 </A></H1>
@@ -128,14 +115,14 @@ about things that look like RCS variables, for example, in deriving values for
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

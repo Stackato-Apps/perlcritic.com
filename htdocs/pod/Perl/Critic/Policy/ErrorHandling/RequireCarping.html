@@ -74,24 +74,28 @@ none of the <A HREF="../../../../Carp.html">Carp</A> functions are necessary.
 
 </A></H1>
 
-<P>If you give this policy an <CODE>allow_messages_ending_with_newlines</CODE>
-option in your <I>.perlcriticrc</I> with a false value, then this policy
-will disallow all uses of <CODE>die</CODE> and <CODE>warn</CODE>.
+<P>By default, this policy allows uses of <CODE>die</CODE> and <CODE>warn</CODE> ending in an
+explicit newline. If you give this policy an
+<CODE>allow_messages_ending_with_newlines</CODE> option in your <I>.perlcriticrc</I>
+with a false value, then this policy will prohibit such uses.
 
 </P>
 <PRE>    [ErrorHandling::RequireCarping]
-    allow_messages_ending_with_newlines = 0
-</PRE>
+    allow_messages_ending_with_newlines = 0</PRE>
+
+<P>If you give this policy an <CODE>allow_in_main_unless_in_subroutine</CODE> option
+in your <I>.perlcriticrc</I> with a true value, then this policy will allow
+<CODE>die</CODE> and <CODE>warn</CODE> in name space main:: unless they appear in a
+subroutine, even if they do not end in an explicit newline.
+
+</P>
+<PRE>    [ErrorHandling::RequireCarping]
+    allow_in_main_unless_in_subroutine = 1</PRE>
 <H1><A NAME="BUGS">BUGS
 
 </A></H1>
 
-<P>This should not complain about using <CODE>warn</CODE> or <CODE>die</CODE> if it's not in
-a function, or if it's in <CODE>main::</CODE>.
-
-</P>
-<P>Also, should allow <CODE>die</CODE> when it is obvious that the &quot;message&quot; is a
-reference.
+<P>Should allow <CODE>die</CODE> when it is obvious that the &quot;message&quot; is a reference.
 
 
 </P><H1><A NAME="SEE%20ALSO">SEE ALSO
@@ -105,14 +109,14 @@ reference.
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -209,8 +209,8 @@ override this.
 <DD>
 Returns the maximum number of violations this policy will report for a
 single document.  If this is not defined, then there is no limit.  If
-<A HREF="#set_maximum_violations_per_document()">set_maximum_violations_per_document()</A> has not been invoked, then
-<A HREF="#default_maximum_violations_per_document()">default_maximum_violations_per_document()</A> is returned.
+<A HREF="#set_maximum_violations_per_document()">/set_maximum_violations_per_document()</A> has not been invoked, then
+<A HREF="#default_maximum_violations_per_document()">/default_maximum_violations_per_document()</A> is returned.
 
 
 </DD>
@@ -345,16 +345,6 @@ parameters, it is necessary to call <CODE>parameter_metadata_available()</CODE>.
 
 
 </P></DD>
-<DT><A NAME="get_parameter(%20%24parameter_name%20)"><CODE> get_parameter( $parameter_name ) </CODE>
-
-</A></DT>
-<DD>
-Returns the
-<A HREF="../../Perl/Critic/PolicyParameter.html">Perl::Critic::PolicyParameter</A> with
-the specified name.
-
-
-</DD>
 <DT><A NAME="set_format(%20%24format%20)"><CODE>set_format( $format )</CODE>
 
 </A></DT>
@@ -384,6 +374,29 @@ See <A HREF="#OVERLOADS">&quot;OVERLOADS&quot;</A> for the details.
 
 
 </DD>
+<DT><A NAME="is_safe()"><CODE>is_safe()</CODE>
+
+</A></DT>
+<DD>
+
+<P>Answer whether this Policy can be used to analyze untrusted code, i.e. the
+Policy doesn't have any potential side effects.
+
+</P>
+<P>This method returns a true value by default.
+
+</P>
+<P>An &quot;unsafe&quot; policy might attempt to compile the code, which, if you have
+<CODE>BEGIN</CODE> or <CODE>CHECK</CODE> blocks that affect files or connect to databases, is not
+a safe thing to do.  If you are writing a such a Policy, then you should
+override this method to return false.
+
+</P>
+<P>By default <A HREF="../../Perl/Critic.html">Perl::Critic</A> will not run unsafe policies.
+
+
+
+</P></DD>
 </DL>
 <H1><A NAME="DOCUMENTATION">DOCUMENTATION
 
@@ -512,14 +525,14 @@ The current maximum number of violations per document of the policy.
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

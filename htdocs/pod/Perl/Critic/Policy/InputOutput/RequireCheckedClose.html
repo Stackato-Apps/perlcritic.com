@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Perl::Critic::Policy::InputOutput::RequireCheckedClose</TITLE>
+<TITLE>NAME</TITLE>
 <LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
@@ -30,7 +30,7 @@
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
@@ -51,8 +51,9 @@ successful.
     use autodie qw&lt; :io &gt;;
     close $filehandle;                               # ok</PRE>
 
-<P>You can use <A HREF="../../../../autodie.html">autodie</A>, <A HREF="../../../../Fatal.html">Fatal</A>, or <A HREF="../../../../Fatal/Exception.html">Fatal::Exception</A> to get around
-this.  Currently, <A HREF="../../../../autodie.html">autodie</A> is not properly treated as a pragma; its
+<P>You can use <A HREF="autodie.html">autodie</A>, <A HREF="Fatal.html">Fatal</A>, or
+<A HREF="Fatal/Exception.html">Fatal::Exception</A> to get around
+this.  Currently, <A HREF="autodie.html">autodie</A> is not properly treated as a pragma; its
 lexical effects aren't taken into account.
 
 
@@ -74,13 +75,13 @@ lexical effects aren't taken into account.
 </A></H1>
 
 <P>This policy module is based heavily on policies written by Jeffrey
-Ryan Thalhammer &lt;thaljef@cpan.org&gt;.
+Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;.
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2007-2009 Andrew Moore.  All rights reserved.
+<P>Copyright (c) 2007-2010 Andrew Moore.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

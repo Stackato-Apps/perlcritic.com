@@ -36,6 +36,8 @@
 </A><UL>
 <LI><A HREF="#default_maximum_violations_per_document()"><CODE>default_maximum_violations_per_document()</CODE>
 
+</A><LI><A HREF="#is_safe()"><CODE>is_safe()</CODE>
+
 </A></UL>
 <LI><A HREF="#DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
 
@@ -47,9 +49,13 @@
 </A><LI><A HREF="#Documentation">Documentation
 
 </A></UL>
-<LI><A HREF="#HINT">HINT
+<LI><A HREF="#TESTING%20YOUR%20POLICY">TESTING YOUR POLICY
+
+</A><LI><A HREF="#HINT">HINT
 
 </A><LI><A HREF="#VERSION">VERSION
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
 
 </A><LI><A HREF="#AUTHOR">AUTHOR
 
@@ -157,7 +163,7 @@ what's wrong.&quot;  The explanation can be either a string with further
 details, or a reference to an array of integers that correspond to
 page numbers in <I>PBP</I>.  We make them read-only because they never
 change.  (See
-<A HREF="Perl/Critic/ValuesAndExpressions/ProhibitConstantPragma.html">Perl::Critic::ValuesAndExpressions::ProhibitConstantPragma</A>
+<A HREF="Perl/Critic/Policy/ValuesAndExpressions/ProhibitConstantPragma.html">Perl::Critic::Policy::ValuesAndExpressions::ProhibitConstantPragma</A>
 for why we don't <CODE>use constant</CODE>.)
 
 </P>
@@ -398,7 +404,9 @@ returns a boolean stating whether the Policy should continue to be
 enabled.  Generally, the only reason to return <CODE>$FALSE</CODE> is when some
 external requirement is missing.  For example,
 <A HREF="Perl/Critic/Policy/CodeLayout/RequireTidyCode.html">Perl::Critic::Policy::CodeLayout::RequireTidyCode</A>
-disables itself if <A HREF="Perl/Tidy.html">Perl::Tidy</A> is not installed.
+used to disable itself if <A HREF="Perl/Tidy.html">Perl::Tidy</A> was not installed
+(that is until we made it no longer optional for the Perl-Critic
+distribution).
 
 </P>
 <P>A basic, do-nothing implementation of <CODE>initialize_if_enabled()</CODE> would
@@ -1101,6 +1109,22 @@ and
 for examples.
 
 
+</P><H2><A NAME="is_safe()"><CODE>is_safe()</CODE>
+
+</A></H2>
+
+<P>Most <A HREF="Perl/Critic.html">Perl::Critic</A> Policies are purely <I>static</I>.  In other words,
+they never compile or execute any of the source code that they
+analyze.  However it is possible to write <I>dynamic</I> Policies that do
+compile or execute code, which may result in unsafe operations (see
+<A HREF="Perl/Critic/Dynamic.html">Perl::Critic::Dynamic</A> for an example).  So
+the <CODE>is_safe()</CODE> method is used to indicate whether a Policy can be
+trusted to not cause mischief.  By default, <CODE>is_safe()</CODE> returns true.
+But if you are writing a Policy that will compile or execute any of
+the source code that it analyzes, then you should override the
+<CODE>is_safe()</CODE> method to return false.
+
+
 </P><H1><A NAME="DISTRIBUTING%20YOUR%20POLICIES">DISTRIBUTING YOUR POLICIES
 
 </A></H1>
@@ -1161,12 +1185,12 @@ descriptions of each.
 
     =item L&lt;Perl::Critic::Policy::Documentation::Example|Perl::Critic::Policy::Documentation::Example&gt;
 
-    Complains about some example documentation issues.  [Severity: 3]
+    Complains about some example documentation issues.  [Default severity: 3]
 
 
     =item L&lt;Perl::Critic::Policy::Variables::Example|Perl::Critic::Policy::Variables::Example&gt;
 
-    All modules must have at least one variable.  [Severity: 3]
+    All modules must have at least one variable.  [Default severity: 3]
 
 
     =back
@@ -1224,9 +1248,15 @@ only to say:
 </P>
 <PRE>    =head1 CONFIGURATION
 
-    This Policy is not configurable except for the standard options.
-</PRE>
-<H1><A NAME="HINT">HINT
+    This Policy is not configurable except for the standard options.</PRE>
+<H1><A NAME="TESTING%20YOUR%20POLICY">TESTING YOUR POLICY
+
+</A></H1>
+
+<P>The <A HREF="Perl/Critic.html">Perl::Critic</A> distribution also contains a framework for testing your
+Policy.  See <A HREF="Test/Perl/Critic/Policy.html">Test::Perl::Critic::Policy</A> for the details.
+
+</P><H1><A NAME="HINT">HINT
 
 </A></H1>
 
@@ -1257,21 +1287,29 @@ and the <CODE>PPI::Tester</CODE> documentation at
 
 </A></H1>
 
-<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.105.
+<P>This is part of <A HREF="Perl/Critic.html">Perl::Critic</A> version 1.110.
+
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P>Chas. Owens has a blog post about developing in-house policies at
+<A HREF="http://svok.blogspot.com/2009/09/adding-house-policies-to-perlcritic.html">http://svok.blogspot.com/2009/09/adding-house-policies-to-perlcritic.html</A>.
 
 
 </P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

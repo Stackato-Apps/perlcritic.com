@@ -147,19 +147,26 @@ in a <I>.perlcriticrc</I> file:
 below the <CODE>=head1</CODE> level.  Also, it does not require the sections to
 appear in any particular order.
 
+</P>
+<P>This Policy applies to the entire document, but can be disabled for a
+particular document by a <CODE>## no critic (RequirePodSections)</CODE> annotation
+anywhere between the beginning of the document and the first POD section
+containing a <CODE>=head1</CODE>, the <CODE>__END__</CODE> (if any), or the <CODE>__DATA__</CODE> (if any),
+whichever comes first.
+
 
 </P><H1><A NAME="AUTHOR">AUTHOR
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2006-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2006-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

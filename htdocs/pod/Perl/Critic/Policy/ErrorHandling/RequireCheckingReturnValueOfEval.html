@@ -114,6 +114,18 @@ true value and to test that value:
 result; <CODE>eval</CODE> returns an empty string on failure.
 
 </P>
+<P>Various modules have been written to take some of the pain out of
+properly localizing and checking <CODE>$@</CODE>/<CODE>$EVAL_ERROR</CODE>. For example:
+
+</P>
+<PRE>    use Try::Tiny;
+    try {
+        ...
+    } catch {
+        # Error handling here;
+        # The exception is in $_/$ARG, not $@/$EVAL_ERROR.
+    };  # Note semicolon.</PRE>
+
 <P>&quot;But we don't use DESTROY() anywhere in our code!&quot; you say.  That may
 be the case, but do any of the third-party modules you use have them?
 What about any you may use in the future or updated versions of the
@@ -134,6 +146,10 @@ ones you already use?
 <P>See thread on perl5-porters starting here:
 <A HREF="http://www.xray.mpe.mpg.de/mailing-lists/perl5-porters/2008-06/msg00537.html">http://www.xray.mpe.mpg.de/mailing-lists/perl5-porters/2008-06/msg00537.html</A>.
 
+</P>
+<P>For a nice, easy, non-magical way of properly handling exceptions, see
+<A HREF="Try/Tiny.html">Try::Tiny</A>.
+
 
 </P><H1><A NAME="AUTHOR">AUTHOR
 
@@ -145,7 +161,7 @@ ones you already use?
 
 </A></H1>
 
-<P>Copyright (c) 2008-2009 Elliot Shank.  All rights reserved.
+<P>Copyright (c) 2008-2010 Elliot Shank.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

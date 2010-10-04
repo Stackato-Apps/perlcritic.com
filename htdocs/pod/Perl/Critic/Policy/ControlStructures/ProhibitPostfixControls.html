@@ -42,33 +42,35 @@ distribution.
 </A></H1>
 
 <P>Conway discourages using postfix control structures (<CODE>if</CODE>, <CODE>for</CODE>,
-<CODE>unless</CODE>, <CODE>until</CODE>, <CODE>while</CODE>) because they hide control flow.  The
-<CODE>unless</CODE> and <CODE>until</CODE> controls are particularly evil because they
-lead to double-negatives that are hard to comprehend.  The only
-tolerable usage of a postfix <CODE>if</CODE> is when it follows a loop break
-such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or <CODE>continue</CODE>.
+<CODE>unless</CODE>, <CODE>until</CODE>, <CODE>when</CODE>, <CODE>while</CODE>) because they hide control
+flow.  The <CODE>unless</CODE> and <CODE>until</CODE> controls are particularly evil
+because they lead to double-negatives that are hard to comprehend.
+The only tolerable usage of a postfix <CODE>if</CODE>/<CODE>when</CODE> is when it follows
+a loop break such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or <CODE>continue</CODE>.
 
 </P>
-<PRE>    do_something() if $condition;         #not ok
-    if($condition){ do_something() }      #ok
+<PRE>    do_something() if $condition;           # not ok
+    if ($condition) { do_something() }      # ok
 
-    do_something() while $condition;      #not ok
-    while($condition){ do_something() }   #ok
+    do_something() while $condition;        # not ok
+    while ($condition) { do_something() }   # ok
 
-    do_something() unless $condition;     #not ok
-    do_something() unless ! $condition;   #really bad
-    if(! $condition){ do_something() }    #ok
+    do_something() unless $condition;       # not ok
+    do_something() unless ! $condition;     # really bad
+    if (! $condition) { do_something() }    # ok
 
-    do_something() until $condition;      #not ok
-    do_something() until ! $condition;    #really bad
-    while(! $condition){ do_something() } #ok
+    do_something() until $condition;        # not ok
+    do_something() until ! $condition;      # really bad
+    while (! $condition) { do_something() } # ok
 
-    do_something($_) for @list;           #not ok
+    do_something($_) for @list;             # not ok
 
     LOOP:
-    for my $n (0..100){
-        next if $condition;               #ok
-        last LOOP if $other_condition;    #also ok
+    for my $n (0..100) {
+        next if $condition;                 # ok
+        last LOOP if $other_condition;      # also ok
+
+        next when m&lt; 0 \z &gt;xms;             # fine too
     }
 </PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -77,8 +79,9 @@ such as <CODE>last</CODE>, <CODE>next</CODE>, <CODE>redo</CODE>, or <CODE>contin
 
 <P>A set of constructs to be ignored by this policy can specified by
 giving a value for 'allow' of a string of space-delimited keywords:
-<CODE>if</CODE>, <CODE>for</CODE>, <CODE>unless</CODE>, <CODE>until</CODE>, and/or <CODE>while</CODE>.  An example of
-specifying allowed flow-control structures in a <I>.perlcriticrc</I> file:
+<CODE>if</CODE>, <CODE>for</CODE>, <CODE>unless</CODE>, <CODE>until</CODE>, <CODE>when</CODE>, and/or <CODE>while</CODE>.  An
+example of specifying allowed flow-control structures in a
+<I>.perlcriticrc</I> file:
 
 </P>
 <PRE>    [ControlStructures::ProhibitPostfixControls]
@@ -109,6 +112,13 @@ permit you to use a postfix <CODE>if</CODE> when the statement begins with one
 of those functions.  It is also pretty common to use <CODE>warn</CODE>, <CODE>carp</CODE>,
 and <CODE>cluck</CODE> with a postfix <CODE>if</CODE>, so those are allowed too.
 
+</P>
+<P>The <CODE>when</CODE> keyword was added to the language after Perl Best
+Practices was written.  This policy treats <CODE>when</CODE> the same way it
+does <CODE>if</CODE>, i.e. it's allowed after flow-control constructs.  Thanks
+to brian d foy for the
+<A HREF="http://www.effectiveperlprogramming.com/blog/543">inspiration</A>.
+
 
 </P><H1><A NAME="BUGS">BUGS
 
@@ -122,14 +132,14 @@ to page 123 when it is found.  RT #37905.
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

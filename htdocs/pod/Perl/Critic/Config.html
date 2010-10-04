@@ -60,159 +60,14 @@ to change without notice.
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-single-policy%20%3d%3e%20%24PATTERN%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%2c%20-color%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B%5d%20)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -single-policy =&gt; $PATTERN, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N, -color =&gt; $B, -criticism-fatal =&gt; $B] )</CODE>
+<DL><DT><A NAME="new(...)"><CODE>new(...)</CODE>
 
 </A></DT>
 <DD>
+Not properly documented because you shouldn't be using this.
+
+
 </DD>
-<DT><A NAME="new()"><CODE>new()</CODE>
-
-</A></DT>
-<DD>
-
-<P>Returns a reference to a new Perl::Critic::Config object.  The default
-value for all arguments can be defined in your <I>.perlcriticrc</I> file.
-See the <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section for more information about that.
-All arguments are optional key-value pairs as follows:
-
-</P>
-<P><B>-profile</B> is a path to a configuration file. If <CODE>$FILE</CODE> is not
-defined, Perl::Critic::Config attempts to find a <I>.perlcriticrc</I>
-configuration file in the current directory, and then in your home
-directory.  Alternatively, you can set the <CODE>PERLCRITIC</CODE> environment
-variable to point to a file in another location.  If a configuration
-file can't be found, or if <CODE>$FILE</CODE> is an empty string, then all
-Policies will be loaded with their default configuration.  See
-<A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> for more information.
-
-</P>
-<P><B>-severity</B> is the minimum severity level.  Only Policy modules that
-have a severity greater than <CODE>$N</CODE> will be loaded into this Config.
-Severity values are integers ranging from 1 (least severe) to 5 (most
-severe).  The default is 5.  For a given <CODE>-profile</CODE>, decreasing the
-<CODE>-severity</CODE> will usually result in more Policy violations.  Users can
-redefine the severity level for any Policy in their <I>.perlcriticrc</I>
-file.  See <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> for more information.
-
-</P>
-<P><B>-theme</B> is special string that defines a set of Policies based on
-their respective themes.  If <CODE>-theme</CODE> is given, only policies that
-are members of that set will be loaded.  See the <A HREF="#POLICY%20THEMES">&quot;POLICY THEMES&quot;</A>
-section for more information about themes.  Unless the <CODE>-severity</CODE>
-option is explicitly given, setting <CODE>-theme</CODE> causes the <CODE>-severity</CODE>
-to be set to 1.
-
-</P>
-<P><B>-include</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Policies
-that match at least one <CODE>m/$PATTERN/ixms</CODE> will be loaded into this
-Config, irrespective of the severity settings.  You can use it in
-conjunction with the <CODE>-exclude</CODE> option.  Note that <CODE>-exclude</CODE> takes
-precedence over <CODE>-include</CODE> when a Policy matches both patterns.
-
-</P>
-<P><B>-exclude</B> is a reference to a list of string <CODE>@PATTERNS</CODE>.  Polices
-that match at least one <CODE>m/$PATTERN/ixms</CODE> will not be loaded into this
-Config, irrespective of the severity settings.  You can use it in
-conjunction with the <CODE>-include</CODE> option.  Note that <CODE>-exclude</CODE> takes
-precedence over <CODE>-include</CODE> when a Policy matches both patterns.
-
-</P>
-<P><B>-single-policy</B> is a string <CODE>PATTERN</CODE>.  Only the policy that
-matches <CODE>m/$PATTERN/ixms</CODE> will be used.  This value overrides the
-<CODE>-severity</CODE>, <CODE>-theme</CODE>, <CODE>-include</CODE>, <CODE>-exclude</CODE>, and <CODE>-only</CODE>
-options.
-
-</P>
-<P><B>-top</B> is the maximum number of Violations to return when ranked by
-their severity levels.  This must be a positive integer.  Violations
-are still returned in the order that they occur within the file.
-Unless the <CODE>-severity</CODE> option is explicitly given, setting <CODE>-top</CODE>
-silently causes the <CODE>-severity</CODE> to be set to 1.
-
-</P>
-<P><B>-only</B> is a boolean value.  If set to a true value, Perl::Critic
-will only choose from Policies that are mentioned in the user's
-profile.  If set to a false value (which is the default), then
-Perl::Critic chooses from all the Policies that it finds at your site.
-
-</P>
-<P><B>-profile-strictness</B> is an enumerated value, one of
-<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_WARN">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_WARN&quot;</A> (the
-default),
-<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>, and
-<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A>.  If set
-to <A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>,
-Perl::Critic will make certain warnings about problems found in a
-<I>.perlcriticrc</I> or file specified via the <B>-profile</B> option fatal.
-For example, Perl::Critic normally only <CODE>warn</CODE>s about profiles
-referring to non-existent Policies, but this value makes this
-situation fatal.  Correspondingly,
-<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A> makes
-Perl::Critic shut up about these things.
-
-</P>
-<P><B>-force</B> controls whether Perl::Critic observes the magical <CODE>&quot;## no
-critic&quot;</CODE> annotations in your code.  If set to a true value,
-Perl::Critic will analyze all code.  If set to a false value (which is
-the default) Perl::Critic will ignore code that is tagged with these
-comments.  See <A HREF="Perl/Critic.html#BENDING%20THE%20RULES">Perl::Critic/&quot;BENDING THE RULES&quot;</A> for more
-information.
-
-</P>
-<P><B>-verbose</B> can be a positive integer (from 1 to 10), or a literal
-format specification.  See
-<A HREF="Perl/Critic/Violations.html">Perl::Critic::Violations</A> for an
-explanation of format specifications.
-
-</P>
-<P><B>-color</B> and <B>-pager</B> are not used by Perl::Critic but is provided
-for the benefit of <A HREF="perlcritic.html">perlcritic</A>.
-
-</P>
-<P><B>-criticism-fatal</B> is not used by Perl::Critic but is provided for
-the benefit of <A HREF="criticism.html">criticism</A>.
-
-</P>
-<P><B>-color-severity-highest</B> is a string representing the highest
-severity violation color, as expected by Term::ANSIColor. It is not
-used by Perl::Critic, but is provided for the benefit of
-<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
-<B>-colour-severity-highest</B>, <B>-color-severity-5</B>, or
-<B>-colour-severity-5</B>.
-
-</P>
-<P><B>-color-severity-high</B> is a string representing the high severity
-violation color, as expected by Term::ANSIColor. It is not used by
-Perl::Critic, but is provided for the benefit of
-<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
-<B>-colour-severity-high</B>, <B>-color-severity-4</B>, or
-<B>-colour-severity-4</B>.
-
-</P>
-<P><B>-color-severity-medium</B> is a string representing the medium
-severity violation color, as expected by Term::ANSIColor. It is not
-used by Perl::Critic, but is provided for the benefit of
-<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
-<B>-colour-severity-medium</B>, <B>-color-severity-3</B>, or
-<B>-colour-severity-3</B>.
-
-</P>
-<P><B>-color-severity-low</B> is a string representing the low severity
-violation color, as expected by Term::ANSIColor. It is not used by
-Perl::Critic, but is provided for the benefit of
-<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
-<B>-colour-severity-low</B>, <B>-color-severity-2</B>, or
-<B>-colour-severity-2</B>.
-
-</P>
-<P><B>-color-severity-lowest</B> is a string representing the lowest
-severity violation color, as expected by Term::ANSIColor. It is not
-used by Perl::Critic, but is provided for the benefit of
-<A HREF="perlcritic.html">perlcritic</A>. It can also be specified as
-<B>-colour-severity-lowest</B>, <B>-color-severity-1</B>, or
-<B>-colour-severity-1</B>.
-
-</P></DD>
 </DL>
 <H1><A NAME="METHODS">METHODS
 
@@ -358,6 +213,14 @@ Returns the value of the <CODE>-pager</CODE> attribute for this Config.
 
 
 </DD>
+<DT><A NAME="unsafe_allowed()"><CODE> unsafe_allowed() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-allow-unsafe</CODE> attribute for this Config.
+
+
+</DD>
 <DT><A NAME="criticism_fatal()"><CODE> criticism_fatal() </CODE>
 
 </A></DT>
@@ -409,6 +272,22 @@ Config.
 Returns the value of the <CODE>-color-severity-lowest</CODE> attribute for this
 Config.
 
+</DD>
+<DT><A NAME="program_extensions()"><CODE> program_extensions() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-program_extensions</CODE> attribute for this Config.
+This is an array of the file name extensions that represent program files.
+
+</DD>
+<DT><A NAME="program_extensions_as_regexes()"><CODE> program_extensions_as_regexes() </CODE>
+
+</A></DT>
+<DD>
+Returns the value of the <CODE>-program_extensions</CODE> attribute for this Config, as
+an array of case-sensitive regexes matching the ends of the file names that
+represent program files.
 
 </DD>
 </DL>
@@ -469,11 +348,13 @@ corresponding Perl::Critic constructor argument.
     include   = NamingConventions ClassHierarchies    #Space-delimited list
     exclude   = Variables  Modules::RequirePackage    #Space-delimited list
     color     = 1                                     #Zero or One
+    allow_unsafe = 1                                  #Zero or One
     color-severity-highest = bold red                 #Term::ANSIColor
     color-severity-high = magenta                     #Term::ANSIColor
     color-severity-medium =                           #no coloring
     color-severity-low =                              #no coloring
-    color-severity-lowest =                           #no coloring</PRE>
+    color-severity-lowest =                           #no coloring
+    program-extensions =                              #Space-delimited list</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like
 this:
@@ -580,7 +461,7 @@ detail in the individual modules themselves.
 to create arbitrary groups of Policies.  They are intended to provide
 an alternative mechanism for selecting your preferred set of Policies.
 For example, you may wish disable a certain subset of Policies when
-analyzing test scripts.  Conversely, you may wish to enable only a
+analyzing test programs.  Conversely, you may wish to enable only a
 specific subset of Policies when analyzing modules.
 
 </P>
@@ -599,7 +480,7 @@ needs.
     cosmetic          Policies that only have a superficial effect
     complexity        Policies that specificaly relate to code complexity
     security          Policies that relate to security issues
-    tests             Policies that are specific to test scripts</PRE>
+    tests             Policies that are specific to test programs</PRE>
 
 <P>Say <CODE>`perlcritic -list`</CODE> to get a listing of all available policies
 and the themes that are associated with each one.  You can also change
@@ -660,14 +541,14 @@ name that doesn't exist is equivalent to an empty set.  Please See
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

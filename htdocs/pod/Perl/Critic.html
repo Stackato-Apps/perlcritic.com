@@ -82,15 +82,16 @@ Policy modules that suit your own tastes.
 <P>For a command-line interface to Perl::Critic, see the documentation
 for <A HREF="perlcritic.html">perlcritic</A>.  If you want to integrate Perl::Critic
 with your build process, <A HREF="Test/Perl/Critic.html">Test::Perl::Critic</A>
-provides an interface that is suitable for test scripts.  Also,
+provides an interface that is suitable for test programs.  Also,
 <A HREF="Test/Perl/Critic/Progressive.html">Test::Perl::Critic::Progressive</A> is
 useful for gradually applying coding standards to legacy code.  For
 the ultimate convenience (at the expense of some flexibility) see the
 <A HREF="criticism.html">criticism</A> pragma.
 
 </P>
-<P>Win32 and ActivePerl users can find PPM distributions of Perl::Critic
-at <A HREF="http://theoryx5.uwinnipeg.ca/ppms/">http://theoryx5.uwinnipeg.ca/ppms/</A>.
+<P>Win32 and ActivePerl users can find PPM distributions of Perl::Critic at
+<A HREF="http://theoryx5.uwinnipeg.ca/ppms/">http://theoryx5.uwinnipeg.ca/ppms/</A> and Alexandr Ciornii's downloadable
+executable at <A HREF="http://chorny.net/perl/perlcritic.html">http://chorny.net/perl/perlcritic.html</A>.
 
 </P>
 <P>If you'd like to try <A HREF="Perl/Critic.html">Perl::Critic</A> without installing
@@ -126,7 +127,7 @@ will go through a deprecation cycle.
 </P><H1><A NAME="CONSTRUCTOR">CONSTRUCTOR
 
 </A></H1>
-<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-pager%20%3d%3e%20%24string%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -pager =&gt; $string, -criticism-fatal =&gt; $B)</CODE>
+<DL><DT><A NAME="new(%20%5b%20-profile%20%3d%3e%20%24FILE%2c%20-severity%20%3d%3e%20%24N%2c%20-theme%20%3d%3e%20%24string%2c%20-include%20%3d%3e%20%5c%40PATTERNS%2c%20-exclude%20%3d%3e%20%5c%40PATTERNS%2c%20-top%20%3d%3e%20%24N%2c%20-only%20%3d%3e%20%24B%2c%20-profile-strictness%20%3d%3e%20%24PROFILE_STRICTNESS_%7bWARN%7cFATAL%7cQUIET%7d%2c%20-force%20%3d%3e%20%24B%2c%20-verbose%20%3d%3e%20%24N%20%5d%2c%20-color%20%3d%3e%20%24B%2c%20-pager%20%3d%3e%20%24string%2c%20-allow-unsafe%20%3d%3e%20%24B%2c%20-criticism-fatal%20%3d%3e%20%24B)"><CODE>new( [ -profile =&gt; $FILE, -severity =&gt; $N, -theme =&gt; $string, -include =&gt; \@PATTERNS, -exclude =&gt; \@PATTERNS, -top =&gt; $N, -only =&gt; $B, -profile-strictness =&gt; $PROFILE_STRICTNESS_{WARN|FATAL|QUIET}, -force =&gt; $B, -verbose =&gt; $N ], -color =&gt; $B, -pager =&gt; $string, -allow-unsafe =&gt; $B, -criticism-fatal =&gt; $B)</CODE>
 
 </A></DT>
 <DD>
@@ -274,6 +275,11 @@ format specification.  See
 <A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> for an explanation
 of format specifications.  You can set the default value for this
 option in your <I>.perlcriticrc</I> file.
+
+</P>
+<P><B>-unsafe</B> directs Perl::Critic to allow the use of Policies that are marked
+as &quot;unsafe&quot; by the author.  Such policies may compile untrusted code or do
+other nefarious things.
 
 </P>
 <P><B>-color</B> and <B>-pager</B> are not used by Perl::Critic but is provided for the benefit
@@ -432,6 +438,7 @@ corresponding constructor argument.
     exclude   = Variables  Modules::RequirePackage    #Space-delimited list
     criticism-fatal = 1                               #Zero or One
     color     = 1                                     #Zero or One
+    allow-unsafe = 1                                  #Zero or One
     pager     = less                                  #pager to pipe output to</PRE>
 
 <P>The remainder of the configuration file is a series of blocks like
@@ -580,7 +587,7 @@ section below for a list of some of these distributions.
 to create arbitrary groups of Policies.  They are intended to provide
 an alternative mechanism for selecting your preferred set of Policies.
 For example, you may wish disable a certain subset of Policies when
-analyzing test scripts.  Conversely, you may wish to enable only a
+analyzing test programs.  Conversely, you may wish to enable only a
 specific subset of Policies when analyzing modules.
 
 </P>
@@ -599,7 +606,7 @@ needs.
     cosmetic          Policies that only have a superficial effect
     complexity        Policies that specificaly relate to code complexity
     security          Policies that relate to security issues
-    tests             Policies that are specific to test scripts
+    tests             Policies that are specific to test programs
 </PRE>
 
 <P>Any Policy may fit into multiple themes.  Say <CODE>&quot;perlcritic -list&quot;</CODE> to
@@ -657,12 +664,11 @@ certain lines or blocks of code by using annotations:
         do_something($_);
     }</PRE>
 
-<P>The <CODE>&quot;## no critic&quot;</CODE> annotations direct Perl::Critic to ignore the
-remaining lines of code until the end of the current block, or until a
-<CODE>&quot;## use critic&quot;</CODE> annotation is found (whichever comes first).  If the
-<CODE>&quot;## no critic&quot;</CODE> annotation is on the same line as a code statement,
-then only that line of code is overlooked.  To direct this Critic to
-ignore the <CODE>&quot;## no critic&quot;</CODE> annotations, use the <CODE>-force</CODE> option.
+<P>The <CODE>&quot;## no critic&quot;</CODE> annotations direct Perl::Critic to ignore the remaining
+lines of code until a <CODE>&quot;## use critic&quot;</CODE> annotation is found. If the <CODE>&quot;## no
+critic&quot;</CODE> annotation is on the same line as a code statement, then only that
+line of code is overlooked.  To direct perlcritic to ignore the <CODE>&quot;## no
+critic&quot;</CODE> annotations, use the <CODE>--force</CODE> option.
 
 </P>
 <P>A bare <CODE>&quot;## no critic&quot;</CODE> annotation disables all the active Policies.  If
@@ -754,7 +760,7 @@ this distribution for a step-by-step demonstration of how to create
 new Policy modules.
 
 </P>
-<P>If you develop any new Policy modules, feel free to send them to <CODE>&lt;thaljef@cpan.org&gt;</CODE> and I'll be happy to put them into the
+<P>If you develop any new Policy modules, feel free to send them to <CODE>&lt;jeff@imaginative-software.com&gt;</CODE> and I'll be happy to put them into the
 Perl::Critic distribution.  Or if you would like to work on the
 Perl::Critic project directly, check out our repository at
 <A HREF="http://perlcritic.tigris.org">http://perlcritic.tigris.org</A>.  To subscribe to our mailing list,
@@ -766,7 +772,7 @@ organization has its own coding standards, we can create custom
 Policies to enforce your local guidelines.  Or if your code base is
 prone to a particular defect pattern, we can design Policies that will
 help you catch those costly defects <B>before</B> they go into production.
-To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
+To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;jeff@imaginative-software.com&gt;</CODE>.
 
 
 </P><H1><A NAME="PREREQUISITES">PREREQUISITES
@@ -780,6 +786,9 @@ To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;thaljef
 
 </P>
 <P><A HREF="Config/Tiny.html">Config::Tiny</A>
+
+</P>
+<P><A HREF="Email/Address.html">Email::Address</A>
 
 </P>
 <P><A HREF="Exception/Class.html">Exception::Class</A>
@@ -803,10 +812,19 @@ To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;thaljef
 <P><A HREF="Module/Pluggable.html">Module::Pluggable</A>
 
 </P>
+<P><A HREF="Perl/Tidy.html">Perl::Tidy</A>
+
+</P>
+<P><A HREF="Pod/Spell.html">Pod::Spell</A>
+
+</P>
 <P><A HREF="PPI.html">PPI</A>
 
 </P>
 <P><A HREF="Pod/PlainText.html">Pod::PlainText</A>
+
+</P>
+<P><A HREF="Pod/Select.html">Pod::Select</A>
 
 </P>
 <P><A HREF="Pod/Usage.html">Pod::Usage</A>
@@ -821,39 +839,24 @@ To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;thaljef
 <P><A HREF="String/Format.html">String::Format</A>
 
 </P>
+<P><A HREF="Task/Weaken.html">Task::Weaken</A>
+
+</P>
+<P><A HREF="Text/ParseWords.html">Text::ParseWords</A>
+
+</P>
 <P><A HREF="version.html">version</A>
 
 
 </P>
 <P>The following modules are optional, but recommended for complete
-testing:
+functionality:
 
 </P>
 <P><A HREF="File/HomeDir.html">File::HomeDir</A>
 
 </P>
 <P><A HREF="File/Which.html">File::Which</A>
-
-</P>
-<P><A HREF="IO/String.html">IO::String</A>
-
-</P>
-<P><A HREF="IPC/Open2.html">IPC::Open2</A>
-
-</P>
-<P><A HREF="Perl/Tidy.html">Perl::Tidy</A>
-
-</P>
-<P><A HREF="Pod/Spell.html">Pod::Spell</A>
-
-</P>
-<P><A HREF="Test/Pod.html">Test::Pod</A>
-
-</P>
-<P><A HREF="Test/Pod/Coverage.html">Test::Pod::Coverage</A>
-
-</P>
-<P><A HREF="Text/ParseWords.html">Text::ParseWords</A>
 
 
 </P><H1><A NAME="CONTACTING%20THE%20DEVELOPMENT%20TEAM">CONTACTING THE DEVELOPMENT TEAM
@@ -863,7 +866,7 @@ testing:
 <P>You are encouraged to subscribe to the mailing list; send a message to
 <A HREF="mailto:users-subscribe@perlcritic.tigris.org">mailto:users-subscribe@perlcritic.tigris.org</A>.  See also the archives at
 <A HREF="http://perlcritic.tigris.org/servlets/SummarizeList?listName=users">http://perlcritic.tigris.org/servlets/SummarizeList?listName=users</A>.
-You can also contact the author at <CODE>&lt;thaljef@cpan.org&gt;</CODE>.
+You can also contact the author at <CODE>&lt;jeff@imaginative-software.com&gt;</CODE>.
 
 </P>
 <P>At least one member of the development team has started hanging around
@@ -971,14 +974,14 @@ Chris Dolan's project to implement twenty PBP policies.
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+<TITLE>Perl::Critic::Policy::Subroutines::ProhibitUnusedPrivateSubroutines</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#HISTORY">HISTORY
+
+</A><LI><A HREF="#BUGS">BUGS
+
+</A><LI><A HREF="#SEE%20ALSO">SEE ALSO
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Subroutines::ProhibitUnusedPrivateSubroutines - Prevent unused private subroutines.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="../../../../Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>By convention Perl authors (like authors in many other languages)
+indicate private methods and variables by inserting a leading
+underscore before the identifier.  This policy catches such subroutines
+which are not used in the file which declares them.
+
+</P>
+<P>This module defines a 'use' of a subroutine as a subroutine or method call to
+it (other than from inside the subroutine itself), a reference to it (i.e.
+<CODE>my $foo = \&amp;_foo</CODE>), a <CODE>goto</CODE> to it outside the subroutine itself (i.e.
+<CODE>goto &amp;_foo</CODE>), or the use of the subroutine's name as an even-numbered
+argument to <CODE>use overload</CODE>.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>You can define what a private subroutine name looks like by specifying
+a regular expression for the <CODE>private_name_regex</CODE> option in your
+<I>.perlcriticrc</I>:
+
+</P>
+<PRE>    [Subroutines::ProhibitUnusedPrivateSubroutines]
+    private_name_regex = _(?!_)\w+</PRE>
+
+<P>The above example is a way of saying that subroutines that start with
+a double underscore are not considered to be private.  (Perl::Critic,
+in its implementation, uses leading double underscores to indicate a
+distribution-private subroutine -- one that is allowed to be invoked by
+other Perl::Critic modules, but not by anything outside of
+Perl::Critic.)
+
+</P>
+<P>You can configure additional subroutines to accept by specifying them
+in a space-delimited list to the <CODE>allow</CODE> option:
+
+</P>
+<PRE>    [Subroutines::ProhibitUnusedPrivateSubroutines]
+    allow = _bar _baz</PRE>
+
+<P>These are added to the default list of exemptions from this policy. So the
+above allows <CODE>sub _bar {}</CODE> and <CODE>sub _baz {}</CODE>, even if they are not
+referred to in the module that defines them.
+
+
+</P><H1><A NAME="HISTORY">HISTORY
+
+</A></H1>
+
+<P>This policy is derived from
+<A HREF="../../../../Perl/Critic/Policy/Subroutines/ProtectPrivateSubs.html">Perl::Critic::Policy::Subroutines::ProtectPrivateSubs</A>,
+which looks at the other side of the problem.
+
+
+</P><H1><A NAME="BUGS">BUGS
+
+</A></H1>
+
+<P>Does not forbid <CODE>sub Foo::_foo{}</CODE> because it does not know (and can not
+assume) what is in the <CODE>Foo</CODE> package.
+
+
+</P><H1><A NAME="SEE%20ALSO">SEE ALSO
+
+</A></H1>
+
+<P><A HREF="../../../../Perl/Critic/Policy/Subroutines/ProtectPrivateSubs.html">Perl::Critic::Policy::Subroutines::ProtectPrivateSubs</A>.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Chris Dolan &lt;cdolan@cpan.org&gt;
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2009-2010 Thomas R. Wyant, III.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

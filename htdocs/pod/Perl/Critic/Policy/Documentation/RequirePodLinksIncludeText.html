@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Documentation::RequirePodLinksIncludeText - Provide text to display with your pod links.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>This Policy requires your POD links to contain text to override your POD
+translator's default link text, where this is possible.  Failure to provide
+your own text leaves you at the mercy of the POD translator, which may
+display something like <CODE>L&lt;Foo&gt;</CODE> as <CODE>the Foo manpage</CODE>.
+
+</P>
+<P>By default, links that specify a documentation section (for example, <CODE>L&lt;Foo/bar&gt;</CODE>, or <CODE>L&lt;/bar&gt;</CODE>) are exempt from this Policy.
+
+
+</P><H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy has two boolean options to configure the handling of links that
+specify a documentation section.
+
+</P>
+<P>The <CODE>allow_external_sections</CODE> option configures the handling of links of the
+form <CODE>L&lt;Foo/bar&gt;</CODE>.  If true, such links are accepted even without a text
+specification.  Such links tend to be turned into something like <CODE>bar in
+Foo</CODE>.
+
+</P>
+<P>By default, this option is asserted.  If you want to prohibit things like
+<CODE>L&lt;Foo/bar&gt;</CODE> (while allowing things like <CODE>L&lt;&lt; Foo-&gt;bar()|Foo/bar &gt;&gt;</CODE>), put something like this in your <I>.perlcriticrc</I>:
+
+</P>
+<PRE> [Documentation::RequirePodLinksIncludeText]
+ allow_external_sections = 0</PRE>
+
+<P>The <CODE>allow_internal_sections</CODE> option configures the handling of links of the
+form <CODE>L&lt;/bar&gt;</CODE>.  If true, such links are accepted even without a text
+specification.  Such links tend to be turned into something like <CODE>bar</CODE>.
+
+</P>
+<P>By default, this option is asserted.  If you want to prohibit things like
+<CODE>L&lt;/bar&gt;</CODE> (while allowing things like <CODE>L&lt;bar()|/bar&gt;</CODE>), put
+something like this in your <I>.perlcriticrc</I>:
+
+</P>
+<PRE> [Documentation::RequirePodLinksIncludeText]
+ allow_internal_sections = 0
+</PRE>
+<H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Thomas R. Wyant, III <I>wyant at cpan dot org</I>
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2009-2010 Thomas R. Wyant, III.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module
+
+</P>
+</BODY>
+</HTML>

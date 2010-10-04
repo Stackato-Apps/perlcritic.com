@@ -44,13 +44,41 @@ distribution.
 value of a match before using those variables.
 
 </P>
-<P>This policy checks that the previous regexp for which the capture variable is
-in-scope is either in a conditional or causes an exception if the match fails.
+<P>This policy checks that the previous regexp for which the capture
+variable is in-scope is either in a conditional or causes an exception
+or other control transfer (i.e. <CODE>next</CODE>, <CODE>last</CODE>, <CODE>redo</CODE>, <CODE>return</CODE>, or
+sometimes <CODE>goto</CODE>) if the match fails.
+
+</P>
+<P>A <CODE>goto</CODE> is only accepted by this policy if it is a co-routine call
+(i.e.  <CODE>goto &amp;foo</CODE>) or a <CODE>goto LABEL</CODE> where the label does not fall
+between the <CODE>goto</CODE> and the capture variable in the scope of the
+<CODE>goto</CODE>. A computed <CODE>goto</CODE> (i.e. something like <CODE>goto (qw{foo bar
+baz})[$i]</CODE>) is not accepted by this policy because its target can not be
+statically determined.
 
 </P>
 <P>This policy does not check whether that conditional is actually
 testing a regexp result, nor does it check whether a regexp actually
 has a capture in it.  Those checks are too hard.
+
+</P>
+<P>This policy also does not check arbitrarily complex conditionals guarding
+regexp results, for pretty much the same reason.  Simple things like
+
+</P>
+<PRE> m/(foo)/ or die &quot;No foo!&quot;;
+ die &quot;No foo!&quot; unless m/(foo)/;</PRE>
+
+<P>will be handled, but something like
+
+</P>
+<PRE> m/(foo) or do {
+   ... lots of complicated calculations here ...
+   die &quot;No foo!&quot;;
+ };</PRE>
+
+<P>are beyond its scope.
 
 
 </P><H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -58,9 +86,9 @@ has a capture in it.  Those checks are too hard.
 </A></H1>
 
 <P>By default, this policy considers <CODE>die</CODE>, <CODE>croak</CODE>, and <CODE>confess</CODE> to
-throw exceptions. If you have additional routines that may be used in
-lieu of one of these, you can configure them in your perlcriticrc as
-follows:
+throw exceptions. If you have additional subroutines or methods that may
+be used in lieu of one of these, you can configure them in your
+perlcriticrc as follows:
 
 </P>
 <PRE> [RegularExpressions::ProhibitCaptureWithoutTest]
@@ -68,23 +96,6 @@ follows:
 <H1><A NAME="BUGS">BUGS
 
 </A></H1>
-
-<P>Needs to allow this construct:
-
-</P>
-<PRE>    for ( ... ) {
-        next unless /(....)/;
-        if ( $1 ) {
-            ....
-        }
-    }</PRE>
-
-<P>Right now, Perl::Critic thinks that the <CODE>$1</CODE> isn't legal to use
-because it's &quot;outside&quot; of the match.  The thing is, we can only get to
-the <CODE>if</CODE> if the regex matched.
-
-</P>
-<PRE>    while ( $str =~ /(expression)/ )</PRE>
 
 <P>This policy does not recognize named capture variables. Yet.
 
@@ -99,7 +110,7 @@ the <CODE>if</CODE> if the regex matched.
 
 </A></H1>
 
-<P>Copyright (c) 2006-2009 Chris Dolan.
+<P>Copyright (c) 2006-2010 Chris Dolan.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

@@ -65,9 +65,8 @@ flagged to ignore.  If the spell checker returns any misspelled words,
 this policy emits a violation.
 
 </P>
-<P>If anything else goes wrong -- you don't have Pod::Spell installed or
-we can't locate the spell checking program or (gasp!) your module has
-no POD -- then this policy passes.
+<P>If anything else goes wrong -- we can't locate the spell checking program or
+(gasp!) your module has no POD -- then this policy passes.
 
 </P>
 <P>To add exceptions on a module-by-module basis, add &quot;stopwords&quot; as
@@ -126,17 +125,27 @@ together into a single list of exemptions.
 
 </A></H1>
 
-<P><A HREF="Pod/Spell.html">Pod::Spell</A> is not included with Perl::Critic, nor is a
-spell checking program.
+<P>A spell checking program is not included with Perl::Critic.
+
+</P>
+<P>The results of failures for this policy can be confusing when <I>aspell</I>
+complains about words containing punctuation such as hyphens and apostrophes.
+In this situation <I>aspell</I> will often only emit part of the word that it
+thinks is misspelled.  For example, if you ask <I>aspell</I> to check
+&quot;foobie-bletch&quot;, the output only complains about &quot;foobie&quot;.  Unfortunately,
+you'll have to look through your POD to figure out what the real word that
+<I>aspell</I> is complaining about is.  One thing to try is looking at the output
+of <CODE>perl -MPod::Spell -e 'print
+Pod::Spell-&gt;new()-&gt;parse_from_file(&quot;lib/Your/Module.pm&quot;)'</CODE> to see what is
+actually being checked for spelling.
 
 
 </P><H1><A NAME="PREREQUISITES">PREREQUISITES
 
 </A></H1>
 
-<P>This policy will disable itself if any of the following are
-unavailable: <A HREF="File/Which.html">File::Which</A>, <A HREF="IO/String.html">IO::String</A>,
-<A HREF="Pod/Spell.html">Pod::Spell</A>, or <A HREF="Text/ParseWords.html">Text::ParseWords</A>.
+<P>This policy will disable itself if <A HREF="File/Which.html">File::Which</A> is not
+available.
 
 
 </P><H1><A NAME="CREDITS">CREDITS
@@ -158,7 +167,7 @@ Perl Foundation.
 
 </A></H1>
 
-<P>Copyright (c) 2007-2009 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2010 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

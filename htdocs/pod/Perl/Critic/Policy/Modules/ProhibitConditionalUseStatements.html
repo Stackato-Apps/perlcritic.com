@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>NAME</TITLE>
+<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<UL>
+<LI><A HREF="#NAME">NAME
+
+</A><LI><A HREF="#AFFILIATION">AFFILIATION
+
+</A><LI><A HREF="#DESCRIPTION">DESCRIPTION
+
+</A><LI><A HREF="#CONFIGURATION">CONFIGURATION
+
+</A><LI><A HREF="#AUTHOR">AUTHOR
+
+</A><LI><A HREF="#COPYRIGHT">COPYRIGHT
+
+</A></UL>
+<HR>
+<H1><A NAME="NAME">NAME
+
+</A></H1>
+
+<P>Perl::Critic::Policy::Modules::ProhibitConditionalUseStatements - Avoid putting conditional logic around compile-time includes.
+
+
+</P><H1><A NAME="AFFILIATION">AFFILIATION
+
+</A></H1>
+
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
+distribution.
+
+
+</P><H1><A NAME="DESCRIPTION">DESCRIPTION
+
+</A></H1>
+
+<P>Modules included via &quot;use&quot; are loaded at compile-time.  Placing conditional
+logic around the &quot;use&quot; statement has no effect on whether the module will be
+loaded.  Doing so can also serve to confuse the reader as to the author's
+original intent.
+
+</P>
+<P>If you need to conditionally load a module you should be using &quot;require&quot;
+instead.
+
+</P>
+<P>This policy will catch the following forms of conditional &quot;use&quot; statements:
+
+</P>
+<PRE>    # if-elsif-else
+    if ($a == 1) { use Module; }
+    if ($a == 1) { } elsif ($a == 2) { use Module; }
+    if ($a == 1) { } else { use Module; }
+    
+    # for/foreach
+    for (1..$a) { use Module; }
+    foreach (@a) { use Module; }
+    
+    # while
+    while ($a == 1) { use Module; }
+    
+    # unless
+    unless ($a == 1) { use Module; }
+    
+    # until
+    until ($a == 1) { use Module; }
+    
+    # do-condition
+    do { use Module; } if $a == 1;
+    do { use Module; } while $a == 1;
+    do { use Module; } unless $a == 1;
+    do { use Module; } until $a == 1;
+    
+    # operator-do
+    $a == 1 || do { use Module; };
+    $a == 1 &amp;&amp; do { use Module; };
+    $a == 1 or do { use Module; };
+    $a == 1 and do { use Module; };
+    
+    # non-string eval
+    eval { use Module; };</PRE>
+
+<P>Including a module via &quot;use&quot; in bare blocks, standalone do blocks, or
+string evals is allowed.
+
+</P>
+<PRE>    # bare block
+    { use Module; }
+    
+    # do
+    do { use Module; }
+    
+    # string eval
+    eval &quot;use Module&quot;;</PRE>
+<H1><A NAME="CONFIGURATION">CONFIGURATION
+
+</A></H1>
+
+<P>This Policy is not configurable except for the standard options.
+
+
+</P><H1><A NAME="AUTHOR">AUTHOR
+
+</A></H1>
+
+<P>Peter Guzis &lt;pguzis@cpan.org&gt;
+
+
+</P><H1><A NAME="COPYRIGHT">COPYRIGHT
+
+</A></H1>
+
+<P>Copyright (c) 2010 Peter Guzis.  All rights reserved.
+
+</P>
+<P>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.  The full text of this license
+can be found in the LICENSE file included with this module.
+
+</P>
+</BODY>
+</HTML>

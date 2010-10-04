@@ -393,14 +393,8 @@ passed the nodes that represent the interior of a list, like:
 
 </A></DT>
 <DD>
-Given a <A HREF="../../PPI/Document.html">PPI::Document</A>, test if it starts with
-<CODE>/#!.*/</CODE>.  If so, it is judged to be a script instead of a module.
-Also, if the filename of the document ends in &quot;.PL&quot; then it is
-also judged to be a script.  However, this only works if the
-document is a <A HREF="../../PPI/Document/File.html">PPI::Document::File</A>.  If it
-isn't, then the filename is not available and it has no bearing on
-how the document is judged.
-See <CODE>shebang_line()</CODE>.
+<B>This subroutine is deprecated and will be removed in a future release.</B> You
+should use the <A HREF="../../Perl/Critic/Document.html#is_program()">Perl::Critic::Document/&quot;is_program()&quot;</A> method instead.
 
 
 </DD>
@@ -869,14 +863,14 @@ themselves, so as to mark any module using them as needing cleanup.
 
 </A></H1>
 
-<P>Jeffrey Ryan Thalhammer &lt;thaljef@cpan.org&gt;
+<P>Jeffrey Ryan Thalhammer &lt;jeff@imaginative-software.com&gt;
 
 
 </P><H1><A NAME="COPYRIGHT">COPYRIGHT
 
 </A></H1>
 
-<P>Copyright (c) 2005-2009 Jeffrey Ryan Thalhammer.  All rights reserved.
+<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify
