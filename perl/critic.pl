@@ -34,7 +34,7 @@ if ( http('HTTP_USER_AGENT') =~ m{ (?: mozilla|msie ) }imx ) {
         my $severity            = param('severity');
 	my ($raw, $cooked)      = load_source_code( $HL, $source_fh );
 	my $code_frame_url      = generate_code_frame( $TT, $cooked );
-	my @violations          = critique_source_code( $severity, $raw );
+	my @violations          = critique_source_code( $severity, $raw, $source_path );
 	my $critique_frame_url  = generate_critique_frame( $TT, $code_frame_url, @violations );
 	my $status              = render_page( $TT, $source_path, $code_frame_url, $critique_frame_url );
     };
@@ -65,9 +65,10 @@ sub render_page {
 #-----------------------------------------------------------------------------
 
 sub critique_source_code {
-    my ($severity, $source_ref) = @_;
+    my ($severity, $source_ref, $source_path) = @_;
     my $critic = Perl::Critic->new( -severity => $severity, -theme => 'core' );
-    my @viols = $critic->critique( $source_ref );
+    my $doc = Perl::Critic::Document->new( -source => $source_ref, '-forced-filename' => $source_path);
+    my @viols = $critic->critique( $doc );
     return @viols;
 }
 
