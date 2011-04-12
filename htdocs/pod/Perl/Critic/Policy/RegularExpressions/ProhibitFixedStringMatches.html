@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::RegularExpressions::ProhibitFixedStringMatches</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -69,9 +69,12 @@ strings.
     Readonly::Hash my %PERL_KEYWORDS =&gt; map {$_ =&gt; 1} qw(
         chomp chop chr crypt hex index lc lcfirst length oct ord ...
     );
-    my $is_perl_keyword = $PERL_KEYWORD{$token};
-</PRE>
-<H2><A NAME="VARIANTS">VARIANTS
+    my $is_perl_keyword = $PERL_KEYWORD{$token};</PRE>
+
+<P>Conway also suggests using <CODE>lc()</CODE> instead of a case-insensitive match.
+
+
+</P><H2><A NAME="VARIANTS">VARIANTS
 
 </A></H2>
 
@@ -120,7 +123,7 @@ Perl Foundation.
 
 </A></H1>
 
-<P>Copyright (c) 2007-2010 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2011 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

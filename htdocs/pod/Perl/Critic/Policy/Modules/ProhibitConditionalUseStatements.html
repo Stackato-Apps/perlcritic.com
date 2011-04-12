@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -29,7 +29,7 @@
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="/pod/Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
@@ -54,32 +54,32 @@ instead.
     if ($a == 1) { use Module; }
     if ($a == 1) { } elsif ($a == 2) { use Module; }
     if ($a == 1) { } else { use Module; }
-    
+
     # for/foreach
     for (1..$a) { use Module; }
     foreach (@a) { use Module; }
-    
+
     # while
     while ($a == 1) { use Module; }
-    
+
     # unless
     unless ($a == 1) { use Module; }
-    
+
     # until
     until ($a == 1) { use Module; }
-    
+
     # do-condition
     do { use Module; } if $a == 1;
     do { use Module; } while $a == 1;
     do { use Module; } unless $a == 1;
     do { use Module; } until $a == 1;
-    
+
     # operator-do
     $a == 1 || do { use Module; };
     $a == 1 &amp;&amp; do { use Module; };
     $a == 1 or do { use Module; };
     $a == 1 and do { use Module; };
-    
+
     # non-string eval
     eval { use Module; };</PRE>
 
@@ -89,10 +89,10 @@ string evals is allowed.
 </P>
 <PRE>    # bare block
     { use Module; }
-    
+
     # do
     do { use Module; }
-    
+
     # string eval
     eval &quot;use Module&quot;;</PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
@@ -113,7 +113,7 @@ string evals is allowed.
 
 </A></H1>
 
-<P>Copyright (c) 2010 Peter Guzis.  All rights reserved.
+<P>Copyright (c) 2010-2011 Peter Guzis.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

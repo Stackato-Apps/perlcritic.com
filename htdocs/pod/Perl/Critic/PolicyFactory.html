@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -34,7 +34,7 @@
 </A></H1>
 
 <P>This is a helper class that instantiates
-<A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects with the user's
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> objects with the user's
 preferred parameters. There are no user-serviceable parts here.
 
 
@@ -58,12 +58,12 @@ to change without notice.
 
 </P>
 <P><B>-profile</B> is a reference to a
-<A HREF="/pod/Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.  This
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A> object.  This
 argument is required.
 
 </P>
 <P><B>-errors</B> is a reference to an instance of
-<A HREF="/pod/Perl/Critic/ConfigErrors.html">Perl::Critic::ConfigErrors</A>.  This
+<A HREF="Perl/Critic/ConfigErrors.html">Perl::Critic::ConfigErrors</A>.  This
 argument is optional.  If specified, than any problems found will be
 added to the object.
 
@@ -83,7 +83,7 @@ will throw a fatal exception.  Otherwise, it returns a reference to
 the new Policy object.
 
 </P>
-<P><B>-name</B> is the name of a <A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A>
+<P><B>-name</B> is the name of a <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A>
 subclass module.  The <CODE>'Perl::Critic::Policy'</CODE> portion of the name
 can be omitted for brevity.  This argument is required.
 
@@ -91,11 +91,11 @@ can be omitted for brevity.  This argument is required.
 <P><B>-params</B> is an optional reference to hash of parameters that will be
 passed into the constructor of the Policy.  If <CODE>-params</CODE> is not
 defined, we will use the appropriate Policy parameters from the
-<A HREF="/pod/Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>.
 
 </P>
 <P>Note that the Policy will not have had
-<A HREF="/pod/Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on it, so it
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on it, so it
 may not yet be usable.
 
 
@@ -106,13 +106,13 @@ may not yet be usable.
 <DD>
 
 <P>Constructs and returns one instance of each
-<A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass that is
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass that is
 installed on the local system.  Each Policy will be created with the
 appropriate parameters from the user's configuration profile.
 
 </P>
 <P>Note that the Policies will not have had
-<A HREF="/pod/Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on them, so
+<A HREF="Perl/Critic/Policy.html#initialize_if_enabled">Perl::Critic::Policy/&quot;initialize_if_enabled&quot;</A> invoked on them, so
 they may not yet be usable.
 
 
@@ -148,7 +148,7 @@ have been installed.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
+<P>Copyright (c) 2005-2011 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

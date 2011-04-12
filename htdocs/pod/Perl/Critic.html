@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -26,7 +26,7 @@
 
 </A><LI><A HREF="#BENDING%20THE%20RULES">BENDING THE RULES
 
-</A><LI><A HREF="#THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="/pod/Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
+</A><LI><A HREF="#THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
 
 </A><LI><A HREF="#EXTENDING%20THE%20CRITIC">EXTENDING THE CRITIC
 
@@ -70,7 +70,7 @@
 <P>Perl::Critic is an extensible framework for creating and applying
 coding standards to Perl source code.  Essentially, it is a static
 source code analysis engine.  Perl::Critic is distributed with a
-number of <A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A> modules that
+number of <A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> modules that
 attempt to enforce various coding guidelines.  Most Policy modules are
 based on Damian Conway's book <B>Perl Best Practices</B>.  However,
 Perl::Critic is <B>not</B> limited to PBP and will even support Policies
@@ -94,7 +94,7 @@ the ultimate convenience (at the expense of some flexibility) see the
 executable at <A HREF="http://chorny.net/perl/perlcritic.html">http://chorny.net/perl/perlcritic.html</A>.
 
 </P>
-<P>If you'd like to try <A HREF="/pod/Perl/Critic.html">Perl::Critic</A> without installing
+<P>If you'd like to try <A HREF="Perl/Critic.html">Perl::Critic</A> without installing
 anything, there is a web-service available at
 <A HREF="http://perlcritic.com">http://perlcritic.com</A>.  The web-service does not yet support all
 the configuration features that are available in the native
@@ -139,7 +139,7 @@ will go through a deprecation cycle.
 
 <P>Returns a reference to a new Perl::Critic object.  Most arguments are
 just passed directly into
-<A HREF="/pod/Perl/Critic/Config.html">Perl::Critic::Config</A>, but I have described
+<A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A>, but I have described
 them here as well.  The default value for all arguments can be defined
 in your <I>.perlcriticrc</I> file.  See the <A HREF="#CONFIGURATION">&quot;CONFIGURATION&quot;</A> section for
 more information about that.  All arguments are optional key-value
@@ -179,6 +179,11 @@ values:
     -severity =&gt; 'cruel'                      -severity =&gt; 2
     -severity =&gt; 'brutal'                     -severity =&gt; 1</PRE>
 
+<P>The names reflect how severely the code is criticized: a <CODE>gentle</CODE>
+criticism reports only the most severe violations, and so on down to a
+<CODE>brutal</CODE> criticism which reports even the most minor violations.
+
+</P>
 <P><B>-theme</B> is special expression that determines which Policies to
 apply based on their respective themes.  For example, the following
 would load only Policies that have a 'bugs' AND 'pbp' theme:
@@ -247,17 +252,17 @@ file.
 
 </P>
 <P><B>-profile-strictness</B> is an enumerated value, one of
-<A HREF="/pod/Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_WARN">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_WARN&quot;</A> (the
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_WARN">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_WARN&quot;</A> (the
 default),
-<A HREF="/pod/Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>, and
-<A HREF="/pod/Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A>.  If set
-to <A HREF="/pod/Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>,
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>, and
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A>.  If set
+to <A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_FATAL">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_FATAL&quot;</A>,
 Perl::Critic will make certain warnings about problems found in a
 <I>.perlcriticrc</I> or file specified via the <B>-profile</B> option fatal.
 For example, Perl::Critic normally only <CODE>warn</CODE>s about profiles
 referring to non-existent Policies, but this value makes this
 situation fatal.  Correspondingly,
-<A HREF="/pod/Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A> makes
+<A HREF="Perl/Critic/Utils/Constants.html#%24PROFILE_STRICTNESS_QUIET">Perl::Critic::Utils::Constants/&quot;$PROFILE_STRICTNESS_QUIET&quot;</A> makes
 Perl::Critic shut up about these things.
 
 </P>
@@ -272,7 +277,7 @@ your <I>.perlcriticrc</I> file.
 </P>
 <P><B>-verbose</B> can be a positive integer (from 1 to 11), or a literal
 format specification.  See
-<A HREF="/pod/Perl/Critic/Violation.html">Perl::Critic::Violation</A> for an explanation
+<A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> for an explanation
 of format specifications.  You can set the default value for this
 option in your <I>.perlcriticrc</I> file.
 
@@ -318,7 +323,7 @@ code.  If <CODE>$source_code</CODE> is a reference to an instance of
 <A HREF="PPI/Document.html">PPI::Document</A>, then that instance is used directly.
 Otherwise, it is treated as a path to a local file containing Perl
 code.  This method returns a list of
-<A HREF="/pod/Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects for each
+<A HREF="Perl/Critic/Violation.html">Perl::Critic::Violation</A> objects for each
 violation of the loaded Policies.  The list is sorted in the order
 that the Violations appear in the code.  If there are no violations,
 this method returns an empty list.
@@ -335,7 +340,7 @@ it returns a reference to this Critic.
 
 </P>
 <P><B>-policy</B> is the name of a
-<A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.  The
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.  The
 <CODE>'Perl::Critic::Policy'</CODE> portion of the name can be omitted for
 brevity.  This argument is required.
 
@@ -359,7 +364,7 @@ they were loaded.
 
 </A></DT>
 <DD>
-Returns the <A HREF="/pod/Perl/Critic/Config.html">Perl::Critic::Config</A> object that
+Returns the <A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> object that
 was created for or given to this Critic.
 
 </DD>
@@ -367,7 +372,7 @@ was created for or given to this Critic.
 
 </A></DT>
 <DD>
-Returns the <A HREF="/pod/Perl/Critic/Statistics.html">Perl::Critic::Statistics</A>
+Returns the <A HREF="Perl/Critic/Statistics.html">Perl::Critic::Statistics</A>
 object that was created for this Critic.  The Statistics object
 accumulates data for all files that are analyzed by this Critic.
 
@@ -478,6 +483,11 @@ names:
     cruel                                              2
     brutal                                             1</PRE>
 
+<P>The names reflect how severely the code is criticized: a <CODE>gentle</CODE>
+criticism reports only the most severe violations, and so on down to a
+<CODE>brutal</CODE> criticism which reports even the most minor violations.
+
+</P>
 <P><CODE>set_themes</CODE> sets the theme for the Policy and overrides its default
 theme.  The argument is a string of one or more whitespace-delimited
 alphanumeric words.  Themes are case-insensitive.  See <A HREF="#POLICY%20THEMES">&quot;POLICY
@@ -567,14 +577,14 @@ this distribution as <I>examples/perlcriticrc-conway</I>.
 
 <P>A large number of Policy modules are distributed with Perl::Critic.
 They are described briefly in the companion document
-<A HREF="/pod/Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
+<A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
 detail in the individual modules themselves.  Say <CODE>&quot;perlcritic -doc
 PATTERN&quot;</CODE> to see the perldoc for all Policy modules that match the
 regex <CODE>m/PATTERN/ixms</CODE>
 
 </P>
 <P>There are a number of distributions of additional policies on CPAN.
-If <A HREF="/pod/Perl/Critic.html">Perl::Critic</A> doesn't contain a policy that you
+If <A HREF="Perl/Critic.html">Perl::Critic</A> doesn't contain a policy that you
 want, some one may have already written it.  See the <A HREF="#SEE%20ALSO">/&quot;SEE ALSO&quot;</A>
 section below for a list of some of these distributions.
 
@@ -732,7 +742,7 @@ complains about your code, try and find a compliant solution before
 resorting to this feature.
 
 
-</P><H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="/pod/Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
+</P><H1><A NAME="THE%20Perl%3a%3aCritic%20PHILOSOPHY">THE <A HREF="Perl/Critic.html">Perl::Critic</A> PHILOSOPHY
 
 </A></H1>
 
@@ -755,7 +765,7 @@ into Perl::Critic.
 addition of new Policies.  You'll need to have some understanding of
 <A HREF="PPI.html">PPI</A>, but most Policy modules are pretty straightforward and
 only require about 20 lines of code.  Please see the
-<A HREF="/pod/Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> file included in
+<A HREF="Perl/Critic/DEVELOPER.html">Perl::Critic::DEVELOPER</A> file included in
 this distribution for a step-by-step demonstration of how to create
 new Policy modules.
 
@@ -812,7 +822,7 @@ To discuss your needs with the Perl::Critic team, just contact <CODE>&lt;jeff@im
 <P><A HREF="Module/Pluggable.html">Module::Pluggable</A>
 
 </P>
-<P><A HREF="/pod/Perl/Tidy.html">Perl::Tidy</A>
+<P><A HREF="Perl/Tidy.html">Perl::Tidy</A>
 
 </P>
 <P><A HREF="Pod/Spell.html">Pod::Spell</A>
@@ -885,22 +895,22 @@ in <A HREF="irc://irc.perl.org/#perlcritic">irc://irc.perl.org/#perlcritic</A>.
 A few are listed here:
 
 </P>
-<P><A HREF="/pod/Perl/Critic/More.html">Perl::Critic::More</A>
+<P><A HREF="Perl/Critic/More.html">Perl::Critic::More</A>
 
 </P>
-<P><A HREF="/pod/Perl/Critic/Bangs.html">Perl::Critic::Bangs</A>
+<P><A HREF="Perl/Critic/Bangs.html">Perl::Critic::Bangs</A>
 
 </P>
-<P><A HREF="/pod/Perl/Critic/Lax.html">Perl::Critic::Lax</A>
+<P><A HREF="Perl/Critic/Lax.html">Perl::Critic::Lax</A>
 
 </P>
-<P><A HREF="/pod/Perl/Critic/StricterSubs.html">Perl::Critic::StricterSubs</A>
+<P><A HREF="Perl/Critic/StricterSubs.html">Perl::Critic::StricterSubs</A>
 
 </P>
-<P><A HREF="/pod/Perl/Critic/Swift.html">Perl::Critic::Swift</A>
+<P><A HREF="Perl/Critic/Swift.html">Perl::Critic::Swift</A>
 
 </P>
-<P><A HREF="/pod/Perl/Critic/Tics.html">Perl::Critic::Tics</A>
+<P><A HREF="Perl/Critic/Tics.html">Perl::Critic::Tics</A>
 
 </P>
 <P>These distributions enable you to use Perl::Critic in your unit tests:
@@ -944,7 +954,7 @@ particular block of code.
 </A></H1>
 
 <P>Adam Kennedy - For creating <A HREF="PPI.html">PPI</A>, the heart and soul of
-<A HREF="/pod/Perl/Critic.html">Perl::Critic</A>.
+<A HREF="Perl/Critic.html">Perl::Critic</A>.
 
 </P>
 <P>Damian Conway - For writing <B>Perl Best Practices</B>, finally :)
@@ -981,7 +991,7 @@ Chris Dolan's project to implement twenty PBP policies.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
+<P>Copyright (c) 2005-2011 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

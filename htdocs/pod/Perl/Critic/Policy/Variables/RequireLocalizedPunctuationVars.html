@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>Perl::Critic::Policy::Variables::RequireLocalizedPunctuationVars</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -11,8 +11,6 @@
 </A><LI><A HREF="#DESCRIPTION">DESCRIPTION
 
 </A><LI><A HREF="#CONFIGURATION">CONFIGURATION
-
-</A><LI><A HREF="#CAVEATS">CAVEATS
 
 </A><LI><A HREF="#CREDITS">CREDITS
 
@@ -91,21 +89,6 @@ complain about that.
 <P>These are added to the default exemptions.
 
 
-</P><H1><A NAME="CAVEATS">CAVEATS
-
-</A></H1>
-
-<P>The current PPI (v1.118) has a bug where $^ variables absorb following
-whitespace by mistake.  This makes it harder to spot those as magic
-variables.  Hopefully this will be fixed by PPI 1.200.  In the
-meantime, we have a workaround in this module.
-
-</P>
-<P>Additionally, PPI v1.118 fails to recognize %! and %^H as magic
-variables.  PPI instead sees the &quot;%&quot; as a modulus operator.  We have
-no workaround for that bug right now.
-
-
 </P><H1><A NAME="CREDITS">CREDITS
 
 </A></H1>
@@ -125,7 +108,7 @@ Perl Foundation.
 
 </A></H1>
 
-<P>Copyright (c) 2007-2010 Chris Dolan.  Many rights reserved.
+<P>Copyright (c) 2007-2011 Chris Dolan.  Many rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

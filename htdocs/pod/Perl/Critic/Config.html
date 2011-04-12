@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -42,7 +42,7 @@
 </A></H1>
 
 <P>Perl::Critic::Config takes care of finding and processing
-user-preferences for <A HREF="/pod/Perl/Critic.html">Perl::Critic</A>.  The Config object
+user-preferences for <A HREF="Perl/Critic.html">Perl::Critic</A>.  The Config object
 defines which Policy modules will be loaded into the Perl::Critic
 engine and how they should be configured.  You should never really
 need to instantiate Perl::Critic::Config directly because the
@@ -83,7 +83,7 @@ it returns a reference to this Critic.
 
 </P>
 <P><B>-policy</B> is the name of a
-<A HREF="/pod/Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.  The
+<A HREF="Perl/Critic/Policy.html">Perl::Critic::Policy</A> subclass module.  The
 <CODE>'Perl::Critic::Policy'</CODE> portion of the name can be omitted for
 brevity.  This argument is required.
 
@@ -176,7 +176,7 @@ Returns the value of the <CODE>-single-policy</CODE> attribute for this Config.
 
 </A></DT>
 <DD>
-Returns the <A HREF="/pod/Perl/Critic/Theme.html">Perl::Critic::Theme</A> object that was
+Returns the <A HREF="Perl/Critic/Theme.html">Perl::Critic::Theme</A> object that was
 created for this Config.
 
 
@@ -318,7 +318,7 @@ have been installed.
 <P>Most of the settings for Perl::Critic and each of the Policy modules
 can be controlled by a configuration file.  The default configuration
 file is called <I>.perlcriticrc</I>.
-<A HREF="/pod/Perl/Critic/Config.html">Perl::Critic::Config</A> will look for this file
+<A HREF="Perl/Critic/Config.html">Perl::Critic::Config</A> will look for this file
 in the current directory first, and then in your home directory.
 Alternatively, you can set the <CODE>PERLCRITIC</CODE> environment variable to
 explicitly point to a different file in another location.  If none of
@@ -449,7 +449,7 @@ that is included in this <I>t/examples</I> directory of this distribution.
 
 <P>A large number of Policy modules are distributed with Perl::Critic.
 They are described briefly in the companion document
-<A HREF="/pod/Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
+<A HREF="Perl/Critic/PolicySummary.html">Perl::Critic::PolicySummary</A> and in more
 detail in the individual modules themselves.
 
 
@@ -533,8 +533,8 @@ name that doesn't exist is equivalent to an empty set.  Please See
 
 </A></H1>
 
-<P><A HREF="/pod/Perl/Critic/OptionsProcessor.html">Perl::Critic::OptionsProcessor</A>,
-<A HREF="/pod/Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>
+<P><A HREF="Perl/Critic/OptionsProcessor.html">Perl::Critic::OptionsProcessor</A>,
+<A HREF="Perl/Critic/UserProfile.html">Perl::Critic::UserProfile</A>
 
 
 </P><H1><A NAME="AUTHOR">AUTHOR
@@ -548,7 +548,7 @@ name that doesn't exist is equivalent to an empty set.  Please See
 
 </A></H1>
 
-<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
+<P>Copyright (c) 2005-2011 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify

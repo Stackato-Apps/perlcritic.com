@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>NAME</TITLE>
-<LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
+<BASE href="/pod"><LINK href="/styles/pod.css" type="text/css" rel="stylesheet"></HEAD>
 <BODY BGCOLOR="#ffffff" TEXT="#000000">
 <UL>
 <LI><A HREF="#NAME">NAME
@@ -29,7 +29,7 @@
 
 </A></H1>
 
-<P>This Policy is part of the core <A HREF="/pod/Perl/Critic.html">Perl::Critic</A>
+<P>This Policy is part of the core <A HREF="Perl/Critic.html">Perl::Critic</A>
 distribution.
 
 
@@ -44,14 +44,14 @@ she needs to modify it.  This Policy scans your file for comments that
 look like this:
 
 </P>
-<PRE>    # $Revision: 3914 $
+<PRE>    # $Revision: 4059 $
     # $Source: /myproject/lib/foo.pm $</PRE>
 
 <P>A common practice is to use the <CODE>Revision</CODE> keyword to automatically
 define the <CODE>$VERSION</CODE> variable like this:
 
 </P>
-<PRE>    our ($VERSION) = '$Revision: 3914 $' =~ m{ \$Revision: \s+ (\S+) }x;
+<PRE>    our ($VERSION) = '$Revision: 4059 $' =~ m{ \$Revision: \s+ (\S+) }x;
 </PRE>
 <H1><A NAME="CONFIGURATION">CONFIGURATION
 
@@ -83,7 +83,7 @@ supported by CVS and Subversion are probably the same.
 
 </A></H1>
 
-<P>Copyright (c) 2005-2010 Imaginative Software Systems.  All rights reserved.
+<P>Copyright (c) 2005-2011 Imaginative Software Systems.  All rights reserved.
 
 </P>
 <P>This program is free software; you can redistribute it and/or modify
