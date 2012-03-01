@@ -17,3 +17,6 @@ requirements:
     - String::Format
     - Syntax::Highlight::Perl::Improved
     - "Template::"
+
+cron:
+  - "0 * * * * find $TMP -name *.html -mmin +60 -delete"
