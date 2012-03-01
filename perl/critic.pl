@@ -12,7 +12,7 @@ use warnings;
 use CGI qw(:standard);
 use English qw(-no_match_vars);
 use File::Temp qw(tempfile);
-use File::Basename qw(basename);
+use File::Basename qw(basename dirname);
 use Syntax::Highlight::Perl::Improved;
 use Perl::Critic;
 use Template;
@@ -21,7 +21,7 @@ use Carp;
 #-----------------------------------------------------------------------------
 # Persistent variables
 
-our $TT_INCLUDE = '/var/www/vhosts/perlcritic.com/tt2';
+our $TT_INCLUDE = dirname(__FILE__)."/../tt2";
 our $TT = Template->new( {INCLUDE_PATH => $TT_INCLUDE} );
 our $HL = create_highlighter();
 
