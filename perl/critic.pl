@@ -175,7 +175,7 @@ sub get_color_table {
 
 sub make_tempfile {
     my $temp_dir = shift || get_temp_dir();
-    return tempfile( DIR => $temp_dir );
+    return tempfile( DIR => $temp_dir, SUFFIX => ".html" );
 }
 
 sub get_temp_dir {
