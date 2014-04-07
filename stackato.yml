@@ -1,5 +1,8 @@
 name: perlcritic
 
+framework:
+  type: perl
+
 processes:
   web: plackup --port $PORT
 
