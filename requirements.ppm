@@ -1,0 +1,9 @@
+CGI::Compile
+CGI::Emulate::PSGI
+PPIx::Regexp
+Perl::Tidy
+Plack
+Pod::Spell
+String::Format
+Syntax::Highlight::Perl::Improved
+Template::

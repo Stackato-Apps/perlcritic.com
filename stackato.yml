@@ -1,25 +1,9 @@
 name: perlcritic
 
-framework:
-  type: perl
-
-processes:
-  web: plackup --port $PORT
+buildpack: https://github.com/ActiveState/stackato-buildpack-perl.git
 
 env:
    TMP: /tmp
-
-requirements:
-  ppm:
-    - CGI::Compile
-    - CGI::Emulate::PSGI
-    - PPIx::Regexp
-    - Perl::Tidy
-    - Plack
-    - Pod::Spell
-    - String::Format
-    - Syntax::Highlight::Perl::Improved
-    - "Template::"
 
 cron:
   - "0 * * * * find /tmp -name *.html -mmin +60 -delete"
