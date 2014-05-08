@@ -1,4 +1,4 @@
-name: perlcritic
+name: perlcritic-com
 
 buildpack: https://github.com/ActiveState/stackato-buildpack-perl.git
 
