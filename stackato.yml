@@ -1,9 +1,0 @@
-name: perlcritic-com
-
-buildpack: https://github.com/ActiveState/stackato-buildpack-perl.git
-
-env:
-  TMP: /tmp
-
-cron:
-- 0 * * * * find /tmp -name *.html -mmin +60 -delete
