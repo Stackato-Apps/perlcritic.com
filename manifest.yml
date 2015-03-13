@@ -1,6 +1,7 @@
 applications:
 - name: perlcritic-com
   buildpack: https://github.com/ActiveState/stackato-buildpack-perl.git
+  mem: 64M
   stackato:
     cron:
     - 0 * * * * find /tmp -name *.html -mmin +60 -delete
