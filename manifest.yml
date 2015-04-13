@@ -1,6 +1,5 @@
 applications:
 - name: perlcritic-com
-  buildpack: https://github.com/ActiveState/stackato-buildpack-perl.git
   mem: 64M
   stackato:
     cron:
