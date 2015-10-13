@@ -12,10 +12,8 @@ even support Policies that contradict Conway. You can enable, disable, and custo
 through the Perl::Critic interface. You can also create new Policy modules that suit your own tastes.
 
 
-Deploying on Stackato
----------------------
+Deploying on HPE Helion Stackato
+--------------------------------
 
-	$ git clone git://github.com/Stackato-Apps/perlcritic.com.git
-	$ cd perlcritic.com
 	$ stackato push -n
 
