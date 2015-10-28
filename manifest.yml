@@ -1,6 +1,6 @@
 applications:
 - name: perlcritic-com
-  mem: 64M
+  memory: 64M
   stackato:
     cron:
     - 0 * * * * find /tmp -name *.html -mmin +60 -delete
